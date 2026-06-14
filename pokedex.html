@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <title>포챔스메타몽 - 포켓몬 도감</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      background: #b89dcc;
+      min-height: 100vh;
+    }
+    .navbar {
+      height: 54px;
+      background: rgba(255,255,255,0.97);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      position: relative;
+      z-index: 20;
+    }
+    .nav-logo { font-size: 17px; font-weight: 700; color: #333; }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      text-decoration: none; color: #444; font-size: 14px;
+      padding: 5px 14px; border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover  { background: #ede0f5; color: #7b3fa0; }
+    .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
+
+    .page-body {
+      padding: 14px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: calc(100vh - 54px);
+      overflow: hidden;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-input {
+      padding: 7px 14px;
+      border: 2px solid rgba(255,255,255,.7);
+      border-radius: 10px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.9);
+      outline: none;
+      width: 200px;
+      transition: border-color .18s, background .18s;
+      font-family: inherit;
+    }
+    .search-input:focus { border-color: #7b3fa0; background: #fff; }
+
+    .filter-row {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .f-btn {
+      padding: 4px 12px;
+      border: 1.5px solid rgba(255,255,255,.6);
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      background: rgba(255,255,255,.7);
+      color: #444;
+      transition: all .17s;
+      font-family: inherit;
+    }
+    .f-btn:hover { background: rgba(255,255,255,.95); }
+    .f-btn.on { background: #7b3fa0; color: #fff; border-color: #7b3fa0; }
+
+    /* type filter buttons — colored when active */
+    .f-btn[data-type].on {
+      background: var(--tc);
+      border-color: var(--tc);
+      color: #fff;
+    }
+
+    .dex-count {
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+      margin-left: auto;
+    }
+
+    .dex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+      grid-auto-rows: 140px;
+      gap: 8px;
+      overflow-y: auto;
+      flex: 1;
+      padding: 2px;
+    }
+
+    .dex-card {
+      background: rgba(255,255,255,0.88);
+      border-radius: 10px;
+      padding: 8px 6px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all .18s;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+    .dex-card:hover {
+      border-color: #9b7fb5;
+      background: #f4eafa;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,.14);
+    }
+    .dex-card.ingame { background: rgba(240,230,255,0.92); }
+    .dex-card img { width: 60px; height: 60px; image-rendering: pixelated; object-fit: contain; }
+    .dex-no   { font-size: 9px; color: #bbb; margin-top: 2px; }
+    .dex-name {
+      font-size: 11px; color: #333; text-align: center; line-height: 1.3; margin-top: 2px;
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      word-break: break-all;
+    }
+    .dex-types { display: flex; gap: 2px; margin-top: 4px; flex-wrap: wrap; justify-content: center; }
+    .dt-badge  { padding: 1px 5px; border-radius: 3px; font-size: 9px; color: #fff; font-weight: 600; }
+    .ingame-mark {
+      font-size: 8px;
+      background: #7b3fa0;
+      color: #fff;
+      border-radius: 3px;
+      padding: 1px 4px;
+      margin-top: 2px;
+    }
+
+    /* Detail modal */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.52);
+      z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .dex-detail {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 28px;
+      width: 480px;
+      max-width: 94vw;
+      max-height: 86vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 44px rgba(0,0,0,.28);
+    }
+    .dd-head {
+      display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px;
+    }
+    .dd-img  { width: 110px; height: 110px; image-rendering: pixelated; object-fit: contain; flex-shrink: 0; }
+    .dd-info { flex: 1; }
+    .dd-no   { font-size: 11px; color: #aaa; }
+    .dd-name { font-size: 20px; font-weight: 700; color: #333; margin: 2px 0 6px; }
+    .dd-types { display: flex; gap: 4px; margin-bottom: 8px; }
+    .dd-form { font-size: 11px; color: #888; }
+
+    .dd-stats { margin-bottom: 14px; }
+    .dd-stats h3 { font-size: 13px; color: #555; margin-bottom: 8px; }
+    .ds-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+    .ds-lbl { font-size: 11px; font-weight: 700; color: #666; width: 16px; text-align: center; }
+    .ds-bg  { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+    .ds-fill { height: 100%; border-radius: 4px; transition: width .5s; }
+    .ds-val { font-size: 11px; color: #777; width: 26px; text-align: right; }
+
+    .dd-close {
+      display: block; width: 100%;
+      background: #7b3fa0; color: #fff;
+      border: none; padding: 9px;
+      border-radius: 8px; font-size: 13px;
+      cursor: pointer; transition: background .18s;
+      font-family: inherit; margin-top: 8px;
+    }
+    .dd-close:hover { background: #5a2d7a; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,.05); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.18); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">포챔스메타몽</div>
+  <div class="nav-links">
+    <a href="index.html">파티 구성</a>
+    <a href="pokemon-box.html">포켓몬 박스</a>
+    <a href="meta-usage.html">메타 사용률</a>
+    <a href="pokedex.html" class="active">포켓몬 도감</a>
+  </div>
+</nav>
+
+<div class="page-body">
+  <div class="toolbar">
+    <input type="text" class="search-input" id="dexSearch" placeholder="포켓몬 이름 검색...">
+    <div class="filter-row" id="modeFilter">
+      <button class="f-btn on" data-mode="all">전체</button>
+      <button class="f-btn" data-mode="ingame">포챔스</button>
+    </div>
+    <div class="filter-row" id="megaFilter">
+      <button class="f-btn" id="megaToggle">메가진화</button>
+    </div>
+    <span class="dex-count" id="dexCount"></span>
+  </div>
+  <div class="filter-row" id="typeFilter"></div>
+  <div class="dex-grid" id="dexGrid"></div>
+</div>
+
+<!-- Detail modal -->
+<div class="modal-overlay" id="dexModal">
+  <div class="dex-detail" id="dexDetail"></div>
+</div>
+
+<script src="pokemon-sprites.js"></script>
+<script src="data.js"></script>
+<script>
+  const TYPE_COLORS = {
+    '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
+    '전기':'#F8C600','얼음':'#98D8D8','격투':'#C03028','독':'#A040A0',
+    '땅':'#C8A840','비행':'#A890F0','에스퍼':'#F85888','벌레':'#A8B820',
+    '바위':'#B8A038','고스트':'#705898','드래곤':'#7038F8','악':'#6B5040',
+    '강철':'#A8A8C0','페어리':'#EE99AC'
+  };
+
+  const ALL_TYPES = Object.keys(TYPE_COLORS);
+
+  function spriteUrl(name, no) {
+    return POKEMON_SPRITES?.[name]
+      || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+  }
+
+  function statColor(v) {
+    if (v >= 130) return '#43a047';
+    if (v >= 100) return '#7cb342';
+    if (v >= 75)  return '#fbc02d';
+    if (v >= 50)  return '#ef6c00';
+    return '#e53935';
+  }
+
+  let dexMode  = 'all';
+  let dexType  = null;
+  let dexQuery = '';
+  let dexMega  = false;
+
+  /* ── type filter buttons ── */
+  (function buildTypeFilter() {
+    const row = document.getElementById('typeFilter');
+    const allBtn = document.createElement('button');
+    allBtn.className = 'f-btn on';
+    allBtn.dataset.type = '';
+    allBtn.textContent = '전체 타입';
+    row.appendChild(allBtn);
+
+    ALL_TYPES.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'f-btn';
+      btn.dataset.type = t;
+      btn.textContent = t;
+      btn.style.setProperty('--tc', TYPE_COLORS[t]);
+      row.appendChild(btn);
+    });
+  })();
+
+  function getFiltered() {
+    let list = POKEMON_DATA;
+    if (dexMode === 'ingame') list = list.filter(p => p.inGame);
+    if (dexMega) list = list.filter(p => p.form === '메가진화');
+    if (dexType) list = list.filter(p => p.type1 === dexType || p.type2 === dexType);
+    if (dexQuery) list = list.filter(p => p.name.includes(dexQuery));
+    return list;
+  }
+
+  function renderGrid() {
+    const list = getFiltered();
+    document.getElementById('dexCount').textContent = `${list.length}마리`;
+
+    document.getElementById('dexGrid').innerHTML = list.map(pk => `
+      <div class="dex-card ${pk.inGame ? 'ingame' : ''}" data-idx="${POKEMON_DATA.indexOf(pk)}">
+        <img src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}" loading="lazy">
+        <div class="dex-no">#${pk.no}</div>
+        <div class="dex-name">${pk.name}</div>
+        <div class="dex-types">
+          ${[pk.type1, pk.type2].filter(Boolean).map(t =>
+            `<span class="dt-badge" style="background:${TYPE_COLORS[t]||'#888'}">${t}</span>`
+          ).join('')}
+        </div>
+        ${pk.inGame ? '<div class="ingame-mark">포챔스</div>' : ''}
+      </div>`).join('');
+  }
+
+  function openDetail(idx) {
+    const pk = POKEMON_DATA[idx];
+    if (!pk) return;
+    const stats = [
+      {l:'H',v:pk.H},{l:'A',v:pk.A},{l:'B',v:pk.B},
+      {l:'C',v:pk.C},{l:'D',v:pk.D},{l:'S',v:pk.S}
+    ];
+    const total = pk.H+pk.A+pk.B+pk.C+pk.D+pk.S;
+
+    document.getElementById('dexDetail').innerHTML = `
+      <div class="dd-head">
+        <img class="dd-img" src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}">
+        <div class="dd-info">
+          <div class="dd-no">#${pk.no}</div>
+          <div class="dd-name">${pk.name}</div>
+          <div class="dd-types">
+            ${[pk.type1, pk.type2].filter(Boolean).map(t =>
+              `<span class="dt-badge" style="background:${TYPE_COLORS[t]||'#888'};font-size:12px;padding:2px 8px">${t}</span>`
+            ).join('')}
+          </div>
+          ${pk.form ? `<div class="dd-form">분류: ${pk.form}</div>` : ''}
+          ${pk.inGame ? '<div class="ingame-mark" style="display:inline-block">포챔스 포켓몬</div>' : ''}
+        </div>
+      </div>
+      <div class="dd-stats">
+        <h3>종족값 (합계: ${total})</h3>
+        ${stats.map(s => `
+          <div class="ds-row">
+            <span class="ds-lbl">${s.l}</span>
+            <div class="ds-bg">
+              <div class="ds-fill" style="width:${Math.min(100, s.v/255*100).toFixed(1)}%; background:${statColor(s.v)};"></div>
+            </div>
+            <span class="ds-val">${s.v}</span>
+          </div>`).join('')}
+      </div>
+      <button class="dd-close" id="ddCloseBtn">닫기</button>
+    `;
+
+    document.getElementById('dexModal').classList.add('open');
+    document.getElementById('ddCloseBtn').addEventListener('click', () => {
+      document.getElementById('dexModal').classList.remove('open');
+    });
+  }
+
+  /* ── event listeners ── */
+  document.getElementById('dexGrid').addEventListener('click', e => {
+    const card = e.target.closest('.dex-card');
+    if (card) openDetail(+card.dataset.idx);
+  });
+  document.getElementById('dexModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget)
+      document.getElementById('dexModal').classList.remove('open');
+  });
+
+  document.getElementById('dexSearch').addEventListener('input', e => {
+    dexQuery = e.target.value;
+    renderGrid();
+  });
+
+  document.getElementById('modeFilter').addEventListener('click', e => {
+    const btn = e.target.closest('.f-btn');
+    if (!btn) return;
+    document.querySelectorAll('#modeFilter .f-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    dexMode = btn.dataset.mode;
+    renderGrid();
+  });
+
+  document.getElementById('megaToggle').addEventListener('click', () => {
+    dexMega = !dexMega;
+    document.getElementById('megaToggle').classList.toggle('on', dexMega);
+    renderGrid();
+  });
+
+  document.getElementById('typeFilter').addEventListener('click', e => {
+    const btn = e.target.closest('.f-btn[data-type]');
+    if (!btn) return;
+    document.querySelectorAll('#typeFilter .f-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    dexType = btn.dataset.type || null;
+    renderGrid();
+  });
+
+  renderGrid();
+</script>
+</body>
+</html>

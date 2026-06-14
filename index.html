@@ -1,0 +1,3790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <title>포챔스메타몽 - 파티 구성</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --purple:#b89dcc;
+      --slot-bg:rgba(255,255,255,.92);
+      --card-bg:rgba(238,230,250,.97);
+      --row-bg:#ddd0ee;
+      --move-bg:#bcaace;
+      --chart-bg:#3f3858;
+      --btn-red:#e53935;
+      --accent:#7b3fa0;
+    }
+    body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--purple);height:100vh;overflow:hidden;}
+
+    /* ── NAVBAR ── */
+    .navbar{height:54px;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 10px rgba(0,0,0,.12);position:relative;z-index:20;}
+    .nav-logo{font-size:17px;font-weight:700;color:#333;}
+    .nav-links{display:flex;gap:6px;}
+    .nav-links a{text-decoration:none;color:#444;font-size:14px;padding:5px 14px;border-radius:6px;transition:background .2s,color .2s;}
+    .nav-links a:hover{background:#ede0f5;color:var(--accent);}
+    .nav-links a.active{background:#d4b8e8;color:#4a1d8a;font-weight:600;}
+    .nav-ana-toggle{display:none;background:var(--accent);color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;}
+
+    /* ── APP BODY ── */
+    .app-wrap{display:flex;flex-direction:column;height:calc(100vh - 54px);}
+    .app-body{display:flex;flex:0 0 76%;min-height:0;padding:10px 12px;gap:10px;overflow:hidden;}
+    .rec-panel{flex:1;background:var(--card-bg);display:flex;flex-direction:column;padding:10px 14px;gap:8px;overflow:hidden;border-radius:14px;margin:0 12px 10px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease .15s,transform .3s ease .15s;}
+    .rec-panel.visible{opacity:1;pointer-events:all;transform:translateY(0);}
+    .rec-title{font-size:12px;font-weight:700;color:#7060a0;padding-bottom:6px;border-bottom:1px solid #e0d0f0;letter-spacing:.4px;flex-shrink:0;}
+    .rec-list{display:flex;flex-direction:row;gap:7px;overflow-x:auto;overflow-y:hidden;flex:1;align-items:center;padding-bottom:4px;}
+    .rec-list::-webkit-scrollbar{height:4px;}
+    .rec-list::-webkit-scrollbar-thumb{background:rgba(123,63,160,.25);border-radius:2px;}
+    .rec-card{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px 5px;border-radius:14px;background:rgba(255,255,255,.7);cursor:pointer;flex-shrink:0;width:72px;transition:background .14s,transform .14s;border:2px solid transparent;}
+    .rec-card:hover{background:#fff;border-color:var(--accent);transform:translateY(-3px);}
+    .rec-card img{width:52px;height:52px;image-rendering:pixelated;object-fit:contain;}
+    .rec-card-name{font-size:9px;color:#444;text-align:center;word-break:keep-all;line-height:1.3;max-width:68px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .rec-card-types{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;}
+
+    /* ── PARTY SIDEBAR ── */
+    .party-sidebar{display:flex;flex-direction:column;gap:7px;flex-shrink:0;}
+    .party-action-btns{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
+    .party-act-btn{width:100%;padding:6px 0;border-radius:8px;border:none;font-size:11px;font-weight:700;cursor:pointer;transition:filter .15s;}
+    .party-act-btn:hover{filter:brightness(1.1);}
+    .party-act-btn.save{background:var(--accent);color:#fff;}
+    .party-act-btn.load{background:#e8def8;color:#6040a0;}
+    .party-slot{width:68px;height:68px;background:var(--slot-bg);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
+    .party-slot:hover{transform:scale(1.09) translateX(5px);box-shadow:6px 4px 18px rgba(0,0,0,.22);background:#fff;}
+    .party-slot.active{transform:translateX(6px);box-shadow:-3px 0 0 0 var(--accent),5px 4px 14px rgba(0,0,0,.2);background:#fff;}
+    .slot-plus{color:#bbb;font-size:24px;font-weight:200;user-select:none;transition:color .2s;}
+    .party-slot:hover .slot-plus{color:#9b7fb5;}
+    .slot-img{width:56px;height:56px;image-rendering:pixelated;object-fit:contain;}
+    .slot-del{position:absolute;top:3px;right:3px;width:15px;height:15px;background:rgba(180,0,0,.8);color:#fff;border-radius:50%;font-size:8px;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;transition:background .15s;}
+    .party-slot:hover .slot-del.on{display:flex;}
+    .slot-del:hover{background:#c00;}
+
+    /* ── DETAIL OVERLAY ── */
+    .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:4;opacity:0;pointer-events:none;transition:opacity .3s ease;}
+    .detail-overlay.visible{opacity:1;}
+
+    /* ── DETAIL AREA ── */
+    .detail-area{width:410px;flex:none;opacity:0;transform:translateX(-16px);transition:opacity .3s ease,transform .3s ease;pointer-events:none;overflow-y:auto;position:relative;z-index:5;}
+    .detail-area.visible{opacity:1;transform:translateX(0);pointer-events:all;}
+    .party-sidebar{position:relative;z-index:5;}
+    .detail-card{background:var(--card-bg);border-radius:14px;padding:12px 18px 14px;box-shadow:0 4px 22px rgba(0,0,0,.13);min-height:100%;}
+    .card-topbar{display:flex;align-items:center;margin-bottom:8px;gap:5px;}
+    .btn-box-action{background:#e8d8f8;border:none;padding:3px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:#5a2d7a;transition:background .15s;font-family:inherit;}
+    .btn-box-action:hover{background:#d0b8f0;}
+    .detail-close{background:#e0d4f0;border:none;padding:3px 10px;border-radius:5px;font-size:11px;cursor:pointer;color:#666;transition:all .15s;font-family:inherit;}
+    .detail-close:hover{background:#f0c8c8;color:#c00;}
+
+    /* Pokemon header */
+    .poke-header{display:flex;gap:12px;margin-bottom:12px;}
+    .poke-img-col{flex-shrink:0;width:155px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;}
+    .poke-img-col:hover .poke-main-img{opacity:.75;transform:scale(1.05);}
+    .poke-main-img{transition:opacity .18s,transform .18s;}
+    .poke-main-img{width:132px;height:132px;image-rendering:pixelated;object-fit:contain;}
+    .poke-name-row{display:flex;align-items:center;gap:6px;}
+    .poke-name{font-size:14px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:98px;}
+    .poke-type-row{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;}
+    .type-mini-badge{padding:2px 8px;border-radius:4px;font-size:11px;color:#fff;font-weight:600;}
+
+    /* Stats */
+    .stats-col{flex:1;min-width:0;}
+    .stat-row{display:flex;align-items:center;gap:5px;margin-bottom:3px;}
+    .stat-lbl{width:16px;font-size:13px;font-weight:700;color:#555;text-align:center;flex-shrink:0;}
+    .stat-bar-bg{flex:1;height:9px;background:#ddd;border-radius:4px;overflow:hidden;}
+    .stat-bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
+    .stat-actual{width:34px;font-size:12px;text-align:right;color:#333;font-weight:600;flex-shrink:0;}
+    .stat-base{width:24px;font-size:10px;text-align:right;color:#aaa;flex-shrink:0;}
+    .ev-input{width:42px;height:22px;border:1px solid #ccc;border-radius:4px;font-size:11px;text-align:center;outline:none;padding:0 2px;transition:border-color .15s;}
+    .ev-input:focus{border-color:var(--accent);}
+
+    .stat-lbl.nat-up{color:#e53935!important;}
+    .stat-lbl.nat-dn{color:#1976d2!important;}
+    .stat-actual.nat-up{color:#e53935!important;}
+    .stat-actual.nat-dn{color:#1976d2!important;}
+    .ev-total-row{font-size:12px;color:#888;margin-top:3px;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:3px 6px;}
+    .ev-total-row span{color:var(--accent);font-weight:700;}
+    .gender-btn{border:none;background:rgba(0,0,0,.06);cursor:pointer;font-size:13px;font-weight:700;padding:1px 7px;border-radius:5px;color:#bbb;transition:color .15s,background .15s;line-height:1.5;}
+    .gender-btn.male{color:#4a90e2;background:rgba(74,144,226,.15);}
+    .gender-btn.female{color:#e2609a;background:rgba(226,96,154,.15);}
+    .det-gender-tab{border:1.5px solid #d0c0e0;background:#fff;cursor:pointer;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;color:#bbb;transition:all .13s;}
+    .det-gender-tab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .det-gender-tab.male.on{background:#4a90e2;border-color:#4a90e2;}
+    .det-gender-tab.female.on{background:#e2609a;border-color:#e2609a;}
+    .dc-big-slot{flex:1;height:93px;background:rgba(123,63,160,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid transparent;transition:all .15s;}
+    .dc-big-slot:hover{background:rgba(123,63,160,.2);border-color:var(--accent);}
+    .dc-big-slot img{width:82px;height:82px;image-rendering:pixelated;object-fit:contain;}
+    .dc-big-slot-plus{font-size:20px;color:#7B3FA0;font-weight:400;}
+    .dc-hp-row{display:flex;align-items:center;gap:6px;margin-top:6px;}
+    .dc-hp-slider{flex:1;-webkit-appearance:none;appearance:none;height:7px;border-radius:4px;outline:none;cursor:pointer;background:linear-gradient(to right,#7ac143 100%,rgba(123,63,160,.2) 100%);}
+    .dc-hp-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#7ac143;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25);}
+    .dc-hp-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#7ac143;border:none;cursor:pointer;}
+    .dc-hp-pct{font-size:10px;color:#9070b0;font-weight:700;min-width:32px;text-align:right;white-space:nowrap;}
+    .dur-row{display:flex;gap:10px;justify-content:flex-end;margin-bottom:5px;}
+    .dur-item{font-size:12px;color:#666;}
+    .dur-item span{font-weight:700;color:var(--accent);}
+    .speed-cmp-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:5px 6px;border-radius:5px;font-size:11px;cursor:pointer;transition:background .18s;}
+    .speed-cmp-btn:hover{background:#5a2d7a;}
+
+    /* Config rows */
+    .cfg-row{display:flex;align-items:center;background:var(--row-bg);border-radius:7px;padding:9px 13px;margin-bottom:6px;gap:8px;cursor:pointer;transition:background .15s,box-shadow .15s;}
+    .cfg-row:hover{background:#cfc0e0;box-shadow:0 2px 8px rgba(0,0,0,.12);}
+    .cfg-lbl{font-size:13px;font-weight:700;color:#555;min-width:24px;flex-shrink:0;}
+    .cfg-content{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;overflow:hidden;}
+    .cfg-name{font-size:12px;color:#333;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .cfg-desc{font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .cfg-name.ph{color:#aaa;font-weight:400;}
+    .item-sprite-sm{width:22px;height:22px;image-rendering:pixelated;flex-shrink:0;}
+
+    /* Move rows */
+    .move-row{display:flex;align-items:center;border-radius:7px;padding:9px 13px;margin-bottom:6px;gap:8px;cursor:pointer;transition:filter .15s;position:relative;}
+    .move-row:hover{filter:brightness(1.12);}
+    .move-type-img{width:32px;height:14px;object-fit:contain;flex-shrink:0;}
+    .move-name-txt{font-size:13px;color:#fff;font-weight:600;min-width:88px;}
+    .move-desc-txt{display:none;}
+    .move-meta-txt{font-size:11px;color:rgba(255,255,255,.7);white-space:nowrap;}
+    .move-power-txt{font-size:12px;color:rgba(255,255,255,.9);white-space:nowrap;min-width:95px;text-align:right;}
+    .move-tooltip{
+      display:none;position:absolute;bottom:calc(100% + 6px);left:0;
+      background:rgba(30,24,50,.97);color:#e8e0f8;font-size:11px;line-height:1.5;
+      padding:7px 11px;border-radius:7px;white-space:normal;max-width:280px;min-width:160px;
+      box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none;z-index:50;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .move-row:hover .move-tooltip{display:block;}
+
+    .dmg-calc-btn{display:block;width:100%;margin-top:7px;background:var(--accent);color:#fff;border:none;padding:7px;border-radius:8px;font-size:12px;cursor:pointer;text-align:center;transition:background .18s;}
+    .dmg-calc-btn:hover{background:#5a2d7a;}
+
+    /* Defense chart */
+    .def-chart{margin-top:10px;background:var(--chart-bg);border-radius:9px;padding:10px 12px;}
+    .def-chart-title{font-size:11px;color:#9080c0;text-align:center;margin-bottom:7px;letter-spacing:.5px;}
+    .def-chart-cols{display:flex;gap:6px;}
+    .def-col{flex:1;}
+    .def-col-lbl{font-size:10px;color:#7060a0;margin-bottom:4px;text-align:center;border-bottom:1px solid #332a50;padding-bottom:2px;}
+    .def-types{display:flex;flex-wrap:wrap;gap:2px;}
+    .type-badge{padding:2px 7px;border-radius:4px;font-size:10px;color:#fff;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.3);}
+
+    /* ── CALC PANELS ── */
+    .calc-panel{flex:1;background:var(--card-bg);border-radius:14px;padding:12px 14px;overflow-y:auto;display:flex;flex-direction:column;min-width:0;box-shadow:0 4px 22px rgba(0,0,0,.08);opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .3s ease,transform .3s ease;}
+    .calc-panel.visible{opacity:1;pointer-events:all;transform:translateY(0);}
+    .calc-panel.speed-calc{flex:0 0 275px;scrollbar-width:thin;scrollbar-color:rgba(140,90,180,.25) transparent;}
+.calc-panel.speed-calc::-webkit-scrollbar{width:4px;}
+.calc-panel.speed-calc::-webkit-scrollbar-track{background:transparent;}
+.calc-panel.speed-calc::-webkit-scrollbar-thumb{background:rgba(140,90,180,.25);border-radius:4px;}
+    /* ── SPEED CALCULATOR ── */
+    .sc-body{display:flex;flex-direction:column;gap:6px;padding-bottom:12px;}
+#speedCalcBody .dc-drop-list{max-height:130px;}
+.sc-stat-btn{border:1.5px solid #d4c0e8;border-radius:10px;background:#fff;font-size:10px;font-weight:600;cursor:pointer;color:#9070b0;padding:2px 7px;white-space:nowrap;transition:all .13s;font-family:inherit;flex-shrink:0;}
+.sc-stat-btn.sc-stat-on{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .sc-pk-stats{font-size:10px;color:#9080c0;margin-top:4px;}
+    .sc-spinrow{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;align-items:center;}
+    .sc-bigval{font-size:18px;font-weight:700;color:#4a2070;min-width:28px;text-align:center;line-height:1.3;}
+    .sc-speed-val{color:#9c27b0!important;font-size:22px!important;}
+    .sc-spin-btn{border:none;border-radius:3px;cursor:pointer;font-size:9px;padding:2px 5px;font-family:inherit;line-height:1.4;transition:filter .1s;}
+    .sc-spin-btn.sc-up{background:#b08bd0;color:#fff;}
+    .sc-spin-btn.sc-dn{background:#d0b0f0;color:#8050c0;}
+    .sc-spin-btn:hover{filter:brightness(1.12);}
+    .sc-nat-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:7px;}
+    .sc-nat-btn{border:none;background:none;cursor:pointer;font-size:12px;color:#9080c0;padding:2px 5px;border-radius:4px;font-family:inherit;transition:all .13s;}
+    .sc-nat-btn.sc-nat-on{background:var(--accent);color:#fff;font-weight:700;}
+    .sc-nat-sep{color:#ddd;font-size:13px;}
+    .sc-row2{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:6px;align-items:end;}
+    .sc-toggles{display:flex;flex-direction:column;gap:3px;}
+    .sc-tog{border:1.5px solid #c9a0e8;border-radius:5px;background:#fff;color:#9070b0;cursor:pointer;font-size:11px;padding:3px 8px;font-family:inherit;transition:all .13s;white-space:nowrap;}
+    .sc-tog.sc-tog-on{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .sc-tog-full{width:100%;margin-top:4px;}
+    .sc-selrow{margin-bottom:5px;}
+    .sc-sel{padding:4px 6px!important;font-size:11px!important;}
+    .sc-pk-info{margin-top:6px;display:flex;flex-direction:column;gap:1px;}
+    .sc-pk-name{font-size:13px;font-weight:700;color:#4a2070;}
+    .sc-pk-stats{font-size:10px;color:#9080c0;}
+    .sc-pk-empty{font-size:11px;color:#b0a0c8;margin-top:6px;text-align:center;}
+    .sc-big-slot{width:60px;height:93px;background:rgba(123,63,160,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;border:2px solid transparent;flex-shrink:0;cursor:pointer;transition:all .15s;}
+    .sc-big-slot:hover{background:rgba(123,63,160,.2);border-color:var(--accent);}
+    .sc-big-slot img{width:54px;height:54px;image-rendering:pixelated;object-fit:contain;}
+    .sc-big-slot-plus{font-size:26px;color:#6a1baa;font-weight:400;}
+    .calc-panel-title{font-size:12px;font-weight:700;color:#7060a0;padding-bottom:6px;border-bottom:1px solid #e0d0f0;margin-bottom:6px;letter-spacing:.4px;}
+
+    /* ── DAMAGE CALC ── */
+    .dc-block{background:var(--row-bg);border-radius:9px;padding:9px 11px;flex-shrink:0;}
+    .dc-block-title{font-size:10px;font-weight:700;color:#9070b0;margin-bottom:7px;letter-spacing:.3px;}
+    .dc-party-pills{display:grid;grid-template-columns:repeat(3,44px);gap:5px;justify-content:center;}
+    .dc-pill{border:2px solid transparent;background:rgba(123,63,160,.08);border-radius:9px;cursor:pointer;padding:3px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+    .dc-pill:hover{background:rgba(123,63,160,.2);transform:scale(1.06);}
+    .dc-pill.dc-sel{border-color:var(--accent);background:rgba(123,63,160,.18);}
+    .dc-pill img{width:36px;height:36px;image-rendering:pixelated;object-fit:contain;}
+    .dc-input{width:100%;box-sizing:border-box;padding:6px 9px;border:1.5px solid #d4c0e8;border-radius:7px;font-size:11px;outline:none;font-family:inherit;background:#fff;transition:border-color .15s;margin-top:5px;}
+    .dc-input:focus{border-color:var(--accent);}
+    .dc-drop{position:relative;z-index:30;}
+    .dc-drop-list{position:absolute;top:calc(100% + 2px);left:0;right:0;max-height:240px;overflow-y:auto;border:1.5px solid #d4c0e8;border-radius:7px;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.12);display:none;}
+    .dc-drop-list.open{display:block;}
+    .dc-drop-item{padding:5px 10px;font-size:11px;cursor:pointer;border-bottom:1px solid #f0e8f8;display:flex;align-items:center;gap:6px;}
+    .dc-drop-item:hover{background:#f0e6fa;}
+    .dc-drop-item:last-child{border-bottom:none;}
+    .dc-stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;}
+    .dc-stat-box{display:flex;flex-direction:column;align-items:center;gap:3px;}
+    .dc-stat-lbl{font-size:10px;color:#999;font-weight:600;}
+    .dc-stat-val{font-size:15px;font-weight:700;color:#333;}
+    .dc-ev-inp{width:46px;height:26px;border:1.5px solid #d4c0e8;border-radius:5px;font-size:12px;text-align:center;outline:none;font-family:inherit;font-weight:700;}
+    .dc-ev-inp:focus{border-color:var(--accent);}
+    .dc-rank-row{display:flex;align-items:center;gap:3px;}
+    .dc-rank-btn{width:22px;height:22px;border:none;border-radius:5px;background:rgba(123,63,160,.15);cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);line-height:1;transition:background .12s;}
+    .dc-rank-btn:hover{background:rgba(123,63,160,.3);}
+    .dc-rank-val{font-size:13px;font-weight:700;color:#333;min-width:22px;text-align:center;}
+    .dc-nat-row{display:flex;align-items:center;gap:5px;margin-top:8px;}
+    .dc-nat-lbl{font-size:10px;color:#999;font-weight:600;min-width:24px;}
+    .dc-nat-btn{padding:3px 9px;border:1.5px solid #d0c0e0;border-radius:6px;background:#fff;font-size:11px;font-weight:700;cursor:pointer;color:#777;transition:all .14s;}
+    .dc-nat-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .dc-sel-row{display:flex;gap:6px;}
+    .dc-sel{flex:1;min-width:0;padding:5px 7px;border:1.5px solid #d4c0e8;border-radius:7px;font-size:11px;outline:none;font-family:inherit;background:#fff;color:#333;cursor:pointer;transition:border-color .15s;}
+    .dc-sel:focus{border-color:var(--accent);}
+    .dc-result-box{background:var(--chart-bg);border-radius:10px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;margin-top:2px;flex-shrink:0;}
+    .dc-result-lbl{font-size:11px;font-weight:700;color:#9080c0;letter-spacing:.3px;}
+    .dc-result-sub{font-size:10px;color:#6a5a90;margin-top:2px;}
+    .dc-result-val{font-size:30px;font-weight:900;color:#e8d8ff;letter-spacing:-.5px;}
+    .dc-type-tag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;color:#fff;font-weight:600;}
+    /* 2-column calc layout */
+    .dc-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;min-height:0;overflow:hidden;}
+    .dc-col{display:flex;flex-direction:column;gap:6px;overflow-y:auto;padding-right:2px;}
+    .dc-col::-webkit-scrollbar{width:3px;}
+    .dc-col::-webkit-scrollbar-thumb{background:rgba(123,63,160,.2);border-radius:2px;}
+    .dc-col-title{font-size:11px;font-weight:700;color:var(--accent);padding:3px 0 5px;border-bottom:1px solid #e0d0f0;letter-spacing:.3px;margin-bottom:2px;flex-shrink:0;}
+    .dc-dmg-box{background:var(--chart-bg);border-radius:10px;padding:10px 14px;flex-shrink:0;}
+    .dc-dmg-range{font-size:18px;font-weight:900;color:#e8d8ff;letter-spacing:-.3px;}
+    .dc-dmg-pct{font-size:13px;font-weight:600;color:#b0a0d0;margin-left:6px;}
+    .dc-dmg-rolls{font-size:10px;color:#7060a0;margin:3px 0 5px;word-break:break-all;line-height:1.5;}
+    .dc-dmg-hits{font-size:14px;font-weight:700;color:#c4a8e8;}
+    .dc-dmg-hits.ohko{color:#ff6b6b;}
+    .dc-dmg-empty{font-size:11px;color:#6a5a90;}
+    .dc-toggle-row{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px;}
+    .dc-toggle-btn{padding:2px 7px;border:1.5px solid #d0c0e0;border-radius:5px;background:#fff;font-size:10px;font-weight:700;cursor:pointer;color:#888;transition:all .13s;flex-shrink:0;white-space:nowrap;}
+    .dc-toggle-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .dc-toggle-btn.on-w{background:#e65100;color:#fff;border-color:#e65100;}
+    .dc-env-row{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-top:4px;}
+    .dc-env-lbl{font-size:9px;color:#9070b0;font-weight:700;white-space:nowrap;min-width:30px;}
+    .dc-val-row{display:flex;gap:5px;margin-top:6px;}
+    .dc-val-box{flex:1;background:rgba(123,63,160,.12);border-radius:6px;padding:3px 8px;text-align:center;min-width:0;}
+    .dc-val-lbl{font-size:9px;color:#9070b0;font-weight:700;}
+    .dc-val-num{font-size:11px;font-weight:900;color:#c4a8e8;}
+
+    /* ── ANALYSIS SIDEBAR ── */
+    .analysis-sidebar{width:350px;flex-shrink:0;display:flex;flex-direction:row;gap:8px;overflow:hidden;position:relative;z-index:5;opacity:0;pointer-events:none;transform:translateX(16px);transition:opacity .3s ease .1s,transform .3s ease .1s;}
+    .analysis-sidebar.visible{opacity:1;pointer-events:all;transform:translateX(0);}
+    .speed-rank-col{flex:0 0 160px;min-width:0;display:flex;flex-direction:column;overflow-y:auto;background:var(--chart-bg);border-radius:10px;padding:10px 12px;}
+    .speed-rank-col .sr-title{font-size:11px;font-weight:700;color:#9080c0;padding-bottom:5px;border-bottom:1px solid #332a50;margin-bottom:6px;letter-spacing:.4px;}
+    .type-chart-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;overflow-y:auto;}
+    .analysis-box{background:var(--chart-bg);border-radius:10px;padding:10px 12px;}
+.ptc-wrap{margin-top:0;}
+.ptc-sub{display:none;}
+.ptc-header{display:flex;gap:2px;padding-left:32px;margin-bottom:3px;}
+.ptc-th{flex:1;display:flex;align-items:center;justify-content:center;}
+.ptc-th img{width:18px;height:18px;image-rendering:pixelated;object-fit:contain;}
+.ptc-type-row{display:flex;gap:2px;align-items:center;margin-bottom:2px;}
+.ptc-lbl{flex:0 0 30px;font-size:7.5px;font-weight:700;color:#fff;border-radius:3px;padding:2px;text-align:center;white-space:nowrap;overflow:hidden;}
+.ptc-cell{flex:1;height:13px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;}
+.ptc-n1{background:rgba(144,112,176,.1);color:transparent;}
+.ptc-4{background:#c62828;}.ptc-2{background:#ef6c00;}.ptc-h{background:#388e3c;}.ptc-q{background:#1b5e20;}.ptc-z{background:#546e7a;}
+    .analysis-box h3{font-size:11px;color:#9080c0;font-weight:700;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #332a50;letter-spacing:.4px;}
+    .chart-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:5px;}
+    .chart-lbl{font-size:10px;font-weight:700;min-width:34px;padding-top:2px;flex-shrink:0;}
+    .chart-types{display:flex;flex-wrap:wrap;gap:2px;flex:1;}
+    .type-badge{padding:2px 6px;border-radius:4px;font-size:10px;color:#fff;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.3);}
+    .chart-empty{font-size:11px;color:#7060a0;}
+
+    /* EV + Durability bar (bottom of detail card) */
+    .ev-dur-bar{background:var(--chart-bg);border-radius:9px;padding:9px 13px;margin-top:8px;display:flex;flex-direction:column;gap:5px;}
+    .ev-dur-bar .ev-total-row{font-size:12px;color:#9080c0;margin:0;}
+    .ev-dur-bar .ev-total-row span{color:#c4a8e8;font-weight:700;}
+    .ev-dur-bar .dur-row{margin:0;justify-content:space-evenly;gap:0;}
+    .ev-dur-bar .dur-item{font-size:12px;color:#9080c0;}
+    .ev-dur-bar .dur-item span{color:#c4a8e8;font-weight:700;}
+    .sg-archetype{font-size:12px;font-weight:700;color:#e8d8ff;text-align:center;padding-bottom:6px;border-bottom:1px solid rgba(180,140,220,.2);}
+    .sg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 2px;margin-top:6px;}
+    .sg-item{display:flex;flex-direction:column;align-items:center;gap:1px;}
+    .sg-lbl{font-size:9px;color:#9070b0;font-weight:600;}
+    .sg-val{font-size:11px;font-weight:700;}
+    .sg-very-low{color:#ef5350;}
+    .sg-low{color:#ff8a65;}
+    .sg-mid{color:#b0a0d0;}
+    .sg-high{color:#42a5f5;}
+    .sg-very-high{color:#66bb6a;}
+    .sg-na{color:#6a5a80;}
+
+    /* ── MODALS ── */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .modal-overlay.open{opacity:1;pointer-events:all;}
+    .modal-box{background:#fff;border-radius:14px;padding:18px 20px;width:620px;max-width:92vw;max-height:84vh;display:flex;flex-direction:column;gap:9px;box-shadow:0 12px 44px rgba(0,0,0,.3);}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;}
+    .modal-title{font-size:14px;font-weight:700;color:#333;}
+    .modal-x{background:none;border:none;font-size:17px;cursor:pointer;color:#777;transition:color .15s;}
+    .modal-x:hover{color:#c00;}
+    .modal-search{width:100%;padding:7px 12px;border:2px solid #ddd;border-radius:8px;font-size:13px;outline:none;transition:border-color .18s;font-family:inherit;}
+    .modal-search:focus{border-color:var(--accent);}
+    .filter-row{display:flex;gap:5px;flex-wrap:wrap;}
+    .f-btn{padding:3px 10px;border:1px solid #ccc;border-radius:20px;font-size:11px;cursor:pointer;background:#fff;color:#444;transition:all .15s;font-family:inherit;}
+    .f-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .f-btn[data-if="포챔스"]{background:#f3e8fd;color:#7b3fa0;border-color:#c9a0e8;}
+    .f-btn[data-if="포챔스"].on{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+    /* Pokemon grid */
+    .poke-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;overflow-y:auto;max-height:400px;padding:2px;}
+    .poke-card{display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:#f8f8f8;transition:all .14s;}
+    .poke-card:hover{border-color:var(--accent);background:#f0e6fa;transform:scale(1.04);}
+    .poke-card img{width:52px;height:52px;image-rendering:pixelated;}
+    .pc-no{font-size:9px;color:#bbb;}
+    .pc-name{font-size:10px;color:#333;text-align:center;word-break:keep-all;line-height:1.3;}
+    .pc-types{display:flex;gap:2px;margin-top:2px;}
+    .pc-tbadge{padding:1px 4px;border-radius:3px;font-size:8px;color:#fff;font-weight:600;}
+
+    /* Move modal */
+    .move-list-wrap{overflow-y:auto;max-height:420px;}
+    .move-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:background .12s;}
+    .move-item:hover{background:#f0e6fa;}
+    .mi-type{padding:2px 7px;border-radius:4px;font-size:10px;color:#fff;font-weight:600;min-width:42px;text-align:center;}
+    .mi-name{font-size:12px;font-weight:600;min-width:110px;color:#333;}
+    .mi-cat{font-size:10px;color:#999;min-width:28px;}
+    .mi-pow{font-size:11px;color:#555;min-width:32px;}
+    .mi-acc{font-size:10px;color:#888;min-width:36px;}
+    .mi-desc{font-size:10px;color:#aaa;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1;}
+
+    /* Item modal */
+    .item-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;overflow-y:auto;max-height:400px;padding:2px;}
+    .item-card{display:flex;flex-direction:column;align-items:center;padding:7px 4px 5px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:#f8f8f8;transition:all .14s;position:relative;}
+    .item-card:hover{border-color:var(--accent);background:#f0e6fa;}
+    .item-card img{width:32px;height:32px;image-rendering:pixelated;}
+    .item-no-img{width:32px;height:32px;background:#e0d0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+    .item-name{font-size:10px;color:#333;text-align:center;word-break:keep-all;margin-top:3px;line-height:1.3;}
+    .item-cat-badge{font-size:8px;color:#888;text-align:center;}
+    .item-effect-panel{grid-column:1/-1;background:#f5eefa;border-radius:8px;padding:8px 10px;font-size:11px;color:#555;display:none;}
+    .item-effect-panel.show{display:block;}
+
+    /* Ability modal */
+    .ability-list{overflow-y:auto;max-height:350px;}
+    .ability-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all .14s;margin-bottom:4px;background:#f9f9f9;}
+    .ability-item:hover{border-color:var(--accent);background:#f0e6fa;}
+    .ability-item.selected{border-color:var(--accent);background:#e8d5f8;}
+    .ability-item .ab-name{font-size:13px;font-weight:700;color:#333;min-width:90px;}
+    .ability-item .ab-desc{font-size:11px;color:#777;flex:1;line-height:1.5;}
+    .ability-item .ab-tag{font-size:9px;background:#ddd;color:#666;border-radius:3px;padding:1px 5px;flex-shrink:0;height:fit-content;}
+    .ability-item .ab-tag.hidden-tag{background:#ffe0b2;color:#e65100;}
+
+    /* Nature modal */
+    .nature-table{width:100%;border-collapse:collapse;font-size:11px;}
+    .nature-table th{padding:5px 6px;background:#f0e6fa;color:#555;font-weight:700;text-align:center;font-size:10px;border:1px solid #ddd;}
+    .nature-table td{padding:4px 6px;text-align:center;border:1px solid #eee;cursor:pointer;transition:background .12s;border-radius:0;}
+    .nature-table td:hover{background:#e8d5f8;}
+    .nature-table td.nat-neutral{background:#f0f0f0;color:#999;}
+    .nature-table td.nat-neutral:hover{background:#e6e0f0;}
+    .nature-table td.nat-selected{background:var(--accent)!important;color:#fff!important;font-weight:700;}
+    .nature-table .row-lbl{background:#fff0f0;color:#e53935;font-weight:700;cursor:default;}
+    .nature-table .row-lbl:hover{background:#fff0f0;}
+    .nature-table .col-lbl{background:#e8f0fe;color:#1976d2;font-weight:700;cursor:default;}
+    .nature-table .col-lbl:hover{background:#e8f0fe;}
+
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:rgba(0,0,0,.05);border-radius:3px;}
+    ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:3px;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1500px){
+      .analysis-sidebar{width:315px;}
+      .calc-panel.speed-calc{flex:0 0 235px;}
+    }
+    @media(max-width:1300px){
+      .analysis-sidebar{width:270px;}
+      .speed-rank-col{display:none;}
+      .type-chart-col{width:auto;flex:1;}
+      .calc-panel.speed-calc{flex:0 0 190px;}
+    }
+    @media(max-width:1100px){
+      .calc-panel{display:none;}
+      .analysis-sidebar{width:240px;flex-direction:column;}
+      .type-chart-col{width:auto;flex:1;}
+    }
+    @media(max-width:960px){
+      .analysis-sidebar{display:none;position:fixed;top:54px;right:0;height:calc(100vh - 54px);width:260px;background:rgba(210,195,230,.98);padding:12px;z-index:15;border-radius:14px 0 0 14px;box-shadow:-4px 0 20px rgba(0,0,0,.15);overflow-y:auto;transform:translateX(100%);flex-direction:column;}
+      .analysis-sidebar.visible{display:flex;opacity:1;transform:translateX(0);}
+      .analysis-sidebar.panel-open{transform:translateX(0);}
+      .speed-rank-col{display:none;}
+      .type-chart-col{width:auto;flex:1;}
+      .nav-ana-toggle{display:block;}
+    }
+    @media(max-width:768px){
+      body{overflow:auto;}
+      .app-wrap{height:auto;}
+      .app-body{flex-direction:column;flex:none;height:auto;overflow:auto;padding:10px;}
+      .rec-panel{flex:none;height:160px;margin:0 10px 8px;}
+      .party-sidebar{flex-direction:row;flex-wrap:wrap;gap:6px;}
+      .party-slot{width:60px;height:60px;}
+      .detail-area{width:100%;transform:none!important;}
+      .poke-header{flex-direction:column;align-items:center;}
+      .poke-img-col{width:100%;flex-direction:row;gap:14px;justify-content:center;}
+      .stats-col{width:100%;}
+    }
+    @media(max-width:480px){
+      .navbar{padding:0 14px;}
+      .nav-links a{padding:4px 8px;font-size:12px;}
+      .poke-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">포챔스메타몽</div>
+  <div class="nav-links">
+    <a href="index.html" class="active">파티 구성</a>
+    <a href="pokemon-box.html">포켓몬 박스</a>
+    <a href="meta-usage.html">메타 사용률</a>
+    <a href="pokedex.html">포켓몬 도감</a>
+  </div>
+  <button class="nav-ana-toggle" id="anaToggle">분석 ▶</button>
+</nav>
+
+<!-- DETAIL OVERLAY -->
+<div class="detail-overlay" id="detailOverlay"></div>
+
+<!-- APP BODY -->
+<div class="app-wrap">
+<div class="app-body">
+  <aside class="party-sidebar" id="partySidebar"></aside>
+  <main class="detail-area" id="detailArea">
+    <div class="detail-card" id="detailCard"></div>
+  </main>
+  <section class="calc-panel" id="powerCalcPanel">
+    <div class="calc-panel-title">결정력 계산기</div>
+    <div id="powerCalcBody" style="flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;"></div>
+  </section>
+  <section class="calc-panel speed-calc" id="speedCalcPanel">
+    <div class="calc-panel-title">스피드 계산기</div>
+    <div id="speedCalcBody"></div>
+  </section>
+  <aside class="analysis-sidebar" id="analysisSidebar">
+    <div class="speed-rank-col">
+      <div class="sr-title">스피드 샘플</div>
+      <div id="speedRankList"></div>
+    </div>
+    <div class="type-chart-col">
+      <div class="analysis-box">
+        <h3>방어 상성</h3>
+        <div id="anaDefChart"></div>
+      </div>
+      <div class="analysis-box">
+        <h3>공격 상성</h3>
+        <div id="anaAtkChart"></div>
+      </div>
+      <div class="analysis-box" id="anaEvalCard" style="flex:1;">
+        <h3>파티 상성</h3>
+        <div id="anaPartyChart"><span class="chart-empty">—</span></div>
+      </div>
+    </div>
+  </aside>
+</div>
+<div class="rec-panel" id="recPanel">
+  <div class="rec-title">추천 포켓몬</div>
+  <div class="rec-list" id="recPokemonList"></div>
+</div>
+</div>
+
+<!-- POKEMON MODAL -->
+<div class="modal-overlay" id="pokeModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">포켓몬 선택</span>
+      <button class="modal-x" id="closePokeModal">✕</button>
+    </div>
+    <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색...">
+    <div class="filter-row" id="pokeFilterRow">
+      <button class="f-btn on" data-f="all">전체</button>
+      <button class="f-btn" data-f="ingame">포챔스</button>
+    </div>
+    <div class="filter-row" id="typeFilterRow" style="gap:3px;"></div>
+    <div class="poke-grid" id="pokeGrid"></div>
+  </div>
+</div>
+
+<!-- MOVE MODAL -->
+<div class="modal-overlay" id="moveModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">기술 선택</span>
+      <button class="modal-x" id="closeMoveModal">✕</button>
+    </div>
+    <input type="text" class="modal-search" id="moveSearch" placeholder="기술명 검색...">
+    <div class="filter-row" id="moveFilterRow">
+      <button class="f-btn on" data-mf="all">전체</button>
+      <button class="f-btn" data-mf="물리">물리</button>
+      <button class="f-btn" data-mf="특수">특수</button>
+      <button class="f-btn" data-mf="변화">변화</button>
+      <button class="f-btn" id="moveStabBtn" style="margin-left:auto;">자속 기술</button>
+    </div>
+    <div class="move-list-wrap">
+      <div id="moveList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ITEM MODAL -->
+<div class="modal-overlay" id="itemModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">도구 선택</span>
+      <button class="modal-x" id="closeItemModal">✕</button>
+    </div>
+    <input type="text" class="modal-search" id="itemSearch" placeholder="도구명 검색...">
+    <div class="filter-row" id="itemFilterRow">
+      <button class="f-btn on" data-if="all">전체</button>
+      <button class="f-btn" data-if="포챔스">포챔스</button>
+      <button class="f-btn" data-if="지닌도구">지닌도구</button>
+      <button class="f-btn" data-if="열매">열매</button>
+      <button class="f-btn" data-if="메가스톤">메가스톤</button>
+      <button class="f-btn" data-if="Z크리스털">Z크리스탈</button>
+      <button class="f-btn" data-if="타입강화">타입강화</button>
+      <button class="f-btn" data-if="전용도구">전용도구</button>
+      <button class="f-btn" data-if="플레이트">플레이트</button>
+      <button class="f-btn" data-if="메모리">메모리</button>
+    </div>
+    <div class="item-effect-panel" id="itemEffectPanel"></div>
+    <div class="item-grid" id="itemGrid"></div>
+  </div>
+</div>
+
+<!-- ABILITY MODAL -->
+<div class="modal-overlay" id="abilityModal">
+  <div class="modal-box" style="max-width:460px;">
+    <div class="modal-head">
+      <span class="modal-title" id="abilityModalTitle">특성 선택</span>
+      <button class="modal-x" id="closeAbilityModal">✕</button>
+    </div>
+    <div class="ability-list" id="abilityList"></div>
+  </div>
+</div>
+
+<!-- NATURE MODAL -->
+<div class="modal-overlay" id="natureModal">
+  <div class="modal-box" style="max-width:540px;">
+    <div class="modal-head">
+      <span class="modal-title">성격 선택</span>
+      <button class="modal-x" id="closeNatureModal">✕</button>
+    </div>
+    <div style="font-size:11px;color:#888;margin:-4px 0 4px">빨간 행 = 올라가는 능력치 / 파란 열 = 내려가는 능력치</div>
+    <div style="overflow-x:auto;">
+      <table class="nature-table" id="natureTable"></table>
+    </div>
+  </div>
+</div>
+
+<!-- BOX MODAL -->
+<div class="modal-overlay" id="boxModal">
+  <div class="modal-box" style="max-width:640px;">
+    <div class="modal-head">
+      <span class="modal-title">포켓몬 박스</span>
+      <button class="modal-x" id="closeBoxModal">✕</button>
+    </div>
+    <div id="boxGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;overflow-y:auto;max-height:420px;padding:2px;"></div>
+  </div>
+</div>
+
+<script src="pokemon-sprites.js"></script>
+<script src="items-data.js"></script>
+<script src="abilities-data.js"></script>
+<script src="move-descs.js"></script>
+<script src="data.js"></script>
+<script src="learnset-data.js"></script>
+<script src="pochams-items.js"></script>
+<script>
+/* ════════════════════════════
+   CONSTANTS
+════════════════════════════ */
+const TYPE_COLORS = {
+  '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
+  '전기':'#F8C600','얼음':'#98D8D8','격투':'#FAAF49','독':'#A040A0',
+  '땅':'#C8A840','비행':'#A890F0','에스퍼':'#F85888','벌레':'#A8B820',
+  '바위':'#B8A038','고스트':'#705898','드래곤':'#7038F8','악':'#565251',
+  '강철':'#A8A8C0','페어리':'#EE99AC'
+};
+const ALL_TYPES = Object.keys(TYPE_COLORS);
+const TYPE_IMG = {
+  '노말':'normal','불꽃':'fire','물':'water','풀':'grass',
+  '전기':'electric','얼음':'ice','격투':'figthing','독':'poison',
+  '땅':'ground','비행':'flying','에스퍼':'psychic','벌레':'bug',
+  '바위':'rock','고스트':'ghost','드래곤':'dragon','악':'dark',
+  '강철':'steel','페어리':'fairy'
+};
+
+const DEF_CHART = {
+  '노말':   {'격투':2,'고스트':0},
+  '불꽃':   {'불꽃':.5,'물':2,'풀':.5,'얼음':.5,'땅':2,'바위':2,'강철':.5},
+  '물':     {'불꽃':.5,'물':.5,'풀':2,'전기':2,'얼음':.5},
+  '풀':     {'불꽃':2,'물':.5,'풀':.5,'전기':.5,'얼음':2,'독':2,'땅':.5,'비행':2,'벌레':2},
+  '전기':   {'물':.5,'전기':.5,'풀':.5,'땅':2,'비행':.5},
+  '얼음':   {'불꽃':2,'물':.5,'얼음':.5,'격투':2,'바위':2,'강철':2},
+  '격투':   {'비행':2,'에스퍼':2,'벌레':.5,'바위':.5,'악':.5,'페어리':2},
+  '독':     {'풀':.5,'격투':.5,'독':.5,'땅':2,'에스퍼':2,'벌레':.5,'페어리':.5},
+  '땅':     {'불꽃':.5,'전기':0,'독':.5,'바위':.5,'물':2,'풀':2,'얼음':2},
+  '비행':   {'전기':2,'얼음':2,'바위':2,'풀':.5,'격투':.5,'땅':0},
+  '에스퍼': {'격투':.5,'에스퍼':.5,'벌레':2,'고스트':2,'악':2},
+  '벌레':   {'불꽃':2,'비행':2,'바위':2,'풀':.5,'격투':.5,'땅':.5},
+  '바위':   {'불꽃':.5,'노말':.5,'독':.5,'비행':.5,'물':2,'풀':2,'격투':2,'땅':2,'강철':2},
+  '고스트': {'노말':0,'격투':0,'독':.5,'벌레':.5,'고스트':2,'악':2},
+  '드래곤': {'불꽃':.5,'물':.5,'전기':.5,'풀':.5,'얼음':2,'드래곤':2,'페어리':2},
+  '악':     {'격투':2,'에스퍼':0,'고스트':.5,'악':.5,'페어리':2},
+  '강철':   {'불꽃':2,'격투':2,'땅':2,'노말':.5,'풀':.5,'얼음':.5,'비행':.5,'에스퍼':.5,'벌레':.5,'바위':.5,'드래곤':.5,'강철':.5,'페어리':.5,'독':0},
+  '페어리': {'독':2,'강철':2,'격투':.5,'벌레':.5,'악':.5,'드래곤':0}
+};
+
+/* Offensive type chart: ATK_CHART[attackType][defendType] = multiplier */
+const ATK_CHART = {};
+ALL_TYPES.forEach(atk => {
+  ATK_CHART[atk] = {};
+  ALL_TYPES.forEach(def => { ATK_CHART[atk][def] = DEF_CHART[def]?.[atk] ?? 1; });
+});
+
+/* ════════════════════════════
+   NATURES
+════════════════════════════ */
+/* rows=stat raised, cols=stat lowered. null = neutral (same row/col) */
+const NATURES = [
+  /* +Atk */
+  {name:'변덕',   up:null, dn:null}, // Hardy  (neutral)
+  {name:'외로움',   up:'A',  dn:'B'},  // Lonely
+  {name:'고집', up:'A',  dn:'C'},  // Adamant
+  {name:'개구쟁이',up:'A', dn:'D'},  // Naughty
+  {name:'용감',     up:'A',  dn:'S'},  // Brave
+  /* +Def */
+  {name:'대담',   up:'B',  dn:'A'},  // Bold
+  {name:'수줍',     up:null, dn:null}, // Docile (neutral)
+  {name:'장난꾸러기',   up:'B',  dn:'C'},  // Impish
+  {name:'촐랑', up:'B',  dn:'D'},  // Lax
+  {name:'무사태평',   up:'B',  dn:'S'},  // Relaxed
+  /* +SpAtk */
+  {name:'조심',   up:'C',  dn:'A'},  // Modest
+  {name:'의젓',     up:'C',  dn:'B'},  // Mild
+  {name:'노력',   up:null, dn:null}, // Bashful (neutral)
+  {name:'덜렁',   up:'C',  dn:'D'},  // Rash
+  {name:'냉정',   up:'C',  dn:'S'},  // Quiet
+  /* +SpDef */
+  {name:'차분',     up:'D',  dn:'A'},  // Calm
+  {name:'얌전', up:'D',  dn:'B'},  // Gentle
+  {name:'신중',     up:'D',  dn:'C'},  // Careful
+  {name:'온순',     up:'D',  dn:'S'},  // Sassy
+  {name:'건방',     up:null, dn:null}, // Quirky (neutral)
+  /* +Spe */
+  {name:'겁쟁이',   up:'S',  dn:'A'},  // Timid
+  {name:'성급',   up:'S',  dn:'B'},  // Hasty
+  {name:'명랑',     up:'S',  dn:'C'},  // Jolly
+  {name:'천진난만', up:'S',  dn:'D'},  // Naive
+  {name:'성실',     up:null, dn:null}, // Serious (neutral)
+];
+/* 5×5 layout: rows = [A,B,C,D,S], cols = [A,B,C,D,S] */
+const NAT_STATS = ['A','B','C','D','S'];
+const NAT_LABELS = {A:'공격',B:'방어',C:'특공',D:'특방',S:'스피드'};
+function natMult(nature, stat) {
+  if (!nature || !stat) return 1;
+  return nature.up===stat ? 1.1 : nature.dn===stat ? 0.9 : 1;
+}
+
+/* ════════════════════════════
+   STATE
+════════════════════════════ */
+const PARTY_SIZE = 6;
+function newSlot() { return {pokemon:null,item:null,ability:null,nature:null,moves:[null,null,null,null],evs:{H:0,A:0,B:0,C:0,D:0,S:0},gender:null}; }
+const party = Array.from({length: PARTY_SIZE}, newSlot);
+let selectedSlot = -1;
+let modalSlot    = -1;
+let calcModalCallback = null;
+let editMoveIdx  = -1;
+let pokeFilter   = 'all';
+let moveFilter   = 'all';
+let itemFilter   = 'all';
+let typeFilter      = null;
+let movePokeFilter  = false;
+let moveStabFilter  = false;
+
+/* ════════════════════════════
+   UTILITIES
+════════════════════════════ */
+function spriteUrl(name, no) {
+  const v = POKEMON_SPRITES?.[name];
+  return v || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+}
+
+function defEffectiveness(t1, t2) {
+  const r = {}; ALL_TYPES.forEach(t => r[t] = 1);
+  [t1, t2].filter(Boolean).forEach(def => {
+    ALL_TYPES.forEach(atk => { r[atk] *= DEF_CHART[def]?.[atk] ?? 1; });
+  });
+  return r;
+}
+
+function statColor(v) {
+  if (v>=130) return '#43a047'; if (v>=100) return '#7cb342';
+  if (v>=75)  return '#fbc02d'; if (v>=50)  return '#ef6c00';
+  return '#e53935';
+}
+
+function calcStat(base, ev, isHP, natM=1) {
+  /* 포챔스 Lv.50: EV 직접 덧셈, max 32, total 66 */
+  const inner = Math.floor((2*base + 31 + (ev||0)) / 2);
+  const raw   = isHP ? inner + 60 : inner + 5;
+  return isHP ? raw : Math.floor(raw * natM);
+}
+
+function totalEVs(evs) {
+  return (evs.H||0)+(evs.A||0)+(evs.B||0)+(evs.C||0)+(evs.D||0)+(evs.S||0);
+}
+
+function calcDurability(pk, evs, nature, item) {
+  const hp   = calcStat(pk.H, evs.H, true);
+  const defM = getItemStatMult(item, pk, 'B');
+  const spdM = getItemStatMult(item, pk, 'D');
+  const def  = calcStat(pk.B, evs.B, false, natMult(nature,'B')) * defM;
+  const spdf = calcStat(pk.D, evs.D, false, natMult(nature,'D')) * spdM;
+  return {
+    phys: Math.floor(hp * def  / 0.411),
+    spec: Math.floor(hp * spdf / 0.411)
+  };
+}
+
+/* ── 포켓몬 전용 도구: 능력치 배율 ──
+   stat multiplier applied to the raw stat value before move calc */
+function getItemStatMult(item, pk, statKey) {
+  if (!item || !pk) return 1;
+  const n = item.name, nm = pk.name;
+  /* 전기구슬 → 피카츄 공격/특공 ×2 */
+  if (n==='전기구슬' && nm.includes('피카츄'))
+    return (statKey==='A'||statKey==='C') ? 2 : 1;
+  /* 굵은뼈 → 뚜벅쵸/텅구리 공격 ×2 */
+  if (n==='굵은뼈' && (nm==='뚜벅쵸'||nm==='텅구리'))
+    return statKey==='A' ? 2 : 1;
+  /* 심해의이빨 → 진주몽 특공 ×2 */
+  if (n==='심해의이빨' && nm==='진주몽')
+    return statKey==='C' ? 2 : 1;
+  /* 심해의비늘 → 진주몽 특방 ×2 */
+  if (n==='심해의비늘' && nm==='진주몽')
+    return statKey==='D' ? 2 : 1;
+  /* 마음의물방울 → 라티아스/라티오스 특공/특방 ×1.5 */
+  if (n==='마음의물방울' && (nm.includes('라티아스')||nm.includes('라티오스')))
+    return (statKey==='C'||statKey==='D') ? 1.5 : 1;
+  /* 구애스카프 → 스피드 ×1.5 */
+  if (n==='구애스카프' && statKey==='S') return 1.5;
+  return 1;
+}
+
+/* ── 포켓몬 전용 도구: 기술 위력 배율 ──
+   (금강옥·백금옥 등 특정 포켓몬+타입 조합) */
+const _PKM_POWER_ITEMS = {
+  '금강옥': { poke:['디아루가'], types:['드래곤','강철'], mult:1.2 },
+  '백금옥': { poke:['펄기아'],   types:['드래곤','물'],   mult:1.2 },
+};
+function getPkmPowerMult(item, pk, mv) {
+  if (!item||!pk||!mv?.power||mv.category==='변화') return 1;
+  const e = _PKM_POWER_ITEMS[item.name];
+  if (!e) return 1;
+  if (!e.poke.some(n => pk.name.includes(n))) return 1;
+  return e.types.includes(mv.type) ? e.mult : 1;
+}
+
+/* ── 아르세우스(플레이트) · 실버디(메모리) 타입 오버라이드 ──
+   Returns the type the pokemon becomes from holding this item */
+function getItemTypeOverride(item, pk) {
+  if (!item || !pk) return null;
+  const isArceus  = pk.name.includes('아르세우스');
+  const isSilvally = pk.name==='실버디' || pk.name.startsWith('실버디');
+  if (!isArceus && !isSilvally) return null;
+  if (isArceus  && item.category!=='플레이트') return null;
+  if (isSilvally && item.category!=='메모리')  return null;
+  for (const t of ALL_TYPES) { if (item.name.includes(t)) return t; }
+  const alias = {'불꽃':['화염'],'전기':['번개'],'격투':['주먹'],'고스트':['유령'],'악':['암흑'],'에스퍼':['정신']};
+  for (const [t, alts] of Object.entries(alias)) {
+    if (alts.some(a => item.name.includes(a))) return t;
+  }
+  return null;
+}
+
+/* 도구 화력 배율 */
+const _TYPE_BOOST_ITEMS = {
+  /* 풀 */ '기적의씨':'풀','꽃향로':'풀',
+  /* 불꽃 */ '숯':'불꽃','목탄':'불꽃',
+  /* 물 */ '신비의물방울':'물','바닷물향로':'물','잔물결향로':'물',
+  /* 전기 */ '자석':'전기',
+  /* 얼음 */ '냉동구슬':'얼음','녹지않는얼음':'얼음',
+  /* 격투 */ '블랙벨트':'격투','검은띠':'격투',
+  /* 독 */ '독독침':'독','독바늘':'독','괴상한향로':'독',
+  /* 땅 */ '부드러운모래':'땅',
+  /* 비행 */ '날카로운부리':'비행','예리한부리':'비행',
+  /* 에스퍼 */ '꼬인숟가락':'에스퍼','휘어진스푼':'에스퍼',
+  /* 벌레 */ '은빛가루':'벌레',
+  /* 바위 */ '딱딱한돌':'바위','암석향로':'바위',
+  /* 고스트 */ '저주의부적':'고스트',
+  /* 드래곤 */ '용의이빨':'드래곤',
+  /* 악 */ '검은안경':'악',
+  /* 강철 */ '금속코트':'강철',
+  /* 노말 */ '실크스카프':'노말',
+  /* 페어리 */ '요정의깃털':'페어리'
+};
+function getItemPowerMult(item, mv, effType=null) {
+  if (!item || !mv?.power || mv.category==='변화') return 1;
+  const n = item.name, cat = mv.category, type = effType ?? mv.type;
+  if (n==='구애머리띠' && cat==='물리') return 1.5;
+  if (n==='구애안경'   && cat==='특수') return 1.5;
+  /* Life Orb: 수명단축(게임 내) 또는 생명의구슬(데이터) */
+  if (n==='수명단축' || n==='생명의구슬') return 1.3;
+  /* Muscle Band */
+  if ((n==='근력띠'||n==='근육의머리띠'||n==='힘의머리띠') && cat==='물리') return 1.1;
+  /* Wise Glasses */
+  if ((n==='현명안경'||n==='박식안경') && cat==='특수') return 1.1;
+  if (_TYPE_BOOST_ITEMS[n]===type) return 1.2;
+  /* 플레이트 · 메모리 계열: 이름 안에 타입 명 포함 */
+  if (item.category==='플레이트'||item.category==='메모리') {
+    if (ALL_TYPES.some(t => n.includes(t) && t===type)) return 1.2;
+    const alias = {'불꽃':['화염','불'],'전기':['번개'],'격투':['주먹'],'고스트':['유령'],'악':['암흑'],'에스퍼':['정신']};
+    for (const [t, alts] of Object.entries(alias)) {
+      if (t===type && alts.some(a => n.includes(a))) return 1.2;
+    }
+  }
+  return 1;
+}
+
+/* ── 특성 보정 데이터 ───────────────────────────────────────── */
+const SLICING_MOVES = new Set([
+  '거수참','성스러운칼','섀도크루','베어가르기','브레이크크루','찍찍베기',
+  '풀베기','크로스포이즌','페이탈클로','드래곤크루','셸블레이드','아쿠아커터',
+  '암석액스','시저크로스','연속자르기','원념의칼','에어슬래시','에어컷터',
+  '제비반환','깜짝베기','도각참','비검천중파','사이코커터','리프블레이드',
+  '솔라블레이드','잎날가르기',
+]);
+const BITING_MOVES = new Set([
+  '필살앞니','독엄니','아가미물기','불꽃엄니','깨물어부수기','물고버티기',
+  '물기','얼음엄니','사이코팽','번개엄니',
+]);
+const PUNCHING_MOVES = new Set([
+  '더블펀처','불릿펀치','코멧펀치','그로우펀치','드레인펀치','마하펀치',
+  '스카이업퍼','암해머','폭발펀치','힘껏펀치','분노의주먹','섀도펀치',
+  '메가톤펀치','연속펀치','잼잼펀치','들이받기','수류연타','제트펀치',
+  '불꽃펀치','암흑강타','냉동펀치','아이스해머','번개펀치','플라스마피스트',
+]);
+const PULSE_MOVES = new Set([
+  '파동탄','대지의파동','용의파동','근원의파동','물의파동','악의파동','치유파동',
+]);
+const SOUND_MOVES = new Set([
+  '금속음','노래하기','돌림노래','멀리짖음','멸망의노래','부르짖기','비밀이야기',
+  '소란피기','싫은소리','에코보이스','옛노래','울부짖기','울음소리','초음파',
+  '치료방울','코골기','폭음파','하이퍼보이스','드래곤옐','소울비트','스케일노이즈',
+  '물거품아리아','벌레의야단법석','플레어송','수다','막말내뱉기','바크아웃',
+  '사이코노이즈','섬뜩한주문','오버드라이브','매혹의보이스','차밍보이스','풀피리',
+]);
+const BALL_MOVES = new Set([
+  '마그넷봄','기합구슬','파동탄','섀도볼','구슬던지기','알폭탄','웨더볼',
+  '애시드봄','오물폭탄','진흙폭탄','대포무노포','구르기','락블레스트',
+  '암석포','꽃가루경단','화염볼','화염탄','부리캐논','아이스볼','미스트볼',
+  '전자포','기관총','시럽봄','씨폭탄','에너지볼',
+]);
+const WIND_MOVES = new Set([
+  '회오리','열사의폭풍','열풍','바람일으키기','에어컷터','찬바람폭풍','폭풍',
+  '눈보라','얼다바람','번개폭풍','봄의폭풍','요정의바람','꽃보라',
+]);
+const RECOIL_MOVES = new Set([
+  '철제광선','지옥의바퀴','돌진','아프로브레이크','이판사판태클','웨이브태클',
+  '양날박치기','깜짝헤드','플레어드라이브','브레이브버드','볼트태클',
+  '와일드볼트','파멸의빛','우드해머',
+]);
+/* 접촉 기술: MOVE_DATA의 tags 기준으로 동적 빌드 */
+const CONTACT_MOVES = new Set((MOVE_DATA||[]).filter(m => m.tags?.includes('접촉')).map(m => m.name));
+/* 우격다짐 대상: 추가 효과 있는 데미지 기술 (기술 설명 "때가 있다" 기준으로 추출) */
+const SHEER_FORCE_MOVES = new Set([
+  '강철날개','더블펀처','러스터캐논','아이언테일','아이언헤드','코멧펀치',
+  '기합구슬','바위깨기','발경','놀래키기','섀도본','섀도볼',
+  '핥기','누르기','박치기','브레이크크루','옛노래','짓밟기','코골기','트라이어택',
+  '필살앞니','더스트슈트','독엄니','독찌르기','독침','셸암즈','스모그',
+  '오물공격','오물웨이브','오물폭탄','용해액',
+  '드래곤다이브','용의숨결','회오리','대지의힘','열사의대지',
+  '거품광선','대포무노포','물의파동','셸블레이드','아쿠아브레이크','열탕','탁류','폭포오르기',
+  '다이아스톰','스톤샤워','원시의힘','벌레의야단법석','분연',
+  '불꽃세례','불꽃엄니','불꽃춤','불꽃펀치','불대문자','브레이즈킥',
+  '성스러운불꽃','열풍','푸른불꽃','플레어드라이브','화염방사','화염볼','화염자동차','화염탄',
+  '뛰어오르다','에어슬래시','폭풍',
+  '깨물어부수기','나이트버스트','물기','악의파동','타오르는분노',
+  '고드름떨구기','냉동빔','냉동펀치','눈보라','눈싸라기','얼음엄니','오로라빔',
+  '콜드플레어','프리즈드라이','프리즈볼트',
+  '라스트버지','미스트볼','사념의박치기','사이코키네시스','신통력','얼어붙는시선','염동력','환상빔',
+  '10만볼트','뇌격','방전','번개','번개엄니','번개펀치','볼트태클','스파크',
+  '전기쇼크','찌리리따끔따끔','차지빔',
+  '문포스','원더스팀','치근거리기','그래스믹서','시드플레어','에너지볼',
+]);
+const MULTI_HIT_COUNT = {
+  '기어소서':2,'더블펀처':2,'타키온커터':2,'두번차기':2,
+  '손바닥치기':5,'가시대포':5,'구슬던지기':5,'더블어택':2,
+  '마구찌르기':5,'마구할퀴기':5,'스위프뺨치기':5,'연속뺨치기':5,
+  '연속펀치':5,'찍찍베기':10,'더블촙':2,'드래곤애로':2,
+  '스케일샷':5,'본러쉬':5,'뼈다귀부메랑':2,'물수리검':5,
+  '수류연타':3,'트리플다이브':3,'락블레스트':5,'더블니들':2,
+  '바늘미사일':5,'더블윙':2,'집단구타':6,'고드름침':5,
+  '트윈빔':2,'기관총':5,
+};
+const OVERRIDE_POWER = {
+  '트리플킥':60,   // 10+20+30 전타명중 기준
+  '트리플악셀':120, // 20+40+60 전타명중 기준
+};
+const _SKIN_TYPES = {
+  '스카이스킨':'비행','페어리스킨':'페어리',
+  '일렉트릭스킨':'전기','프리즈스킨':'얼음',
+  '드래곤스킨':'드래곤','전기로바꾸기':'전기',
+};
+const MEGA_STONE_MAP = {
+  '메가이상해꽃':'이상해꽃나이트','메가리자몽X':'리자몽나이트X','메가리자몽Y':'리자몽나이트Y',
+  '메가거북왕':'거북왕나이트','메가독침붕':'독침붕나이트','메가피죤투':'피죤투나이트',
+  '메가라이츄X':'라이츄나이트X','메가라이츄Y':'라이츄나이트Y','메가픽시':'픽시나이트',
+  '메가후딘':'후디나이트','메가야도란':'야도란나이트','메가팬텀':'팬텀나이트',
+  '메가캥카':'캥카나이트','메가아쿠스타':'아쿠스타나이트','메가쁘사이저':'쁘사이저나이트',
+  '메가갸라도스':'갸라도스나이트','메가프테라':'프테라나이트',
+  '메가뮤츠X':'뮤츠나이트X','메가뮤츠Y':'뮤츠나이트Y',
+  '메가메가니움':'메가니움나이트','메가장크로다일':'장크로다일나이트',
+  '메가전룡':'전룡나이트','메가강철톤':'강철톤나이트','메가핫삼':'핫삼나이트',
+  '메가헤라크로스':'헤라크로스나이트','메가무장조':'무장조나이트','메가헬가':'헬가나이트',
+  '메가마기라스':'마기라스나이트','메가나무킹':'나무킹나이트','메가번치코':'번치코나이트',
+  '메가대짱이':'대짱이나이트','메가가디안':'가디안나이트','메가깜까미':'깜까미나이트',
+  '메가입치트':'입치트나이트','메가보스로라':'보스로라나이트','메가요가램':'요가램나이트',
+  '메가썬더볼트':'썬더볼트나이트','메가샤크니아':'샤크니아나이트','메가폭타':'폭타나이트',
+  '메가파비코리':'파비코리나이트','메가다크펫':'다크펫나이트','메가치렁':'치렁나이트',
+  '메가앱솔':'앱솔나이트','메가앱솔Z':'앱솔나이트','메가얼음귀신':'얼음귀신나이트',
+  '메가보만다':'보만다나이트','메가메타그로스':'메타그로스나이트',
+  '메가라티아스':'라티아스나이트','메가라티오스':'라티오스나이트',
+  '메가찌르호크':'찌르호크나이트','메가이어롭':'이어롭나이트',
+  '메가한카리아스':'한카리아스나이트','메가한카리아스Z':'한카리아스나이트',
+  '메가루카리오':'루카리오나이트','메가루카리오Z':'루카리오나이트',
+  '메가눈설왕':'눈설왕나이트','메가엘레이드':'엘레이드나이트','메가눈여아':'눈여아나이트',
+  '메가히드런':'히드런나이트','메가다크라이':'다크라이나이트','메가염무왕':'염무왕나이트',
+  '메가몰드류':'몰드류나이트','메가다부니':'다부니나이트','메가펜드라':'펜드라나이트',
+  '메가곤율거니':'곤율거니나이트','메가저리더프':'저리더프나이트','메가샹델라':'샹델라나이트',
+  '메가골루그':'골루그나이트','메가브리가론':'브리가론나이트','메가마폭시':'마폭시나이트',
+  '메가개굴닌자':'개굴닌자나이트','메가화염레오':'화염레오나이트',
+  '메가냐오닉스':'냐오닉스나이트','메가칼라마네로':'칼라마네로나이트',
+  '메가거북손데스':'거북손데스나이트','메가드래캄':'드래캄나이트','메가루차불':'루차불나이트',
+  '메가지가르데':'지가르데나이트','메가디안시':'디안시나이트','메가모단단게':'모단단게나이트',
+  '메가갑주무사':'갑주무사나이트','메가할비롱':'할비롱나이트','메가마기아나':'마기아나나이트',
+  '메가제라오라':'제라오라나이트','메가대여르':'대여르나이트','메가스코빌런':'스코빌런나이트',
+  '메가킬라플로르':'킬라플로르나이트','메가싸리용':'싸리용나이트','메가드닐레이브':'드닐레이브나이트',
+};
+
+function getAbilityStatMult(ability, statKey, ctx={}) {
+  if (!ability) return 1;
+  const n = ability.name;
+  const { weather='', field='', hpPct=100 } = ctx;
+  if ((n==='천하장사'||n==='순수한힘') && statKey==='A') return 2;
+  if (n==='의욕' && statKey==='A') return 1.5;
+  if (n==='선파워' && statKey==='C' && weather==='맑음') return 1.5;
+  if (n==='타오르는불꽃' && statKey==='A' && (!weather||weather==='맑음')) return 4/3;
+  if (n==='하드론엔진' && statKey==='C' && field==='일렉') return 4/3;
+  if (n==='슬로스타트' && (statKey==='A'||statKey==='S')) return 0.5;
+  if (n==='무기력' && (statKey==='A'||statKey==='C') && hpPct<=50) return 0.5;
+  if (n==='플라워기프트' && statKey==='D' && weather==='맑음') return 1.5;
+  return 1;
+}
+function getAbilityMoveType(ability, mv) {
+  if (!ability || !mv) return mv?.type;
+  const skin = _SKIN_TYPES[ability.name];
+  if (skin && mv.type==='노말') return skin;
+  if (ability.name==='촉촉보이스' && SOUND_MOVES.has(mv.name)) return '물';
+  return mv.type;
+}
+
+/* ── 폼/도구/특성을 모두 고려한 기술 유효 타입 ── */
+function getMoveEffectiveType(pk, mv, item, ability, weather='') {
+  if (!mv || !pk) return mv?.type;
+  /* 노말스킨: 모든 기술 → 노말 (최우선) */
+  if (ability?.name === '노말스킨') return '노말';
+  /* 특성 타입 변환 (스킨 계열, 촉촉보이스) */
+  const abilityType = getAbilityMoveType(ability, mv);
+  if (abilityType !== mv.type) return abilityType;
+  const mvName = mv.name;
+  /* 심판의뭉치: 아르세우스 현재 타입 */
+  if (mvName === '심판의뭉치' && pk.name.includes('아르세우스')) return pk.type1;
+  /* 멀티어택: 실버디 현재 타입 */
+  if (mvName === '멀티어택' && pk.name.startsWith('실버디')) return pk.type1;
+  /* 덩굴방망이: 오거폰 마스크 타입 (기본폼은 풀, 마스크폼은 type2) */
+  if (mvName === '덩굴방망이' && pk.name.startsWith('오거폰')) return pk.type2 || pk.type1;
+  /* 웨더볼: 날씨에 따라 타입 변환 */
+  if (mvName === '웨더볼') {
+    const effW = weather || ((pk.name==='메가메가니움'||ability?.name==='메가솔라'||ability?.name==='타오르는불꽃') ? '맑음' : '');
+    if (effW==='맑음') return '불꽃';
+    if (effW==='비') return '물';
+    if (effW==='모래') return '바위';
+    if (effW==='눈') return '얼음';
+    return '노말';
+  }
+  return mv.type;
+}
+
+/* ── 기술 유효 위력 (폼/도구/특성 오버라이드 포함) ── */
+function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
+  const n = mv.name;
+  const { hpPct=100, defHpPct=100, defS=1, defWeight=null, status='' } = ctx;
+
+  if (OVERRIDE_POWER[n]) return OVERRIDE_POWER[n];
+
+  /* 웨더볼 */
+  if (n === '웨더볼') {
+    const effW = weather || ((pk?.name==='메가메가니움'||ability?.name==='메가솔라'||ability?.name==='타오르는불꽃') ? '맑음' : '');
+    return effW ? 100 : 50;
+  }
+
+  /* 해수스파우팅 / 분화 / 드래곤에너지: 자신 HP에 비례 (HP 많을수록 강함) */
+  if (['해수스파우팅','분화','드래곤에너지'].includes(n)) {
+    return Math.max(1, Math.floor(150 * hpPct / 100));
+  }
+  /* 기사회생 / 바둥바둥: 자신 HP에 반비례 (HP 적을수록 강함) */
+  if (['기사회생','바둥바둥'].includes(n)) {
+    if (hpPct > 50) return 20;
+    if (hpPct > 35) return 40;
+    if (hpPct > 20) return 80;
+    if (hpPct > 10) return 100;
+    if (hpPct >  4) return 150;
+    return 200;
+  }
+  /* 소금물: 상대 HP ≤ 50% 일 때 위력 2배 */
+  if (n === '소금물') return defHpPct <= 50 ? 130 : 65;
+  /* 묵사발: 상대 HP 비율에 비례 (max 120) */
+  if (n === '묵사발') return Math.max(1, Math.floor(120 * defHpPct / 100));
+  /* 객기 (기술): 상태이상일 때 위력 2배 */
+  if (n === '객기' && status) return (mv.power || 70) * 2;
+  /* 자이로볼: 상대 스피드가 높을수록 강함 (min 1, max 150) */
+  if (n === '자이로볼') {
+    const atkS = pk?.S || 1;
+    return Math.min(150, Math.max(1, Math.floor(25 * Math.max(1, defS) / Math.max(1, atkS))));
+  }
+  /* 일렉트릭볼: 자신/상대 스피드 비율 */
+  if (n === '일렉트릭볼') {
+    const atkS = pk?.S || 1;
+    const r = Math.floor(atkS / Math.max(1, defS));
+    if (r >= 4) return 150;
+    if (r >= 3) return 120;
+    if (r >= 2) return 80;
+    if (r >= 1) return 60;
+    return 40;
+  }
+  /* 헤비봄버 / 히트스탬프: 자신 몸무게 / 상대 몸무게 비율 */
+  if (['헤비봄버','히트스탬프'].includes(n)) {
+    const atkW = pk?.weight || null;
+    if (!atkW || !defWeight) return null;
+    const r = atkW / defWeight;
+    if (r >= 5) return 120;
+    if (r >= 4) return 100;
+    if (r >= 3) return 80;
+    if (r >= 2) return 60;
+    return 40;
+  }
+  /* 풀묶기 / 안다리걸기: 상대 몸무게가 무거울수록 강함 */
+  if (['풀묶기','안다리걸기'].includes(n)) {
+    if (!defWeight) return null;
+    if (defWeight >= 200) return 120;
+    if (defWeight >= 100) return 100;
+    if (defWeight >=  50) return 80;
+    if (defWeight >=  25) return 60;
+    if (defWeight >=  10) return 40;
+    return 20;
+  }
+  /* 매그니튜드: 무작위 위력, 대표값 70 사용 */
+  if (n === '매그니튜드') return 70;
+
+  return mv.power;
+}
+
+/* ── 쾌청 버프: 메가메가니움 또는 메가솔라 특성의 불꽃 기술 ×1.5 ── */
+function getSunnyBoost(pk, effType, ability) {
+  const hasSunny = pk?.name === '메가메가니움' || ability?.name === '메가솔라';
+  if (hasSunny && effType === '불꽃') return 1.5;
+  return 1;
+}
+function getAbilityPowerMult(ability, mv, effType=null, ctx={}) {
+  if (!ability || !mv?.power || mv.category==='변화') return 1;
+  const n = ability.name, p = mv.power;
+  const type = effType ?? mv.type;
+  const { weather='', field='', status='', hpPct=100 } = ctx;
+  const isPhys = mv.category === '물리';
+  const lowHP = hpPct <= 33;
+  /* ── 기술명/태그 기반 ── */
+  if (n==='테크니션' && p<=60) return 1.5;
+  if (n==='예리함' && SLICING_MOVES.has(mv.name)) return 1.5;
+  if (n==='옹골찬턱' && BITING_MOVES.has(mv.name)) return 1.5;
+  if (n==='철주먹' && PUNCHING_MOVES.has(mv.name)) return 1.2;
+  if (n==='메가런처' && PULSE_MOVES.has(mv.name)) return 1.5;
+  if ((n==='펑크록') && SOUND_MOVES.has(mv.name)) return 1.3;
+  if (n==='이판사판' && RECOIL_MOVES.has(mv.name)) return 1.2;
+  if (n==='우격다짐' && SHEER_FORCE_MOVES.has(mv.name)) return 1.3;
+  if (n==='단단한발톱' && CONTACT_MOVES.has(mv.name)) return 1.3;
+  /* ── 타입 기반 ── */
+  if ((n==='트랜지스터'||n==='트렌지스터') && type==='전기') return 1.5;
+  if (n==='용의턱'     && type==='드래곤') return 1.5;
+  if (n==='바위나르기' && type==='바위') return 1.5;
+  if (n==='수포'       && type==='물') return 2;
+  if ((n==='강철술사'||n==='강철정신') && type==='강철') return 1.5;
+  /* ── 핀치 특성 (HP ≤33%) ── */
+  if (n==='맹화' && type==='불꽃' && lowHP) return 1.5;
+  if (n==='급류' && type==='물'   && lowHP) return 1.5;
+  if (n==='심록' && type==='풀'   && lowHP) return 1.5;
+  if (n==='벌레의알림' && type==='벌레' && lowHP) return 1.5;
+  /* ── 상태이상 연동 ── */
+  if (n==='근성'   && isPhys && status) return 1.5;
+  if (n==='독폭주' && isPhys && status==='독') return 1.5;
+  if (n==='열폭주' && !isPhys && status==='화상') return 1.5;
+  /* ── 날씨/필드 연동 ── */
+  if (n==='모래의힘' && weather==='모래' && ['땅','바위','강철'].includes(type)) return 1.3;
+  /* ── 조건부 ── */
+  if (n==='애널라이즈'||n==='브레인포스') return 1.3;
+  /* ── 전체 기술 보정 ── */
+  if (n==='부자유친') return 1.25;
+  if (n==='노말스킨') return 1.2;
+  if (_SKIN_TYPES[n] && mv.type==='노말') return 1.2;
+  return 1;
+}
+
+function getStatGrade(value, breaks) {
+  if (value < breaks[0]) return {label:'매우낮음', cls:'sg-very-low'};
+  if (value < breaks[1]) return {label:'낮음',     cls:'sg-low'};
+  if (value < breaks[2]) return {label:'준수함',   cls:'sg-mid'};
+  if (value < breaks[3]) return {label:'높음',     cls:'sg-high'};
+  return                        {label:'매우높음', cls:'sg-very-high'};
+}
+
+function calcDecisivePower(pk, evs, mv, nature, item, ability) {
+  if (!mv || mv.category==='변화') return 0;
+  const effPow = getMoveEffectivePower(pk, mv, ability);
+  if (!effPow) return 0;
+  const isPhys = mv.category==='물리';
+  const base   = isPhys ? pk.A : pk.C;
+  const evKey  = isPhys ? 'A' : 'C';
+  const statM  = getItemStatMult(item, pk, evKey) * getAbilityStatMult(ability, evKey);
+  const stat   = calcStat(base, evs[evKey], false, natMult(nature, evKey)) * statM;
+  const effType = getMoveEffectiveType(pk, mv, item, ability);
+  let isStab = effType===pk.type1 || effType===pk.type2;
+  if (!isStab) {
+    const ot = getItemTypeOverride(item, pk);
+    if (ot && ot===effType) isStab = true;
+  }
+  const stab = (ability?.name==='적응력' && isStab) ? 2 : (isStab ? 1.5 : 1);
+  const itemM    = getItemPowerMult(item, mv, effType) * getPkmPowerMult(item, pk, mv);
+  const abilityM = getAbilityPowerMult(ability, mv, effType);
+  const hits     = MULTI_HIT_COUNT[mv.name] || 1;
+  const sunnyM   = getSunnyBoost(pk, effType, ability);
+  return Math.floor(stat * effPow * hits * stab * itemM * abilityM * sunnyM);
+}
+
+function hexToRgb(hex) {
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+/* ── 폼 변환 (도구 기반) ── */
+const PLATE_FORM = {
+  '강철플레이트':'아르세우스(강철)','고드름플레이트':'아르세우스(얼음)',
+  '공포플레이트':'아르세우스(악)','대지플레이트':'아르세우스(땅)',
+  '맹독플레이트':'아르세우스(독)','물방울플레이트':'아르세우스(물)',
+  '불구슬플레이트':'아르세우스(불꽃)','비단벌레플레이트':'아르세우스(벌레)',
+  '암석플레이트':'아르세우스(바위)','용의플레이트':'아르세우스(드래곤)',
+  '우뢰플레이트':'아르세우스(전기)','원령플레이트':'아르세우스(고스트)',
+  '이상한플레이트':'아르세우스(에스퍼)','정령플레이트':'아르세우스(페어리)',
+  '주먹플레이트':'아르세우스(격투)','초록플레이트':'아르세우스(풀)',
+  '푸른하늘플레이트':'아르세우스(비행)',
+};
+const MEMORY_FORM = {
+  '고스트메모리':'실버디(고스트)','그라운드메모리':'실버디(땅)',
+  '그래스메모리':'실버디(풀)','다크메모리':'실버디(악)',
+  '드래곤메모리':'실버디(드래곤)','락메모리':'실버디(바위)',
+  '버그메모리':'실버디(벌레)','사이킥메모리':'실버디(에스퍼)',
+  '스틸메모리':'실버디(강철)','아이스메모리':'실버디(얼음)',
+  '워터메모리':'실버디(물)','일렉트릭메모리':'실버디(전기)',
+  '파이어메모리':'실버디(불꽃)','파이팅메모리':'실버디(격투)',
+  '페어리메모리':'실버디(페어리)','포이즌메모리':'실버디(독)',
+  '플라잉메모리':'실버디(비행)',
+};
+const ITEM_FORM_MAP = {
+  '녹슨검':       { base:'자시안',   form:'자시안(검왕)' },
+  '녹슨방패':     { base:'자마젠타', form:'자마젠타(방패왕)' },
+  '백금옥':       { base:'기라티나', form:'기라티나(오리진폼)' },
+  '금강옥':       { base:'디아루가', form:'디아루가(오리진폼)' },
+  '백옥':         { base:'펄기아',   form:'펄기아(오리진폼)' },
+  '우물의가면':   { base:'오거폰',   form:'오거폰(우물의가면)' },
+  '주춧돌의가면': { base:'오거폰',   form:'오거폰(주춧돌의가면)' },
+  '화덕의가면':   { base:'오거폰',   form:'오거폰(화덕의가면)' },
+};
+const DEFAULT_FORM_ITEM = {};
+
+/* 성별에 따라 모습이 다른 포켓몬: 이름 → {male, female} */
+const GENDER_FORM_MAP = (() => {
+  const pairs = [
+    ['니드런♂','니드런♀'],['탱그릴♂','탱그릴♀'],['탱탱겔♂','탱탱겔♀'],
+    ['화염레오♂','화염레오♀'],['냐오닉스♂','냐오닉스♀'],
+    ['에써르♂','에써르♀'],['대쓰여너♂','대쓰여너♀'],['퍼퓨돈♂','퍼퓨돈♀'],
+  ];
+  const m = {};
+  for (const [male, female] of pairs) {
+    m[male]   = {male, female};
+    m[female] = {male, female};
+  }
+  return m;
+})();
+
+/* 메가스톤 역방향 맵: 스톤명 → 메가폼명 (Z폼 제외하고 일반폼 우선) */
+const STONE_MEGA_MAP = (() => {
+  const m = {};
+  for (const [mega, stone] of Object.entries(MEGA_STONE_MAP)) {
+    if (!mega.endsWith('Z')) m[stone] = mega;
+  }
+  return m;
+})();
+
+/* 폼명 → 해당 아이템명 역방향 맵 */
+const FORM_ITEM_MAP = {
+  ...Object.fromEntries(Object.entries(PLATE_FORM).map(([item, form]) => [form, item])),
+  ...Object.fromEntries(Object.entries(MEMORY_FORM).map(([item, form]) => [form, item])),
+  ...Object.fromEntries(Object.entries(ITEM_FORM_MAP).map(([item, {form}]) => [form, item])),
+};
+
+function getBaseName(name) {
+  /* 메가폼: '메가이상해꽃' → '이상해꽃', '메가리자몽X' → '리자몽' */
+  if (name.startsWith('메가') && name !== '메가니움' && name !== '메가자리') {
+    return name.replace('메가', '').replace(/[XYZ]$/, '');
+  }
+  if (/^아르세우스\(/.test(name)) return '아르세우스';
+  if (/^실버디\(/.test(name))     return '실버디';
+  if (/^오거폰\(/.test(name))     return '오거폰';
+  /* ITEM_FORM_MAP에 등록된 폼들 (자시안(검왕), 디아루가(오리진폼) 등) */
+  for (const {form, base} of Object.values(ITEM_FORM_MAP)) {
+    if (name === form) return base;
+  }
+  return name;
+}
+
+function getTargetForm(baseName, itemName) {
+  if (!itemName) return baseName;
+  /* 메가스톤 → 메가폼 */
+  const megaTarget = STONE_MEGA_MAP[itemName];
+  if (megaTarget && getBaseName(megaTarget) === baseName) return megaTarget;
+  /* 아르세우스 플레이트, 실버디 메모리 */
+  if (baseName === '아르세우스') return PLATE_FORM[itemName] || baseName;
+  if (baseName === '실버디') {
+    if (MEMORY_FORM[itemName]) return MEMORY_FORM[itemName];
+    /* 플레이트도 실버디 폼 변경 지원: 원령플레이트 → 실버디(고스트) */
+    const plateTarget = PLATE_FORM[itemName];
+    if (plateTarget) {
+      const typeName = plateTarget.match(/\((.+)\)/)?.[1];
+      if (typeName) return `실버디(${typeName})`;
+    }
+    return baseName;
+  }
+  /* 그 외 ITEM_FORM_MAP */
+  const entry = ITEM_FORM_MAP[itemName];
+  if (entry && entry.base === baseName) return entry.form;
+  return baseName;
+}
+
+function applyFormChange(slotIdx) {
+  const mem = party[slotIdx];
+  if (!mem?.pokemon) return false;
+  const baseName   = getBaseName(mem.pokemon.name);
+  const itemName   = mem.item?.name || null;
+  const targetName = getTargetForm(baseName, itemName);
+  if (targetName === mem.pokemon.name) return false;
+  const newPk = POKEMON_DATA.find(p => p.name === targetName);
+  if (!newPk) return false;
+  mem.pokemon = newPk;
+  const abd = ABILITY_DATA?.[newPk.name];
+  mem.ability = abd?.normal?.[0] || null;
+  return true;
+}
+
+/* ════════════════════════════
+   RENDER SLOTS
+════════════════════════════ */
+function renderSlots() {
+  const sb = document.getElementById('partySidebar');
+  sb.innerHTML = '';
+  for (let i = 0; i < PARTY_SIZE; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'party-slot' + (selectedSlot===i?' active':'');
+    const mem = party[i];
+    if (mem.pokemon) {
+      const img = document.createElement('img');
+      img.src = spriteUrl(mem.pokemon.name, mem.pokemon.no);
+      img.className = 'slot-img'; img.alt = mem.pokemon.name;
+      slot.appendChild(img);
+      const del = document.createElement('span');
+      del.className = 'slot-del on'; del.textContent = '✕';
+      del.addEventListener('click', e => { e.stopPropagation(); removePokemon(i); });
+      slot.appendChild(del);
+    } else {
+      const plus = document.createElement('span');
+      plus.className = 'slot-plus'; plus.textContent = '+';
+      slot.appendChild(plus);
+    }
+    slot.addEventListener('click', () => onSlotClick(i));
+    sb.appendChild(slot);
+  }
+  const btns = document.createElement('div');
+  btns.className = 'party-action-btns';
+  btns.innerHTML = `
+    <button class="party-act-btn save" id="partySaveBtn">파티 저장하기</button>
+    <button class="party-act-btn load" id="partyLoadBtn">파티 불러오기</button>`;
+  sb.appendChild(btns);
+
+  document.dispatchEvent(new Event('pochams:partychange'));
+}
+
+function removePokemon(idx) {
+  party[idx] = newSlot();
+  if (selectedSlot===idx) { selectedSlot=-1; hidePanel(); }
+  renderSlots(); renderRecommended();
+  saveParty();
+}
+
+function onSlotClick(idx) {
+  if (!party[idx].pokemon) { openPokeModal(idx); }
+  else if (selectedSlot === idx) { selectedSlot=-1; localStorage.setItem('pochams_selected',-1); hidePanel(); renderSlots(); }
+  else { selectedSlot=idx; localStorage.setItem('pochams_selected',idx); renderSlots(); renderDetail(idx); showPanel(); }
+}
+
+function showPanel() {
+  requestAnimationFrame(() => {
+    document.getElementById('detailArea').classList.add('visible');
+    document.getElementById('powerCalcPanel').classList.add('visible');
+    document.getElementById('speedCalcPanel').classList.add('visible');
+    document.getElementById('analysisSidebar').classList.add('visible');
+    document.getElementById('recPanel').classList.add('visible');
+  });
+}
+function hidePanel() {
+  document.getElementById('detailArea').classList.remove('visible');
+  document.getElementById('powerCalcPanel').classList.remove('visible');
+  document.getElementById('speedCalcPanel').classList.remove('visible');
+  document.getElementById('analysisSidebar').classList.remove('visible');
+  document.getElementById('recPanel').classList.remove('visible');
+}
+
+/* ════════════════════════════
+   RENDER DETAIL CARD
+════════════════════════════ */
+function renderDetail(idx) {
+  const mem    = party[idx];
+  const pk     = mem.pokemon;
+  if (!pk) return;
+
+  const evs    = mem.evs;
+  const nature = mem.nature;
+  const stats  = ['H','A','B','C','D','S'];
+  const bases  = {H:pk.H,A:pk.A,B:pk.B,C:pk.C,D:pk.D,S:pk.S};
+
+  const eff  = defEffectiveness(pk.type1, pk.type2||null);
+  const x4   = ALL_TYPES.filter(t => eff[t]===4);
+  const x2   = ALL_TYPES.filter(t => eff[t]===2);
+  const x1   = ALL_TYPES.filter(t => eff[t]===1);
+  const x05  = ALL_TYPES.filter(t => eff[t]===0.5);
+  const x025 = ALL_TYPES.filter(t => eff[t]===0.25);
+  const x0   = ALL_TYPES.filter(t => eff[t]===0);
+
+  const dur     = calcDurability(pk, evs, nature, mem.item);
+  const evTotal = totalEVs(evs);
+
+  // Stat grade panel
+  const POW_BREAKS = [18000, 28000, 38000, 48000];
+  const DUR_BREAKS = [30000, 42500, 55000, 75000];
+  const SPD_BREAKS = [106, 136, 161, 181];
+  const physMvs = (mem.moves||[]).filter(m=>m&&m.category==='물리');
+  const specMvs = (mem.moves||[]).filter(m=>m&&m.category==='특수');
+  const physPow = physMvs.length ? Math.max(...physMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
+  const specPow = specMvs.length ? Math.max(...specMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
+  const speedStat = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(mem.item, pk, 'S') * getAbilityStatMult(mem.ability, 'S'));
+  const physPowG = physPow>0 ? getStatGrade(physPow, POW_BREAKS) : null;
+  const specPowG = specPow>0 ? getStatGrade(specPow, POW_BREAKS) : null;
+  const physDurG = getStatGrade(dur.phys, DUR_BREAKS);
+  const specDurG = getStatGrade(dur.spec, DUR_BREAKS);
+  const speedG   = getStatGrade(speedStat, SPD_BREAKS);
+  const avgDur = (dur.phys+dur.spec)/2;
+  const speedTag = speedStat>=161?'고스핏':speedStat>=136?'중스핏':'저스핏';
+  const durTag   = avgDur>=55000?'고내구':avgDur>=42500?'중내구':'저내구';
+  let roleTag;
+  if (physPow===0&&specPow===0)       roleTag='지원형';
+  else if (physPow>0&&specPow===0)    roleTag='물리 어태커';
+  else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
+  else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
+  else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
+  else                                roleTag='균형형';
+  if (avgDur>=55000&&physPow<18000&&specPow<18000) roleTag='탱커';
+  const archetype = `${speedTag} ${durTag} ${roleTag}`;
+
+  const typeBadges = [pk.type1, pk.type2].filter(Boolean)
+    .map(t => `<span class="type-mini-badge" style="background:${TYPE_COLORS[t]}">${t}</span>`)
+    .join('');
+
+  const statRows = stats.map(s => {
+    const base   = bases[s];
+    const isHP   = s==='H';
+    const nm     = isHP ? 1 : natMult(nature, s);
+    const actual = calcStat(base, evs[s], isHP, nm);
+    const pct    = Math.min(100, base/255*100).toFixed(1);
+    const lblCls = isHP ? '' : (nature?.up===s ? ' nat-up' : nature?.dn===s ? ' nat-dn' : '');
+    return `
+    <div class="stat-row">
+      <span class="stat-lbl${lblCls}">${s}</span>
+      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${pct}%;background:${statColor(base)};"></div></div>
+      <span class="stat-actual${lblCls}">${actual}</span>
+      <span class="stat-base">(${base})</span>
+      <input class="ev-input" type="number" min="0" max="32" value="${evs[s]||0}" data-stat="${s}" data-slot="${idx}">
+    </div>`;
+  }).join('');
+
+  const itemName    = mem.item?.name||'';
+  const itemEffect  = mem.item?.effect||'';
+  const itemSprite  = mem.item?.sprite||'';
+  const abilityName = mem.ability?.name||'';
+  const abilityDesc = mem.ability?.desc||'';
+  const natureName  = nature?.name||'';
+  const natEffect   = nature
+    ? (nature.up ? `${NAT_LABELS[nature.up]} ↑  ${NAT_LABELS[nature.dn]} ↓` : '보정 없음')
+    : '';
+
+  const movesHtml = [0,1,2,3].map(mi => {
+    const mv  = mem.moves[mi];
+    const effMvType = mv ? getMoveEffectiveType(pk, mv, mem.item, mem.ability) : null;
+    const tc  = mv ? (TYPE_COLORS[effMvType]||'#888') : '#888';
+    const bg  = mv ? tc : 'var(--move-bg)';
+    const dp   = mv ? calcDecisivePower(pk, evs, mv, nature, mem.item, mem.ability) : 0;
+    const desc = mv ? (MOVE_DESCS?.[mv.name]||'') : '';
+    return `
+    <div class="move-row" data-slot="${idx}" data-mi="${mi}" style="background:${bg}">
+      ${mv ? `<img class="move-type-img" src="type_images/${TYPE_IMG[effMvType]||'normal'}.png" alt="${effMvType}">` : '<span style="width:32px;flex-shrink:0"></span>'}
+      <span class="move-name-txt">${mv?mv.name:''}</span>
+      <span class="move-meta-txt">${mv?mv.category+' / PP:'+mv.pp:''}</span>
+      <span class="move-power-txt">결정력 : ${dp||'-'}</span>
+      ${desc ? `<div class="move-tooltip">${desc}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  const badge = (t, suffix='') => `<span class="type-badge" style="background:${TYPE_COLORS[t]}">${t}${suffix}</span>`;
+
+  document.getElementById('detailCard').innerHTML = `
+    <div class="card-topbar">
+      <span style="font-size:11px;color:#888;font-weight:600;">Lv.50</span>
+      <div style="display:flex;gap:5px;margin-left:auto;">
+        <button class="btn-box-action" data-slot="${idx}" data-action="boxLoad" title="박스에서 불러오기">📦 불러오기</button>
+        <button class="btn-box-action" data-slot="${idx}" data-action="boxSave" title="현재 포켓몬을 박스에 저장">💾 박스 저장</button>
+        <button class="detail-close" id="detailCloseBtn">✕ 닫기</button>
+      </div>
+    </div>
+
+    <div class="poke-header">
+      <div class="poke-img-col" data-slot="${idx}" data-action="changePoke">
+        <img src="${spriteUrl(pk.name,pk.no)}" class="poke-main-img" alt="${pk.name}">
+        <div class="poke-name-row">
+          <span class="poke-name" title="${pk.name}">${pk.name}</span>
+        </div>
+        <div class="poke-type-row">${typeBadges}</div>
+      </div>
+
+      <div class="stats-col">
+        ${statRows}
+        <div class="ev-total-row">
+          <div style="display:flex;gap:3px;flex-shrink:0;">
+            <button class="det-gender-tab${!mem.gender?' on':''}" data-gender-slot="${idx}" data-gender="">무성</button>
+            <button class="det-gender-tab male${mem.gender==='♂'?' on':''}" data-gender-slot="${idx}" data-gender="♂">♂</button>
+            <button class="det-gender-tab female${mem.gender==='♀'?' on':''}" data-gender-slot="${idx}" data-gender="♀">♀</button>
+          </div>
+          <span style="flex-shrink:0;">노력치 합계 <span id="evTotalDisp">${evTotal}</span>/66</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cfg-row" data-slot="${idx}" data-action="changeItem">
+      <span class="cfg-lbl">도구</span>
+      ${itemSprite ? `<img class="item-sprite-sm" src="${itemSprite}" alt="${itemName}">` : ''}
+      <div class="cfg-content">
+        <span class="cfg-name ${itemName?'':'ph'}">${itemName||'도구 없음'}</span>
+        ${itemEffect ? `<span class="cfg-desc">${itemEffect}</span>` : ''}
+      </div>
+    </div>
+
+    <div class="cfg-row" data-slot="${idx}" data-action="changeAbility">
+      <span class="cfg-lbl">특성</span>
+      <div class="cfg-content">
+        <span class="cfg-name ${abilityName?'':'ph'}">${abilityName||'특성 없음'}</span>
+        ${abilityDesc ? `<span class="cfg-desc">${abilityDesc}</span>` : ''}
+      </div>
+    </div>
+
+    <div class="cfg-row" data-slot="${idx}" data-action="changeNature">
+      <span class="cfg-lbl">성격</span>
+      <div class="cfg-content">
+        <span class="cfg-name ${natureName?'':'ph'}">${natureName||'성격 없음'}</span>
+        ${natEffect ? `<span class="cfg-desc">${natEffect}</span>` : ''}
+      </div>
+    </div>
+
+    ${movesHtml}
+
+    <div class="ev-dur-bar">
+      <div class="sg-archetype">${archetype}</div>
+      <div class="sg-grid">
+        <div class="sg-item"><span class="sg-lbl">물리화력</span><span class="sg-val ${physPowG?.cls||'sg-na'}">${physPowG?.label||'—'}</span></div>
+        <div class="sg-item"><span class="sg-lbl">물리내구</span><span class="sg-val ${physDurG.cls}">${physDurG.label}</span></div>
+        <div class="sg-item"><span class="sg-lbl">스피드</span><span class="sg-val ${speedG.cls}">${speedG.label}</span></div>
+        <div class="sg-item"><span class="sg-lbl">특수화력</span><span class="sg-val ${specPowG?.cls||'sg-na'}">${specPowG?.label||'—'}</span></div>
+        <div class="sg-item"><span class="sg-lbl">특수내구</span><span class="sg-val ${specDurG.cls}">${specDurG.label}</span></div>
+      </div>
+      <div class="dur-row" id="durRow">
+        <div class="dur-item">물리내구 <span id="durPhys">${dur.phys.toLocaleString()}</span></div>
+        <div class="dur-item">특수내구 <span id="durSpec">${dur.spec.toLocaleString()}</span></div>
+      </div>
+    </div>
+  `;
+
+  updateAnalysis(idx);
+  if (window.dcSyncFromSlot) window.dcSyncFromSlot(idx);
+  if (window.scSyncFromSlot) window.scSyncFromSlot(idx);
+}
+
+/* ════════════════════════════
+   EVENT HANDLERS
+════════════════════════════ */
+function cardClickHandler(e) {
+  if (e.target.id === 'detailCloseBtn') {
+    selectedSlot=-1; localStorage.setItem('pochams_selected',-1); hidePanel(); renderSlots();
+    return;
+  }
+  /* 성별 버튼 (3-tab 방식) */
+  const gBtn = e.target.closest('[data-gender-slot]');
+  if (gBtn) {
+    const slotIdx = +gBtn.dataset.genderSlot;
+    const newGender = gBtn.dataset.gender || null;
+    party[slotIdx].gender = newGender;
+    /* 성별 폼 전환 */
+    const pair = GENDER_FORM_MAP[party[slotIdx].pokemon?.name];
+    if (pair && newGender) {
+      const targetName = newGender === '♂' ? pair.male : pair.female;
+      const newPk = POKEMON_DATA.find(p => p.name === targetName);
+      if (newPk) {
+        party[slotIdx].pokemon = newPk;
+        const abd = ABILITY_DATA?.[newPk.name];
+        party[slotIdx].ability = abd?.normal?.[0] || null;
+      }
+    }
+    saveParty();
+    renderSlots();
+    renderDetail(slotIdx);
+    return;
+  }
+  const btn = e.target.closest('.poke-img-col[data-action], .cfg-row[data-action], .move-row[data-mi], .btn-chg');
+  if (!btn) return;
+  const slotIdx = +btn.dataset.slot;
+  const action  =  btn.dataset.action;
+  const mi      =  btn.dataset.mi;
+  if (action==='changePoke')          openPokeModal(slotIdx);
+  else if (action==='changeItem')     openItemModal(slotIdx);
+  else if (action==='changeAbility')  openAbilityModal(slotIdx);
+  else if (action==='changeNature')   openNatureModal(slotIdx);
+  else if (action==='boxSave')        saveToBox(slotIdx);
+  else if (action==='boxLoad')        openBoxModal(slotIdx);
+  else if (mi!==undefined)            openMoveModal(slotIdx, +mi);
+}
+
+function evChangeHandler(e) {
+  const inp = e.target.closest('.ev-input');
+  if (!inp) return;
+  const slotIdx = +inp.dataset.slot;
+  const stat    =  inp.dataset.stat;
+  let val = Math.min(32, Math.max(0, +inp.value||0));
+
+  const mem  = party[slotIdx];
+  const evs  = mem.evs;
+  const others = totalEVs(evs) - (evs[stat]||0);
+  if (others + val > 66) val = 66 - others;
+  inp.value = val;
+  mem.evs[stat] = val;
+
+  /* update stat display without full re-render */
+  const statRow    = inp.closest('.stat-row');
+  const actualSpan = statRow.querySelector('.stat-actual');
+  const pk         = mem.pokemon;
+  const bases      = {H:pk.H,A:pk.A,B:pk.B,C:pk.C,D:pk.D,S:pk.S};
+  const isHP       = stat==='H';
+  const nm         = isHP ? 1 : natMult(mem.nature, stat);
+  actualSpan.textContent = calcStat(bases[stat], val, isHP, nm);
+
+  const dispEl = document.getElementById('evTotalDisp');
+  if (dispEl) dispEl.textContent = totalEVs(mem.evs);
+
+  /* update durability */
+  const dur = calcDurability(pk, mem.evs, mem.nature, mem.item);
+  const physEl = document.getElementById('durPhys');
+  const specEl = document.getElementById('durSpec');
+  if (physEl) physEl.textContent = dur.phys.toLocaleString();
+  if (specEl) specEl.textContent = dur.spec.toLocaleString();
+
+  /* update move decisive power */
+  document.querySelectorAll('.move-power-txt').forEach((el, mi) => {
+    const mv = mem.moves[mi];
+    const dp = mv ? calcDecisivePower(pk, mem.evs, mv, mem.nature, mem.item, mem.ability) : 0;
+    el.textContent = '결정력 : ' + (dp||'-');
+  });
+  updateAnalysis(slotIdx);
+  if (window.dcSyncFromSlot) window.dcSyncFromSlot(slotIdx);
+  if (window.scSyncFromSlot) window.scSyncFromSlot(slotIdx);
+  saveParty();
+}
+
+/* ════════════════════════════
+   ANALYSIS
+════════════════════════════ */
+function updateAnalysis(idx) {
+  const pk    = party[idx].pokemon;
+  const moves = party[idx].moves;
+  if (!pk) return;
+
+  const defEff = defEffectiveness(pk.type1, pk.type2||null);
+  const badge  = (t, label) => `<span class="type-badge" style="background:${TYPE_COLORS[t]||'#888'}">${label||t}</span>`;
+  const row    = (lbl, color, html) =>
+    html ? `<div class="chart-row"><span class="chart-lbl" style="color:${color}">${lbl}</span><div class="chart-types">${html}</div></div>` : '';
+
+  /* ── 방어 상성 ── */
+  const x4  = ALL_TYPES.filter(t=>defEff[t]===4);
+  const x2  = ALL_TYPES.filter(t=>defEff[t]===2);
+  const x05 = ALL_TYPES.filter(t=>defEff[t]===0.5);
+  const x025= ALL_TYPES.filter(t=>defEff[t]===0.25);
+  const x0  = ALL_TYPES.filter(t=>defEff[t]===0);
+
+  document.getElementById('anaDefChart').innerHTML =
+    row('×4',  '#c62828', x4.map(t=>badge(t)).join('')) +
+    row('×2',  '#e65100', x2.map(t=>badge(t)).join('')) +
+    row('½',   '#2e7d32', x05.map(t=>badge(t)).join('')) +
+    row('¼',   '#1b5e20', x025.map(t=>badge(t)).join('')) +
+    row('무효', '#37474f', x0.map(t=>badge(t)).join('')) ||
+    '<span class="chart-empty">상성 없음</span>';
+
+  /* ── 공격 상성 ── */
+  const powermoves = moves.filter(mv => mv?.power && mv.category!=='변화');
+
+  if (!powermoves.length) {
+    document.getElementById('anaAtkChart').innerHTML = '<span class="chart-empty">기술 미설정</span>';
+    return;
+  }
+
+  const mem2 = party[idx];
+  const bestEff = {};
+  ALL_TYPES.forEach(def => {
+    bestEff[def] = Math.max(0, ...powermoves.map(mv => {
+      const et = getMoveEffectiveType(pk, mv, mem2.item, mem2.ability);
+      return ATK_CHART[et]?.[def] ?? 1;
+    }));
+  });
+
+  const a2  = ALL_TYPES.filter(t=>bestEff[t]>=4);
+  const a2n = ALL_TYPES.filter(t=>bestEff[t]===2);
+  const a05 = ALL_TYPES.filter(t=>bestEff[t]===0.5);
+  const a0  = ALL_TYPES.filter(t=>bestEff[t]===0);
+
+  document.getElementById('anaAtkChart').innerHTML =
+    row('×4↑',  '#c62828', a2.map(t=>badge(t)).join('')) +
+    row('×2',   '#e65100', a2n.map(t=>badge(t)).join('')) +
+    row('½↓',   '#2e7d32', a05.map(t=>badge(t)).join('')) +
+    row('무효',  '#37474f', a0.map(t=>badge(t)).join('')) ||
+    '<span class="chart-empty">없음</span>';
+
+}
+
+function renderPartyTypeChart() {
+  const el = document.getElementById('anaPartyChart');
+  if (!el) return;
+  const slots = party.filter(s => s.pokemon);
+  if (!slots.length) { el.innerHTML = ''; return; }
+
+  const effs = slots.map(s => defEffectiveness(s.pokemon.type1, s.pokemon.type2||null));
+
+  const headerHTML = slots.map(s =>
+    `<div class="ptc-th" title="${s.pokemon.name}">
+      <img src="${spriteUrl(s.pokemon.name, s.pokemon.no)}" alt="${s.pokemon.name}">
+    </div>`
+  ).join('');
+
+  const rowsHTML = ALL_TYPES.map(atkType => {
+    const cells = effs.map(eff => {
+      const m = eff[atkType];
+      let cls, txt;
+      if      (m >= 4)    { cls = 'ptc-4'; txt = '4×'; }
+      else if (m === 2)   { cls = 'ptc-2'; txt = '2×'; }
+      else if (m === 0.5) { cls = 'ptc-h'; txt = '½'; }
+      else if (m === 0.25){ cls = 'ptc-q'; txt = '¼'; }
+      else if (m === 0)   { cls = 'ptc-z'; txt = '0'; }
+      else                { cls = 'ptc-n1'; txt = ''; }
+      return `<div class="ptc-cell ${cls}">${txt}</div>`;
+    }).join('');
+    return `<div class="ptc-type-row">
+      <div class="ptc-lbl" style="background:${TYPE_COLORS[atkType]}">${atkType}</div>
+      ${cells}
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `<div class="ptc-wrap">
+    <div class="ptc-sub">파티 상성</div>
+    <div class="ptc-header">${headerHTML}</div>
+    ${rowsHTML}
+  </div>`;
+}
+
+function empty() { return '<span class="chart-empty">없음</span>'; }
+
+/* ════════════════════════════
+   결정력 / 대미지 계산기
+════════════════════════════ */
+(function initPowerCalc() {
+  const body = document.getElementById('powerCalcBody');
+  if (!body) return;
+
+  const atk = { pokemon:null, move:null, ev:0, natM:1.0, rank:0, item:null, ability:null,
+    gender:'', status:'', hpPct:100,
+    critical:false, charge:false, helpingHand:false, battery:false, powerSpot:false,
+    supremeCount:0 };
+  const def = { pokemon:null, hpEV:0, defEV:0, natM:1.0, rank:0, item:null, ability:null,
+    gender:'', hpPct:100,
+    reflect:false, lightScreen:false, auroraVeil:false, friendGuard:false };
+  const env = { weather:'', field:'', aura:'', auraBreak:false,
+    tabletRuin:false, vesselRuin:false, swordRuin:false, beadRuin:false };
+
+  body.innerHTML = `
+  <div style="display:flex;flex-direction:column;flex:1;min-height:0;gap:6px;overflow:hidden;">
+    <div class="dc-cols">
+      <!-- 공격 -->
+      <div class="dc-col">
+        <div class="dc-col-title" style="display:flex;justify-content:space-between;align-items:center;"><span>⚔ 공격</span><button id="dcClearAtk" style="font-size:9px;padding:2px 7px;border:1px solid #c9a0e8;border-radius:4px;background:#fff;color:#9070b0;cursor:pointer;font-family:inherit;">비우기</button></div>
+        <div class="dc-block">
+          <div class="dc-block-title">포켓몬</div>
+          <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:4px;justify-content:center;">
+            <div class="dc-big-slot" id="dcBigSlot" title="클릭하여 검색">
+              <img id="dcBigSlotImg" style="display:none;width:82px;height:82px;image-rendering:pixelated;object-fit:contain;">
+              <span class="dc-big-slot-plus" id="dcBigSlotPlus">+</span>
+            </div>
+            <div class="dc-party-pills" id="dcPills"></div>
+          </div>
+          <div class="dc-drop"><input class="dc-input" id="dcPokeQ" placeholder="이름 검색..." autocomplete="off"><div class="dc-drop-list" id="dcPokeList"></div></div>
+          <div class="dc-env-row" style="margin-top:4px;"><span class="dc-env-lbl">성별</span>
+            <button class="dc-toggle-btn on" data-ag="">무성</button>
+            <button class="dc-toggle-btn" data-ag="♂">♂</button>
+            <button class="dc-toggle-btn" data-ag="♀">♀</button>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">기술</div>
+          <div class="dc-drop"><input class="dc-input" id="dcMoveQ" placeholder="기술 검색..." autocomplete="off"><div class="dc-drop-list" id="dcMoveList"></div></div>
+          <div id="dcMoveInfo" style="font-size:10px;color:#9070b0;margin-top:4px;min-height:14px;"></div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">공격 스탯</div>
+          <div class="dc-stat-grid">
+            <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcBase">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcEV" type="number" min="0" max="32" value="0"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcActual">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">랭크</span>
+              <div class="dc-rank-row"><button class="dc-rank-btn" id="dcRkDn">−</button><span class="dc-rank-val" id="dcRkVal">0</span><button class="dc-rank-btn" id="dcRkUp">+</button></div>
+            </div>
+          </div>
+          <div class="dc-nat-row" id="dcAtkNatRow"><span class="dc-nat-lbl">성격</span>
+            <button class="dc-nat-btn" data-m="0.9">×0.9</button><button class="dc-nat-btn on" data-m="1.0">×1.0</button><button class="dc-nat-btn" data-m="1.1">×1.1</button>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">도구 / 특성</div>
+          <div class="dc-drop"><input class="dc-input" id="dcItemQ" placeholder="도구 검색..." autocomplete="off"><div class="dc-drop-list" id="dcItemList"></div></div>
+          <select class="dc-sel" id="dcAbilSel" style="margin-top:4px;width:100%;"><option value="">특성 없음</option></select>
+          <div class="dc-env-row" id="dcOLRow" style="display:none;margin-top:4px;">
+            <span class="dc-env-lbl">단계</span>
+            <button class="dc-toggle-btn on" data-ol="0">0</button>
+            <button class="dc-toggle-btn" data-ol="1">1</button>
+            <button class="dc-toggle-btn" data-ol="2">2</button>
+            <button class="dc-toggle-btn" data-ol="3">3</button>
+            <button class="dc-toggle-btn" data-ol="4">4</button>
+            <button class="dc-toggle-btn" data-ol="5">5</button>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">공격 상황</div>
+          <div class="dc-toggle-row">
+            <button class="dc-toggle-btn" id="dcCrit">급소</button>
+            <button class="dc-toggle-btn" id="dcCharge">충전</button>
+            <button class="dc-toggle-btn" id="dcHH">도우미</button>
+            <button class="dc-toggle-btn" id="dcBatt">배터리</button>
+            <button class="dc-toggle-btn" id="dcPS">파워스폿</button>
+          </div>
+          <div class="dc-env-row" style="margin-top:5px;"><span class="dc-env-lbl">상태이상</span>
+            <button class="dc-toggle-btn" data-st="독">독</button>
+            <button class="dc-toggle-btn" data-st="마비">마비</button>
+            <button class="dc-toggle-btn" data-st="얼음">얼음</button>
+            <button class="dc-toggle-btn" data-st="화상">화상</button>
+            <button class="dc-toggle-btn" data-st="잠듦">잠듦</button>
+          </div>
+          <div class="dc-hp-row">
+            <span class="dc-env-lbl" style="min-width:24px;">체력</span>
+            <input type="range" class="dc-hp-slider" id="dcAtkHPSlider" min="1" max="100" value="100">
+            <span class="dc-hp-pct" id="dcAtkHPPct">100%</span>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">날씨 / 필드 / 오라</div>
+          <div class="dc-env-row"><span class="dc-env-lbl">날씨</span>
+            <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:3px;">
+              <button class="dc-toggle-btn" data-w="맑음">쾌청</button>
+              <button class="dc-toggle-btn" data-w="비">비바리기</button>
+              <button class="dc-toggle-btn" data-w="모래">모래바람</button>
+              <button class="dc-toggle-btn" data-w="눈">설경</button>
+            </div>
+          </div>
+          <div class="dc-env-row"><span class="dc-env-lbl">필드</span>
+            <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:3px;">
+              <button class="dc-toggle-btn" data-f="그래스">그래스필드</button>
+              <button class="dc-toggle-btn" data-f="일렉">일렉트릭필드</button>
+              <button class="dc-toggle-btn" data-f="사이코">사이코필드</button>
+              <button class="dc-toggle-btn" data-f="미스트">미스트필드</button>
+            </div>
+          </div>
+          <div class="dc-env-row"><span class="dc-env-lbl">오라</span>
+            <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:3px;">
+              <button class="dc-toggle-btn" data-a="페어리">페어리오라</button>
+              <button class="dc-toggle-btn" data-a="다크">다크오라</button>
+              <button class="dc-toggle-btn" id="dcAuraBreak">오라브레이크</button>
+            </div>
+          </div>
+          <div class="dc-env-row" style="align-items:flex-start;"><span class="dc-env-lbl" style="padding-top:3px;">재앙</span>
+            <div style="flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <button class="dc-toggle-btn" id="dcRuinAtk" title="재앙의목간: 공격↓25%">재앙의목간(A↓)</button>
+              <button class="dc-toggle-btn" id="dcRuinSpAtk" title="재앙의그릇: 특공↓25%">재앙의그릇(C↓)</button>
+              <button class="dc-toggle-btn" id="dcRuinDef" title="재앙의검: 방어↓25%">재앙의검(B↓)</button>
+              <button class="dc-toggle-btn" id="dcRuinSpDef" title="재앙의구슬: 특방↓25%">재앙의구슬(D↓)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 수비 -->
+      <div class="dc-col">
+        <div class="dc-col-title" style="display:flex;justify-content:space-between;align-items:center;"><span>🛡 수비</span><button id="dcClearDef" style="font-size:9px;padding:2px 7px;border:1px solid #c9a0e8;border-radius:4px;background:#fff;color:#9070b0;cursor:pointer;font-family:inherit;">비우기</button></div>
+        <div class="dc-block">
+          <div class="dc-block-title">포켓몬</div>
+          <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:4px;justify-content:center;">
+            <div class="dc-big-slot" id="dcDefBigSlot" title="클릭하여 검색">
+              <img id="dcDefBigSlotImg" style="display:none;width:82px;height:82px;image-rendering:pixelated;object-fit:contain;">
+              <span class="dc-big-slot-plus" id="dcDefBigSlotPlus">+</span>
+            </div>
+            <div class="dc-party-pills" id="dcDefPills"></div>
+          </div>
+          <div class="dc-drop"><input class="dc-input" id="dcDefPokeQ" placeholder="이름 검색..." autocomplete="off"><div class="dc-drop-list" id="dcDefPokeList"></div></div>
+          <div class="dc-env-row" style="margin-top:4px;"><span class="dc-env-lbl">성별</span>
+            <button class="dc-toggle-btn on" data-dg="">무성</button>
+            <button class="dc-toggle-btn" data-dg="♂">♂</button>
+            <button class="dc-toggle-btn" data-dg="♀">♀</button>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">HP 스탯</div>
+          <div class="dc-stat-grid">
+            <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcDefHBase">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefHPEV" type="number" min="0" max="32" value="0"></div>
+            <div class="dc-stat-box" style="grid-column:span 2"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcDefHActual">—</span></div>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">방어 스탯</div>
+          <div class="dc-stat-grid">
+            <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcDefDBase">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefEV" type="number" min="0" max="32" value="0"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcDefActual">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">랭크</span>
+              <div class="dc-rank-row"><button class="dc-rank-btn" id="dcDefRkDn">−</button><span class="dc-rank-val" id="dcDefRkVal">0</span><button class="dc-rank-btn" id="dcDefRkUp">+</button></div>
+            </div>
+          </div>
+          <div class="dc-nat-row" id="dcDefNatRow"><span class="dc-nat-lbl">성격</span>
+            <button class="dc-nat-btn" data-m="0.9">×0.9</button><button class="dc-nat-btn on" data-m="1.0">×1.0</button><button class="dc-nat-btn" data-m="1.1">×1.1</button>
+          </div>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">도구 / 특성</div>
+          <div class="dc-drop"><input class="dc-input" id="dcDefItemQ" placeholder="도구 검색..." autocomplete="off"><div class="dc-drop-list" id="dcDefItemList"></div></div>
+          <select class="dc-sel" id="dcDefAbilSel" style="margin-top:4px;width:100%;"><option value="">특성 없음</option></select>
+        </div>
+        <div class="dc-block">
+          <div class="dc-block-title">방어 상황</div>
+          <div class="dc-toggle-row">
+            <button class="dc-toggle-btn" id="dcReflect">리플렉터</button>
+            <button class="dc-toggle-btn" id="dcLightScr">빛의장막</button>
+            <button class="dc-toggle-btn" id="dcAuVeil">오로라베일</button>
+            <button class="dc-toggle-btn" id="dcFG">프렌드가드</button>
+          </div>
+          <div class="dc-hp-row">
+            <span class="dc-env-lbl" style="min-width:24px;">체력</span>
+            <input type="range" class="dc-hp-slider" id="dcDefHPSlider" min="1" max="100" value="100">
+            <span class="dc-hp-pct" id="dcDefHPPct">100%</span>
+          </div>
+        </div>
+        <div class="dc-block" id="dcDurBlock">
+          <div class="dc-block-title">내구력</div>
+          <div class="dc-val-row">
+            <div class="dc-val-box"><div class="dc-val-lbl">물리내구</div><div class="dc-val-num" id="dcPhysDur">—</div></div>
+            <div class="dc-val-box"><div class="dc-val-lbl">특수내구</div><div class="dc-val-num" id="dcSpecDur">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 결과 -->
+    <div class="dc-dmg-box">
+      <div class="dc-dmg-range" id="dcDmgRange"><span class="dc-dmg-empty">포켓몬과 기술을 선택하세요</span></div>
+      <div class="dc-dmg-rolls" id="dcDmgRolls"></div>
+      <div class="dc-dmg-hits" id="dcDmgHits"></div>
+      <div class="dc-val-row" style="margin-top:4px;">
+        <div class="dc-val-box"><div class="dc-val-lbl">결정력</div><div class="dc-val-num" id="dcDecPower">—</div></div>
+        <div class="dc-val-box"><div class="dc-val-lbl">물리내구</div><div class="dc-val-num" id="dcDefPhysDur">—</div></div>
+        <div class="dc-val-box"><div class="dc-val-lbl">특수내구</div><div class="dc-val-num" id="dcDefSpecDur">—</div></div>
+      </div>
+    </div>
+  </div>`;
+
+  /* ── 아이템 세팅 헬퍼 ── */
+  function setAtkItem(it) {
+    atk.item = it || null;
+    document.getElementById('dcItemQ').value = it ? it.name : '';
+    calcDamage();
+  }
+  function setDefItem(it) {
+    def.item = it || null;
+    document.getElementById('dcDefItemQ').value = it ? it.name : '';
+    calcDamage();
+  }
+
+  /* ── 랭크 배율 ── */
+  function rankMult(r) { return r>=0 ? (2+r)/2 : 2/(2-r); }
+
+  /* ── 공격/방어 스탯 표시 갱신 ── */
+  function updateAtkDisplay() {
+    const {pokemon:pk, move:mv, ev, natM, rank} = atk;
+    if (!pk) return;
+    const isPhys = !mv || mv.category === '물리';
+    const base = pk[isPhys?'A':'C'] || 0;
+    const actual = Math.floor(calcStat(base, ev, false, natM));
+    document.getElementById('dcBase').textContent = base;
+    document.getElementById('dcActual').textContent = actual;
+  }
+
+  function updateDefDisplay() {
+    const {pokemon:pk, hpEV, defEV, natM} = def;
+    if (!pk) return;
+    const hBase = pk.H || 0;
+    document.getElementById('dcDefHBase').textContent = hBase;
+    document.getElementById('dcDefHActual').textContent = Math.floor(calcStat(hBase, hpEV, true, 1.0));
+    const mv = atk.move;
+    if (mv) {
+      const dKey = mv.category==='물리' ? 'B' : 'D';
+      const dBase = pk[dKey] || 0;
+      document.getElementById('dcDefDBase').textContent = dBase;
+      document.getElementById('dcDefActual').textContent = Math.floor(calcStat(dBase, defEV, false, natM));
+    }
+  }
+
+  /* ── 대미지 계산 ── */
+  function calcDamage() {
+    const rangeEl = document.getElementById('dcDmgRange');
+    const rollsEl = document.getElementById('dcDmgRolls');
+    const hitsEl  = document.getElementById('dcDmgHits');
+    const {pokemon:atkPk, move:mv, ev, natM:aNatM, rank:aRank, item:aItem, ability:aAbil,
+           gender:aGender, status:aStatus, hpPct:aHP, critical, charge, helpingHand, battery, powerSpot, supremeCount} = atk;
+    const {pokemon:defPk, hpEV, defEV, natM:dNatM, rank:dRank,
+           gender:dGender, hpPct:dHP, reflect, lightScreen, auroraVeil, friendGuard} = def;
+
+    updateAtkDisplay();
+    updateDefDisplay();
+
+    saveCalcState();
+
+    /* 내구력: defPk 있으면 계산, 없으면 초기화 */
+    if (defPk) {
+      /* 날씨는 아직 미확정이므로 env.weather 직접 사용 */
+      const _effW = env.weather || (def.ability?.name==='타오르는불꽃'?'맑음':'');
+      const hpAct = Math.floor(calcStat(defPk.H, hpEV, true, 1.0));
+      const defB  = Math.floor(calcStat(defPk.B, defEV, false, dNatM));
+      const defD  = Math.floor(calcStat(defPk.D, defEV, false, dNatM));
+      const durBItM = getItemStatMult(def.item, defPk, 'B');
+      const durDItM = getItemStatMult(def.item, defPk, 'D');
+      const durBAbM = getAbilityStatMult(def.ability, 'B', {weather:_effW});
+      const durDAbM = getAbilityStatMult(def.ability, 'D', {weather:_effW});
+      /* 장막 보정: 장막은 입히는 데미지를 ½ → 내구력 관점에선 ×2 */
+      const scrPhys = (reflect||auroraVeil) ? 2 : 1;
+      const scrSpec = (lightScreen||auroraVeil) ? 2 : 1;
+      const phys = Math.floor(hpAct * defB * durBItM * durBAbM * scrPhys / 0.411);
+      const spec = Math.floor(hpAct * defD * durDItM * durDAbM * scrSpec / 0.411);
+      const el1=document.getElementById('dcPhysDur'), el2=document.getElementById('dcSpecDur');
+      const el3=document.getElementById('dcDefPhysDur'), el4=document.getElementById('dcDefSpecDur');
+      if(el1) el1.textContent=phys.toLocaleString();
+      if(el2) el2.textContent=spec.toLocaleString();
+      if(el3) el3.textContent=phys.toLocaleString();
+      if(el4) el4.textContent=spec.toLocaleString();
+    } else {
+      ['dcPhysDur','dcSpecDur','dcDefPhysDur','dcDefSpecDur'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='—';});
+    }
+
+    /* 공격 측 입력 없으면 조기 종료 */
+    if (!atkPk || !mv || mv.category==='변화') {
+      rangeEl.innerHTML = '<span class="dc-dmg-empty">포켓몬과 기술을 선택하세요</span>';
+      rollsEl.textContent = ''; hitsEl.textContent = '';
+      const dp=document.getElementById('dcDecPower'); if(dp) dp.textContent='—'; return;
+    }
+
+    const isPhys = mv.category === '물리';
+
+    /* 유효 날씨 (특성 자동 날씨 포함) */
+    let effWeather = env.weather;
+    if (!effWeather) {
+      if (atkPk.name==='메가메가니움'||aAbil?.name==='메가솔라'||aAbil?.name==='타오르는불꽃') effWeather='맑음';
+    }
+    const effField = env.field;
+    const ctx = { weather:effWeather, field:effField, status:aStatus, hpPct:aHP };
+
+    /* 공격 스탯 (바디프레스는 방어 스탯을 공격으로 사용) */
+    const isBodyPress = mv.name === '바디프레스';
+    const atkStatKey = isBodyPress ? 'B' : (isPhys ? 'A' : 'C');
+    const atkBase = atkPk[atkStatKey] || 0;
+    const atkAct  = Math.floor(calcStat(atkBase, isBodyPress ? (def.defEV||0) : ev, false, aNatM));
+    const atkRk   = Math.floor(atkAct * rankMult(aRank));
+    const atkItM  = getItemStatMult(aItem, atkPk, atkStatKey);
+    const atkAbM  = getAbilityStatMult(aAbil, atkStatKey, ctx);
+    /* 쿼크차지/고대활성: 해당 공격 스탯이 최고일 때 ×1.3 */
+    let quarkM = 1;
+    if ((aAbil?.name==='쿼크차지'&&effField==='일렉')||(aAbil?.name==='고대활성'&&effWeather==='맑음')) {
+      const sk=atkStatKey;
+      if(['A','B','C'].includes(sk)&&atkPk[sk]>=Math.max(atkPk.A,atkPk.B,atkPk.C,atkPk.D,atkPk.S)) quarkM=1.3;
+    }
+    /* 화상: 물리 ×0.5 (근성 있으면 면제) */
+    const burnM = (aStatus==='화상'&&isPhys&&aAbil?.name!=='근성') ? 0.5 : 1;
+    /* 재앙: 목간(공↓)/그릇(특↓) */
+    const ruinAtkM = (isPhys ? env.tabletRuin : env.vesselRuin) ? 0.75 : 1;
+    const A = Math.floor(Math.floor(Math.floor(atkRk * atkItM) * atkAbM * quarkM) * burnM * ruinAtkM);
+
+    /* 유효 기술 타입/위력 — defPk 없이도 계산 가능 */
+    const effType = getMoveEffectiveType(atkPk, mv, aItem, aAbil, effWeather);
+    const powerCtx = { hpPct:aHP, defHpPct:dHP, defS:defPk?.S||1, defWeight:defPk?.weight||null, status:aStatus };
+    const effPow  = getMoveEffectivePower(atkPk, mv, aAbil, effWeather, powerCtx);
+    if (!effPow) {
+      rangeEl.innerHTML = '<span class="dc-dmg-empty">상대 포켓몬을 선택하세요</span>';
+      rollsEl.textContent = ''; hitsEl.textContent = '';
+      const dp=document.getElementById('dcDecPower'); if(dp) dp.textContent='—'; return;
+    }
+
+    /* STAB (리베로/변환자재 = 항상 자속) */
+    let isStab = effType===atkPk.type1||effType===atkPk.type2;
+    if (!isStab) { const ot=getItemTypeOverride(aItem,atkPk); if(ot&&ot===effType) isStab=true; }
+    if (aAbil?.name==='리베로'||aAbil?.name==='변환자재') isStab=true;
+    const stab = (aAbil?.name==='적응력'&&isStab)?2:(isStab?1.5:1);
+
+    /* 기술/아이템 배율 */
+    const itemPM = getItemPowerMult(aItem,mv,effType) * getPkmPowerMult(aItem,atkPk,mv);
+    const abilPM = getAbilityPowerMult(aAbil, mv, effType, ctx);
+
+    /* 날씨 배율 */
+    let weatherM=1;
+    if (effWeather==='맑음') { if(effType==='불꽃') weatherM=1.5; if(effType==='물') weatherM=0.5; }
+    else if (effWeather==='비') { if(effType==='물') weatherM=1.5; if(effType==='불꽃') weatherM=0.5; }
+
+    /* 필드 배율 */
+    let fieldM=1;
+    if (effField==='그래스'&&effType==='풀') fieldM=1.3;
+    else if (effField==='일렉'&&effType==='전기') fieldM=1.3;
+    else if (effField==='사이코'&&effType==='에스퍼') fieldM=1.3;
+    if (effField==='그래스'&&['지진','마그니튜드','구르기'].includes(mv.name)) fieldM*=0.5;
+
+    /* 오라 배율 */
+    let auraM=1;
+    if (env.aura==='페어리'&&effType==='페어리') auraM=env.auraBreak?0.75:4/3;
+    else if (env.aura==='다크'&&effType==='악') auraM=env.auraBreak?0.75:4/3;
+
+    /* 급소 */
+    const critM = critical ? (aAbil?.name==='스나이퍼'?2.25:1.5) : 1;
+
+    /* 충전 */
+    const chargeM = (charge&&effType==='전기') ? 2 : 1;
+
+    /* 도우미/배터리/파워스폿 */
+    const hhM   = helpingHand ? 1.5 : 1;
+    const battM = (battery&&!isPhys) ? 1.3 : 1;
+    const psM   = powerSpot ? 1.3 : 1;
+
+    /* 투쟁심 */
+    let rivalryM=1;
+    if (aAbil?.name==='투쟁심'&&aGender&&dGender) rivalryM=aGender===dGender?1.25:0.75;
+
+    /* 총대장 */
+    const supremeM = supremeCount>0 ? (1+supremeCount*0.1) : 1;
+
+    /* OVERRIDE_POWER 기술(트리플킥 등)은 총합 위력이므로 1타로 표시 */
+    const hits = OVERRIDE_POWER[mv.name] ? 1 : (MULTI_HIT_COUNT[mv.name] || mv.hits || 1);
+
+    /* 결정력 = 공격측 위력 지수 (수비자 독립) */
+    const decPow = Math.floor(A * effPow * hits * stab * itemPM * abilPM * weatherM * fieldM * auraM * critM * chargeM * hhM * battM * psM * rivalryM * supremeM);
+    const dp=document.getElementById('dcDecPower');
+    if(dp) dp.textContent=decPow.toLocaleString();
+
+    /* 수비 포켓몬 없으면 데미지 계산 생략 */
+    if (!defPk) {
+      rangeEl.innerHTML = '<span class="dc-dmg-empty">수비 포켓몬을 선택하세요</span>';
+      rollsEl.textContent=''; hitsEl.textContent=''; return;
+    }
+
+    /* 방어 스탯 */
+    const defStatK = isPhys ? 'B' : 'D';
+    const defBase  = defPk[defStatK] || 0;
+    const defAct   = Math.floor(calcStat(defBase, defEV, false, dNatM));
+    const defRk    = Math.floor(defAct * rankMult(dRank));
+    const defItM   = getItemStatMult(def.item, defPk, defStatK);
+    const defAbM   = getAbilityStatMult(def.ability, defStatK, {weather:effWeather});
+    /* 날씨 방어 보정: 모래→바위 특방×1.5, 눈→얼음 방어×1.5 */
+    let dWeatherM = 1;
+    if (effWeather==='모래'&&!isPhys&&(defPk.type1==='바위'||defPk.type2==='바위')) dWeatherM=1.5;
+    if (effWeather==='눈' &&isPhys &&(defPk.type1==='얼음'||defPk.type2==='얼음')) dWeatherM=1.5;
+    /* 재앙: 검(방↓)/구슬(특방↓) */
+    const ruinDefM = (isPhys ? env.swordRuin : env.beadRuin) ? 0.75 : 1;
+    const D = Math.floor(Math.floor(defRk * defItM * defAbM) * dWeatherM * ruinDefM);
+
+    if (A<=0||D<=0) {
+      rangeEl.innerHTML='<span class="dc-dmg-empty">스탯 오류</span>';
+      rollsEl.textContent='';hitsEl.textContent='';return;
+    }
+
+    const defHAct   = Math.floor(calcStat(defPk.H, hpEV, true, 1.0));
+    const defCurHP  = Math.max(1, Math.floor(defHAct * dHP / 100));
+
+    /* 카타스트로피: 현재 HP 절반 고정 데미지 */
+    if (mv.name === '카타스트로피') {
+      const fixedDmg = Math.floor(defCurHP / 2);
+      const pct = (fixedDmg / defHAct * 100).toFixed(1);
+      rangeEl.innerHTML = `${fixedDmg} <span class="dc-dmg-pct">(${pct}%) 현재HP의½</span>`;
+      rollsEl.textContent=''; hitsEl.textContent='';
+      if(dp) dp.textContent='—'; return;
+    }
+    /* 적당히손봐주기 / 칼등치기: HP 1 남기는 고정 데미지 */
+    if (['적당히손봐주기','칼등치기'].includes(mv.name)) {
+      const fixedDmg = defCurHP - 1;
+      const pct = (fixedDmg / defHAct * 100).toFixed(1);
+      rangeEl.innerHTML = `${fixedDmg} <span class="dc-dmg-pct">(${pct}%) HP 1 남김</span>`;
+      rollsEl.textContent=''; hitsEl.textContent='';
+      if(dp) dp.textContent='—'; return;
+    }
+
+    /* 타입 상성 */
+    const dAbil = def.ability;
+    /* 특성 무효 */
+    if (dAbil?.name==='부유'&&effType==='땅') { rangeEl.textContent='효과 없음 (부유)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='흙먹기'&&effType==='땅') { rangeEl.textContent='효과 없음 (흙먹기)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if ((dAbil?.name==='저수'||dAbil?.name==='마중물')&&effType==='물') { rangeEl.textContent='효과 없음';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='수포'&&effType==='물') { rangeEl.textContent='효과 없음 (수포)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if ((dAbil?.name==='전기엔진'||dAbil?.name==='피뢰침'||dAbil?.name==='축전')&&effType==='전기') { rangeEl.textContent='효과 없음';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='초식'&&effType==='풀') { rangeEl.textContent='효과 없음 (초식)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='방탄'&&BALL_MOVES.has(mv.name)) { rangeEl.textContent='효과 없음 (방탄)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='방음'&&SOUND_MOVES.has(mv.name)) { rangeEl.textContent='효과 없음 (방음)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='바람타기'&&WIND_MOVES.has(mv.name)) { rangeEl.textContent='효과 없음 (바람타기)';rollsEl.textContent='';hitsEl.textContent='';return; }
+
+    const e1 = ATK_CHART[effType]?.[defPk.type1] ?? 1;
+    const e2 = defPk.type2 ? (ATK_CHART[effType]?.[defPk.type2] ?? 1) : 1;
+    let typeEff = e1 * e2;
+    /* 불가사의부적: 효과 최고 이외 무효 */
+    if (dAbil?.name==='불가사의부적'&&typeEff<2) { rangeEl.textContent='효과 없음 (불가사의부적)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    /* 색안경: 불효과 → 통상 배율로 */
+    if (aAbil?.name==='색안경'&&typeEff>0&&typeEff<1) typeEff=Math.min(typeEff*2,1);
+    if (typeEff===0) { rangeEl.textContent='효과 없음';rollsEl.textContent='';hitsEl.textContent='';return; }
+
+    /* 장막 (급소면 무시) */
+    let screenM=1;
+    if (!critical) {
+      if (auroraVeil) screenM=0.5;
+      else if (isPhys&&reflect) screenM=0.5;
+      else if (!isPhys&&lightScreen) screenM=0.5;
+    }
+
+    /* 프렌드가드 */
+    const fgM = friendGuard ? 0.75 : 1;
+
+    /* 방어 특성 배율 */
+    let defAbilM=1;
+    /* 체력 만탱 조건 */
+    if ((dAbil?.name==='멀티스케일'||dAbil?.name==='스펙터가드'||dAbil?.name==='테라셸')&&dHP>=100) defAbilM*=0.5;
+    /* 퍼코트: 물리 전체 절반 (체력 무관) */
+    if (dAbil?.name==='퍼코트'&&isPhys) defAbilM*=0.5;
+    /* 얼음인분: 특수 절반 */
+    if (dAbil?.name==='얼음인분'&&!isPhys) defAbilM*=0.5;
+    /* 초고효과 경감 */
+    if ((dAbil?.name==='필터'||dAbil?.name==='프리즘아머'||dAbil?.name==='하드록')&&typeEff>1) defAbilM*=0.75;
+    /* 타입별 경감 */
+    if (dAbil?.name==='두꺼운지방'&&(effType==='불꽃'||effType==='얼음')) defAbilM*=0.5;
+    if ((dAbil?.name==='내열'||dAbil?.name==='수포')&&effType==='불꽃') defAbilM*=0.5;
+    /* 건조피부: 불꽃 1.25× */
+    if (dAbil?.name==='건조피부'&&effType==='불꽃') defAbilM*=1.25;
+    /* 복슬복슬: 접촉 절반, 불꽃 2× */
+    if (dAbil?.name==='복슬복슬'&&isPhys&&CONTACT_MOVES.has(mv.name)) defAbilM*=0.5;
+    if (dAbil?.name==='복슬복슬'&&effType==='불꽃') defAbilM*=2;
+    /* 소리 경감 */
+    if (dAbil?.name==='펑크록'&&SOUND_MOVES.has(mv.name)) defAbilM*=0.5;
+
+    /* Level 50 damage formula — 랜덤 롤을 baseDmg 직후에 적용 (STAB/타입보다 먼저) */
+    const baseDmg = Math.floor(Math.floor(22 * effPow * A / D) / 50) + 2;
+
+    /* 16 랜덤 롤: random → STAB → 타입 → 나머지 배율 순으로 floor 적용 */
+    const rolls=[];
+    for (let i=0;i<16;i++) {
+      let dmg = Math.floor(baseDmg * (85+i) / 100);
+      dmg = Math.floor(dmg * stab);
+      dmg = Math.floor(dmg * typeEff);
+      dmg = Math.floor(dmg * itemPM * abilPM * weatherM * fieldM * auraM);
+      dmg = Math.floor(dmg * critM);
+      dmg = Math.floor(dmg * chargeM * hhM * battM * psM);
+      dmg = Math.floor(dmg * screenM * fgM * defAbilM);
+      dmg = Math.floor(dmg * rivalryM * supremeM);
+      rolls.push(dmg);
+    }
+    const minD=rolls[0]*hits, maxD=rolls[15]*hits;
+
+    const minPct=(minD/defHAct*100).toFixed(1);
+    const maxPct=(maxD/defHAct*100).toFixed(1);
+
+    rangeEl.innerHTML=`${minD}~${maxD} <span class="dc-dmg-pct">(${minPct}%~${maxPct}%)</span>`;
+    rollsEl.textContent=(hits>1?`×${hits}타 | `:'')+rolls.join(', ');
+
+    if (maxD<=0) { hitsEl.textContent='';return; }
+    const minHits=Math.ceil(defCurHP/maxD);
+    const maxHits=minD>0?Math.ceil(defCurHP/minD):99;
+    hitsEl.className='dc-dmg-hits';
+    if (maxD>=defCurHP) {
+      const cnt=rolls.filter(r=>r*hits>=defCurHP).length;
+      if (cnt===16) { hitsEl.textContent='확정 1타';hitsEl.className='dc-dmg-hits ohko'; }
+      else hitsEl.textContent=`${(cnt/16*100).toFixed(1)}% 난수 1타`;
+    } else if (minHits===maxHits) {
+      hitsEl.textContent=`확정 ${minHits}타`;
+    } else {
+      hitsEl.textContent=`난수 ${minHits}~${maxHits}타`;
+    }
+  }
+
+  /* ── 파티 pill (공격) ── */
+  function renderPills() {
+    const el = document.getElementById('dcPills');
+    if (!el) return;
+    el.innerHTML = party.map((s,i) => !s.pokemon ? '' :
+      `<button class="dc-pill${atk.pokemon?.name===s.pokemon.name?' dc-sel':''}" data-pi="${i}" title="${s.pokemon.name}">
+        <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${s.pokemon.name}">
+      </button>`
+    ).join('');
+    el.querySelectorAll('.dc-pill').forEach(btn => btn.addEventListener('click', () => {
+      const idx = +btn.dataset.pi;
+      const s = party[idx];
+      if (!s?.pokemon) return;
+      atk.pokemon = s.pokemon;
+      document.getElementById('dcPokeQ').value = s.pokemon.name;
+      document.getElementById('dcPokeList').classList.remove('open');
+      fillAbilSel(s.pokemon, 'dcAbilSel');
+      updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
+      el.querySelectorAll('.dc-pill').forEach(b => b.classList.remove('dc-sel'));
+      el.querySelector(`[data-pi="${idx}"]`)?.classList.add('dc-sel');
+      if (s.moves?.[0]) setMove(s.moves[0]);
+      atk.item = s.item; atk.ability = s.ability;
+      atk.ev = s.evs?.[atk.move?.category==='물리'?'A':'C'] || 0;
+      document.getElementById('dcEV').value = atk.ev;
+      document.getElementById('dcItemQ').value = s.item?.name||'';
+      document.getElementById('dcAbilSel').value = s.ability?.name||'';
+      const olRow=document.getElementById('dcOLRow'); if(olRow) olRow.style.display=s.ability?.name==='총대장'?'flex':'none';
+      calcDamage();
+    }));
+  }
+
+  /* ── 파티 pill (수비) ── */
+  function renderDefPills() {
+    const el = document.getElementById('dcDefPills');
+    if (!el) return;
+    el.innerHTML = party.map((s,i) => !s.pokemon ? '' :
+      `<button class="dc-pill${def.pokemon?.name===s.pokemon.name?' dc-sel':''}" data-pi="${i}" title="${s.pokemon.name}">
+        <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${s.pokemon.name}">
+      </button>`
+    ).join('');
+    el.querySelectorAll('.dc-pill').forEach(btn => btn.addEventListener('click', () => {
+      const idx = +btn.dataset.pi;
+      const s = party[idx];
+      if (!s?.pokemon) return;
+      def.pokemon = s.pokemon;
+      document.getElementById('dcDefPokeQ').value = s.pokemon.name;
+      document.getElementById('dcDefPokeList').classList.remove('open');
+      fillAbilSel(s.pokemon, 'dcDefAbilSel');
+      updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus', s.pokemon);
+      el.querySelectorAll('.dc-pill').forEach(b => b.classList.remove('dc-sel'));
+      el.querySelector(`[data-pi="${idx}"]`)?.classList.add('dc-sel');
+      def.hpEV = s.evs?.H || 0;
+      const defStatK = atk.move?.category==='물리' ? 'B' : 'D';
+      def.defEV = s.evs?.[defStatK] || 0;
+      document.getElementById('dcDefHPEV').value = def.hpEV;
+      document.getElementById('dcDefEV').value = def.defEV;
+      def.item = s.item; def.ability = s.ability;
+      document.getElementById('dcDefItemQ').value = s.item?.name||'';
+      document.getElementById('dcDefAbilSel').value = s.ability?.name||'';
+      def.natM = s.nature ? natMult(s.nature, defStatK) : 1.0;
+      document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn')
+        .forEach(b => b.classList.toggle('on', +b.dataset.m === def.natM));
+      calcDamage();
+    }));
+  }
+
+  /* ── pill dc-sel 업데이트 (re-render 없이) ── */
+  function updateAtkPillSel() {
+    document.querySelectorAll('#dcPills .dc-pill').forEach(b =>
+      b.classList.toggle('dc-sel', party[+b.dataset.pi]?.pokemon?.name === atk.pokemon?.name));
+  }
+  function updateDefPillSel() {
+    document.querySelectorAll('#dcDefPills .dc-pill').forEach(b =>
+      b.classList.toggle('dc-sel', party[+b.dataset.pi]?.pokemon?.name === def.pokemon?.name));
+  }
+
+  function updateBigSlot(id, imgId, plusId, pk) {
+    const img = document.getElementById(imgId), plus = document.getElementById(plusId);
+    if (!img) return;
+    if (pk) { img.src = spriteUrl(pk.name, pk.no); img.style.display=''; if(plus) plus.style.display='none'; }
+    else { img.style.display='none'; if(plus) plus.style.display=''; }
+  }
+
+  /* ── 포켓몬 세팅 (공격) ── */
+  function setAtkPokemon(pk) {
+    atk.pokemon = pk;
+    document.getElementById('dcPokeQ').value = pk.name;
+    document.getElementById('dcPokeList').classList.remove('open');
+    fillAbilSel(pk, 'dcAbilSel');
+    updateAtkPillSel();
+    updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', pk);
+    calcDamage();
+  }
+
+  /* ── 포켓몬 세팅 (수비) ── */
+  function setDefPokemon(pk) {
+    def.pokemon = pk;
+    document.getElementById('dcDefPokeQ').value = pk.name;
+    document.getElementById('dcDefPokeList').classList.remove('open');
+    fillAbilSel(pk, 'dcDefAbilSel');
+    updateDefPillSel();
+    updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus', pk);
+    calcDamage();
+  }
+
+  /* ── 특성 셀렉트 채우기 ── */
+  function fillAbilSel(pk, selId) {
+    const sel = document.getElementById(selId);
+    if (!sel || !pk) return;
+    sel.innerHTML = '<option value="">특성 없음</option>';
+    const abd = ABILITY_DATA?.[pk.name];
+    const norm = Array.isArray(abd?.normal) ? abd.normal : [];
+    const hidn = !abd?.hidden ? [] : Array.isArray(abd.hidden) ? abd.hidden : [abd.hidden];
+    norm.forEach(ab => {
+      const o = document.createElement('option'); o.value=ab.name; o.textContent=ab.name; sel.appendChild(o);
+    });
+    hidn.forEach(ab => {
+      const o = document.createElement('option'); o.value=ab.name; o.textContent=ab.name+' (숨겨진)'; sel.appendChild(o);
+    });
+  }
+
+  /* ── 기술 세팅 ── */
+  function setMove(mv) {
+    atk.move = mv;
+    document.getElementById('dcMoveQ').value = mv.name;
+    document.getElementById('dcMoveList').classList.remove('open');
+    const tc = TYPE_COLORS[mv.type]||'#888';
+    document.getElementById('dcMoveInfo').innerHTML =
+      `<span class="dc-type-tag" style="background:${tc}">${mv.type}</span> ${mv.category} | 위력 ${mv.power??'가변'}`;
+    if (atk.pokemon && selectedSlot >= 0) window.dcSyncFromSlot(selectedSlot);
+    else calcDamage();
+  }
+
+  /* ── 검색 드롭다운 헬퍼 ── */
+  const allDrops = [];
+  function makeSearch(inputId, listId, getData, onSelect) {
+    const inp = document.getElementById(inputId);
+    const lst = document.getElementById(listId);
+    const drop = lst.closest('.dc-drop');
+    allDrops.push({lst, drop});
+
+    function showRows(q) {
+      let rows = getData(q);
+      if (!q) rows = [...rows].sort((a,b)=>(a.data?.name||'').localeCompare(b.data?.name||'','ko'));
+      if (!rows.length) { lst.classList.remove('open'); drop.style.zIndex=''; return; }
+      allDrops.forEach(d => { if(d.lst!==lst){ d.lst.classList.remove('open'); d.drop.style.zIndex=''; } });
+      lst.innerHTML = rows.map(r=>r.html).join('');
+      lst.classList.add('open');
+      drop.style.zIndex = '60';
+      lst.querySelectorAll('.dc-drop-item').forEach((el,i) => el.addEventListener('click', ()=>{ onSelect(rows[i].data); lst.classList.remove('open'); drop.style.zIndex=''; }));
+    }
+
+    inp.addEventListener('focus', () => showRows(inp.value.trim()));
+    inp.addEventListener('input', () => showRows(inp.value.trim()));
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#'+inputId) && !e.target.closest('#'+listId)) {
+        lst.classList.remove('open'); drop.style.zIndex='';
+      }
+    });
+  }
+
+  /* 큰 슬롯 클릭 → 포켓몬 선택 모달 */
+  document.getElementById('dcBigSlot')?.addEventListener('click', () => {
+    calcModalCallback = (pk) => setAtkPokemon(pk);
+    openPokeModal(0);
+  });
+  document.getElementById('dcDefBigSlot')?.addEventListener('click', () => {
+    calcModalCallback = (pk) => setDefPokemon(pk);
+    openPokeModal(0);
+  });
+
+  makeSearch('dcPokeQ','dcPokeList',
+    q => POKEMON_DATA.filter(p=>p.name.includes(q)).map(p=>({
+      html:`<div class="dc-drop-item">${p.name}</div>`, data:p })),
+    p => setAtkPokemon(p));
+
+  makeSearch('dcMoveQ','dcMoveList',
+    q => (MOVE_DATA||[]).filter(m=>m.name.includes(q)&&m.category!=='변화'&&!(m.accuracy===null&&m.pp===1)).map(m=>({
+      html:`<div class="dc-drop-item">
+        <span class="dc-type-tag" style="background:${TYPE_COLORS[m.type]||'#888'}">${m.type}</span>
+        <span style="flex:1">${m.name}</span>
+        <span style="color:#aaa;font-size:10px">${m.power??'가변'}</span></div>`, data:m })),
+    m => setMove(m));
+
+  makeSearch('dcDefPokeQ','dcDefPokeList',
+    q => POKEMON_DATA.filter(p=>p.name.includes(q)).map(p=>({
+      html:`<div class="dc-drop-item">${p.name}</div>`, data:p })),
+    p => setDefPokemon(p));
+
+  makeSearch('dcItemQ','dcItemList',
+    q => (ITEM_DATA||[]).filter(it=>it.name.includes(q)).map(it=>({
+      html:`<div class="dc-drop-item">${it.name}</div>`, data:it })),
+    it => setAtkItem(it));
+
+  makeSearch('dcDefItemQ','dcDefItemList',
+    q => (ITEM_DATA||[]).filter(it=>it.name.includes(q)).map(it=>({
+      html:`<div class="dc-drop-item">${it.name}</div>`, data:it })),
+    it => setDefItem(it));
+
+  /* 도구 인풋 비우면 아이템 해제 */
+  document.getElementById('dcItemQ').addEventListener('input', e => {
+    if (!e.target.value.trim()) { atk.item = null; calcDamage(); }
+  });
+  document.getElementById('dcDefItemQ').addEventListener('input', e => {
+    if (!e.target.value.trim()) { def.item = null; calcDamage(); }
+  });
+
+  /* ── EV (공격) ── */
+  document.getElementById('dcEV').addEventListener('input', e => {
+    atk.ev = Math.min(32, Math.max(0, +e.target.value||0));
+    calcDamage();
+  });
+
+  /* ── 랭크 (공격) ── */
+  document.getElementById('dcRkUp').addEventListener('click', () => {
+    if (atk.rank<6){atk.rank++;document.getElementById('dcRkVal').textContent=atk.rank;calcDamage();}
+  });
+  document.getElementById('dcRkDn').addEventListener('click', () => {
+    if (atk.rank>-6){atk.rank--;document.getElementById('dcRkVal').textContent=atk.rank;calcDamage();}
+  });
+
+  /* ── 성격 (공격) ── */
+  document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn').forEach(btn => btn.addEventListener('click', () => {
+    document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    atk.natM = +btn.dataset.m;
+    calcDamage();
+  }));
+
+  /* ── 특성 (공격) ── */
+  document.getElementById('dcAbilSel').addEventListener('change', e => {
+    const pk = atk.pokemon;
+    if (!pk) return;
+    const abd = ABILITY_DATA?.[pk.name];
+    const norm = Array.isArray(abd?.normal) ? abd.normal : [];
+    const hidn = !abd?.hidden ? [] : Array.isArray(abd.hidden) ? abd.hidden : [abd.hidden];
+    atk.ability = [...norm,...hidn].find(ab=>ab.name===e.target.value)||null;
+    const olRow = document.getElementById('dcOLRow');
+    if (olRow) olRow.style.display = atk.ability?.name==='총대장' ? 'flex' : 'none';
+    calcDamage();
+  });
+
+  /* ── HP EV (수비) ── */
+  document.getElementById('dcDefHPEV').addEventListener('input', e => {
+    def.hpEV = Math.min(32, Math.max(0, +e.target.value||0));
+    calcDamage();
+  });
+
+  /* ── 방어 EV (수비) ── */
+  document.getElementById('dcDefEV').addEventListener('input', e => {
+    def.defEV = Math.min(32, Math.max(0, +e.target.value||0));
+    calcDamage();
+  });
+
+  /* ── 랭크 (수비) ── */
+  document.getElementById('dcDefRkUp').addEventListener('click', () => {
+    if (def.rank<6){def.rank++;document.getElementById('dcDefRkVal').textContent=def.rank;calcDamage();}
+  });
+  document.getElementById('dcDefRkDn').addEventListener('click', () => {
+    if (def.rank>-6){def.rank--;document.getElementById('dcDefRkVal').textContent=def.rank;calcDamage();}
+  });
+
+  /* ── 성격 (수비) ── */
+  document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach(btn => btn.addEventListener('click', () => {
+    document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    def.natM = +btn.dataset.m;
+    calcDamage();
+  }));
+
+  /* ── 특성 (수비) ── */
+  document.getElementById('dcDefAbilSel').addEventListener('change', e => {
+    const pk = def.pokemon;
+    if (!pk) return;
+    const abd = ABILITY_DATA?.[pk.name];
+    const norm = Array.isArray(abd?.normal) ? abd.normal : [];
+    const hidn = !abd?.hidden ? [] : Array.isArray(abd.hidden) ? abd.hidden : [abd.hidden];
+    def.ability = [...norm,...hidn].find(ab=>ab.name===e.target.value)||null;
+    calcDamage();
+  });
+
+  function renderAllPills() { renderPills(); renderDefPills(); }
+  renderAllPills();
+  document.addEventListener('pochams:partychange', renderAllPills);
+
+  /* ── 성별 (공격) ── */
+  document.querySelectorAll('.dc-toggle-btn[data-ag]').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.dc-toggle-btn[data-ag]').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    atk.gender = btn.dataset.ag;
+    calcDamage();
+  }));
+
+  /* ── 성별 (수비) ── */
+  document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    def.gender = btn.dataset.dg;
+    calcDamage();
+  }));
+
+  /* ── 상태이상 (공격) ── */
+  document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(btn => btn.addEventListener('click', () => {
+    const val = btn.dataset.st;
+    if (atk.status === val) { atk.status=''; document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.remove('on')); }
+    else { document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); atk.status=val; }
+    calcDamage();
+  }));
+
+  /* ── 체력 슬라이더 배경 업데이트 ── */
+  function updateSliderBg(slider) {
+    const pct = (+slider.value - +slider.min) / (+slider.max - +slider.min) * 100;
+    slider.style.background = `linear-gradient(to right,#7ac143 ${pct}%,rgba(123,63,160,.2) ${pct}%)`;
+  }
+
+  /* ── 체력% (공격) 슬라이더 ── */
+  const dcAtkHPSlider = document.getElementById('dcAtkHPSlider');
+  const dcAtkHPPct = document.getElementById('dcAtkHPPct');
+  if (dcAtkHPSlider) updateSliderBg(dcAtkHPSlider);
+  dcAtkHPSlider?.addEventListener('input', e => {
+    const v = +e.target.value;
+    atk.hpPct = v;
+    if (dcAtkHPPct) dcAtkHPPct.textContent = v + '%';
+    updateSliderBg(dcAtkHPSlider);
+    calcDamage();
+  });
+
+  /* ── 체력% (수비) 슬라이더 ── */
+  const dcDefHPSlider = document.getElementById('dcDefHPSlider');
+  const dcDefHPPct = document.getElementById('dcDefHPPct');
+  if (dcDefHPSlider) updateSliderBg(dcDefHPSlider);
+  dcDefHPSlider?.addEventListener('input', e => {
+    const v = +e.target.value;
+    def.hpPct = v;
+    if (dcDefHPPct) dcDefHPPct.textContent = v + '%';
+    updateSliderBg(dcDefHPSlider);
+    calcDamage();
+  });
+
+  /* ── 공격 상황 토글 ── */
+  ['dcCrit','dcCharge','dcHH','dcBatt','dcPS'].forEach(id => {
+    const map = {dcCrit:'critical',dcCharge:'charge',dcHH:'helpingHand',dcBatt:'battery',dcPS:'powerSpot'};
+    document.getElementById(id)?.addEventListener('click', function(){
+      this.classList.toggle('on');
+      atk[map[id]] = this.classList.contains('on');
+      calcDamage();
+    });
+  });
+
+  /* ── 총대장 단계 ── */
+  document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    atk.supremeCount = +btn.dataset.ol;
+    calcDamage();
+  }));
+
+  /* ── 날씨 ── */
+  document.querySelectorAll('.dc-toggle-btn[data-w]').forEach(btn => btn.addEventListener('click', () => {
+    const val = btn.dataset.w;
+    if (env.weather === val) { env.weather=''; document.querySelectorAll('.dc-toggle-btn[data-w]').forEach(b=>b.classList.remove('on')); }
+    else { document.querySelectorAll('.dc-toggle-btn[data-w]').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); env.weather=val; }
+    calcDamage();
+  }));
+
+  /* ── 필드 ── */
+  document.querySelectorAll('.dc-toggle-btn[data-f]').forEach(btn => btn.addEventListener('click', () => {
+    const val = btn.dataset.f;
+    if (env.field === val) { env.field=''; document.querySelectorAll('.dc-toggle-btn[data-f]').forEach(b=>b.classList.remove('on')); }
+    else { document.querySelectorAll('.dc-toggle-btn[data-f]').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); env.field=val; }
+    calcDamage();
+  }));
+
+  /* ── 오라 ── */
+  document.querySelectorAll('.dc-toggle-btn[data-a]').forEach(btn => btn.addEventListener('click', () => {
+    const val = btn.dataset.a;
+    if (env.aura === val) { env.aura=''; document.querySelectorAll('.dc-toggle-btn[data-a]').forEach(b=>b.classList.remove('on')); }
+    else { document.querySelectorAll('.dc-toggle-btn[data-a]').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); env.aura=val; }
+    calcDamage();
+  }));
+
+  /* ── 오라브레이크 ── */
+  document.getElementById('dcAuraBreak')?.addEventListener('click', function(){
+    this.classList.toggle('on'); env.auraBreak=this.classList.contains('on'); calcDamage();
+  });
+
+  /* ── 재앙의보물 ── */
+  ['dcRuinAtk','dcRuinSpAtk','dcRuinDef','dcRuinSpDef'].forEach(id => {
+    const map = {dcRuinAtk:'tabletRuin',dcRuinSpAtk:'vesselRuin',dcRuinDef:'swordRuin',dcRuinSpDef:'beadRuin'};
+    document.getElementById(id)?.addEventListener('click', function(){
+      this.classList.toggle('on'); env[map[id]]=this.classList.contains('on'); calcDamage();
+    });
+  });
+
+  /* ── 방어 상황 토글 ── */
+  ['dcReflect','dcLightScr','dcAuVeil','dcFG'].forEach(id => {
+    const map = {dcReflect:'reflect',dcLightScr:'lightScreen',dcAuVeil:'auroraVeil',dcFG:'friendGuard'};
+    document.getElementById(id)?.addEventListener('click', function(){
+      this.classList.toggle('on'); def[map[id]]=this.classList.contains('on'); calcDamage();
+    });
+  });
+
+  /* ── 비우기 ── */
+  document.getElementById('dcClearAtk')?.addEventListener('click', () => {
+    atk.pokemon=null; atk.move=null; atk.ev=0; atk.natM=1.0; atk.rank=0;
+    atk.item=null; atk.ability=null; atk.gender=''; atk.status=''; atk.hpPct=100;
+    atk.critical=false; atk.charge=false; atk.helpingHand=false; atk.battery=false; atk.powerSpot=false; atk.supremeCount=0;
+    document.getElementById('dcPokeQ').value='';
+    document.getElementById('dcMoveQ').value=''; document.getElementById('dcMoveInfo').innerHTML='';
+    document.getElementById('dcEV').value=0; document.getElementById('dcRkVal').textContent=0;
+    document.getElementById('dcItemQ').value='';
+    document.getElementById('dcAbilSel').innerHTML='<option value="">특성 없음</option>';
+    document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn').forEach((b,i)=>b.classList.toggle('on',i===1));
+    document.querySelectorAll('.dc-toggle-btn[data-ag]').forEach((b,i)=>b.classList.toggle('on',i===0));
+    document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.remove('on'));
+    ['dcCrit','dcCharge','dcHH','dcBatt','dcPS'].forEach(id=>document.getElementById(id)?.classList.remove('on'));
+    document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach((b,i)=>b.classList.toggle('on',i===0));
+    document.getElementById('dcOLRow').style.display='none';
+    const slA=document.getElementById('dcAtkHPSlider'); if(slA){slA.value=100;updateSliderBg(slA);}
+    const pcA=document.getElementById('dcAtkHPPct'); if(pcA) pcA.textContent='100%';
+    updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus',null);
+    updateAtkPillSel(); calcDamage();
+  });
+
+  document.getElementById('dcClearDef')?.addEventListener('click', () => {
+    def.pokemon=null; def.hpEV=0; def.defEV=0; def.natM=1.0; def.rank=0;
+    def.item=null; def.ability=null; def.gender=''; def.hpPct=100;
+    def.reflect=false; def.lightScreen=false; def.auroraVeil=false; def.friendGuard=false;
+    document.getElementById('dcDefPokeQ').value='';
+    document.getElementById('dcDefHPEV').value=0; document.getElementById('dcDefEV').value=0;
+    document.getElementById('dcDefRkVal').textContent=0;
+    document.getElementById('dcDefItemQ').value='';
+    document.getElementById('dcDefAbilSel').innerHTML='<option value="">특성 없음</option>';
+    document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach((b,i)=>b.classList.toggle('on',i===1));
+    document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach((b,i)=>b.classList.toggle('on',i===0));
+    ['dcReflect','dcLightScr','dcAuVeil','dcFG'].forEach(id=>document.getElementById(id)?.classList.remove('on'));
+    const slD=document.getElementById('dcDefHPSlider'); if(slD){slD.value=100;updateSliderBg(slD);}
+    const pcD=document.getElementById('dcDefHPPct'); if(pcD) pcD.textContent='100%';
+    updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus',null);
+    updateDefPillSel(); calcDamage();
+  });
+
+  /* ── LocalStorage 저장/복원 ── */
+  function saveCalcState() {
+    try {
+      localStorage.setItem('pochams_calc', JSON.stringify({
+        atk: {
+          pkName:atk.pokemon?.name||null, pkNo:atk.pokemon?.no||null,
+          mvName:atk.move?.name||null, ev:atk.ev, natM:atk.natM, rank:atk.rank,
+          itemName:atk.item?.name||null, abilityName:atk.ability?.name||null,
+          gender:atk.gender, status:atk.status, hpPct:atk.hpPct,
+          critical:atk.critical, charge:atk.charge, helpingHand:atk.helpingHand,
+          battery:atk.battery, powerSpot:atk.powerSpot, supremeCount:atk.supremeCount,
+        },
+        def: {
+          pkName:def.pokemon?.name||null, pkNo:def.pokemon?.no||null,
+          hpEV:def.hpEV, defEV:def.defEV, natM:def.natM, rank:def.rank,
+          itemName:def.item?.name||null, abilityName:def.ability?.name||null,
+          gender:def.gender, hpPct:def.hpPct,
+          reflect:def.reflect, lightScreen:def.lightScreen, auroraVeil:def.auroraVeil, friendGuard:def.friendGuard,
+        },
+        env: {...env},
+      }));
+    } catch(e) {}
+  }
+
+  function loadCalcState() {
+    try {
+      const raw = localStorage.getItem('pochams_calc');
+      if (!raw) return;
+      const s = JSON.parse(raw);
+
+      if (s.atk) {
+        const a = s.atk;
+        if (a.pkName != null) {
+          const pk = (POKEMON_DATA||[]).find(p=>p.name===a.pkName&&p.no===a.pkNo);
+          if (pk) {
+            atk.pokemon = pk;
+            fillAbilSel(pk,'dcAbilSel');
+            updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus',pk);
+            document.getElementById('dcPokeQ').value = pk.name;
+          }
+        }
+        if (a.mvName != null) {
+          const mv = (MOVE_DATA||[]).find(m=>m.name===a.mvName);
+          if (mv) {
+            atk.move = mv;
+            document.getElementById('dcMoveQ').value = mv.name;
+            const tc = TYPE_COLORS[mv.type]||'#888';
+            document.getElementById('dcMoveInfo').innerHTML = `<span class="dc-type-tag" style="background:${tc}">${mv.type}</span> ${mv.category} | 위력 ${mv.power??'가변'}`;
+          }
+        }
+        if (a.ev != null) { atk.ev = a.ev; document.getElementById('dcEV').value = a.ev; }
+        if (a.natM != null) {
+          atk.natM = a.natM;
+          document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn').forEach(b=>b.classList.toggle('on',+b.dataset.m===a.natM));
+        }
+        if (a.rank != null) { atk.rank = a.rank; document.getElementById('dcRkVal').textContent = a.rank; }
+        if (a.itemName != null) { atk.item={name:a.itemName}; document.getElementById('dcItemQ').value=a.itemName; }
+        if (a.abilityName != null) {
+          atk.ability={name:a.abilityName};
+          const sel=document.getElementById('dcAbilSel'); if(sel) sel.value=a.abilityName;
+          const olRow=document.getElementById('dcOLRow'); if(olRow) olRow.style.display=a.abilityName==='총대장'?'flex':'none';
+        }
+        if (a.gender != null) { atk.gender=a.gender; document.querySelectorAll('.dc-toggle-btn[data-ag]').forEach(b=>b.classList.toggle('on',b.dataset.ag===a.gender)); }
+        if (a.status != null) { atk.status=a.status; document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.toggle('on',b.dataset.st===a.status&&a.status!=='')); }
+        if (a.hpPct != null) { atk.hpPct=a.hpPct; const sl=document.getElementById('dcAtkHPSlider'); if(sl){sl.value=a.hpPct;updateSliderBg(sl);} const pc=document.getElementById('dcAtkHPPct'); if(pc) pc.textContent=a.hpPct+'%'; }
+        const atkBoolMap={critical:'dcCrit',charge:'dcCharge',helpingHand:'dcHH',battery:'dcBatt',powerSpot:'dcPS'};
+        Object.entries(atkBoolMap).forEach(([k,id])=>{if(a[k]!=null){atk[k]=a[k];document.getElementById(id)?.classList.toggle('on',a[k]);}});
+        if (a.supremeCount != null) { atk.supremeCount=a.supremeCount; document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach(b=>b.classList.toggle('on',+b.dataset.ol===a.supremeCount)); }
+      }
+
+      if (s.def) {
+        const d = s.def;
+        if (d.pkName != null) {
+          const pk = (POKEMON_DATA||[]).find(p=>p.name===d.pkName&&p.no===d.pkNo);
+          if (pk) {
+            def.pokemon = pk;
+            fillAbilSel(pk,'dcDefAbilSel');
+            updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus',pk);
+            document.getElementById('dcDefPokeQ').value = pk.name;
+          }
+        }
+        if (d.hpEV != null) { def.hpEV=d.hpEV; document.getElementById('dcDefHPEV').value=d.hpEV; }
+        if (d.defEV != null) { def.defEV=d.defEV; document.getElementById('dcDefEV').value=d.defEV; }
+        if (d.natM != null) { def.natM=d.natM; document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach(b=>b.classList.toggle('on',+b.dataset.m===d.natM)); }
+        if (d.rank != null) { def.rank=d.rank; document.getElementById('dcDefRkVal').textContent=d.rank; }
+        if (d.itemName != null) { def.item={name:d.itemName}; document.getElementById('dcDefItemQ').value=d.itemName; }
+        if (d.abilityName != null) { def.ability={name:d.abilityName}; const sel=document.getElementById('dcDefAbilSel'); if(sel) sel.value=d.abilityName; }
+        if (d.gender != null) { def.gender=d.gender; document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach(b=>b.classList.toggle('on',b.dataset.dg===d.gender)); }
+        if (d.hpPct != null) { def.hpPct=d.hpPct; const sl=document.getElementById('dcDefHPSlider'); if(sl){sl.value=d.hpPct;updateSliderBg(sl);} const pc=document.getElementById('dcDefHPPct'); if(pc) pc.textContent=d.hpPct+'%'; }
+        const defBoolMap={reflect:'dcReflect',lightScreen:'dcLightScr',auroraVeil:'dcAuVeil',friendGuard:'dcFG'};
+        Object.entries(defBoolMap).forEach(([k,id])=>{if(d[k]!=null){def[k]=d[k];document.getElementById(id)?.classList.toggle('on',d[k]);}});
+      }
+
+      if (s.env) {
+        Object.assign(env, s.env);
+        if (env.weather) document.querySelectorAll('.dc-toggle-btn[data-w]').forEach(b=>b.classList.toggle('on',b.dataset.w===env.weather));
+        if (env.field) document.querySelectorAll('.dc-toggle-btn[data-f]').forEach(b=>b.classList.toggle('on',b.dataset.f===env.field));
+        if (env.aura) document.querySelectorAll('.dc-toggle-btn[data-a]').forEach(b=>b.classList.toggle('on',b.dataset.a===env.aura));
+        if (env.auraBreak) document.getElementById('dcAuraBreak')?.classList.add('on');
+        const ruinMap={tabletRuin:'dcRuinAtk',vesselRuin:'dcRuinSpAtk',swordRuin:'dcRuinDef',beadRuin:'dcRuinSpDef'};
+        Object.entries(ruinMap).forEach(([k,id])=>{if(env[k]) document.getElementById(id)?.classList.add('on');});
+      }
+
+      calcDamage();
+    } catch(e) {}
+  }
+
+  loadCalcState();
+
+  /* detail-card 변경 시 공격 side 동기화 */
+  window.dcSyncFromSlot = function(idx) {
+    const s = party[idx];
+    if (!s?.pokemon || !atk.pokemon) return;
+    if (atk.pokemon.name !== s.pokemon.name) return;
+    const isPhys = atk.move?.category === '물리';
+    const sk = isPhys ? 'A' : 'C';
+    atk.ev = s.evs?.[sk] || 0;
+    const evInp = document.getElementById('dcEV');
+    if (evInp) evInp.value = atk.ev;
+    const nm = s.nature ? natMult(s.nature, sk) : 1.0;
+    atk.natM = nm;
+    document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn')
+      .forEach(b => b.classList.toggle('on', +b.dataset.m === nm));
+    atk.item = s.item;
+    const iSel = document.getElementById('dcItemQ');
+    if (iSel) iSel.value = s.item?.name || '';
+    atk.ability = s.ability;
+    fillAbilSel(s.pokemon, 'dcAbilSel');
+    const aSel = document.getElementById('dcAbilSel');
+    if (aSel) aSel.value = s.ability?.name || '';
+    const olRow = document.getElementById('dcOLRow');
+    if (olRow) olRow.style.display = s.ability?.name==='총대장' ? 'flex' : 'none';
+    updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
+    calcDamage();
+  };
+})();
+
+/* ════════════════════════════
+   추천 포켓몬 패널
+════════════════════════════ */
+function renderRecommended() {
+  const el = document.getElementById('recPokemonList');
+  if (!el || !POKEMON_DATA?.length) return;
+  const inParty = new Set(party.map(s => s.pokemon?.name).filter(Boolean));
+  const pool = POKEMON_DATA.filter(pk => pk.champions && !inParty.has(pk.name));
+  el.innerHTML = pool.map(pk => {
+    const t1 = pk.type1 ? `<span class="pc-tbadge" style="background:${TYPE_COLORS[pk.type1]}">${pk.type1}</span>` : '';
+    const t2 = pk.type2 ? `<span class="pc-tbadge" style="background:${TYPE_COLORS[pk.type2]}">${pk.type2}</span>` : '';
+    return `<div class="rec-card" data-pkname="${pk.name}" title="${pk.name}">
+      <img src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}">
+      <span class="rec-card-name">${pk.name}</span>
+      <div class="rec-card-types">${t1}${t2}</div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.rec-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const pk = POKEMON_DATA.find(p => p.name === card.dataset.pkname);
+      if (!pk) return;
+      const emptySlot = party.findIndex(s => !s.pokemon);
+      const slotIdx = emptySlot >= 0 ? emptySlot : 0;
+      party[slotIdx].pokemon = pk;
+      const abd = ABILITY_DATA?.[pk.name];
+      party[slotIdx].ability = abd?.normal?.[0] || null;
+      party[slotIdx].evs = {H:0,A:0,B:0,C:0,D:0,S:0};
+      if (pk.name.endsWith('♂') || GENDER_FORM_MAP[pk.name]?.male === pk.name) party[slotIdx].gender = '♂';
+      else if (pk.name.endsWith('♀') || GENDER_FORM_MAP[pk.name]?.female === pk.name) party[slotIdx].gender = '♀';
+      else party[slotIdx].gender = null;
+      saveParty(); renderSlots(); renderRecommended();
+      selectedSlot = slotIdx; renderDetail(slotIdx); showPanel();
+    });
+  });
+}
+
+/* ════════════════════════════
+   POKEMON MODAL
+════════════════════════════ */
+function openPokeModal(slotIdx) {
+  modalSlot = slotIdx;
+  typeFilter = null;
+  document.querySelectorAll('#typeFilterRow .tf-btn').forEach(b=>{b.style.opacity='.55';b.style.border='2px solid transparent';});
+  document.getElementById('pokeModal').classList.add('open');
+  document.getElementById('pokeSearch').value = '';
+  renderPokeGrid('');
+  setTimeout(()=>document.getElementById('pokeSearch').focus(),50);
+}
+function closePokeModal() { document.getElementById('pokeModal').classList.remove('open'); calcModalCallback = null; }
+
+function renderPokeGrid(q) {
+  let list = POKEMON_DATA.map((p,i)=>({p,i}));
+  if (pokeFilter==='ingame') list = list.filter(({p})=>p.inGame);
+  if (typeFilter) list = list.filter(({p})=>p.type1===typeFilter||p.type2===typeFilter);
+  if (q) list = list.filter(({p})=>p.name.includes(q));
+  document.getElementById('pokeGrid').innerHTML = list.map(({p:pk,i}) => `
+    <div class="poke-card" data-idx="${i}">
+      <img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}" loading="lazy">
+      <div class="pc-no">#${pk.no}</div>
+      <div class="pc-name">${pk.name}</div>
+      <div class="pc-types">
+        ${[pk.type1,pk.type2].filter(Boolean).map(t=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+document.getElementById('pokeGrid').addEventListener('click', e => {
+  const card = e.target.closest('.poke-card');
+  if (!card) return;
+  const pk = POKEMON_DATA[+card.dataset.idx];
+  if (!pk) return;
+  /* 계산기 전용 콜백 모드 */
+  if (calcModalCallback) {
+    const cb = calcModalCallback; calcModalCallback = null;
+    closePokeModal(); cb(pk); return;
+  }
+  if (modalSlot < 0) return;
+  party[modalSlot].pokemon = pk;
+  /* auto-set ability */
+  const abd = ABILITY_DATA?.[pk.name];
+  party[modalSlot].ability = abd?.normal?.[0] || null;
+  /* reset evs, moves, nature, item */
+  party[modalSlot].evs    = {H:0,A:0,B:0,C:0,D:0,S:0};
+  party[modalSlot].moves  = [null,null,null,null];
+  party[modalSlot].nature = null;
+  party[modalSlot].item   = null;
+  /* 성별 자동 감지 */
+  if (pk.name.endsWith('♂') || GENDER_FORM_MAP[pk.name]?.male === pk.name) party[modalSlot].gender = '♂';
+  else if (pk.name.endsWith('♀') || GENDER_FORM_MAP[pk.name]?.female === pk.name) party[modalSlot].gender = '♀';
+  else party[modalSlot].gender = null;
+  /* 전용도구/메가스톤 자동 장착 */
+  const autoItemName =
+    MEGA_STONE_MAP[pk.name]                        // 메가폼 직접 선택
+    || FORM_ITEM_MAP[pk.name]                      // 폼 직접 선택 (자시안(검왕) 등)
+    || DEFAULT_FORM_ITEM[getBaseName(pk.name)];    // 기본폼 선택 (자시안 → 녹슨검)
+  if (autoItemName) {
+    const autoItemObj = ITEM_DATA.find(it => it.name === autoItemName);
+    if (autoItemObj) party[modalSlot].item = autoItemObj;
+  }
+  applyFormChange(modalSlot);
+  selectedSlot = modalSlot;
+  saveParty();
+  closePokeModal();
+  renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
+});
+
+document.getElementById('closePokeModal').addEventListener('click', closePokeModal);
+document.getElementById('pokeModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closePokeModal(); });
+document.getElementById('pokeSearch').addEventListener('input', e=>renderPokeGrid(e.target.value));
+document.getElementById('pokeFilterRow').addEventListener('click', e=>{
+  const btn = e.target.closest('.f-btn');
+  if (!btn) return;
+  document.querySelectorAll('#pokeFilterRow .f-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); pokeFilter=btn.dataset.f;
+  renderPokeGrid(document.getElementById('pokeSearch').value);
+});
+
+/* ════════════════════════════
+   MOVE MODAL
+════════════════════════════ */
+function openMoveModal(slotIdx, mi) {
+  modalSlot=slotIdx; editMoveIdx=mi;
+  moveStabFilter = false;
+  const stabBtn = document.getElementById('moveStabBtn');
+  if (stabBtn) { stabBtn.classList.remove('on'); stabBtn.textContent = '자속 기술'; }
+  document.getElementById('moveModal').classList.add('open');
+  document.getElementById('moveSearch').value='';
+  renderMoveList('');
+  setTimeout(()=>document.getElementById('moveSearch').focus(),50);
+}
+function closeMoveModal() {
+  moveStabFilter = false;
+  document.getElementById('moveModal').classList.remove('open');
+}
+
+function renderMoveList(q) {
+  let list = MOVE_DATA.map((m,i)=>({m,i}));
+  if (modalSlot >= 0 && party[modalSlot].pokemon) {
+    const pk = party[modalSlot].pokemon;
+    const lsBase = getBaseName(pk.name);
+    const learnset = LEARNSET_DATA?.[lsBase] ?? LEARNSET_DATA?.[pk.name];
+    if (learnset) {
+      const learnSet = new Set(learnset);
+      list = list.filter(({m}) => learnSet.has(m.name));
+    }
+  }
+  if (moveStabFilter && modalSlot >= 0 && party[modalSlot].pokemon) {
+    const pk = party[modalSlot].pokemon;
+    list = list.filter(({m}) => m.type === pk.type1 || m.type === pk.type2);
+  }
+  if (q) list = list.filter(({m})=>m.name.includes(q));
+  if (moveFilter!=='all') list = list.filter(({m})=>m.category===moveFilter);
+  document.getElementById('moveList').innerHTML = list.map(({m:mv,i})=>`
+    <div class="move-item" data-idx="${i}">
+      <span class="mi-type" style="background:${TYPE_COLORS[mv.type]||'#888'}">${mv.type}</span>
+      <span class="mi-name">${mv.name}</span>
+      <span class="mi-cat">${mv.category}</span>
+      <span class="mi-pow">${mv.power??'-'}</span>
+      <span class="mi-acc">${mv.accuracy?mv.accuracy+'%':'-'}</span>
+      <span class="mi-desc">${MOVE_DESCS?.[mv.name]||''}</span>
+    </div>`).join('');
+}
+
+document.getElementById('moveList').addEventListener('click', e=>{
+  const item=e.target.closest('.move-item');
+  if (!item||modalSlot<0||editMoveIdx<0) return;
+  party[modalSlot].moves[editMoveIdx] = MOVE_DATA[+item.dataset.idx];
+  saveParty();
+  closeMoveModal(); renderDetail(modalSlot); updateAnalysis(modalSlot);
+});
+document.getElementById('closeMoveModal').addEventListener('click', closeMoveModal);
+document.getElementById('moveModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeMoveModal(); });
+document.getElementById('moveSearch').addEventListener('input', e=>renderMoveList(e.target.value));
+document.getElementById('moveFilterRow').addEventListener('click', e=>{
+  const btn=e.target.closest('.f-btn');
+  if (!btn) return;
+  if (btn.id === 'moveStabBtn') {
+    moveStabFilter = !moveStabFilter;
+    btn.classList.toggle('on', moveStabFilter);
+    const pk = party[modalSlot]?.pokemon;
+    btn.textContent = moveStabFilter && pk
+      ? `${pk.type1}${pk.type2?'/'+pk.type2:''} 자속`
+      : '자속 기술';
+    renderMoveList(document.getElementById('moveSearch').value);
+    return;
+  }
+  document.querySelectorAll('#moveFilterRow .f-btn[data-mf]').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); moveFilter=btn.dataset.mf;
+  renderMoveList(document.getElementById('moveSearch').value);
+});
+
+/* ════════════════════════════
+   ITEM MODAL
+════════════════════════════ */
+function openItemModal(slotIdx) {
+  modalSlot=slotIdx;
+  document.getElementById('itemModal').classList.add('open');
+  document.getElementById('itemSearch').value='';
+  document.getElementById('itemEffectPanel').classList.remove('show');
+  renderItemGrid('');
+  setTimeout(()=>document.getElementById('itemSearch').focus(),50);
+}
+function closeItemModal() { document.getElementById('itemModal').classList.remove('open'); }
+
+function renderItemGrid(q) {
+  let list = (ITEM_DATA||[]).map((it,i)=>({it,i}));
+  if (q) list = list.filter(({it})=>it.name.includes(q));
+  if (itemFilter==='포챔스') list = list.filter(({it})=>POCHAMS_ITEM_NAMES?.has(it.name));
+  else if (itemFilter!=='all') list = list.filter(({it})=>it.category===itemFilter);
+  const clearCard = `<div class="item-card" data-idx="-1" style="border-color:#e53935"><div class="item-no-img" style="font-size:20px">✕</div><div class="item-name" style="color:#e53935">도구 없음</div><div class="item-cat-badge">해제</div></div>`;
+  document.getElementById('itemGrid').innerHTML = clearCard + list.map(({it,i})=>`
+    <div class="item-card" data-idx="${i}">
+      ${it.sprite ? `<img src="${it.sprite}" alt="${it.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="item-no-img" style="display:none">🎒</div>` : '<div class="item-no-img">🎒</div>'}
+      <div class="item-name">${it.name}</div>
+      <div class="item-cat-badge">${it.category}</div>
+    </div>`).join('');
+}
+
+document.getElementById('itemGrid').addEventListener('click', e=>{
+  const card=e.target.closest('.item-card');
+  if (!card||modalSlot<0) return;
+  const idx = +card.dataset.idx;
+  if (idx === -1) {
+    party[modalSlot].item = null;
+    applyFormChange(modalSlot);
+    saveParty(); closeItemModal(); renderSlots(); renderDetail(modalSlot); return;
+  }
+  const it = ITEM_DATA[idx];
+  if (!it) return;
+  const ep = document.getElementById('itemEffectPanel');
+  ep.innerHTML = `<strong>${it.name}</strong>　${it.effect}`;
+  ep.classList.add('show');
+  if (card.classList.contains('selected')) {
+    party[modalSlot].item = it;
+    applyFormChange(modalSlot);
+    saveParty(); closeItemModal(); renderSlots(); renderDetail(modalSlot);
+    return;
+  }
+  document.querySelectorAll('.item-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+});
+
+document.getElementById('closeItemModal').addEventListener('click', closeItemModal);
+document.getElementById('itemModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeItemModal(); });
+document.getElementById('itemSearch').addEventListener('input', e=>{ renderItemGrid(e.target.value); });
+document.getElementById('itemFilterRow').addEventListener('click', e=>{
+  const btn=e.target.closest('.f-btn');
+  if (!btn) return;
+  document.querySelectorAll('#itemFilterRow .f-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); itemFilter=btn.dataset.if;
+  renderItemGrid(document.getElementById('itemSearch').value);
+});
+
+/* ════════════════════════════
+   ABILITY MODAL
+════════════════════════════ */
+let _curAbilList = [];
+
+function openAbilityModal(slotIdx) {
+  modalSlot=slotIdx;
+  const pk = party[slotIdx].pokemon;
+  if (!pk) return;
+  const abd = ABILITY_DATA?.[pk.name];
+  document.getElementById('abilityModalTitle').textContent = `특성 선택 — ${pk.name}`;
+  document.getElementById('abilityModal').classList.add('open');
+
+  const cur = party[slotIdx].ability?.name||'';
+  const list = document.getElementById('abilityList');
+
+  if (!abd) {
+    _curAbilList = [];
+    list.innerHTML = '<div style="color:#aaa;font-size:13px;padding:12px">특성 데이터 없음</div>';
+    return;
+  }
+
+  _curAbilList = [...(abd.normal||[]).map(a=>({...a,tag:'일반'}))];
+  if (abd.hidden?.name) _curAbilList.push({...abd.hidden, tag:'숨겨진 특성'});
+
+  list.innerHTML = _curAbilList.map((a,i)=>`
+    <div class="ability-item ${a.name===cur?'selected':''}" data-i="${i}">
+      <span class="ab-name">${a.name}</span>
+      <span class="ab-desc">${a.desc||''}</span>
+      <span class="ab-tag ${a.tag==='숨겨진 특성'?'hidden-tag':''}">${a.tag}</span>
+    </div>`).join('');
+}
+function closeAbilityModal() { document.getElementById('abilityModal').classList.remove('open'); }
+document.getElementById('closeAbilityModal').addEventListener('click', closeAbilityModal);
+document.getElementById('abilityModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeAbilityModal(); });
+document.getElementById('abilityList').addEventListener('click', e=>{
+  const item=e.target.closest('.ability-item');
+  if (!item||modalSlot<0) return;
+  const a = _curAbilList[+item.dataset.i];
+  if (!a) return;
+  party[modalSlot].ability = a;
+  saveParty(); closeAbilityModal(); renderDetail(modalSlot);
+});
+
+/* ════════════════════════════
+   NATURE MODAL
+════════════════════════════ */
+function buildNatureTable(curNature) {
+  /* 5×5 grid: row=raised, col=lowered */
+  const rows = NAT_STATS;
+  const cols = NAT_STATS;
+  /* create lookup: [upStat][dnStat] → nature (or null for neutral diagonal) */
+  const natGrid = {};
+  rows.forEach(r => { natGrid[r] = {}; cols.forEach(c => natGrid[r][c] = null); });
+  NATURES.forEach(n => {
+    if (n.up && n.dn) natGrid[n.up][n.dn] = n;
+  });
+  /* neutral natures on diagonal */
+  const neutralByRow = {};
+  NATURES.filter(n=>!n.up).forEach((n,i) => { neutralByRow[rows[i]] = n; });
+
+  let html = `<thead><tr><th></th>${cols.map(c=>`<th class="col-lbl">▼${NAT_LABELS[c]}</th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach((r,ri) => {
+    html += `<tr><th class="row-lbl">▲${NAT_LABELS[r]}</th>`;
+    cols.forEach(c => {
+      if (r===c) {
+        const n = neutralByRow[r]||NATURES.filter(n=>!n.up)[ri];
+        html += `<td class="nat-neutral ${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?.name||'-'}</td>`;
+      } else {
+        const n = natGrid[r][c];
+        html += `<td class="${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?.name||'?'}</td>`;
+      }
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  return html;
+}
+
+function openNatureModal(slotIdx) {
+  modalSlot = slotIdx;
+  const tbl = document.getElementById('natureTable');
+  tbl.innerHTML = buildNatureTable(party[slotIdx].nature);
+  document.getElementById('natureModal').classList.add('open');
+}
+function closeNatureModal() { document.getElementById('natureModal').classList.remove('open'); }
+document.getElementById('closeNatureModal').addEventListener('click', closeNatureModal);
+document.getElementById('natureModal').addEventListener('click', e=>{
+  if (e.target===e.currentTarget) { closeNatureModal(); return; }
+  const td = e.target.closest('td[data-nidx]');
+  if (!td||modalSlot<0) return;
+  const nidx = +td.dataset.nidx;
+  const n = NATURES[nidx];
+  if (!n) return;
+  party[modalSlot].nature = n;
+  saveParty(); closeNatureModal(); renderDetail(modalSlot);
+});
+
+/* ════════════════════════════
+   RESPONSIVE ANALYSIS TOGGLE
+════════════════════════════ */
+document.getElementById('anaToggle').addEventListener('click', () => {
+  const sb = document.getElementById('analysisSidebar');
+  sb.classList.toggle('panel-open');
+  sb.classList.toggle('visible');
+});
+
+/* ════════════════════════════
+   LOCAL STORAGE
+════════════════════════════ */
+function saveParty() {
+  const data = party.map(slot => {
+    if (!slot.pokemon) return null;
+    return {
+      pkIdx:   POKEMON_DATA.indexOf(slot.pokemon),
+      itIdx:   slot.item    ? ITEM_DATA.indexOf(slot.item)   : -1,
+      natIdx:  slot.nature  ? NATURES.indexOf(slot.nature)   : -1,
+      ability: slot.ability ? {name:slot.ability.name, desc:slot.ability.desc||''} : null,
+      moves:   slot.moves.map(mv => mv ? MOVE_DATA.indexOf(mv) : -1),
+      evs:     {...slot.evs},
+      gender:  slot.gender || null
+    };
+  });
+  localStorage.setItem('pochams_party', JSON.stringify(data));
+  localStorage.setItem('pochams_selected', selectedSlot);
+}
+
+function applySlotData(d, i) {
+  if (!d) return;
+  const pk = POKEMON_DATA[d.pkIdx];
+  if (!pk) return;
+  party[i].pokemon = pk;
+  party[i].item    = (d.itIdx  >= 0 && ITEM_DATA[d.itIdx])  ? ITEM_DATA[d.itIdx]  : null;
+  party[i].nature  = (d.natIdx >= 0 && NATURES[d.natIdx])   ? NATURES[d.natIdx]   : null;
+  party[i].ability = d.ability || null;
+  party[i].moves   = (d.moves||[-1,-1,-1,-1]).map(mi => (mi>=0 && MOVE_DATA[mi]) ? MOVE_DATA[mi] : null);
+  party[i].evs     = d.evs || {H:0,A:0,B:0,C:0,D:0,S:0};
+  party[i].gender  = d.gender || null;
+}
+
+function loadParty() {
+  try {
+    const raw = localStorage.getItem('pochams_party');
+    if (!raw) return;
+    JSON.parse(raw).forEach((d, i) => { if (i < PARTY_SIZE) applySlotData(d, i); });
+  } catch(e) {}
+}
+
+/* ════════════════════════════
+   BOX
+════════════════════════════ */
+function saveToBox(slotIdx) {
+  const mem = party[slotIdx];
+  if (!mem.pokemon) return;
+  const entry = {
+    pkIdx:   POKEMON_DATA.indexOf(mem.pokemon),
+    itIdx:   mem.item   ? ITEM_DATA.indexOf(mem.item)  : -1,
+    natIdx:  mem.nature ? NATURES.indexOf(mem.nature)  : -1,
+    ability: mem.ability ? {name:mem.ability.name, desc:mem.ability.desc||''} : null,
+    moves:   mem.moves.map(mv => mv ? MOVE_DATA.indexOf(mv) : -1),
+    evs:     {...mem.evs},
+    gender:  mem.gender || null,
+    savedAt: Date.now()
+  };
+  try {
+    const box = JSON.parse(localStorage.getItem('pochams_box')||'[]');
+    box.push(entry);
+    localStorage.setItem('pochams_box', JSON.stringify(box));
+    showToast(`${mem.pokemon.name}을(를) 박스에 저장했습니다!`);
+  } catch(e) { showToast('저장 실패'); }
+}
+
+function openBoxModal(slotIdx) {
+  modalSlot = slotIdx;
+  renderBoxGrid();
+  document.getElementById('boxModal').classList.add('open');
+}
+
+function renderBoxGrid() {
+  const grid = document.getElementById('boxGrid');
+  let box = [];
+  try { box = JSON.parse(localStorage.getItem('pochams_box')||'[]'); } catch(e) {}
+  if (!box.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:32px;font-size:13px">박스가 비어 있습니다</div>';
+    return;
+  }
+  grid.innerHTML = box.map((entry, bi) => {
+    const pk = POKEMON_DATA[entry.pkIdx];
+    if (!pk) return '';
+    const nature = (entry.natIdx >= 0) ? NATURES[entry.natIdx] : null;
+    const it = (entry.itIdx >= 0) ? ITEM_DATA[entry.itIdx] : null;
+    return `
+    <div class="poke-card" style="position:relative;padding-bottom:6px;">
+      <img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}" loading="lazy">
+      <div class="pc-no">#${pk.no}</div>
+      <div class="pc-name">${pk.name}</div>
+      <div class="pc-types">${[pk.type1,pk.type2].filter(Boolean).map(t=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')}</div>
+      ${nature?`<div style="font-size:9px;color:#888;margin-top:1px">${nature.name}</div>`:''}
+      ${it?`<div style="font-size:9px;color:#7b3fa0">${it.name}</div>`:''}
+      <div style="display:flex;gap:3px;margin-top:4px;width:100%;justify-content:center;">
+        <button class="btn-box-action" data-bi="${bi}" data-boxact="load" style="font-size:9px;padding:2px 5px;">불러오기</button>
+        <button class="btn-box-action" data-bi="${bi}" data-boxact="del" style="font-size:9px;padding:2px 5px;background:#fde0e0;color:#c00;">삭제</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('boxGrid').addEventListener('click', e => {
+  const btn = e.target.closest('[data-boxact]');
+  if (!btn) return;
+  const bi  = +btn.dataset.bi;
+  const act = btn.dataset.boxact;
+  let box = [];
+  try { box = JSON.parse(localStorage.getItem('pochams_box')||'[]'); } catch(e) {}
+  if (act === 'del') {
+    box.splice(bi, 1);
+    localStorage.setItem('pochams_box', JSON.stringify(box));
+    renderBoxGrid();
+  } else if (act === 'load' && modalSlot >= 0) {
+    applySlotData(box[bi], modalSlot);
+    saveParty();
+    document.getElementById('boxModal').classList.remove('open');
+    selectedSlot = modalSlot;
+    renderSlots(); renderDetail(selectedSlot); showPanel();
+  }
+});
+document.getElementById('closeBoxModal').addEventListener('click', () => {
+  document.getElementById('boxModal').classList.remove('open');
+});
+document.getElementById('boxModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) document.getElementById('boxModal').classList.remove('open');
+});
+
+function showToast(msg) {
+  let t = document.getElementById('toastEl');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toastEl';
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#5a2d7a;color:#fff;padding:9px 22px;border-radius:20px;font-size:12px;z-index:9999;pointer-events:none;opacity:0;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25);';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._to);
+  t._to = setTimeout(() => { t.style.opacity = '0'; }, 2400);
+}
+
+/* ════════════════════════════
+   SPEED CALCULATOR
+════════════════════════════ */
+const sc = {
+  pokemon: null, slotIdx: -1,
+  ev: 0, iv: 31, natM: 1.0, rank: 0,
+  itemName: '', abilityName: '',
+  weather: '', field: '',
+  status: '',
+  tailwind: false, stickyWeb: false,
+  unburden: false,
+};
+
+const _SC_ITEMS    = ['구애스카프','검은철구','스피드파우더','교정깁스','부스트에너지'];
+const _SC_ABILS    = ['고대활성','곡예','눈치우기','모래헤치기','서핑테일','속보','슬로스타트','쓱쓱','엽록소','쿼크차지'];
+const _SC_WEATHERS = ['쾌청','비바라기','모래바람','설경'];
+const _SC_FIELDS   = ['일렉트릭필드','그래스필드','미스트필드','사이코필드'];
+
+function calcStatIV(base, ev, iv, natM) {
+  return Math.floor((Math.floor((2*base + (iv||31) + (ev||0)) / 2) + 5) * (natM||1));
+}
+
+function scIsSpeedHighest(pk) {
+  if (!pk) return false;
+  return pk.S >= Math.max(pk.H, pk.A, pk.B, pk.C, pk.D);
+}
+
+function calcSCFinal() {
+  const pk = sc.pokemon;
+  if (!pk) return {base:0, speed:0};
+
+  const base = calcStatIV(pk.S, sc.ev, sc.iv, sc.natM);
+
+  const effRank = Math.max(-6, Math.min(6, sc.rank - (sc.stickyWeb ? 1 : 0)));
+  const rankM   = effRank >= 0 ? (2+effRank)/2 : 2/(2-effRank);
+
+  let itemM = 1;
+  if      (sc.itemName==='구애스카프')   itemM = 1.5;
+  else if (sc.itemName==='검은철구')     itemM = 0.5;
+  else if (sc.itemName==='교정깁스')     itemM = 0.5;
+  else if (sc.itemName==='스피드파우더') itemM = 2;
+
+  let abilM = 1;
+  const abl = sc.abilityName;
+  const boostActive = sc.itemName === '부스트에너지';
+  if      (abl==='쓱쓱'       && sc.weather==='비바라기')    abilM = 2;
+  else if (abl==='엽록소'     && sc.weather==='쾌청')         abilM = 2;
+  else if (abl==='모래헤치기' && sc.weather==='모래바람')     abilM = 2;
+  else if (abl==='눈치우기'   && sc.weather==='설경')         abilM = 2;
+  else if (abl==='서핑테일'   && sc.field==='일렉트릭필드')   abilM = 2;
+  else if (abl==='속보'       && sc.status)                   abilM = 1.5;
+  else if (abl==='슬로스타트')                                 abilM = 0.5;
+  else if (abl==='곡예'       && sc.unburden)                 abilM = 2;
+  else if ((abl==='쿼크차지' && (sc.field==='일렉트릭필드'||boostActive)) ||
+           (abl==='고대활성' && (sc.weather==='쾌청'||boostActive))) {
+    if (scIsSpeedHighest(pk)) abilM = 1.5;
+  }
+
+  let statusM = 1;
+  if (sc.status==='마비' && abl!=='속보') statusM = 0.5;
+
+  const twM   = sc.tailwind ? 2 : 1;
+  const speed = Math.floor(Math.floor(base * rankM) * itemM * abilM * statusM * twM);
+  return {base, speed};
+}
+
+function scSpinBlock(field, val, bigStep, fmt) {
+  const label   = field==='ev'?'노력치':field==='iv'?'개체값':'랭크업';
+  const display = fmt ? fmt(val) : ''+val;
+  return `<div class="dc-stat-box">
+    <span class="dc-stat-lbl">${label}</span>
+    <div style="display:flex;gap:2px;">
+      <button class="sc-spin-btn sc-up" data-field="${field}" data-d="${bigStep}">↑↑</button>
+      <button class="sc-spin-btn sc-up" data-field="${field}" data-d="1">↑</button>
+    </div>
+    <span class="sc-bigval">${display}</span>
+    <div style="display:flex;gap:2px;">
+      <button class="sc-spin-btn sc-dn" data-field="${field}" data-d="-1">↓</button>
+      <button class="sc-spin-btn sc-dn" data-field="${field}" data-d="-${bigStep}">↓↓</button>
+    </div>
+  </div>`;
+}
+
+function scSave() {
+  const data = {
+    slotIdx: sc.slotIdx, ev: sc.ev, iv: sc.iv, natM: sc.natM, rank: sc.rank,
+    itemName: sc.itemName, abilityName: sc.abilityName,
+    weather: sc.weather, field: sc.field, status: sc.status,
+    tailwind: sc.tailwind, stickyWeb: sc.stickyWeb, unburden: sc.unburden,
+  };
+  localStorage.setItem('pochams_sc', JSON.stringify(data));
+}
+
+function scLoad() {
+  try {
+    const raw = localStorage.getItem('pochams_sc');
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    sc.ev = d.ev ?? 0; sc.iv = d.iv ?? 31; sc.natM = d.natM ?? 1.0; sc.rank = d.rank ?? 0;
+    sc.itemName = d.itemName ?? ''; sc.abilityName = d.abilityName ?? '';
+    sc.weather = d.weather ?? ''; sc.field = d.field ?? ''; sc.status = d.status ?? '';
+    sc.tailwind = !!d.tailwind; sc.stickyWeb = !!d.stickyWeb; sc.unburden = !!d.unburden;
+    if (d.slotIdx >= 0 && party[d.slotIdx]?.pokemon) {
+      sc.slotIdx = d.slotIdx;
+      sc.pokemon = party[d.slotIdx].pokemon;
+    }
+  } catch(e) {}
+}
+
+function scClear() {
+  sc.pokemon = null; sc.slotIdx = -1;
+  sc.ev = 0; sc.iv = 31; sc.natM = 1.0; sc.rank = 0;
+  sc.itemName = ''; sc.abilityName = '';
+  sc.weather = ''; sc.field = ''; sc.status = '';
+  sc.tailwind = false; sc.stickyWeb = false; sc.unburden = false;
+  localStorage.removeItem('pochams_sc');
+  renderSpeedCalc();
+}
+
+function scLoadFromSlot(idx) {
+  const s = party[idx];
+  if (!s?.pokemon) return;
+  sc.slotIdx    = idx;
+  sc.pokemon    = s.pokemon;
+  sc.ev         = s.evs?.S || 0;
+  sc.iv         = 31;
+  sc.natM       = s.nature ? natMult(s.nature, 'S') : 1.0;
+  sc.itemName   = _SC_ITEMS.includes(s.item?.name) ? s.item.name : '';
+  sc.abilityName= _SC_ABILS.includes(s.ability?.name) ? s.ability.name : '';
+}
+
+function renderSpeedCalc() {
+  const el = document.getElementById('speedCalcBody');
+  if (!el) return;
+
+  const pk = sc.pokemon;
+  const {base, speed} = pk ? calcSCFinal() : {base:0, speed:0};
+  const showUnburden = sc.abilityName === '곡예';
+
+  const pillsHtml = party.map((s,i) => !s.pokemon ? '' :
+    `<button class="dc-pill${sc.slotIdx===i?' dc-sel':''}" data-pi="${i}" title="${s.pokemon.name}">
+      <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${s.pokemon.name}">
+    </button>`
+  ).join('');
+
+  const bigSlotHtml = pk
+    ? `<img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}">`
+    : `<span class="sc-big-slot-plus">+</span>`;
+
+  el.innerHTML = `<div class="sc-body">
+  <div class="dc-block">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
+      <div class="dc-block-title" style="margin-bottom:0;">포켓몬</div>
+      <button id="scClearBtn" style="border:1.5px solid #d4c0e8;border-radius:5px;background:#fff;color:#b090c8;font-size:9px;font-weight:600;padding:2px 7px;cursor:pointer;font-family:inherit;">비우기</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:6px;justify-content:center;">
+      <div class="sc-big-slot">${bigSlotHtml}</div>
+      <div class="dc-party-pills" id="scPills">${pillsHtml}</div>
+    </div>
+    ${pk
+      ? `<div class="sc-pk-info"><span class="sc-pk-name">${pk.name}</span><span class="sc-pk-stats">S${pk.S} | H${pk.H} A${pk.A} B${pk.B} C${pk.C} D${pk.D}</span></div>`
+      : `<div class="sc-pk-empty">파티에서 포켓몬을 선택하세요</div>`}
+  </div>
+
+  <div class="dc-block">
+    <div class="dc-block-title">스피드 수치</div>
+    <div class="dc-stat-grid">
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">종족값</span>
+        <span class="dc-stat-val">${pk ? pk.S : '—'}</span>
+      </div>
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">노력치</span>
+        <input class="dc-ev-inp" id="scEV" type="number" min="0" max="32" value="${sc.ev}">
+      </div>
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">개체값</span>
+        <input class="dc-ev-inp" id="scIV" type="number" min="0" max="31" value="${sc.iv}">
+      </div>
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">실수값</span>
+        <span class="dc-stat-val">${pk ? base : '—'}</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">랭크</span>
+        <div class="dc-rank-row">
+          <button class="dc-rank-btn" id="scRankMinus">−</button>
+          <span class="dc-rank-val" id="scRankVal">${sc.rank > 0 ? '+'+sc.rank : sc.rank}</span>
+          <button class="dc-rank-btn" id="scRankPlus">+</button>
+        </div>
+      </div>
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">레벨</span>
+        <span class="dc-stat-val">50</span>
+      </div>
+      <div class="dc-stat-box">
+        <span class="dc-stat-lbl">속력</span>
+        <span style="font-size:22px;font-weight:700;color:#9c27b0;line-height:1.1;">${pk ? speed : '—'}</span>
+      </div>
+    </div>
+    <div class="dc-nat-row" id="scNatRow">
+      <span class="dc-nat-lbl">성격</span>
+      <button class="dc-nat-btn${sc.natM===0.9?' on':''}" data-m="0.9">×0.9</button>
+      <button class="dc-nat-btn${sc.natM===1.0?' on':''}" data-m="1.0">×1.0</button>
+      <button class="dc-nat-btn${sc.natM===1.1?' on':''}" data-m="1.1">×1.1</button>
+    </div>
+  </div>
+
+  <div class="dc-block">
+    <div class="dc-block-title">환경</div>
+    <div class="dc-env-row" style="margin-bottom:6px;flex-wrap:nowrap;overflow-x:auto;">
+      <span class="dc-env-lbl">상태이상</span>
+      ${['독','마비','얼음','화상','잠듦'].map(s=>`<button class="dc-toggle-btn${sc.status===s?' on':''}" data-st="${s}">${s}</button>`).join('')}
+    </div>
+    <div style="display:flex;gap:6px;">
+      <button id="scStickyWeb" class="sc-tog${sc.stickyWeb?' sc-tog-on':''}" style="flex:1;">끈적끈적네트</button>
+      <button id="scTailwind"  class="sc-tog${sc.tailwind?' sc-tog-on':''}" style="flex:1;">순풍</button>
+    </div>
+  </div>
+
+  <div class="dc-block">
+    <div class="dc-block-title">도구 · 특성 · 날씨 · 필드</div>
+    <div style="margin-bottom:6px;">
+      <div class="dc-stat-lbl" style="margin-bottom:3px;">도구</div>
+      <div class="dc-drop" id="scItemDrop">
+        <input class="dc-input" id="scItemQ" placeholder="도구 검색..." autocomplete="off" value="${sc.itemName}"${sc.itemName?' style="padding-right:28px;"':''}>
+        ${sc.itemName?`<button id="scItemClear" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:#bbb;font-size:14px;line-height:1;padding:0;">✕</button>`:''}
+        <div class="dc-drop-list" id="scItemList"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:6px;">
+      <div class="dc-stat-lbl" style="margin-bottom:3px;">특성</div>
+      <div class="dc-drop" id="scAbilDrop">
+        <input class="dc-input" id="scAbilQ" placeholder="특성 검색..." autocomplete="off" value="${sc.abilityName}"${sc.abilityName?' style="padding-right:28px;"':''}>
+        ${sc.abilityName?`<button id="scAbilClear" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:#bbb;font-size:14px;line-height:1;padding:0;">✕</button>`:''}
+        <div class="dc-drop-list" id="scAbilList"></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;${showUnburden?'margin-bottom:6px;':''}">
+      <div>
+        <div class="dc-stat-lbl" style="margin-bottom:3px;">날씨</div>
+        <select class="dc-input" id="scWeather" style="font-size:11px;padding:4px 6px;">
+          <option value="">선택</option>
+          ${_SC_WEATHERS.map(w=>`<option value="${w}"${sc.weather===w?' selected':''}>${w}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <div class="dc-stat-lbl" style="margin-bottom:3px;">필드</div>
+        <select class="dc-input" id="scField" style="font-size:11px;padding:4px 6px;">
+          <option value="">선택</option>
+          ${_SC_FIELDS.map(f=>`<option value="${f}"${sc.field===f?' selected':''}>${f}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    ${showUnburden?`<button id="scUnburden" class="sc-tog sc-tog-full${sc.unburden?' sc-tog-on':''}">도구 소진 (곡예 발동)</button>`:''}
+  </div>
+</div>`;
+
+  /* Clear button */
+  const clearBtn = el.querySelector('#scClearBtn');
+  if (clearBtn) clearBtn.addEventListener('click', scClear);
+
+  /* Party pills */
+  el.querySelectorAll('#scPills .dc-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = +btn.dataset.pi;
+      scLoadFromSlot(idx);
+      scSave();
+      renderSpeedCalc();
+    });
+  });
+
+  /* Big slot click → 포켓몬 검색 모달 */
+  const scBigSlotEl = el.querySelector('.sc-big-slot');
+  if (scBigSlotEl) scBigSlotEl.addEventListener('click', () => {
+    calcModalCallback = (pk) => { sc.pokemon = pk; sc.slotIdx = -1; scSave(); renderSpeedCalc(); };
+    openPokeModal(0);
+  });
+
+  /* EV / IV inputs */
+  const evInp = el.querySelector('#scEV');
+  if (evInp) evInp.addEventListener('change', () => { sc.ev = Math.max(0, Math.min(32, +evInp.value||0)); scSave(); renderSpeedCalc(); });
+
+  const ivInp = el.querySelector('#scIV');
+  if (ivInp) ivInp.addEventListener('change', () => { sc.iv = Math.max(0, Math.min(31, +ivInp.value||0)); scSave(); renderSpeedCalc(); });
+
+  /* Rank */
+  const rMinus = el.querySelector('#scRankMinus');
+  const rPlus  = el.querySelector('#scRankPlus');
+  if (rMinus) rMinus.addEventListener('click', () => { sc.rank = Math.max(-6, sc.rank-1); scSave(); renderSpeedCalc(); });
+  if (rPlus)  rPlus.addEventListener('click',  () => { sc.rank = Math.min(6,  sc.rank+1); scSave(); renderSpeedCalc(); });
+
+  /* Nature */
+  el.querySelectorAll('#scNatRow .dc-nat-btn').forEach(btn => {
+    btn.addEventListener('click', () => { sc.natM = parseFloat(btn.dataset.m); scSave(); renderSpeedCalc(); });
+  });
+
+  /* Status buttons */
+  el.querySelectorAll('[data-st]').forEach(btn => {
+    btn.addEventListener('click', () => { sc.status = sc.status===btn.dataset.st ? '' : btn.dataset.st; scSave(); renderSpeedCalc(); });
+  });
+
+  /* Item search */
+  const itemDrop = el.querySelector('#scItemDrop');
+  const itemQ    = el.querySelector('#scItemQ');
+  const itemList = el.querySelector('#scItemList');
+  function showItemList(q) {
+    const hits = _SC_ITEMS.filter(n => !q || n.includes(q));
+    itemList.innerHTML = hits.map(n=>`<div class="dc-drop-item" data-v="${n}">${n}</div>`).join('');
+    const visible = hits.length > 0;
+    itemList.classList.toggle('open', visible);
+    if (itemDrop) itemDrop.style.zIndex = visible ? '200' : '';
+  }
+  if (itemQ) {
+    itemQ.addEventListener('input', () => showItemList(itemQ.value.trim()));
+    itemQ.addEventListener('focus', () => showItemList(itemQ.value.trim()));
+    itemList.addEventListener('mousedown', e => {
+      const row = e.target.closest('.dc-drop-item');
+      if (!row) return;
+      e.preventDefault();
+      sc.itemName = row.dataset.v;
+      itemQ.value = sc.itemName;
+      itemList.classList.remove('open');
+      if (itemDrop) itemDrop.style.zIndex = '';
+      if (sc.abilityName !== '곡예') sc.unburden = false;
+      scSave(); renderSpeedCalc();
+    });
+    itemQ.addEventListener('blur', () => setTimeout(() => {
+      itemList.classList.remove('open');
+      if (itemDrop) itemDrop.style.zIndex = '';
+    }, 120));
+    const iclear = el.querySelector('#scItemClear');
+    if (iclear) iclear.addEventListener('click', () => { sc.itemName=''; sc.unburden=false; scSave(); renderSpeedCalc(); });
+  }
+
+  /* Ability search */
+  const abilDrop = el.querySelector('#scAbilDrop');
+  const abilQ    = el.querySelector('#scAbilQ');
+  const abilList = el.querySelector('#scAbilList');
+  function showAbilList(q) {
+    const hits = _SC_ABILS.filter(a => !q || a.includes(q));
+    abilList.innerHTML = hits.map(a=>`<div class="dc-drop-item" data-v="${a}">${a}</div>`).join('');
+    const visible = hits.length > 0;
+    abilList.classList.toggle('open', visible);
+    if (abilDrop) abilDrop.style.zIndex = visible ? '200' : '';
+  }
+  if (abilQ) {
+    abilQ.addEventListener('input', () => showAbilList(abilQ.value.trim()));
+    abilQ.addEventListener('focus', () => showAbilList(abilQ.value.trim()));
+    abilList.addEventListener('mousedown', e => {
+      const row = e.target.closest('.dc-drop-item');
+      if (!row) return;
+      e.preventDefault();
+      sc.abilityName = row.dataset.v;
+      abilQ.value = sc.abilityName;
+      abilList.classList.remove('open');
+      if (abilDrop) abilDrop.style.zIndex = '';
+      scSave(); renderSpeedCalc();
+    });
+    abilQ.addEventListener('blur', () => setTimeout(() => {
+      abilList.classList.remove('open');
+      if (abilDrop) abilDrop.style.zIndex = '';
+    }, 120));
+    const aclear = el.querySelector('#scAbilClear');
+    if (aclear) aclear.addEventListener('click', () => { sc.abilityName=''; sc.unburden=false; scSave(); renderSpeedCalc(); });
+  }
+
+  /* Weather / Field */
+  const wSel = el.querySelector('#scWeather');
+  if (wSel) wSel.addEventListener('change', () => { sc.weather = wSel.value; scSave(); renderSpeedCalc(); });
+  const fSel = el.querySelector('#scField');
+  if (fSel) fSel.addEventListener('change', () => { sc.field = fSel.value; scSave(); renderSpeedCalc(); });
+
+  /* Toggles */
+  const tog = (id, fn) => { const b=el.querySelector('#'+id); if(b) b.addEventListener('click', ()=>{fn(); scSave(); renderSpeedCalc();}); };
+  tog('scTailwind',  () => sc.tailwind  = !sc.tailwind);
+  tog('scStickyWeb', () => sc.stickyWeb = !sc.stickyWeb);
+  tog('scUnburden',  () => sc.unburden  = !sc.unburden);
+}
+
+window.scSyncFromSlot = function(idx) {
+  if (sc.slotIdx !== idx) return;
+  scLoadFromSlot(idx);
+  renderSpeedCalc();
+};
+
+/* ════════════════════════════
+   INIT
+════════════════════════════ */
+document.getElementById('detailCard').addEventListener('click', cardClickHandler);
+document.getElementById('detailCard').addEventListener('change', evChangeHandler);
+
+/* type filter buttons */
+(function() {
+  const row = document.getElementById('typeFilterRow');
+  row.innerHTML = ALL_TYPES.map(t =>
+    `<button class="tf-btn" data-type="${t}" style="background:${TYPE_COLORS[t]};color:#fff;border:2px solid transparent;padding:3px 8px;border-radius:20px;font-size:11px;cursor:pointer;opacity:.55;font-family:inherit;transition:all .15s;">${t}</button>`
+  ).join('');
+  row.addEventListener('click', e => {
+    const btn = e.target.closest('.tf-btn');
+    if (!btn) return;
+    const t = btn.dataset.type;
+    typeFilter = (typeFilter === t) ? null : t;
+    document.querySelectorAll('#typeFilterRow .tf-btn').forEach(b => {
+      const sel = typeFilter && b.dataset.type === typeFilter;
+      b.style.opacity = sel ? '1' : '.55';
+      b.style.border  = sel ? '2px solid #333' : '2px solid transparent';
+    });
+    renderPokeGrid(document.getElementById('pokeSearch').value);
+  });
+})();
+
+loadParty();
+
+/* pending box import from pokemon-box.html */
+const _pendingBox = localStorage.getItem('pochams_box_add');
+if (_pendingBox) {
+  try {
+    const _pentry = JSON.parse(_pendingBox);
+    const _pei = party.findIndex(s => !s.pokemon);
+    if (_pei >= 0) { applySlotData(_pentry, _pei); saveParty(); }
+  } catch(e) {}
+  localStorage.removeItem('pochams_box_add');
+}
+
+/* restore selected slot */
+const _savedSlot = parseInt(localStorage.getItem('pochams_selected') ?? '-1');
+if (_savedSlot >= 0 && party[_savedSlot]?.pokemon) selectedSlot = _savedSlot;
+
+renderSlots();
+renderRecommended();
+if (selectedSlot >= 0) { renderDetail(selectedSlot); showPanel(); }
+scLoad();
+renderSpeedCalc();
+document.addEventListener('pochams:partychange', () => { renderSpeedCalc(); renderPartyTypeChart(); });
+</script>
+</body>
+</html>

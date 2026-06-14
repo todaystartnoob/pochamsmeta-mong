@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <title>포챔스메타몽 - 메타 사용률</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      background: #b89dcc;
+      min-height: 100vh;
+    }
+    .navbar {
+      height: 54px;
+      background: rgba(255,255,255,0.97);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      position: relative;
+      z-index: 20;
+    }
+    .nav-logo { font-size: 17px; font-weight: 700; color: #333; }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      text-decoration: none; color: #444; font-size: 14px;
+      padding: 5px 14px; border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover  { background: #ede0f5; color: #7b3fa0; }
+    .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
+
+    .page-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 54px);
+      padding: 40px 24px;
+      gap: 16px;
+    }
+
+    .coming-soon {
+      background: rgba(255,255,255,0.88);
+      border-radius: 20px;
+      padding: 48px 60px;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+    .coming-soon .icon { font-size: 52px; margin-bottom: 16px; }
+    .coming-soon h1 { font-size: 22px; font-weight: 700; color: #333; margin-bottom: 10px; }
+    .coming-soon p  { font-size: 14px; color: #888; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">포챔스메타몽</div>
+  <div class="nav-links">
+    <a href="index.html">파티 구성</a>
+    <a href="pokemon-box.html">포켓몬 박스</a>
+    <a href="meta-usage.html" class="active">메타 사용률</a>
+    <a href="pokedex.html">포켓몬 도감</a>
+  </div>
+</nav>
+
+<div class="page-body">
+  <div class="coming-soon">
+    <div class="icon">📊</div>
+    <h1>메타 사용률</h1>
+    <p>준비 중입니다.</p>
+  </div>
+</div>
+
+</body>
+</html>
