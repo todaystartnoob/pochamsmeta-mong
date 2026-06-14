@@ -49,9 +49,9 @@
 
     /* ── PARTY SIDEBAR ── */
     .party-sidebar{display:flex;flex-direction:column;gap:7px;flex-shrink:0;}
-    .party-action-btns{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
-    .party-act-btn{width:100%;padding:6px 0;border-radius:8px;border:none;font-size:11px;font-weight:700;cursor:pointer;transition:filter .15s;}
-    .party-act-btn:hover{filter:brightness(1.1);}
+    .party-action-btns{display:flex;flex-direction:column;gap:7px;margin-top:auto;padding-top:7px;}
+    .party-act-btn{width:68px;height:68px;border-radius:10px;border:none;font-size:10px;font-weight:700;cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s,filter .15s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 2px 8px rgba(0,0,0,.12);line-height:1.3;flex-shrink:0;}
+    .party-act-btn:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(0,0,0,.18);filter:brightness(1.05);}
     .party-act-btn.save{background:var(--accent);color:#fff;}
     .party-act-btn.load{background:#e8def8;color:#6040a0;}
     .party-slot{width:68px;height:68px;background:var(--slot-bg);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
@@ -63,6 +63,36 @@
     .slot-del{position:absolute;top:3px;right:3px;width:15px;height:15px;background:rgba(180,0,0,.8);color:#fff;border-radius:50%;font-size:8px;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;transition:background .15s;}
     .party-slot:hover .slot-del.on{display:flex;}
     .slot-del:hover{background:#c00;}
+
+    /* ── AD PANELS ── */
+    .ad-panel{display:none;background:#c8c8c8;width:190px;flex-shrink:0;}
+    /* ── BIG MODE (default state) ── */
+    .app-body.big-mode{position:relative;flex:1;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:80px;padding:20px 230px 80px;box-sizing:border-box;}
+    #appBody.big-mode ~ #recPanel{display:none;}
+    .app-body.big-mode > .detail-area,
+    .app-body.big-mode > .calc-panel,
+    .app-body.big-mode > .analysis-sidebar{display:none;}
+    .app-body.big-mode .ad-panel{display:block;position:absolute;top:6%;bottom:6%;width:190px;border-radius:10px;}
+    .app-body.big-mode #leftAd{left:10px;}
+    .app-body.big-mode #rightAd{right:10px;}
+    .app-body.big-mode #partySidebar{display:flex;flex-direction:row;flex-wrap:wrap;width:340px;gap:10px;justify-content:center;align-content:center;position:relative;}
+    .app-body.big-mode .party-slot{width:160px;height:160px;border-radius:14px;}
+    .app-body.big-mode .party-slot:hover{transform:scale(1.05);box-shadow:0 6px 22px rgba(0,0,0,.2);background:#fff;}
+    .app-body.big-mode .slot-img{width:130px;height:130px;}
+    .app-body.big-mode .slot-plus{font-size:44px;}
+    .app-body.big-mode .party-action-btns{display:none;}
+    /* ── ENEMY SIDEBAR ── */
+    .enemy-sidebar{display:none;flex-wrap:wrap;width:340px;gap:10px;justify-content:center;align-content:center;flex-shrink:0;}
+    .app-body.big-mode #enemySidebar{display:flex;}
+    .enemy-slot{width:160px;height:160px;background:var(--slot-bg);border-radius:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
+    .enemy-slot:hover{transform:scale(1.05);box-shadow:0 6px 22px rgba(0,0,0,.2);background:#fff;}
+    .enemy-slot:hover .slot-del.on{display:flex;}
+    /* ── BIG MODE BUTTONS ── */
+    .big-mode-btns{position:absolute;top:calc(100% + 12px);left:0;width:340px;gap:8px;}
+    .big-act-btn{flex:1;padding:11px 0;border-radius:10px;border:none;font-size:12px;font-weight:700;cursor:pointer;transition:filter .15s;}
+    .big-act-btn:hover{filter:brightness(1.1);}
+    .big-act-btn.load{background:var(--accent);color:#fff;}
+    .big-act-btn.clear{background:#e8def8;color:#6040a0;}
 
     /* ── DETAIL OVERLAY ── */
     .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:4;opacity:0;pointer-events:none;transition:opacity .3s ease;}
@@ -452,7 +482,8 @@
 
 <!-- APP BODY -->
 <div class="app-wrap">
-<div class="app-body">
+<div class="app-body" id="appBody">
+  <div class="ad-panel" id="leftAd"></div>
   <aside class="party-sidebar" id="partySidebar"></aside>
   <main class="detail-area" id="detailArea">
     <div class="detail-card" id="detailCard"></div>
@@ -485,6 +516,8 @@
       </div>
     </div>
   </aside>
+  <aside class="enemy-sidebar" id="enemySidebar"></aside>
+  <div class="ad-panel" id="rightAd"></div>
 </div>
 <div class="rec-panel" id="recPanel">
   <div class="rec-title">추천 포켓몬</div>
@@ -1327,30 +1360,49 @@ function renderSlots() {
     slot.addEventListener('click', () => onSlotClick(i));
     sb.appendChild(slot);
   }
-  const btns = document.createElement('div');
-  btns.className = 'party-action-btns';
-  btns.innerHTML = `
-    <button class="party-act-btn save" id="partySaveBtn">파티 저장하기</button>
-    <button class="party-act-btn load" id="partyLoadBtn">파티 불러오기</button>`;
-  sb.appendChild(btns);
+  const isBigMode = document.getElementById('appBody')?.classList.contains('big-mode');
+  if (isBigMode) {
+    const bigBtns = document.createElement('div');
+    bigBtns.className = 'big-mode-btns';
+    bigBtns.style.display = 'flex';
+    bigBtns.innerHTML = `
+      <button class="big-act-btn load" id="bigLoadBtn">📂 파티 불러오기</button>
+      <button class="big-act-btn clear" id="bigClearBtn">비우기</button>`;
+    bigBtns.querySelector('#bigClearBtn').addEventListener('click', () => {
+      for (let i = 0; i < PARTY_SIZE; i++) party[i] = newSlot();
+      saveParty(); renderSlots();
+    });
+    sb.appendChild(bigBtns);
+  } else {
+    const btns = document.createElement('div');
+    btns.className = 'party-action-btns';
+    btns.innerHTML = `
+      <button class="party-act-btn save" id="partySaveBtn"><span style="font-size:16px;line-height:1">💾</span>파티 저장</button>
+      <button class="party-act-btn load" id="partyLoadBtn"><span style="font-size:16px;line-height:1">📂</span>파티 불러오기</button>`;
+    sb.appendChild(btns);
+  }
 
   document.dispatchEvent(new Event('pochams:partychange'));
 }
 
 function removePokemon(idx) {
   party[idx] = newSlot();
-  if (selectedSlot===idx) { selectedSlot=-1; hidePanel(); }
-  renderSlots(); renderRecommended();
   saveParty();
+  renderSlots(); renderRecommended();
+  if (selectedSlot === idx) {
+    openPokeModal(idx);
+    return;
+  }
 }
 
 function onSlotClick(idx) {
   if (!party[idx].pokemon) { openPokeModal(idx); }
   else if (selectedSlot === idx) { selectedSlot=-1; localStorage.setItem('pochams_selected',-1); hidePanel(); renderSlots(); }
-  else { selectedSlot=idx; localStorage.setItem('pochams_selected',idx); renderSlots(); renderDetail(idx); showPanel(); }
+  else { selectedSlot=idx; localStorage.setItem('pochams_selected',idx); document.getElementById('appBody')?.classList.remove('big-mode'); renderSlots(); renderDetail(idx); showPanel(); }
 }
 
 function showPanel() {
+  document.getElementById('appBody')?.classList.remove('big-mode');
   requestAnimationFrame(() => {
     document.getElementById('detailArea').classList.add('visible');
     document.getElementById('powerCalcPanel').classList.add('visible');
@@ -1360,6 +1412,7 @@ function showPanel() {
   });
 }
 function hidePanel() {
+  document.getElementById('appBody')?.classList.add('big-mode');
   document.getElementById('detailArea').classList.remove('visible');
   document.getElementById('powerCalcPanel').classList.remove('visible');
   document.getElementById('speedCalcPanel').classList.remove('visible');
@@ -2951,6 +3004,7 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
   selectedSlot = modalSlot;
   saveParty();
   closePokeModal();
+  document.getElementById('appBody')?.classList.remove('big-mode');
   renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
 });
 
@@ -3324,6 +3378,7 @@ document.getElementById('boxGrid').addEventListener('click', e => {
     saveParty();
     document.getElementById('boxModal').classList.remove('open');
     selectedSlot = modalSlot;
+    document.getElementById('appBody')?.classList.remove('big-mode');
     renderSlots(); renderDetail(selectedSlot); showPanel();
   }
 });
@@ -3439,6 +3494,61 @@ function scSave() {
     tailwind: sc.tailwind, stickyWeb: sc.stickyWeb, unburden: sc.unburden,
   };
   localStorage.setItem('pochams_sc', JSON.stringify(data));
+}
+
+/* ════════════════════════════
+   ENEMY PARTY
+════════════════════════════ */
+const enemyParty = Array.from({length: 6}, () => ({pokemon: null}));
+
+function saveEnemyParty() {
+  localStorage.setItem('pochams_enemy_party', JSON.stringify(
+    enemyParty.map(s => s.pokemon ? {no: s.pokemon.no, name: s.pokemon.name} : null)
+  ));
+}
+
+function loadEnemyParty() {
+  const raw = localStorage.getItem('pochams_enemy_party');
+  if (!raw) return;
+  try {
+    const data = JSON.parse(raw);
+    data.forEach((d, i) => {
+      if (i < 6 && d) {
+        const pk = POKEMON_DATA.find(p => p.no === d.no && p.name === d.name);
+        if (pk) enemyParty[i].pokemon = pk;
+      }
+    });
+  } catch(e) {}
+}
+
+function renderEnemySlots() {
+  const el = document.getElementById('enemySidebar');
+  if (!el) return;
+  el.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'enemy-slot';
+    const mem = enemyParty[i];
+    if (mem.pokemon) {
+      const img = document.createElement('img');
+      img.src = spriteUrl(mem.pokemon.name, mem.pokemon.no);
+      img.className = 'slot-img'; img.alt = mem.pokemon.name;
+      slot.appendChild(img);
+      const del = document.createElement('span');
+      del.className = 'slot-del on'; del.textContent = '✕';
+      del.addEventListener('click', e => { e.stopPropagation(); enemyParty[i].pokemon = null; saveEnemyParty(); renderEnemySlots(); });
+      slot.appendChild(del);
+    } else {
+      const plus = document.createElement('span');
+      plus.className = 'slot-plus'; plus.textContent = '+';
+      slot.appendChild(plus);
+    }
+    slot.addEventListener('click', () => {
+      calcModalCallback = (pk) => { enemyParty[i].pokemon = pk; saveEnemyParty(); renderEnemySlots(); };
+      openPokeModal(0);
+    });
+    el.appendChild(slot);
+  }
 }
 
 function scLoad() {
@@ -3763,6 +3873,7 @@ document.getElementById('detailCard').addEventListener('change', evChangeHandler
 })();
 
 loadParty();
+loadEnemyParty();
 
 /* pending box import from pokemon-box.html */
 const _pendingBox = localStorage.getItem('pochams_box_add');
@@ -3778,8 +3889,10 @@ if (_pendingBox) {
 /* restore selected slot */
 const _savedSlot = parseInt(localStorage.getItem('pochams_selected') ?? '-1');
 if (_savedSlot >= 0 && party[_savedSlot]?.pokemon) selectedSlot = _savedSlot;
+if (selectedSlot === -1) document.getElementById('appBody')?.classList.add('big-mode');
 
 renderSlots();
+renderEnemySlots();
 renderRecommended();
 if (selectedSlot >= 0) { renderDetail(selectedSlot); showPanel(); }
 scLoad();
