@@ -7,55 +7,176 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <title>포챔스메타몽 - 메타 사용률</title>
+  <script src="pokemon-sprites.js"></script>
+  <script src="data.js"></script>
+  <script src="abilities-data.js"></script>
+  <script src="learnset-data.js"></script>
+  <script src="champions_loc_map.js"></script>
+  <script src="meta-usage-data.js"></script>
+  <script src="meta-usage-sets.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-      background: #b89dcc;
-      min-height: 100vh;
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{height:100%;overflow:hidden;}
+    :root{
+      --purple:#b89dcc;
+      --card-bg:rgba(238,230,250,.97);
+      --row-bg:#ddd0ee;
+      --accent:#7b3fa0;
+      --slot-bg:rgba(255,255,255,.92);
     }
-    .navbar {
-      height: 54px;
-      background: rgba(255,255,255,0.97);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-      position: relative;
-      z-index: 20;
-    }
-    .nav-logo { font-size: 17px; font-weight: 700; color: #333; }
-    .nav-links { display: flex; gap: 6px; }
-    .nav-links a {
-      text-decoration: none; color: #444; font-size: 14px;
-      padding: 5px 14px; border-radius: 6px;
-      transition: background .2s, color .2s;
-    }
-    .nav-links a:hover  { background: #ede0f5; color: #7b3fa0; }
-    .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
+    body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--purple);height:100vh;overflow:hidden;display:flex;flex-direction:column;}
 
-    .page-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 54px);
-      padding: 40px 24px;
-      gap: 16px;
-    }
+    /* NAVBAR */
+    .navbar{height:54px;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 10px rgba(0,0,0,.12);position:sticky;top:0;z-index:20;flex-shrink:0;}
+    .nav-logo{font-size:17px;font-weight:700;color:#333;}
+    .nav-links{display:flex;gap:6px;}
+    .nav-links a{text-decoration:none;color:#444;font-size:14px;padding:5px 14px;border-radius:6px;transition:background .2s,color .2s;}
+    .nav-links a:hover{background:#ede0f5;color:var(--accent);}
+    .nav-links a.active{background:#d4b8e8;color:#4a1d8a;font-weight:600;}
 
-    .coming-soon {
-      background: rgba(255,255,255,0.88);
-      border-radius: 20px;
-      padding: 48px 60px;
-      text-align: center;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
-    }
-    .coming-soon .icon { font-size: 52px; margin-bottom: 16px; }
-    .coming-soon h1 { font-size: 22px; font-weight: 700; color: #333; margin-bottom: 10px; }
-    .coming-soon p  { font-size: 14px; color: #888; line-height: 1.7; }
+    /* PAGE LAYOUT */
+    #pageWrap{display:flex;flex:1;height:calc(100vh - 54px);overflow:hidden;}
+    .ad-panel{width:190px;flex-shrink:0;background:#c8c8c8;margin:14px 12px;border-radius:10px;}
+    #mainContent{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:14px 0 0;}
+
+    /* SELECTOR BAR */
+    #selectorBar{display:flex;align-items:center;gap:10px;padding:0 14px 12px;flex-shrink:0;flex-wrap:wrap;}
+    .season-tabs{display:flex;gap:6px;}
+    .season-tab{padding:6px 14px;border-radius:8px;border:none;background:rgba(255,255,255,.55);color:#555;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+    .season-tab:hover{background:rgba(255,255,255,.8);}
+    .season-tab.active{background:var(--accent);color:#fff;}
+    .rule-toggle{display:flex;background:rgba(255,255,255,.45);border-radius:8px;padding:3px;gap:2px;}
+    .rule-btn{padding:5px 18px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;background:transparent;color:#555;transition:all .15s;}
+    .rule-btn.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.12);}
+    .data-src{font-size:11px;color:#5a3a7a;opacity:.75;margin-left:auto;}
+
+    /* CONTENT ROW */
+    #contentRow{display:flex;gap:12px;flex:1;overflow:hidden;padding:0 14px 14px;}
+
+    /* PANELS */
+    .meta-panel{background:var(--card-bg);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.1);}
+    .panel-header{padding:14px 16px 10px;flex-shrink:0;border-bottom:2px solid var(--row-bg);}
+    .panel-title{font-size:15px;font-weight:700;color:#3a1a6a;}
+    .panel-sub{font-size:11px;color:#999;margin-top:2px;}
+    .panel-body{flex:1;overflow-y:auto;padding:6px 0;}
+    .panel-body::-webkit-scrollbar{width:5px;}
+    .panel-body::-webkit-scrollbar-thumb{background:#c0a0dc;border-radius:3px;}
+    .panel-body::-webkit-scrollbar-track{background:transparent;}
+
+    /* USAGE PANEL */
+    #usagePanel{width:400px;flex-shrink:0;}
+    #usagePanel .panel-header{display:flex;align-items:center;justify-content:space-between;}
+    #usagePanel .panel-header-left{display:flex;flex-direction:column;gap:1px;}
+    #usagePanel .panel-body{overflow-y:auto;scrollbar-width:none;}
+    #usagePanel .panel-body::-webkit-scrollbar{display:none;}
+    .usage-filter{display:flex;gap:4px;}
+    .usage-filter-btn{font-size:11px;font-weight:700;padding:3px 10px;border-radius:5px;border:none;cursor:pointer;font-family:inherit;background:var(--row-bg);color:#7a5090;transition:all .12s;}
+    .usage-filter-btn.active{background:var(--accent);color:#fff;}
+    .usage-row{display:flex;align-items:center;gap:8px;padding:6px 10px;cursor:pointer;transition:background .12s;border-radius:8px;margin:1px 6px;}
+    #usagePager,#teamsPager{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 0 10px;flex-shrink:0;border-top:1px solid var(--row-bg);}
+    .pager-btn{background:var(--row-bg);border:none;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;color:#4a1d8a;cursor:pointer;font-family:inherit;transition:background .12s;}
+    .pager-btn:hover{background:#c8a8e8;}
+    .pager-btn:disabled{opacity:.35;cursor:default;}
+    .pager-info{font-size:12px;color:#999;}
+    .usage-row:hover{background:rgba(212,184,232,.5);}
+    .usage-row.selected{background:#d4b8e8;}
+    .rank-num{width:28px;text-align:center;font-size:12px;font-weight:700;color:#aaa;flex-shrink:0;}
+    .rank-medal{font-size:18px;line-height:1;}
+    .rank-top{color:var(--accent);}
+    .usage-sprite{width:54px;height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .usage-sprite img{width:52px;height:52px;object-fit:contain;image-rendering:pixelated;}
+    .usage-info{flex:1;min-width:0;}
+    .usage-name-row{display:flex;align-items:center;gap:5px;margin-bottom:3px;overflow:hidden;}
+    .usage-name{font-size:11px;font-weight:700;color:#2d1a45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:1;min-width:0;}
+    .type-badge{flex-shrink:0;}
+    .type-badge{font-size:9px;font-weight:700;color:#fff;padding:2px 5px;border-radius:3px;letter-spacing:.3px;flex-shrink:0;}
+    .usage-moves{display:flex;flex-wrap:nowrap;gap:3px;overflow:hidden;}
+    .move-chip{font-size:10px;background:rgba(180,140,220,.35);color:#4a1d8a;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap;}
+    .usage-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+    .usage-pct{font-size:13px;font-weight:700;color:#4a1d8a;}
+    .usage-bar{width:70px;height:7px;background:rgba(0,0,0,.1);border-radius:4px;overflow:hidden;}
+    .usage-bar-fill{height:100%;background:linear-gradient(90deg,#b07ee0,#7b3fa0);border-radius:4px;}
+
+    /* TEAMS PANEL */
+    #teamsPanel{flex:1;min-width:0;}
+    #teamsPanel .panel-body{overflow:hidden;display:flex;flex-direction:column;}
+    .teams-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:8px;padding:8px 10px;align-content:stretch;}
+    .team-card{background:var(--slot-bg);border-radius:12px;padding:10px 12px;cursor:pointer;transition:box-shadow .15s,transform .12s;min-height:0;display:flex;flex-direction:column;}
+    .team-card:hover{box-shadow:0 5px 18px rgba(0,0,0,.16);transform:translateY(-2px);}
+    .team-card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+    .team-rank-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;background:var(--row-bg);color:#4a1d8a;}
+    .team-rank-badge.r1{background:linear-gradient(135deg,#FFD700,#FFA500);color:#6a4000;}
+    .team-rank-badge.r2{background:linear-gradient(135deg,#D8D8D8,#A8A8A8);color:#444;}
+    .team-rank-badge.r3{background:linear-gradient(135deg,#E09060,#B06030);color:#fff;}
+    .team-rating{font-size:12px;font-weight:700;color:#7a5090;margin-left:auto;}
+    .team-sprites{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1;align-content:center;}
+    .team-sprite-wrap{display:flex;flex-direction:column;align-items:center;}
+    .team-sprite-wrap img{width:52px;height:52px;object-fit:contain;image-rendering:pixelated;}
+    .tera-badge{font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.4);margin-top:1px;}
+    .team-poke-name{font-size:10px;color:#666;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;}
+
+    /* DETAIL OVERLAY */
+    #detailOverlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;}
+    #detailOverlay.open{display:flex;}
+    #detailCard{background:#fff;border-radius:18px;width:1160px;max-width:98vw;height:88vh;display:flex;flex-direction:column;position:relative;box-shadow:0 12px 48px rgba(0,0,0,.28);overflow:hidden;}
+    .dc-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#bbb;line-height:1;transition:color .12s;z-index:10;}
+    .dc-close:hover{color:#555;}
+    /* inner wrapper */
+    #detailContent{flex:1;min-height:0;overflow:hidden;}
+    .dc-wrap{height:100%;display:flex;}
+    /* LEFT side */
+    .dc-left{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden;}
+    /* top: sprite + info + stats */
+    .dc-top{display:flex;gap:14px;align-items:flex-start;padding:20px 16px 14px 24px;flex-shrink:0;border-bottom:1px solid #eee8f8;}
+    .dc-sprite img{width:96px;height:96px;object-fit:contain;image-rendering:pixelated;}
+    .dc-info{flex:1;}
+    .dc-name{font-size:22px;font-weight:700;color:#2d1a45;}
+    .dc-rate{font-size:13px;color:#aaa;margin-top:3px;}
+    .dc-stats-wrap{margin-top:10px;}
+    .dc-stats-label{font-size:10px;font-weight:700;color:#c0a0d8;letter-spacing:.6px;margin-bottom:5px;}
+    .dc-stats{display:flex;gap:4px;}
+    .dc-stat-cell{flex:1;text-align:center;background:#f5f1ff;border-radius:7px;padding:5px 3px;}
+    .dc-stat-k{font-size:10px;font-weight:700;color:#a080c0;display:block;}
+    .dc-stat-v{font-size:13px;font-weight:700;color:#2d1a45;display:block;margin-top:2px;}
+    /* bottom: 2x2 usage panels */
+    .dc-panels{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:12px 16px 12px 24px;min-height:0;overflow:hidden;}
+    .dc-panel{display:flex;flex-direction:column;min-width:0;background:rgba(238,230,250,.5);border-radius:12px;padding:10px 12px;overflow:hidden;}
+    .dc-panel-title{font-size:10px;font-weight:700;color:#c0a0d8;letter-spacing:.6px;margin-bottom:8px;flex-shrink:0;}
+    .dc-panel-body{flex:1;overflow-y:auto;min-height:0;}
+    .dc-panel-body::-webkit-scrollbar{width:3px;}
+    .dc-panel-body::-webkit-scrollbar-thumb{background:#d0c0e8;border-radius:2px;}
+    .dc-sub-title{font-size:10px;font-weight:700;color:#c0a0d8;letter-spacing:.6px;margin:8px 0 5px;}
+    /* bar rows */
+    .dc-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+    .dc-bar-label{font-size:13px;color:#333;width:80px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .dc-bar{flex:1;min-width:20px;height:4px;background:#e8dff5;border-radius:4px;overflow:hidden;}
+    .dc-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#c09ae8,#7b3fa0);}
+    .dc-bar-pct{font-size:12px;color:#aaa;min-width:36px;text-align:right;flex-shrink:0;}
+    /* RIGHT side: 노력치 */
+    .dc-right{width:255px;flex-shrink:0;border-left:1px solid #eee8f8;overflow-y:auto;padding:20px 20px 16px 16px;}
+    .dc-right::-webkit-scrollbar{width:3px;}
+    .dc-right::-webkit-scrollbar-thumb{background:#d0c0e8;border-radius:2px;}
+    .dc-right-title{font-size:10px;font-weight:700;color:#c0a0d8;letter-spacing:.6px;margin-bottom:10px;}
+    /* EV spreads */
+    .ev-spread-item{background:#faf8ff;border:1px solid #ede5f8;border-radius:8px;padding:8px 10px;margin-bottom:6px;}
+    .ev-spread-head{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+    .ev-spread-label{font-size:12px;font-weight:700;color:#4a1d8a;flex-shrink:0;}
+    .ev-spread-bar{flex:1;height:4px;background:#ede5f8;border-radius:3px;overflow:hidden;}
+    .ev-spread-bar-fill{height:100%;background:#a070d0;border-radius:3px;}
+    .ev-spread-pct{font-size:10px;color:#aaa;white-space:nowrap;flex-shrink:0;}
+    .ev-chips{display:flex;gap:3px;flex-wrap:wrap;}
+    .ev-chip{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;}
+    .ev-H{background:#d5f0d5;color:#2a7a2a;}
+    .ev-A{background:#fde0e0;color:#b02020;}
+    .ev-B{background:#fdf0cc;color:#886600;}
+    .ev-C{background:#d5e8fd;color:#1060c0;}
+    .ev-D{background:#d0f0ee;color:#107070;}
+    .ev-S{background:#ebe0fd;color:#5a20b0;}
+
+    /* LOADING / EMPTY */
+    .panel-msg{text-align:center;padding:48px 20px;color:#bbb;font-size:14px;}
   </style>
 </head>
 <body>
@@ -70,13 +191,678 @@
   </div>
 </nav>
 
-<div class="page-body">
-  <div class="coming-soon">
-    <div class="icon">📊</div>
-    <h1>메타 사용률</h1>
-    <p>준비 중입니다.</p>
+<div id="pageWrap">
+  <div class="ad-panel" id="leftAd"></div>
+
+  <div id="mainContent">
+    <div id="selectorBar">
+      <div class="season-tabs" id="seasonTabs"></div>
+      <div class="rule-toggle" id="ruleTabs">
+        <button class="rule-btn active" data-rule="single">싱글</button>
+        <button class="rule-btn" data-rule="double">더블</button>
+      </div>
+      <span class="data-src">출처: champs.pokedb.tokyo</span>
+    </div>
+
+    <div id="contentRow">
+      <div class="meta-panel" id="usagePanel">
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <div class="panel-title">포켓몬 사용 순위</div>
+            <div class="panel-sub" id="usageSub">불러오는 중...</div>
+          </div>
+          <div class="usage-filter">
+            <button class="usage-filter-btn active" data-view="normal">전체</button>
+            <button class="usage-filter-btn" data-view="mega">메가진화</button>
+          </div>
+        </div>
+        <div class="panel-body" id="usageBody">
+          <div class="panel-msg">불러오는 중...</div>
+        </div>
+        <div id="usagePager"></div>
+      </div>
+
+      <div class="meta-panel" id="teamsPanel">
+        <div class="panel-header">
+          <div class="panel-title">포챔스 순위권 파티</div>
+          <div class="panel-sub" id="teamsSub">불러오는 중...</div>
+        </div>
+        <div class="panel-body" id="teamsBody">
+          <div class="panel-msg">불러오는 중...</div>
+        </div>
+        <div id="teamsPager"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-panel" id="rightAd"></div>
+</div>
+
+<!-- DETAIL OVERLAY -->
+<div id="detailOverlay">
+  <div id="detailCard">
+    <button class="dc-close" id="detailClose">✕</button>
+    <div id="detailContent"></div>
   </div>
 </div>
 
+<script>
+function translateName(s) {
+  if (typeof CHAMPIONS_LOC_MAP === 'undefined') return s;
+  const loc = CHAMPIONS_LOC_MAP;
+  return loc.ability_ja2ko?.[s] ?? loc.item_ja2ko?.[s] ?? loc.move_ja2ko?.[s] ?? loc.nature_ja2ko?.[s] ?? s;
+}
+
+// ID(도감번호-폼번호) → 표시명 (폼 구분이 필요한 경우)
+const FORM_NAMES = {
+  '0038-01': '알로라 나인테일',
+  '0059-01': '히스이 윈디',
+  '0080-02': '가라르 야도란',
+  '0128-01': '팔데아 켄타로스(콤뱃종)',
+  '0128-02': '팔데아 켄타로스(아쿠아종)',
+  '0128-03': '팔데아 켄타로스(블레이즈종)',
+  '0157-01': '히스이 블레이범',
+  '0199-01': '가라르 야도킹',
+  '0479-01': '히트로토무',
+  '0479-02': '워시로토무',
+  '0479-03': '프로스트로토무',
+  '0479-04': '스핀로토무',
+  '0479-05': '커트로토무',
+  '0503-01': '히스이 대검귀',
+  '0571-01': '히스이 조로아크',
+  '0670-05': '플라엣테(영원의꽃)',
+  '0706-01': '히스이 미끄래곤',
+  '0724-01': '히스이 모크나이퍼',
+  '0902-00': '대쓰여너♂',
+  '0902-01': '대쓰여너♀',
+};
+
+function usageDisplayName(u) {
+  return FORM_NAMES[u.id] ?? u.name;
+}
+
+function usageSpriteUrl(u, no) {
+  const S = typeof POKEMON_SPRITES !== 'undefined' ? POKEMON_SPRITES : null;
+  if (!S) return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+  const formName = FORM_NAMES[u.id];
+  return (formName && S[formName]) || S[u.name] || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+}
+
+const TYPE_COLORS = {
+  '노말':'#A8A878','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
+  '전기':'#F8D030','얼음':'#98D8D8','격투':'#C03028','독':'#A040A0',
+  '땅':'#E0C068','비행':'#A890F0','에스퍼':'#F85888','벌레':'#A8B820',
+  '바위':'#B8A038','고스트':'#705898','드래곤':'#7038F8','악':'#705848',
+  '강철':'#B8B8D0','페어리':'#EE99AC'
+};
+
+function typeColor(t) { return TYPE_COLORS[t] || '#888'; }
+
+function spriteUrl(name, no) {
+  const v = typeof POKEMON_SPRITES !== 'undefined' && POKEMON_SPRITES?.[name];
+  return v || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+}
+
+function idToNo(id) {
+  return parseInt((id || '0000-00').split('-')[0]);
+}
+
+function teamSpriteUrl(pk) {
+  const S = typeof POKEMON_SPRITES !== 'undefined' ? POKEMON_SPRITES : null;
+  const { name, form, item, id } = pk;
+  const no = idToNo(id);
+
+  const tryKey = k => S?.[k] || null;
+
+  // 1. 메가진화: 도구에 '나이트' 포함 (리자몽나이트X/Y 등 접미사 대응)
+  if (item?.includes('나이트')) {
+    const suffix = item.slice(item.lastIndexOf('나이트') + 3); // "X", "Y", or ""
+    if (suffix) {
+      const mv = tryKey('메가' + name + suffix);
+      if (mv) return mv;
+    }
+    const mv = tryKey('메가' + name);
+    if (mv) return mv;
+  }
+
+  // 2. 폼 별 스프라이트
+  if (form && form !== 'None') {
+    // 로토무 등 폼명이 직접 키인 경우 ("워시로토무")
+    const fv = tryKey(form);
+    if (fv) return fv;
+
+    // "이름(폼)" 조합 ("플라엣테(영원의 꽃)")
+    const cv = tryKey(name + '(' + form + ')');
+    if (cv) return cv;
+
+    // 히스이 폼: "히스이 이름"
+    if (form.includes('히스이')) {
+      const hv = tryKey('히스이 ' + name);
+      if (hv) return hv;
+    }
+  }
+
+  // 3. 기본 이름 → PokeAPI 폴백
+  return tryKey(name) || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+}
+
+function teamDisplayName(pk) {
+  const { name, form, item } = pk;
+  if (item?.includes('나이트')) {
+    const suffix = item.slice(item.lastIndexOf('나이트') + 3);
+    return '메가' + name + suffix;
+  }
+  if (form && form !== 'None') {
+    if (typeof POKEMON_SPRITES !== 'undefined' && POKEMON_SPRITES?.[form]) return form;
+  }
+  return name;
+}
+
+let seasons = [];
+let curSeason = null;
+let curRule = 'single';
+let mainData = null;
+let setsData = null;
+let selectedUsageIdx = -1;
+
+function getLocalData(season, rule) {
+  const key = `s${season}_${rule}`;
+  return (typeof META_USAGE_DATA !== 'undefined' && META_USAGE_DATA[key]) || null;
+}
+
+function getLocalSets(season, rule) {
+  const key = `s${season}_${rule}`;
+  return (typeof META_SETS_DATA !== 'undefined' && META_SETS_DATA[key]) || null;
+}
+
+function init() {
+  // 시즌/룰 목록을 META_USAGE_DATA 키에서 파싱
+  if (typeof META_USAGE_DATA !== 'undefined') {
+    const seen = new Map();
+    for (const key of Object.keys(META_USAGE_DATA)) {
+      const m = key.match(/^s(\d+)_(single|double)$/);
+      if (m) {
+        const n = parseInt(m[1]);
+        if (!seen.has(n)) seen.set(n, { number: n, rules: [] });
+        seen.get(n).rules.push(m[2]);
+      }
+    }
+    seasons = [...seen.values()].sort((a, b) => a.number - b.number);
+  }
+
+  if (!seasons.length) seasons = [{ number: 1, rules: ['single', 'double'] }];
+  curSeason = seasons[seasons.length - 1].number;
+
+  renderSeasonTabs();
+  bindRuleTabs();
+  loadData();
+}
+
+function renderSeasonTabs() {
+  const el = document.getElementById('seasonTabs');
+  el.innerHTML = '';
+  for (const s of seasons) {
+    const btn = document.createElement('button');
+    btn.className = 'season-tab' + (s.number === curSeason ? ' active' : '');
+    btn.textContent = `시즌 ${s.number}`;
+    btn.addEventListener('click', () => {
+      if (curSeason === s.number) return;
+      curSeason = s.number;
+      if (!s.rules.includes(curRule)) {
+        curRule = s.rules[0];
+        document.querySelectorAll('.rule-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.rule === curRule);
+        });
+      }
+      document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedUsageIdx = -1;
+      loadData();
+    });
+    el.appendChild(btn);
+  }
+}
+
+function bindRuleTabs() {
+  document.querySelectorAll('.rule-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (curRule === btn.dataset.rule) return;
+      curRule = btn.dataset.rule;
+      document.querySelectorAll('.rule-btn').forEach(b => b.classList.toggle('active', b === btn));
+      selectedUsageIdx = -1;
+      loadData();
+    });
+  });
+  document.querySelectorAll('.usage-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (usageViewMode === btn.dataset.view) return;
+      usageViewMode = btn.dataset.view;
+      document.querySelectorAll('.usage-filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+      usagePage = 0;
+      selectedUsageIdx = -1;
+      renderUsage();
+    });
+  });
+}
+
+function loadData() {
+  setLoading();
+  mainData = getLocalData(curSeason, curRule);
+  setsData = getLocalSets(curSeason, curRule);
+  usagePage = 0;
+  teamsPage = 0;
+  // 시즌/룰 전환 시 탭은 유지, 버튼 상태만 동기화
+  document.querySelectorAll('.usage-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.view === usageViewMode));
+  renderUsage();
+  renderTeams();
+}
+
+function setLoading() {
+  document.getElementById('usageBody').innerHTML = '<div class="panel-msg">불러오는 중...</div>';
+  document.getElementById('teamsBody').innerHTML = '<div class="panel-msg">불러오는 중...</div>';
+  document.getElementById('usageSub').textContent = '';
+  document.getElementById('teamsSub').textContent = '';
+}
+
+/* ── USAGE PANEL ── */
+function getMoves(id) {
+  if (!setsData?.pokemon) return [];
+  const pk = setsData.pokemon.find(p => p.id === id);
+  if (!pk?.moves?.length) return [];
+  return pk.moves.slice(0, 2).map(m => m.name ?? String(m));
+}
+
+const PAGE_SIZE = 10;
+const TEAMS_PAGE_SIZE = 9;
+let usagePage = 0;
+let teamsPage = 0;
+let usageViewMode = 'normal'; // 'normal' | 'mega'
+
+// 배틀 내 폼체인지라 별도 순위 불필요한 폼
+const BATTLE_FORM_BLACKLIST = new Set([
+  '킬가르도(블레이드폼)', '돌핀맨(히어로)', '지우개굴닌자',
+]);
+
+function buildFullUsageList(baseUsage) {
+  if (typeof POKEMON_DATA === 'undefined') return baseUsage;
+  const usedNames = new Set();
+  baseUsage.forEach(u => {
+    usedNames.add(u.name);
+    const dn = usageDisplayName(u);
+    if (dn !== u.name) usedNames.add(dn);
+  });
+  const added = new Set();
+  const extras = [];
+  POKEMON_DATA.forEach(p => {
+    if (!p.champions) return;
+    if (p.name.startsWith('메가')) return;          // 메가는 별도 탭
+    if (BATTLE_FORM_BLACKLIST.has(p.name)) return; // 배틀전용 폼 제외
+    if (usedNames.has(p.name) || added.has(p.name)) return;
+    added.add(p.name);
+    extras.push({ id: p.no.toString().padStart(4, '0') + '-00', name: p.name, count: 0, rate: 0 });
+  });
+  return [...baseUsage, ...extras];
+}
+
+function megaNameFromStone(stoneName) {
+  // "루카리오나이트" → "메가루카리오", "리자몽나이트X" → "메가리자몽X"
+  const idx = stoneName.lastIndexOf('나이트');
+  if (idx === -1) return null;
+  return '메가' + stoneName.slice(0, idx) + stoneName.slice(idx + 3);
+}
+
+function buildMegaUsageList(baseUsage, setsData) {
+  const setsMap = {};
+  setsData?.pokemon?.forEach(p => { setsMap[p.id] = p; });
+
+  // megaName → best entry (highest effective rate)
+  const megaMap = new Map();
+  baseUsage.forEach(u => {
+    const pk = setsMap[u.id];
+    if (!pk?.items?.length) return;
+    pk.items.forEach(item => {
+      if (!item.name?.includes('나이트')) return;
+      const megaName = megaNameFromStone(item.name);
+      if (!megaName) return;
+      const megaRate = parseFloat((u.rate * item.rate / 100).toFixed(2));
+      const existing = megaMap.get(megaName);
+      if (!existing || megaRate > existing.rate) {
+        megaMap.set(megaName, {
+          id: u.id,
+          name: u.name,
+          _megaName: megaName,
+          _stoneName: item.name,
+          _stoneRate: item.rate,
+          rate: megaRate,
+          count: Math.round((u.count || 0) * item.rate / 100),
+        });
+      }
+    });
+  });
+  // POKEMON_DATA의 메가 포켓몬 중 아직 없는 것은 0%로 추가
+  if (typeof POKEMON_DATA !== 'undefined') {
+    POKEMON_DATA.forEach(p => {
+      if (!p.champions || !p.name.startsWith('메가')) return;
+      if (megaMap.has(p.name)) return;
+      // 메가이름에서 base name 추정: "메가리자몽X" → base "리자몽", suffix "X"
+      const stripped = p.name.slice(2); // remove "메가"
+      const suffixMatch = stripped.match(/([XYZ])$/);
+      const suffix = suffixMatch ? suffixMatch[1] : '';
+      const baseName = suffix ? stripped.slice(0, -suffix.length) : stripped;
+      megaMap.set(p.name, {
+        id: p.no.toString().padStart(4, '0') + '-00',
+        name: baseName,
+        _megaName: p.name,
+        _stoneName: baseName + '나이트' + suffix,
+        _stoneRate: 0,
+        rate: 0,
+        count: 0,
+      });
+    });
+  }
+  return [...megaMap.values()].sort((a, b) => b.rate - a.rate);
+}
+
+function renderUsage() {
+  const body = document.getElementById('usageBody');
+  const sub = document.getElementById('usageSub');
+  const pager = document.getElementById('usagePager');
+
+  if (!mainData?.usage?.length) {
+    body.innerHTML = '<div class="panel-msg">데이터가 없습니다</div>';
+    sub.textContent = '';
+    pager.innerHTML = '';
+    return;
+  }
+
+  const isMega = usageViewMode === 'mega';
+  const usage = isMega
+    ? buildMegaUsageList(mainData.usage, setsData)
+    : buildFullUsageList(mainData.usage);
+
+  const totalPages = Math.ceil(usage.length / PAGE_SIZE);
+  sub.textContent = isMega ? `메가진화 ${usage.length}종` : `총 ${usage.length}종`;
+  body.innerHTML = '';
+  body.scrollTop = 0;
+
+  const start = usagePage * PAGE_SIZE;
+  const pageItems = usage.slice(start, start + PAGE_SIZE);
+
+  pageItems.forEach((u, pi) => {
+    const i = start + pi;
+    const no = idToNo(u.id);
+    const moves = getMoves(u.id);
+    const rankNum = i + 1;
+    let rankHtml;
+    if (rankNum === 1) rankHtml = `<span class="rank-medal">🥇</span>`;
+    else if (rankNum === 2) rankHtml = `<span class="rank-medal">🥈</span>`;
+    else if (rankNum === 3) rankHtml = `<span class="rank-medal">🥉</span>`;
+    else rankHtml = `<span class="${i < 10 ? 'rank-top' : ''}">${rankNum}</span>`;
+
+    // 메가 탭: _megaName 우선, 일반 탭: usageDisplayName
+    const displayName = isMega ? (u._megaName || u.name) : usageDisplayName(u);
+    const bs = getBaseStats(displayName) || getBaseStats(u.name);
+    const typeBadges = bs
+      ? [bs.type1, bs.type2].filter(Boolean).map(t => `<span class="type-badge" style="background:${typeColor(t)}">${t}</span>`).join('')
+      : '';
+
+    // 메가 탭: 스프라이트는 megaName으로, 일반 탭: usageSpriteUrl
+    const spriteImg = isMega
+      ? ((typeof POKEMON_SPRITES !== 'undefined' && POKEMON_SPRITES?.[u._megaName]) || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`)
+      : usageSpriteUrl(u, no);
+
+    // 메가 탭 하위 텍스트: "기반 사용률 X% × 채용률 Y%"
+    const subLine = isMega
+      ? `<div class="usage-moves"><span style="font-size:10px;color:#999">${u._stoneName} ${u._stoneRate.toFixed(1)}%</span></div>`
+      : `<div class="usage-moves">${moves.map(m => `<span class="move-chip">${m}</span>`).join('')}</div>`;
+
+    const row = document.createElement('div');
+    row.className = 'usage-row' + (i === selectedUsageIdx ? ' selected' : '');
+    row.innerHTML = `
+      <div class="rank-num">${rankHtml}</div>
+      <div class="usage-sprite"><img src="${spriteImg}" alt="${displayName}" loading="lazy"></div>
+      <div class="usage-info">
+        <div class="usage-name-row"><span class="usage-name">${displayName}</span>${typeBadges}</div>
+        ${subLine}
+      </div>
+      <div class="usage-right">
+        <div class="usage-pct" style="${u.rate === 0 ? 'color:#ccc' : ''}">${u.rate === 0 ? '-' : u.rate.toFixed(1) + '%'}</div>
+        <div class="usage-bar"><div class="usage-bar-fill" style="width:${Math.min(100, u.rate).toFixed(1)}%"></div></div>
+      </div>`;
+    row.addEventListener('click', () => openDetail(i, u));
+    body.appendChild(row);
+  });
+
+  if (totalPages > 1) {
+    pager.innerHTML = `
+      <button class="pager-btn" id="pgPrev" ${usagePage === 0 ? 'disabled' : ''}>◀ 이전</button>
+      <span class="pager-info">${usagePage + 1} / ${totalPages}</span>
+      <button class="pager-btn" id="pgNext" ${usagePage >= totalPages - 1 ? 'disabled' : ''}>다음 ▶</button>`;
+    pager.querySelector('#pgPrev').addEventListener('click', () => { usagePage--; renderUsage(); });
+    pager.querySelector('#pgNext').addEventListener('click', () => { usagePage++; renderUsage(); });
+  } else {
+    pager.innerHTML = '';
+  }
+}
+
+/* ── TEAMS PANEL ── */
+function renderTeams() {
+  const body = document.getElementById('teamsBody');
+  const sub = document.getElementById('teamsSub');
+  const pager = document.getElementById('teamsPager');
+
+  if (!mainData?.teams?.length) {
+    body.innerHTML = '<div class="panel-msg">데이터가 없습니다</div>';
+    sub.textContent = '';
+    pager.innerHTML = '';
+    return;
+  }
+
+  const teams = mainData.teams;
+  const totalPages = Math.ceil(teams.length / TEAMS_PAGE_SIZE);
+  sub.textContent = `TOP ${teams.length}`;
+  body.innerHTML = '';
+  body.scrollTop = 0;
+
+  const start = teamsPage * TEAMS_PAGE_SIZE;
+  const pageItems = teams.slice(start, start + TEAMS_PAGE_SIZE);
+
+  const grid = document.createElement('div');
+  grid.className = 'teams-grid';
+
+  pageItems.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'team-card';
+
+    const rankBadgeClass = t.rank === 1 ? 'r1' : t.rank === 2 ? 'r2' : t.rank === 3 ? 'r3' : '';
+    const rankLabel = t.rank === 1 ? '🥇 1위' : t.rank === 2 ? '🥈 2위' : t.rank === 3 ? '🥉 3위' : `#${t.rank}위`;
+
+    const spritesHtml = (t.team || []).slice(0, 6).map(pk => {
+      const tc = typeColor(pk.terastal);
+      const dispName = teamDisplayName(pk);
+      return `<div class="team-sprite-wrap">
+        <img src="${teamSpriteUrl(pk)}" alt="${dispName}" loading="lazy">
+        ${pk.terastal ? `<span class="tera-badge" style="background:${tc}">${pk.terastal}</span>` : ''}
+        <div class="team-poke-name">${dispName}</div>
+      </div>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="team-card-header">
+        <span class="team-rank-badge ${rankBadgeClass}">${rankLabel}</span>
+        <span class="team-rating">★ ${(t.rating || 0).toLocaleString()}</span>
+      </div>
+      <div class="team-sprites">${spritesHtml}</div>`;
+
+    grid.appendChild(card);
+  });
+
+  body.appendChild(grid);
+
+  if (totalPages > 1) {
+    pager.innerHTML = `
+      <button class="pager-btn" id="tpPrev" ${teamsPage === 0 ? 'disabled' : ''}>◀ 이전</button>
+      <span class="pager-info">${teamsPage + 1} / ${totalPages}</span>
+      <button class="pager-btn" id="tpNext" ${teamsPage >= totalPages - 1 ? 'disabled' : ''}>다음 ▶</button>`;
+    pager.querySelector('#tpPrev').addEventListener('click', () => { teamsPage--; renderTeams(); });
+    pager.querySelector('#tpNext').addEventListener('click', () => { teamsPage++; renderTeams(); });
+  } else {
+    pager.innerHTML = '';
+  }
+}
+
+/* ── DETAIL MODAL ── */
+function getBaseStats(name) {
+  if (typeof POKEMON_DATA === 'undefined') return null;
+  return POKEMON_DATA.find(p => p.name === name) || null;
+}
+
+function makeBarRows(arr) {
+  if (!arr?.length) return '';
+  return arr.map(item => {
+    const pct = Math.min(100, item.rate ?? 0);
+    return `<div class="dc-bar-row">
+      <div class="dc-bar-label">${translateName(item.name)}</div>
+      <div class="dc-bar"><div class="dc-bar-fill" style="width:${pct.toFixed(1)}%"></div></div>
+      <div class="dc-bar-pct">${(item.rate ?? 0).toFixed(1)}%</div>
+    </div>`;
+  }).join('');
+}
+
+function openDetail(idx, u) {
+  selectedUsageIdx = idx;
+  document.querySelectorAll('.usage-row').forEach((r, i) => r.classList.toggle('selected', i === idx));
+
+  const pk = setsData?.pokemon?.find(p => p.id === u.id);
+  const no = idToNo(u.id);
+  const content = document.getElementById('detailContent');
+  const dname = usageDisplayName(u);
+  const bs = getBaseStats(dname) || getBaseStats(u.name);
+
+  // 종족값
+  const statKeys = ['H','A','B','C','D','S'];
+  const statsHtml = bs
+    ? `<div class="dc-stats-wrap">
+        <div class="dc-stats-label">종족값</div>
+        <div class="dc-stats">${statKeys.map(k => `<div class="dc-stat-cell"><span class="dc-stat-k">${k}</span><span class="dc-stat-v">${bs[k] ?? '?'}</span></div>`).join('')}</div>
+       </div>`
+    : '';
+
+  // 좌상단 헤더 (공통)
+  const topHtml = `
+    <div class="dc-top">
+      <div class="dc-sprite"><img src="${usageSpriteUrl(u, no)}" alt="${dname}"></div>
+      <div class="dc-info">
+        <div class="dc-name">${dname}</div>
+        <div class="dc-rate">사용률 ${u.rate.toFixed(1)}% · ${idx + 1}위</div>
+        ${statsHtml}
+      </div>
+    </div>`;
+
+  if (!pk) {
+    const lookupName = dname;
+    const abilityData = (typeof ABILITY_DATA !== 'undefined') && (ABILITY_DATA[lookupName] || ABILITY_DATA[u.name]);
+    const learnset = (typeof LEARNSET_DATA !== 'undefined') && (LEARNSET_DATA[lookupName] || LEARNSET_DATA[u.name]);
+
+    let abHtml = '';
+    if (abilityData) {
+      (abilityData.normal || []).forEach(a => {
+        abHtml += `<div class="dc-bar-row"><div style="font-size:13px;color:#2d1a45">${a.name}</div></div>`;
+      });
+      if (abilityData.hidden) {
+        abHtml += `<div class="dc-bar-row" style="margin-top:4px"><div style="font-size:12px;color:#9b59b6">${abilityData.hidden.name} <span style="font-size:10px;color:#bbb">(숨겨진)</span></div></div>`;
+      }
+    } else {
+      abHtml = '<div style="color:#ccc;font-size:12px">데이터 없음</div>';
+    }
+
+    const moveChips = learnset?.length
+      ? learnset.map(m => `<span class="move-chip">${m}</span>`).join('')
+      : '<div style="color:#ccc;font-size:12px">데이터 없음</div>';
+
+    content.innerHTML = `<div class="dc-wrap">
+      <div class="dc-left">
+        ${topHtml}
+        <div class="dc-panels">
+          <div class="dc-panel">
+            <div class="dc-panel-title">특성</div>
+            <div class="dc-panel-body">${abHtml}</div>
+          </div>
+          <div class="dc-panel" style="grid-column:1/-1;grid-row:2">
+            <div class="dc-panel-title">배울 수 있는 기술</div>
+            <div class="dc-panel-body" style="display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start">${moveChips}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+    document.getElementById('detailOverlay').classList.add('open');
+    return;
+  }
+
+  // 노력치 (우측 패널)
+  let evHtml = '';
+  if (pk.ev_spreads?.length) {
+    const evMax = pk.ev_spreads[0].rate || 1;
+    for (const ev of pk.ev_spreads) {
+      const evs = ev.evs ?? {};
+      const chips = [['H',evs.H],['A',evs.A],['B',evs.B],['C',evs.C],['D',evs.D],['S',evs.S]]
+        .filter(([,v]) => v > 0)
+        .map(([s,v]) => `<span class="ev-chip ev-${s}">${s} ${v}</span>`)
+        .join('');
+      const pct = Math.min(100, (ev.rate ?? 0) / evMax * 100).toFixed(0);
+      evHtml += `<div class="ev-spread-item">
+        <div class="ev-spread-head">
+          <span class="ev-spread-label">${ev.label || '-'}</span>
+          <div class="ev-spread-bar"><div class="ev-spread-bar-fill" style="width:${pct}%"></div></div>
+          <span class="ev-spread-pct">${(ev.rate ?? 0).toFixed(1)}%</span>
+        </div>
+        <div class="ev-chips">${chips || '<span style="color:#ccc;font-size:10px">없음</span>'}</div>
+      </div>`;
+    }
+  } else {
+    evHtml = '<div style="color:#ccc;font-size:12px">데이터 없음</div>';
+  }
+
+  content.innerHTML = `
+    <div class="dc-wrap">
+      <div class="dc-left">
+        ${topHtml}
+        <div class="dc-panels">
+          <div class="dc-panel">
+            <div class="dc-panel-title">주요 기술</div>
+            <div class="dc-panel-body">${makeBarRows(pk.moves)}</div>
+          </div>
+          <div class="dc-panel">
+            <div class="dc-panel-title">도구</div>
+            <div class="dc-panel-body">${makeBarRows(pk.items)}</div>
+          </div>
+          <div class="dc-panel">
+            <div class="dc-panel-title">특성</div>
+            <div class="dc-panel-body">${makeBarRows(pk.abilities)}</div>
+          </div>
+          <div class="dc-panel">
+            <div class="dc-panel-title">성격</div>
+            <div class="dc-panel-body">${makeBarRows(pk.natures)}</div>
+          </div>
+        </div>
+      </div>
+      <div class="dc-right">
+        <div class="dc-right-title">노력치</div>
+        ${evHtml}
+      </div>
+    </div>`;
+
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+document.getElementById('detailClose').addEventListener('click', () => {
+  document.getElementById('detailOverlay').classList.remove('open');
+});
+document.getElementById('detailOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) document.getElementById('detailOverlay').classList.remove('open');
+});
+
+init();
+</script>
 </body>
 </html>

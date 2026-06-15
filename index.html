@@ -83,7 +83,7 @@
     .app-body.big-mode .party-action-btns{display:none;}
     /* ── ENEMY SIDEBAR ── */
     .enemy-sidebar{display:none;flex-wrap:wrap;width:340px;gap:10px;justify-content:center;align-content:center;flex-shrink:0;}
-    .app-body.big-mode #enemySidebar{display:flex;}
+    .app-body.big-mode #enemySidebar{display:flex;position:relative;}
     .enemy-slot{width:160px;height:160px;background:var(--slot-bg);border-radius:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
     .enemy-slot:hover{transform:scale(1.05);box-shadow:0 6px 22px rgba(0,0,0,.2);background:#fff;}
     .enemy-slot:hover .slot-del.on{display:flex;}
@@ -2978,6 +2978,18 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
     closePokeModal(); cb(pk); return;
   }
   if (modalSlot < 0) return;
+  /* 중복 체크: 이미 파티에 있으면 해당 슬롯 데이터를 새 슬롯으로 이동, 기존 슬롯은 비움 */
+  const _dupIdx = party.findIndex((s, i) => i !== modalSlot && s.pokemon?.no === pk.no && s.pokemon?.name === pk.name);
+  if (_dupIdx >= 0) {
+    party[modalSlot] = { ...party[_dupIdx] };
+    party[_dupIdx] = newSlot();
+    selectedSlot = modalSlot;
+    saveParty();
+    closePokeModal();
+    document.getElementById('appBody')?.classList.remove('big-mode');
+    renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
+    return;
+  }
   party[modalSlot].pokemon = pk;
   /* auto-set ability */
   const abd = ABILITY_DATA?.[pk.name];
@@ -3544,11 +3556,31 @@ function renderEnemySlots() {
       slot.appendChild(plus);
     }
     slot.addEventListener('click', () => {
-      calcModalCallback = (pk) => { enemyParty[i].pokemon = pk; saveEnemyParty(); renderEnemySlots(); };
+      calcModalCallback = (pk) => {
+        const _eDupIdx = enemyParty.findIndex((s, j) => j !== i && s.pokemon?.no === pk.no && s.pokemon?.name === pk.name);
+        if (_eDupIdx >= 0) {
+          enemyParty[i] = { ...enemyParty[_eDupIdx] };
+          enemyParty[_eDupIdx] = { pokemon: null };
+        } else {
+          enemyParty[i].pokemon = pk;
+        }
+        saveEnemyParty(); renderEnemySlots();
+      };
       openPokeModal(0);
     });
     el.appendChild(slot);
   }
+  const enemyBtns = document.createElement('div');
+  enemyBtns.className = 'big-mode-btns';
+  enemyBtns.style.display = 'flex';
+  enemyBtns.innerHTML = `
+    <button class="big-act-btn load" id="enemyLoadBtn">📋 불러오기</button>
+    <button class="big-act-btn clear" id="enemyClearBtn">비우기</button>`;
+  enemyBtns.querySelector('#enemyClearBtn').addEventListener('click', () => {
+    for (let i = 0; i < 6; i++) enemyParty[i] = { pokemon: null };
+    saveEnemyParty(); renderEnemySlots();
+  });
+  el.appendChild(enemyBtns);
 }
 
 function scLoad() {
