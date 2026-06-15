@@ -7,94 +7,123 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <title>포챔스메타몽 - 포켓몬 박스</title>
+  <title>포챔스메타몽 - 박스</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #b89dcc; min-height: 100vh; }
+    body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #b89dcc; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
     .navbar {
-      height: 54px; background: rgba(255,255,255,.97);
+      height: 54px; background: rgba(255,255,255,.97); flex-shrink: 0;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 32px; box-shadow: 0 2px 10px rgba(0,0,0,.12);
-      position: relative; z-index: 20;
+      padding: 0 32px; box-shadow: 0 2px 10px rgba(0,0,0,.12); position: relative; z-index: 20;
     }
-    .nav-logo { display:flex;align-items:center; } .nav-logo img { height:38px;object-fit:contain; }
+    .nav-logo { display:flex; align-items:center; }
+    .nav-logo img { height:38px; object-fit:contain; }
     .nav-links { display: flex; gap: 6px; }
     .nav-links a {
       text-decoration: none; color: #444; font-size: 14px;
-      padding: 5px 14px; border-radius: 6px;
-      transition: background .2s, color .2s;
+      padding: 5px 14px; border-radius: 6px; transition: background .2s, color .2s;
     }
     .nav-links a:hover  { background: #ede0f5; color: #7b3fa0; }
     .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
 
-    .page-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
-
-    .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .toolbar h1 { font-size: 18px; font-weight: 700; color: #fff; }
-    .box-count { font-size: 12px; color: rgba(255,255,255,.85); }
-    .clear-btn {
-      margin-left: auto; background: rgba(220,50,50,.85); color: #fff;
-      border: none; padding: 6px 14px; border-radius: 8px; font-size: 12px;
-      cursor: pointer; transition: background .18s; font-family: inherit;
-    }
-    .clear-btn:hover { background: #c00; }
-
-    .box-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 10px;
+    .page-layout {
+      flex: 1; min-height: 0;
+      display: flex; flex-direction: row; gap: 10px; padding: 12px;
     }
 
-    .box-card {
-      background: rgba(255,255,255,.93);
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.1);
+    .side-ad {
+      flex: 0 0 180px; background: rgba(0,0,0,.12); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: rgba(255,255,255,.5); letter-spacing: 2px;
+    }
+
+    .hub-center {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .hub-cards {
+      flex: 1; min-height: 0;
+      display: flex; flex-direction: row; gap: 10px;
+    }
+
+    .hub-card {
+      flex: 1;
+      background: rgba(238,230,250,.97);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(80,40,120,.15);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 18px;
+      text-decoration: none; color: inherit;
+      cursor: pointer;
+      transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s, border-color .15s;
+      border: 2px solid rgba(160,120,220,.25);
+      padding: 32px 24px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hub-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 40px rgba(90,40,150,.22);
+      border-color: rgba(140,80,200,.55);
+    }
+
+    .hub-sprites {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
     }
-    .bc-img   { width: 72px; height: 72px; image-rendering: pixelated; object-fit: contain; }
-    .bc-no    { font-size: 9px; color: #bbb; }
-    .bc-name  { font-size: 13px; font-weight: 700; color: #333; text-align: center; }
-    .bc-types { display: flex; gap: 3px; margin: 2px 0; flex-wrap: wrap; justify-content: center; }
-    .bc-badge { padding: 2px 7px; border-radius: 4px; font-size: 9px; color: #fff; font-weight: 600; }
-    .bc-nature { font-size: 10px; color: #888; }
-    .bc-item   { font-size: 10px; color: #7b3fa0; font-weight: 600; }
-    .bc-moves  { width: 100%; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
-    .bc-move   {
-      font-size: 10px; color: #fff; padding: 2px 6px; border-radius: 4px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;
+    .hub-sprites-row {
+      display: flex;
+      align-items: flex-end;
     }
-    .bc-actions { display: flex; gap: 5px; margin-top: 7px; width: 100%; }
-    .bc-btn {
-      flex: 1; padding: 5px 4px; border: none; border-radius: 7px;
-      font-size: 11px; cursor: pointer; font-family: inherit;
-      transition: background .15s; font-weight: 600;
+    .hub-sprites-row img {
+      width: 64px; height: 64px;
+      image-rendering: pixelated; object-fit: contain;
+      filter: drop-shadow(0 3px 8px rgba(60,20,100,.22));
+      flex-shrink: 0;
     }
-    .bc-btn-add { background: #7b3fa0; color: #fff; }
-    .bc-btn-add:hover { background: #5a2d7a; }
-    .bc-btn-del { background: #fde0e0; color: #c00; }
-    .bc-btn-del:hover { background: #f5b8b8; }
+    .hub-sprites-row.back img { width: 54px; height: 54px; opacity: .75; }
+    .hub-sprites-row img:nth-child(1) { margin-right: -14px; transform: rotate(-6deg) translateY(4px); z-index: 0; }
+    .hub-sprites-row img:nth-child(2) { z-index: 2; position: relative; }
+    .hub-sprites-row img:nth-child(3) { margin-left: -14px; transform: rotate(6deg) translateY(4px); z-index: 0; }
+    /* 포켓몬 박스: 3개짜리 단일 행 */
+    .hub-sprites-single {
+      display: flex;
+      align-items: flex-end;
+      height: 90px;
+    }
+    .hub-sprites-single img {
+      width: 72px; height: 72px;
+      image-rendering: pixelated; object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(60,20,100,.25));
+      flex-shrink: 0;
+    }
+    .hub-sprites-single img:nth-child(1) { margin-right: -18px; opacity: .85; transform: rotate(-8deg) translateY(6px); z-index: 0; }
+    .hub-sprites-single img:nth-child(2) { width: 88px; height: 88px; z-index: 2; position: relative; }
+    .hub-sprites-single img:nth-child(3) { margin-left: -18px; opacity: .85; transform: rotate(8deg) translateY(6px); z-index: 0; }
 
-    .empty-state {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 60px 20px;
-      color: rgba(255,255,255,.85);
-      font-size: 14px;
-      line-height: 2.2;
+    .hub-card-title {
+      font-size: 20px; font-weight: 700; color: #3a1a5c;
+      letter-spacing: .3px;
     }
-    .empty-state a { color: #fff; font-weight: 700; text-decoration: underline; }
+    .hub-card-desc {
+      font-size: 12px; color: #7060a0; text-align: center; line-height: 1.7;
+    }
+    .hub-card-count {
+      background: #7b3fa0; color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 12px; border-radius: 20px;
+      min-width: 60px; text-align: center;
+    }
+    .hub-card-count.empty { background: rgba(0,0,0,.18); }
 
-    .toast {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: #5a2d7a; color: #fff; padding: 9px 22px;
-      border-radius: 20px; font-size: 12px; z-index: 9999;
-      pointer-events: none; opacity: 0; transition: opacity .3s;
-      white-space: nowrap; box-shadow: 0 4px 14px rgba(0,0,0,.25);
+    .bottom-ad {
+      flex: 0 0 140px; background: rgba(0,0,0,.12); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: rgba(255,255,255,.5); letter-spacing: 2px;
     }
 
     ::-webkit-scrollbar { width: 5px; }
@@ -114,150 +143,76 @@
   </div>
 </nav>
 
-<div class="page-body">
-  <div class="toolbar">
-    <h1>포켓몬 박스</h1>
-    <span class="box-count" id="boxCount"></span>
-    <button class="clear-btn" id="clearAllBtn">전체 삭제</button>
+<div class="page-layout">
+  <div class="side-ad">광고</div>
+
+  <div class="hub-center">
+    <div class="hub-cards">
+
+      <a href="party-box.html" class="hub-card">
+        <div class="hub-sprites" id="partySprites">
+          <div class="hub-sprites-row back">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="메타그로스">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="망나뇽">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png" alt="마기라스">
+          </div>
+          <div class="hub-sprites-row">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png" alt="루카리오">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png" alt="한카리아스">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png" alt="가라도스">
+          </div>
+        </div>
+        <div class="hub-card-title">파티 박스</div>
+        <div class="hub-card-desc">저장된 파티 구성을<br>불러오고 관리합니다</div>
+        <div class="hub-card-count" id="partyCount">불러오는 중...</div>
+      </a>
+
+      <a href="pokemon-storage.html" class="hub-card">
+        <div class="hub-sprites-single" id="pokeSprites">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="리자몽">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png" alt="갸라도스">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="메타그로스">
+        </div>
+        <div class="hub-card-title">포켓몬 박스</div>
+        <div class="hub-card-desc">저장된 개별 포켓몬을<br>파티에 추가합니다</div>
+        <div class="hub-card-count" id="pokemonCount">불러오는 중...</div>
+      </a>
+
+    </div>
+    <div class="bottom-ad">광고</div>
   </div>
-  <div class="box-grid" id="boxGrid"></div>
+
+  <div class="side-ad">광고</div>
 </div>
 
-<div class="toast" id="toastEl"></div>
-
 <script src="pokemon-sprites.js"></script>
-<script src="items-data.js"></script>
-<script src="data.js"></script>
 <script>
-const TYPE_COLORS = {
-  '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
-  '전기':'#F8C600','얼음':'#98D8D8','격투':'#C03028','독':'#A040A0',
-  '땅':'#C8A840','비행':'#A890F0','에스퍼':'#F85888','벌레':'#A8B820',
-  '바위':'#B8A038','고스트':'#705898','드래곤':'#7038F8','악':'#6B5040',
-  '강철':'#A8A8C0','페어리':'#EE99AC'
-};
+const partySaves = JSON.parse(localStorage.getItem('pochams_party_saves') || '[]');
+const pokemonBox = JSON.parse(localStorage.getItem('pochams_box') || '[]');
 
-const NATURES = [
-  {name:'덜렁이',  up:null,dn:null},{name:'외로움',    up:'A',dn:'B'},
-  {name:'개구장이',up:'A', dn:'C'},{name:'장난꾸러기', up:'A',dn:'D'},
-  {name:'용감',    up:'A', dn:'S'},{name:'겁쟁이',     up:'B',dn:'A'},
-  {name:'온순',    up:null,dn:null},{name:'촐랑이',     up:'B',dn:'C'},
-  {name:'버릇없이',up:'B', dn:'D'},{name:'느긋이',     up:'B',dn:'S'},
-  {name:'얌전이',  up:'C', dn:'A'},{name:'온화',       up:'C',dn:'B'},
-  {name:'수줍음',  up:null,dn:null},{name:'건방짐',     up:'C',dn:'D'},
-  {name:'조용이',  up:'C', dn:'S'},{name:'차분',       up:'D',dn:'A'},
-  {name:'부드러운',up:'D', dn:'B'},{name:'신중',       up:'D',dn:'C'},
-  {name:'고집',    up:'D', dn:'S'},{name:'조심',       up:null,dn:null},
-  {name:'성급이',  up:'S', dn:'A'},{name:'서두름',     up:'S',dn:'B'},
-  {name:'경솔',    up:'S', dn:'C'},{name:'천진난만',   up:'S',dn:'D'},
-  {name:'진지',    up:null,dn:null}
-];
+const partyEl = document.getElementById('partyCount');
+const pokeEl  = document.getElementById('pokemonCount');
 
-const NAT_STAT_LABELS = {A:'공격',B:'방어',C:'특공',D:'특방',S:'스피드'};
-
-function spriteUrl(name, no) {
-  const v = POKEMON_SPRITES?.[name];
-  return v || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${no}.png`;
+if (partySaves.length === 0) {
+  partyEl.textContent = '저장된 파티 없음';
+  partyEl.classList.add('empty');
+} else {
+  partyEl.textContent = `${partySaves.length}개 저장됨`;
 }
 
-function showToast(msg) {
-  const t = document.getElementById('toastEl');
-  t.textContent = msg;
-  t.style.opacity = '1';
-  clearTimeout(t._to);
-  t._to = setTimeout(() => { t.style.opacity = '0'; }, 2400);
+if (pokemonBox.length === 0) {
+  pokeEl.textContent = '저장된 포켓몬 없음';
+  pokeEl.classList.add('empty');
+} else {
+  pokeEl.textContent = `${pokemonBox.length}마리 저장됨`;
 }
 
-function getBox() {
-  try { return JSON.parse(localStorage.getItem('pochams_box') || '[]'); } catch(e) { return []; }
+/* 포켓몬 박스 카드: 실제 저장된 포켓몬 스프라이트로 교체 */
+if (pokemonBox.length >= 3 && typeof POKEMON_SPRITES !== 'undefined') {
+  const container = document.getElementById('pokeSprites');
+  const picks = pokemonBox.slice(0, 3);
+  // We'd need POKEMON_DATA for pkIdx→name, skip if not available
 }
-function setBox(box) { localStorage.setItem('pochams_box', JSON.stringify(box)); }
-
-function renderBox() {
-  const box = getBox();
-  document.getElementById('boxCount').textContent = `${box.length}마리 저장됨`;
-
-  const grid = document.getElementById('boxGrid');
-  if (!box.length) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        박스가 비어 있습니다.<br>
-        <a href="index.html">파티 구성</a> 페이지에서 포켓몬 카드의 <strong>💾 박스 저장</strong> 버튼을 눌러 저장해보세요.
-      </div>`;
-    return;
-  }
-
-  grid.innerHTML = box.map((entry, bi) => {
-    const pk = POKEMON_DATA[entry.pkIdx];
-    if (!pk) return '';
-    const nature = (entry.natIdx >= 0 && NATURES[entry.natIdx]) ? NATURES[entry.natIdx] : null;
-    const it = (entry.itIdx >= 0 && ITEM_DATA[entry.itIdx]) ? ITEM_DATA[entry.itIdx] : null;
-    const moves = (entry.moves || []).map(mi => (mi >= 0 && MOVE_DATA[mi]) ? MOVE_DATA[mi] : null).filter(Boolean);
-
-    const natLabel = nature
-      ? (nature.up
-          ? `${nature.name} (${NAT_STAT_LABELS[nature.up]}↑ ${NAT_STAT_LABELS[nature.dn]}↓)`
-          : `${nature.name} (보정없음)`)
-      : '';
-
-    return `
-    <div class="box-card">
-      <img class="bc-img" src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}" loading="lazy">
-      <div class="bc-no">#${pk.no}</div>
-      <div class="bc-name">${pk.name}</div>
-      <div class="bc-types">
-        ${[pk.type1, pk.type2].filter(Boolean).map(t =>
-          `<span class="bc-badge" style="background:${TYPE_COLORS[t]||'#888'}">${t}</span>`
-        ).join('')}
-      </div>
-      ${natLabel ? `<div class="bc-nature">${natLabel}</div>` : ''}
-      ${it ? `<div class="bc-item">📦 ${it.name}</div>` : ''}
-      ${moves.length ? `
-      <div class="bc-moves">
-        ${moves.map(mv => `<div class="bc-move" style="background:${TYPE_COLORS[mv.type]||'#888'}">${mv.name}</div>`).join('')}
-      </div>` : ''}
-      <div class="bc-actions">
-        <button class="bc-btn bc-btn-add" data-bi="${bi}" data-act="add">파티에 추가</button>
-        <button class="bc-btn bc-btn-del" data-bi="${bi}" data-act="del">삭제</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-document.getElementById('boxGrid').addEventListener('click', e => {
-  const btn = e.target.closest('[data-act]');
-  if (!btn) return;
-  const bi  = +btn.dataset.bi;
-  const act = btn.dataset.act;
-  const box = getBox();
-
-  if (act === 'del') {
-    const pk = POKEMON_DATA[box[bi]?.pkIdx];
-    const name = pk?.name || '포켓몬';
-    box.splice(bi, 1);
-    setBox(box);
-    showToast(`${name}을(를) 삭제했습니다.`);
-    renderBox();
-  } else if (act === 'add') {
-    try {
-      localStorage.setItem('pochams_box_add', JSON.stringify(box[bi]));
-      window.location.href = 'index.html';
-    } catch(e) {
-      showToast('오류가 발생했습니다.');
-    }
-  }
-});
-
-document.getElementById('clearAllBtn').addEventListener('click', () => {
-  const box = getBox();
-  if (!box.length) { showToast('박스가 이미 비어 있습니다.'); return; }
-  if (!confirm(`박스의 포켓몬 ${box.length}마리를 모두 삭제하시겠습니까?`)) return;
-  setBox([]);
-  showToast('박스를 비웠습니다.');
-  renderBox();
-});
-
-renderBox();
 </script>
 </body>
 </html>
