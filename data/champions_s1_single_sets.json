@@ -1,0 +1,2870 @@
+{
+  "season_number": 1,
+  "rule": "single",
+  "top_n": 50,
+  "pokemon": [
+    {
+      "id": "0445-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 68.6
+        }
+      ],
+      "items": [
+        {
+          "name": "기합의띠",
+          "rate": 38.8
+        },
+        {
+          "name": "구애스카프",
+          "rate": 31.9
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 13.3
+        },
+        {
+          "name": "리샘열매",
+          "rate": 7.5
+        },
+        {
+          "name": "한카리아스나이트",
+          "rate": 2.0
+        },
+        {
+          "name": "플카열매",
+          "rate": 1.5
+        },
+        {
+          "name": "하반열매",
+          "rate": 1.4
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.6
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.6
+        },
+        {
+          "name": "로셀열매",
+          "rate": 0.4
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "한카리아스",
+      "usage_rate": 53.98
+    },
+    {
+      "id": "1018-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 46.8
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 34.5
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 25.3
+        },
+        {
+          "name": "하양허브",
+          "rate": 23.3
+        },
+        {
+          "name": "구애스카프",
+          "rate": 5.2
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 2.8
+        },
+        {
+          "name": "유루열매",
+          "rate": 1.5
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.4
+        },
+        {
+          "name": "로플열매",
+          "rate": 1.3
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.1
+        },
+        {
+          "name": "용의이빨",
+          "rate": 0.7
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "브리두라스",
+      "usage_rate": 38.26
+    },
+    {
+      "id": "0902-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 71.2
+        }
+      ],
+      "items": [
+        {
+          "name": "구애스카프",
+          "rate": 83.2
+        },
+        {
+          "name": "기합의띠",
+          "rate": 7.0
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 4.5
+        },
+        {
+          "name": "저주의부적",
+          "rate": 2.5
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.7
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.4
+        },
+        {
+          "name": "수불열매",
+          "rate": 0.2
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.2
+        },
+        {
+          "name": "마코열매",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "대쓰여너",
+      "usage_rate": 29.36
+    },
+    {
+      "id": "0823-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 66.1
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 67.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 21.7
+        },
+        {
+          "name": "반짝가루",
+          "rate": 3.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.7
+        },
+        {
+          "name": "오카열매",
+          "rate": 0.6
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.5
+        },
+        {
+          "name": "예리한부리",
+          "rate": 0.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.4
+        },
+        {
+          "name": "초나열매",
+          "rate": 0.3
+        },
+        {
+          "name": "검은띠",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "아머까오",
+      "usage_rate": 24.62
+    },
+    {
+      "id": "0670-05",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 63.2
+        },
+        {
+          "name": "성실",
+          "rate": 0.0
+        }
+      ],
+      "items": [
+        {
+          "name": "플라엣테나이트",
+          "rate": 96.1
+        },
+        {
+          "name": "구애스카프",
+          "rate": 3.2
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 0.1
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.0
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.0
+        },
+        {
+          "name": "마폭시나이트",
+          "rate": 0.0
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.0
+        },
+        {
+          "name": "팬텀나이트",
+          "rate": 0.0
+        },
+        {
+          "name": "핫삼나이트",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "플라엣테",
+      "usage_rate": 24.43
+    },
+    {
+      "id": "0730-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 69.1
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 46.0
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 19.6
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 9.4
+        },
+        {
+          "name": "기합의띠",
+          "rate": 8.0
+        },
+        {
+          "name": "리샘열매",
+          "rate": 7.3
+        },
+        {
+          "name": "유루열매",
+          "rate": 3.9
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 2.0
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.1
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.5
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.5
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "누리레느",
+      "usage_rate": 23.67
+    },
+    {
+      "id": "0130-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 58.8
+        }
+      ],
+      "items": [
+        {
+          "name": "갸라도스나이트",
+          "rate": 76.6
+        },
+        {
+          "name": "리샘열매",
+          "rate": 7.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 6.2
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 5.1
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 1.2
+        },
+        {
+          "name": "초나열매",
+          "rate": 0.9
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.6
+        },
+        {
+          "name": "유루열매",
+          "rate": 0.5
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.3
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 0.3
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "갸라도스",
+      "usage_rate": 17.8
+    },
+    {
+      "id": "0428-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 84.9
+        }
+      ],
+      "items": [
+        {
+          "name": "이어롭나이트",
+          "rate": 95.8
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 1.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.7
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.4
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.3
+        },
+        {
+          "name": "로플열매",
+          "rate": 0.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.1
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "이어롭",
+      "usage_rate": 17.42
+    },
+    {
+      "id": "0212-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 93.1
+        }
+      ],
+      "items": [
+        {
+          "name": "핫삼나이트",
+          "rate": 84.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 4.0
+        },
+        {
+          "name": "리샘열매",
+          "rate": 3.0
+        },
+        {
+          "name": "금속코트",
+          "rate": 2.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 1.4
+        },
+        {
+          "name": "오카열매",
+          "rate": 1.0
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.2
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "핫삼",
+      "usage_rate": 16.1
+    },
+    {
+      "id": "0681-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 62.5
+        }
+      ],
+      "items": [
+        {
+          "name": "저주의부적",
+          "rate": 47.0
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 33.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 9.2
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 3.3
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.7
+        },
+        {
+          "name": "검은띠",
+          "rate": 0.6
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 0.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "수불열매",
+          "rate": 0.3
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "킬가르도",
+      "usage_rate": 15.91
+    },
+    {
+      "id": "0094-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 86.8
+        }
+      ],
+      "items": [
+        {
+          "name": "팬텀나이트",
+          "rate": 82.8
+        },
+        {
+          "name": "기합의띠",
+          "rate": 13.6
+        },
+        {
+          "name": "구애스카프",
+          "rate": 2.2
+        },
+        {
+          "name": "저주의부적",
+          "rate": 0.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.1
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "팬텀",
+      "usage_rate": 15.34
+    },
+    {
+      "id": "0778-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 68.6
+        }
+      ],
+      "items": [
+        {
+          "name": "저주의부적",
+          "rate": 40.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 26.2
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 8.4
+        },
+        {
+          "name": "반짝가루",
+          "rate": 7.7
+        },
+        {
+          "name": "초점렌즈",
+          "rate": 3.4
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 3.2
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.6
+        },
+        {
+          "name": "구애스카프",
+          "rate": 2.0
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 1.7
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.4
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "따라큐",
+      "usage_rate": 15.34
+    },
+    {
+      "id": "0450-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 72.4
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 67.2
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 28.4
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 1.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.0
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.3
+        },
+        {
+          "name": "꼬시개열매",
+          "rate": 0.3
+        },
+        {
+          "name": "부드러운모래",
+          "rate": 0.1
+        },
+        {
+          "name": "린드열매",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "하마돈",
+      "usage_rate": 14.96
+    },
+    {
+      "id": "0908-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 52.4
+        }
+      ],
+      "items": [
+        {
+          "name": "구애스카프",
+          "rate": 66.1
+        },
+        {
+          "name": "기합의띠",
+          "rate": 26.5
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.9
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 0.7
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.7
+        },
+        {
+          "name": "기적의씨",
+          "rate": 0.6
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.6
+        },
+        {
+          "name": "검은안경",
+          "rate": 0.4
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.3
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "마스카나",
+      "usage_rate": 14.58
+    },
+    {
+      "id": "0006-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 40.3
+        }
+      ],
+      "items": [
+        {
+          "name": "리자몽나이트Y",
+          "rate": 64.4
+        },
+        {
+          "name": "리자몽나이트X",
+          "rate": 34.2
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.2
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "목탄",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.0
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.0
+        },
+        {
+          "name": "독침붕나이트",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "리자몽",
+      "usage_rate": 14.2
+    },
+    {
+      "id": "0970-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 71.0
+        }
+      ],
+      "items": [
+        {
+          "name": "기합의띠",
+          "rate": 62.1
+        },
+        {
+          "name": "킬라플로르나이트",
+          "rate": 26.8
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 5.5
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 1.5
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 1.3
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.3
+        },
+        {
+          "name": "꼬시개열매",
+          "rate": 0.1
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "킬라플로르",
+      "usage_rate": 13.07
+    },
+    {
+      "id": "0149-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 69.7
+        }
+      ],
+      "items": [
+        {
+          "name": "망나뇽나이트",
+          "rate": 83.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 8.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 1.7
+        },
+        {
+          "name": "하양허브",
+          "rate": 1.0
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.9
+        },
+        {
+          "name": "실크스카프",
+          "rate": 0.8
+        },
+        {
+          "name": "플카열매",
+          "rate": 0.7
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.5
+        },
+        {
+          "name": "용의이빨",
+          "rate": 0.4
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.3
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "망나뇽",
+      "usage_rate": 12.5
+    },
+    {
+      "id": "0448-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 66.1
+        }
+      ],
+      "items": [
+        {
+          "name": "루카리오나이트",
+          "rate": 95.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 2.3
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.9
+        },
+        {
+          "name": "검은띠",
+          "rate": 0.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.1
+        },
+        {
+          "name": "핫삼나이트",
+          "rate": 0.1
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "루카리오",
+      "usage_rate": 11.36
+    },
+    {
+      "id": "0655-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 88.3
+        }
+      ],
+      "items": [
+        {
+          "name": "마폭시나이트",
+          "rate": 96.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.8
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.2
+        },
+        {
+          "name": "목탄",
+          "rate": 0.2
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "마폭시",
+      "usage_rate": 11.36
+    },
+    {
+      "id": "0637-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 33.8
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 43.3
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 20.7
+        },
+        {
+          "name": "리샘열매",
+          "rate": 19.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 4.9
+        },
+        {
+          "name": "목탄",
+          "rate": 1.8
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.7
+        },
+        {
+          "name": "꼬시개열매",
+          "rate": 1.6
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.1
+        },
+        {
+          "name": "루미열매",
+          "rate": 1.1
+        },
+        {
+          "name": "유루열매",
+          "rate": 0.6
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "불카모스",
+      "usage_rate": 10.98
+    },
+    {
+      "id": "0635-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 51.0
+        }
+      ],
+      "items": [
+        {
+          "name": "구애스카프",
+          "rate": 78.8
+        },
+        {
+          "name": "기합의띠",
+          "rate": 6.4
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.8
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 2.6
+        },
+        {
+          "name": "하양허브",
+          "rate": 2.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.0
+        },
+        {
+          "name": "검은안경",
+          "rate": 1.3
+        },
+        {
+          "name": "하반열매",
+          "rate": 0.9
+        },
+        {
+          "name": "용의이빨",
+          "rate": 0.5
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.4
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "삼삼드래",
+      "usage_rate": 10.23
+    },
+    {
+      "id": "0197-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 57.0
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 92.0
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 3.7
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.0
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.5
+        },
+        {
+          "name": "로플열매",
+          "rate": 0.4
+        },
+        {
+          "name": "검은안경",
+          "rate": 0.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.2
+        },
+        {
+          "name": "로셀열매",
+          "rate": 0.1
+        },
+        {
+          "name": "유루열매",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "블래키",
+      "usage_rate": 10.23
+    },
+    {
+      "id": "0121-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 61.9
+        }
+      ],
+      "items": [
+        {
+          "name": "아쿠스타나이트",
+          "rate": 96.1
+        },
+        {
+          "name": "기합의띠",
+          "rate": 1.0
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 0.2
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.0
+        },
+        {
+          "name": "자석",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "아쿠스타",
+      "usage_rate": 9.85
+    },
+    {
+      "id": "0983-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 92.4
+        },
+        {
+          "name": "성실",
+          "rate": 0.1
+        }
+      ],
+      "items": [
+        {
+          "name": "검은안경",
+          "rate": 74.0
+        },
+        {
+          "name": "로플열매",
+          "rate": 6.6
+        },
+        {
+          "name": "기합의띠",
+          "rate": 4.6
+        },
+        {
+          "name": "리샘열매",
+          "rate": 4.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 3.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.0
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.5
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 0.6
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "검은띠",
+          "rate": 0.4
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "대도각참",
+      "usage_rate": 9.09
+    },
+    {
+      "id": "0115-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 90.3
+        }
+      ],
+      "items": [
+        {
+          "name": "캥카나이트",
+          "rate": 98.2
+        },
+        {
+          "name": "실크스카프",
+          "rate": 0.7
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "로플열매",
+          "rate": 0.1
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "이어롭나이트",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        },
+        {
+          "name": "망나뇽나이트",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "캥카",
+      "usage_rate": 8.9
+    },
+    {
+      "id": "0503-01",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 52.7
+        }
+      ],
+      "items": [
+        {
+          "name": "기합의띠",
+          "rate": 35.6
+        },
+        {
+          "name": "구애스카프",
+          "rate": 34.6
+        },
+        {
+          "name": "검은안경",
+          "rate": 10.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 6.8
+        },
+        {
+          "name": "리샘열매",
+          "rate": 3.5
+        },
+        {
+          "name": "초점렌즈",
+          "rate": 1.7
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.6
+        },
+        {
+          "name": "로플열매",
+          "rate": 1.2
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 1.1
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 0.9
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "대검귀",
+      "usage_rate": 7.01
+    },
+    {
+      "id": "0937-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 76.9
+        }
+      ],
+      "items": [
+        {
+          "name": "기합의띠",
+          "rate": 77.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 4.3
+        },
+        {
+          "name": "저주의부적",
+          "rate": 3.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.8
+        },
+        {
+          "name": "목탄",
+          "rate": 2.5
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 1.5
+        },
+        {
+          "name": "하양허브",
+          "rate": 1.4
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.9
+        },
+        {
+          "name": "수불열매",
+          "rate": 0.8
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "파라블레이즈",
+      "usage_rate": 7.01
+    },
+    {
+      "id": "0658-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 54.6
+        }
+      ],
+      "items": [
+        {
+          "name": "개굴닌자나이트",
+          "rate": 42.1
+        },
+        {
+          "name": "기합의띠",
+          "rate": 39.4
+        },
+        {
+          "name": "구애스카프",
+          "rate": 12.7
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 1.3
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 1.0
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.7
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.3
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "초점렌즈",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "개굴닌자",
+      "usage_rate": 6.25
+    },
+    {
+      "id": "0036-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 62.3
+        }
+      ],
+      "items": [
+        {
+          "name": "픽시나이트",
+          "rate": 89.9
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 4.5
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 2.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.4
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.3
+        },
+        {
+          "name": "바리비열매",
+          "rate": 0.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.2
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "픽시",
+      "usage_rate": 5.49
+    },
+    {
+      "id": "0009-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 84.2
+        }
+      ],
+      "items": [
+        {
+          "name": "거북왕나이트",
+          "rate": 87.9
+        },
+        {
+          "name": "하양허브",
+          "rate": 7.4
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.8
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.8
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.6
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 0.5
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        },
+        {
+          "name": "유루열매",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "거북왕",
+      "usage_rate": 5.11
+    },
+    {
+      "id": "0227-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 40.0
+        }
+      ],
+      "items": [
+        {
+          "name": "무장조나이트",
+          "rate": 47.4
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 16.8
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 15.7
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 5.5
+        },
+        {
+          "name": "검은띠",
+          "rate": 3.8
+        },
+        {
+          "name": "반짝가루",
+          "rate": 3.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.9
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.1
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.6
+        },
+        {
+          "name": "오카열매",
+          "rate": 0.5
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "무장조",
+      "usage_rate": 4.92
+    },
+    {
+      "id": "0199-01",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 46.2
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 31.7
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 30.9
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 11.0
+        },
+        {
+          "name": "반짝가루",
+          "rate": 3.5
+        },
+        {
+          "name": "검은띠",
+          "rate": 2.6
+        },
+        {
+          "name": "수불열매",
+          "rate": 2.5
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 2.4
+        },
+        {
+          "name": "독바늘",
+          "rate": 2.3
+        },
+        {
+          "name": "휘어진스푼",
+          "rate": 2.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.6
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "야도킹",
+      "usage_rate": 4.92
+    },
+    {
+      "id": "0952-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 59.3
+        },
+        {
+          "name": "성실",
+          "rate": 0.4
+        }
+      ],
+      "items": [
+        {
+          "name": "スコヴィラナイト",
+          "rate": 91.6
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 6.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.3
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.2
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.2
+        },
+        {
+          "name": "기적의씨",
+          "rate": 0.2
+        },
+        {
+          "name": "목탄",
+          "rate": 0.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "스코빌런",
+      "usage_rate": 4.73
+    },
+    {
+      "id": "0003-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 46.1
+        }
+      ],
+      "items": [
+        {
+          "name": "이상해꽃나이트",
+          "rate": 92.6
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.4
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 1.5
+        },
+        {
+          "name": "기적의씨",
+          "rate": 0.7
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.5
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.4
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.2
+        },
+        {
+          "name": "오카열매",
+          "rate": 0.1
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "이상해꽃",
+      "usage_rate": 4.55
+    },
+    {
+      "id": "0956-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 36.1
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 34.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 30.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 13.6
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 6.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 3.7
+        },
+        {
+          "name": "반짝가루",
+          "rate": 2.5
+        },
+        {
+          "name": "휘어진스푼",
+          "rate": 2.1
+        },
+        {
+          "name": "수불열매",
+          "rate": 1.9
+        },
+        {
+          "name": "마코열매",
+          "rate": 1.7
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.6
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "클레스퍼트라",
+      "usage_rate": 4.36
+    },
+    {
+      "id": "0903-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 60.1
+        }
+      ],
+      "items": [
+        {
+          "name": "하양허브",
+          "rate": 45.8
+        },
+        {
+          "name": "기합의띠",
+          "rate": 26.8
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 13.5
+        },
+        {
+          "name": "구애스카프",
+          "rate": 4.8
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 1.7
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.2
+        },
+        {
+          "name": "전기구슬",
+          "rate": 1.1
+        },
+        {
+          "name": "검은띠",
+          "rate": 0.6
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.6
+        },
+        {
+          "name": "독바늘",
+          "rate": 0.6
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "포푸니크",
+      "usage_rate": 4.17
+    },
+    {
+      "id": "0748-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 28.0
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 61.5
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 13.1
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 6.3
+        },
+        {
+          "name": "반짝가루",
+          "rate": 3.6
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 1.7
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.8
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.6
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.4
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.3
+        },
+        {
+          "name": "초나열매",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "더시마사리",
+      "usage_rate": 3.79
+    },
+    {
+      "id": "0911-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 67.3
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 37.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 24.9
+        },
+        {
+          "name": "수불열매",
+          "rate": 4.7
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.5
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 2.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.9
+        },
+        {
+          "name": "목탄",
+          "rate": 1.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.4
+        },
+        {
+          "name": "마코열매",
+          "rate": 0.7
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.6
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "라우드본",
+      "usage_rate": 3.79
+    },
+    {
+      "id": "0752-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 52.6
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 51.3
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 19.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 8.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 5.0
+        },
+        {
+          "name": "리샘열매",
+          "rate": 4.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 3.9
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 3.5
+        },
+        {
+          "name": "루미열매",
+          "rate": 1.0
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.7
+        },
+        {
+          "name": "초나열매",
+          "rate": 0.6
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "깨비물거미",
+      "usage_rate": 3.6
+    },
+    {
+      "id": "0143-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 43.2
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 51.4
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 15.6
+        },
+        {
+          "name": "유루열매",
+          "rate": 12.4
+        },
+        {
+          "name": "로플열매",
+          "rate": 9.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 4.2
+        },
+        {
+          "name": "실크스카프",
+          "rate": 3.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.8
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.2
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "잠만보",
+      "usage_rate": 3.6
+    },
+    {
+      "id": "0939-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 51.1
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 36.4
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 34.3
+        },
+        {
+          "name": "자석",
+          "rate": 12.8
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 11.5
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.2
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.9
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.9
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.7
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.2
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "찌리배리",
+      "usage_rate": 3.41
+    },
+    {
+      "id": "0279-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 39.0
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 37.9
+        },
+        {
+          "name": "기합의띠",
+          "rate": 33.8
+        },
+        {
+          "name": "구애스카프",
+          "rate": 5.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 4.6
+        },
+        {
+          "name": "초나열매",
+          "rate": 3.5
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 2.9
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 2.8
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.9
+        },
+        {
+          "name": "예리한부리",
+          "rate": 1.7
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "패리퍼",
+      "usage_rate": 3.41
+    },
+    {
+      "id": "0154-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 88.1
+        }
+      ],
+      "items": [
+        {
+          "name": "메가니움나이트",
+          "rate": 98.9
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "망나뇽나이트",
+          "rate": 0.0
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.0
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.0
+        },
+        {
+          "name": "팬텀나이트",
+          "rate": 0.0
+        },
+        {
+          "name": "이상해꽃나이트",
+          "rate": 0.0
+        },
+        {
+          "name": "기적의씨",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "메가니움",
+      "usage_rate": 3.41
+    },
+    {
+      "id": "0479-02",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 44.2
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 43.5
+        },
+        {
+          "name": "구애스카프",
+          "rate": 28.9
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 14.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 3.5
+        },
+        {
+          "name": "자석",
+          "rate": 2.1
+        },
+        {
+          "name": "유루열매",
+          "rate": 1.9
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.2
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.0
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 1.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.9
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "로토무",
+      "usage_rate": 3.03
+    },
+    {
+      "id": "0478-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 72.4
+        }
+      ],
+      "items": [
+        {
+          "name": "눈여아나이트",
+          "rate": 95.6
+        },
+        {
+          "name": "기합의띠",
+          "rate": 2.0
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.7
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "눈설왕나이트",
+          "rate": 0.2
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.2
+        },
+        {
+          "name": "녹지않는얼음",
+          "rate": 0.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "눈여아",
+      "usage_rate": 3.03
+    },
+    {
+      "id": "0700-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 58.6
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 40.8
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 38.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 11.8
+        },
+        {
+          "name": "리샘열매",
+          "rate": 2.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.7
+        },
+        {
+          "name": "바리비열매",
+          "rate": 1.4
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.7
+        },
+        {
+          "name": "유루열매",
+          "rate": 0.7
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.7
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.4
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "님피아",
+      "usage_rate": 2.84
+    },
+    {
+      "id": "0248-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 49.5
+        }
+      ],
+      "items": [
+        {
+          "name": "마기라스나이트",
+          "rate": 53.0
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 12.0
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 10.2
+        },
+        {
+          "name": "로플열매",
+          "rate": 7.4
+        },
+        {
+          "name": "리샘열매",
+          "rate": 4.5
+        },
+        {
+          "name": "기합의띠",
+          "rate": 2.9
+        },
+        {
+          "name": "유루열매",
+          "rate": 2.4
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.9
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.5
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 0.8
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "마기라스",
+      "usage_rate": 2.65
+    },
+    {
+      "id": "0282-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 69.2
+        }
+      ],
+      "items": [
+        {
+          "name": "가디안나이트",
+          "rate": 80.0
+        },
+        {
+          "name": "구애스카프",
+          "rate": 9.6
+        },
+        {
+          "name": "기합의띠",
+          "rate": 4.4
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 1.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.6
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.6
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 0.5
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.4
+        },
+        {
+          "name": "바리비열매",
+          "rate": 0.3
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "가디안",
+      "usage_rate": 2.65
+    },
+    {
+      "id": "0395-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 30.1
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 33.9
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 24.5
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 22.3
+        },
+        {
+          "name": "로플열매",
+          "rate": 8.7
+        },
+        {
+          "name": "기합의띠",
+          "rate": 3.3
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.6
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 1.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.0
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.7
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.7
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "엠페르트",
+      "usage_rate": 2.46
+    },
+    {
+      "id": "0071-00",
+      "moves": [],
+      "abilities": [],
+      "natures": [
+        {
+          "name": ")",
+          "rate": 27.0
+        }
+      ],
+      "items": [
+        {
+          "name": "우츠보트나이트",
+          "rate": 98.0
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.3
+        },
+        {
+          "name": "하양허브",
+          "rate": 0.2
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.2
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.1
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.1
+        },
+        {
+          "name": "기적의씨",
+          "rate": 0.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.1
+        },
+        {
+          "name": "독바늘",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "우츠보트",
+      "usage_rate": 2.27
+    }
+  ],
+  "source": "champs.pokedb.tokyo"
+}
