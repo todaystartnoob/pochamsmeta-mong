@@ -18,7 +18,7 @@
       padding: 0 32px; box-shadow: 0 2px 10px rgba(0,0,0,.12);
       position: relative; z-index: 20;
     }
-    .nav-logo { font-size: 17px; font-weight: 700; color: #333; }
+    .nav-logo { display:flex;align-items:center; } .nav-logo img { height:38px;object-fit:contain; }
     .nav-links { display: flex; gap: 6px; }
     .nav-links a {
       text-decoration: none; color: #444; font-size: 14px;
@@ -105,7 +105,7 @@
 <body>
 
 <nav class="navbar">
-  <div class="nav-logo">포챔스메타몽</div>
+  <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
     <a href="index.html">파티 구성</a>
     <a href="pokemon-box.html" class="active">포켓몬 박스</a>

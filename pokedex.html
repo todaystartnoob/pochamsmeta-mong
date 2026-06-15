@@ -26,7 +26,7 @@
       position: relative;
       z-index: 20;
     }
-    .nav-logo { font-size: 17px; font-weight: 700; color: #333; }
+    .nav-logo { display:flex;align-items:center; } .nav-logo img { height:38px;object-fit:contain; }
     .nav-links { display: flex; gap: 6px; }
     .nav-links a {
       text-decoration: none; color: #444; font-size: 14px;
@@ -201,7 +201,7 @@
 <body>
 
 <nav class="navbar">
-  <div class="nav-logo">포챔스메타몽</div>
+  <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
     <a href="index.html">파티 구성</a>
     <a href="pokemon-box.html">포켓몬 박스</a>
@@ -258,7 +258,7 @@
   }
 
   let dexMode  = 'all';
-  let dexType  = null;
+  let dexTypes = []; // max 2, queue order
   let dexQuery = '';
   let dexMega  = false;
 
@@ -285,7 +285,11 @@
     let list = POKEMON_DATA;
     if (dexMode === 'ingame') list = list.filter(p => p.inGame);
     if (dexMega) list = list.filter(p => p.form === '메가진화');
-    if (dexType) list = list.filter(p => p.type1 === dexType || p.type2 === dexType);
+    if (dexTypes.length === 1) list = list.filter(p => p.type1 === dexTypes[0] || p.type2 === dexTypes[0]);
+    else if (dexTypes.length === 2) list = list.filter(p =>
+      (p.type1 === dexTypes[0] || p.type2 === dexTypes[0]) &&
+      (p.type1 === dexTypes[1] || p.type2 === dexTypes[1])
+    );
     if (dexQuery) list = list.filter(p => p.name.includes(dexQuery));
     return list;
   }
@@ -382,12 +386,32 @@
     renderGrid();
   });
 
+  function syncTypeButtons() {
+    document.querySelectorAll('#typeFilter .f-btn').forEach(b => {
+      b.classList.toggle('on', dexTypes.includes(b.dataset.type) || (b.dataset.type === '' && dexTypes.length === 0));
+    });
+  }
+
   document.getElementById('typeFilter').addEventListener('click', e => {
     const btn = e.target.closest('.f-btn[data-type]');
     if (!btn) return;
-    document.querySelectorAll('#typeFilter .f-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    dexType = btn.dataset.type || null;
+    const t = btn.dataset.type; // '' = 전체
+    if (t === '') {
+      dexTypes = [];
+    } else {
+      const idx = dexTypes.indexOf(t);
+      if (idx !== -1) {
+        // 이미 선택된 타입 → 제거
+        dexTypes.splice(idx, 1);
+      } else if (dexTypes.length < 2) {
+        dexTypes.push(t);
+      } else {
+        // 2개 이미 선택 → 가장 먼저 고른 것 제거 후 새 타입 추가
+        dexTypes.shift();
+        dexTypes.push(t);
+      }
+    }
+    syncTypeButtons();
     renderGrid();
   });
 

@@ -25,7 +25,7 @@
 
     /* ── NAVBAR ── */
     .navbar{height:54px;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 10px rgba(0,0,0,.12);position:relative;z-index:20;}
-    .nav-logo{font-size:17px;font-weight:700;color:#333;}
+    .nav-logo{display:flex;align-items:center;}.nav-logo img{height:38px;object-fit:contain;}
     .nav-links{display:flex;gap:6px;}
     .nav-links a{text-decoration:none;color:#444;font-size:14px;padding:5px 14px;border-radius:6px;transition:background .2s,color .2s;}
     .nav-links a:hover{background:#ede0f5;color:var(--accent);}
@@ -34,11 +34,38 @@
 
     /* ── APP BODY ── */
     .app-wrap{display:flex;flex-direction:column;height:calc(100vh - 54px);}
-    .app-body{display:flex;flex:0 0 76%;min-height:0;padding:10px 12px;gap:10px;overflow:hidden;}
-    .rec-panel{flex:1;background:var(--card-bg);display:flex;flex-direction:column;padding:10px 14px;gap:8px;overflow:hidden;border-radius:14px;margin:0 12px 10px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease .15s,transform .3s ease .15s;}
-    .rec-panel.visible{opacity:1;pointer-events:all;transform:translateY(0);}
-    .rec-title{font-size:12px;font-weight:700;color:#7060a0;padding-bottom:6px;border-bottom:1px solid #e0d0f0;letter-spacing:.4px;flex-shrink:0;}
-    .rec-list{display:flex;flex-direction:row;gap:7px;overflow-x:auto;overflow-y:hidden;flex:1;align-items:center;padding-bottom:4px;}
+    .app-body{display:flex;flex:1;min-height:0;padding:10px 12px;gap:10px;overflow:hidden;}
+    .rec-panel{flex:0 0 230px;background:var(--card-bg);display:flex;flex-direction:column;padding:8px 0 10px;gap:6px;overflow:hidden;border-radius:14px;margin:0 12px 10px;opacity:0;pointer-events:none;transform:translateY(10px);transition:flex-basis .25s ease,opacity .18s ease,transform .18s ease;}
+    .rec-panel.visible{opacity:1;pointer-events:all;transform:translateY(0);transition:flex-basis .25s ease,opacity .3s ease .15s,transform .3s ease .15s;}
+    .rec-panel.collapsed{flex-basis:36px;}
+    /* ── REC CARDS V2 ── */
+    .rec-list::after{content:'';flex-shrink:0;width:7px;display:block;}
+    .rcv-card{background:var(--chart-bg);border:1px solid #3a2a5a;border-radius:10px;padding:9px 12px 12px;flex-shrink:0;width:320px;display:flex;flex-direction:column;gap:5px;transition:border-color .15s,box-shadow .15s;}
+    .rcv-card:hover{border-color:#7050a8;box-shadow:0 2px 12px rgba(100,60,180,.2);}
+    .rcv-head{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+    .rcv-name{font-size:12px;font-weight:700;color:#e8e0ff;margin-right:2px;flex-shrink:0;}
+    .rcv-chip{font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+    .rcv-rank{background:#2a1a40;color:#9080c0;border:1px solid #4a3a6a;}
+    .rcv-score{background:#5030a0;color:#fff;}
+    .rcv-tag{background:#1a2a3a;color:#70b8e8;border:1px solid #2a4a6a;}
+    .rcv-body{display:flex;align-items:center;gap:8px;}
+    .rcv-sprite{width:50px;height:50px;image-rendering:pixelated;object-fit:contain;flex-shrink:0;}
+    .rcv-stats-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3px 5px;}
+    .rcv-stat{background:rgba(255,255,255,.04);border-radius:5px;padding:4px 6px;}
+    .rcv-stat-lbl{font-size:7px;color:#6858a0;margin-bottom:1px;}
+    .rcv-stat-val{font-size:9.5px;font-weight:600;color:#c8c0e8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .rcv-spd{color:#f0e8ff!important;font-size:12px!important;}
+    .rcv-reason{font-size:8.5px;color:#9080b8;padding:1px 0;}
+    .rcv-reason span{color:#c4a8e8;font-weight:700;}
+    .rcv-bottom{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding-top:6px;border-top:1px solid #2a1a48;margin-top:auto;}
+    .rcv-sc{font-size:7.5px;color:#6a5a88;background:#1e1430;border-radius:3px;padding:2px 5px;}
+    .rcv-add-btn{margin-left:auto;font-size:9px;font-weight:700;padding:4px 12px;border:1.5px solid #6050a0;border-radius:5px;background:transparent;color:#b0a0d8;cursor:pointer;font-family:inherit;transition:background .12s,color .12s;flex-shrink:0;}
+    .rcv-add-btn:hover{background:#5030a0;color:#fff;border-color:#8060b8;}
+    .rec-toggle-chevron{margin-left:auto;font-size:9px;transition:transform .25s ease;line-height:1;color:#a090c8;}
+    .rec-panel.collapsed .rec-toggle-chevron{transform:rotate(180deg);}
+    .rec-title{font-size:12px;font-weight:700;color:#7060a0;padding:0 14px 6px;border-bottom:1px solid #e0d0f0;letter-spacing:.4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;user-select:none;}
+    .rec-title:hover .rec-toggle-chevron{color:#7040a0;}
+    .rec-list{display:flex;flex-direction:row;gap:7px;overflow-x:auto;overflow-y:hidden;flex:1;align-items:stretch;padding:2px 0 4px 14px;}
     .rec-list::-webkit-scrollbar{height:4px;}
     .rec-list::-webkit-scrollbar-thumb{background:rgba(123,63,160,.25);border-radius:2px;}
     .rec-card{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px 5px;border-radius:14px;background:rgba(255,255,255,.7);cursor:pointer;flex-shrink:0;width:72px;transition:background .14s,transform .14s;border:2px solid transparent;}
@@ -67,32 +94,57 @@
     /* ── AD PANELS ── */
     .ad-panel{display:none;background:#c8c8c8;width:190px;flex-shrink:0;}
     /* ── BIG MODE (default state) ── */
-    .app-body.big-mode{position:relative;flex:1;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:80px;padding:20px 230px 80px;box-sizing:border-box;}
+    .app-body.big-mode{flex:0 0 auto;display:flex;flex-direction:row;align-items:stretch;padding:10px 8px;gap:8px;box-sizing:border-box;}
     #appBody.big-mode ~ #recPanel{display:none;}
     .app-body.big-mode > .detail-area,
     .app-body.big-mode > .calc-panel,
     .app-body.big-mode > .analysis-sidebar{display:none;}
-    .app-body.big-mode .ad-panel{display:block;position:absolute;top:6%;bottom:6%;width:190px;border-radius:10px;}
-    .app-body.big-mode #leftAd{left:10px;}
-    .app-body.big-mode #rightAd{right:10px;}
-    .app-body.big-mode #partySidebar{display:flex;flex-direction:row;flex-wrap:wrap;width:340px;gap:10px;justify-content:center;align-content:center;position:relative;}
-    .app-body.big-mode .party-slot{width:160px;height:160px;border-radius:14px;}
-    .app-body.big-mode .party-slot:hover{transform:scale(1.05);box-shadow:0 6px 22px rgba(0,0,0,.2);background:#fff;}
-    .app-body.big-mode .slot-img{width:130px;height:130px;}
-    .app-body.big-mode .slot-plus{font-size:44px;}
+    /* ad panels */
+    .app-body.big-mode .ad-panel{display:flex;width:150px;flex-shrink:0;border-radius:10px;}
+    /* party: narrow vertical column */
+    .app-body.big-mode #partySidebar{display:flex;flex-direction:column;width:112px;flex-shrink:0;gap:5px;padding:6px;align-items:center;}
+    .app-body.big-mode .party-slot{width:94px;height:94px;border-radius:10px;}
+    .app-body.big-mode .party-slot:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(0,0,0,.2);background:#fff;}
+    .app-body.big-mode .slot-img{width:78px;height:78px;}
+    .app-body.big-mode .slot-plus{font-size:28px;}
     .app-body.big-mode .party-action-btns{display:none;}
     /* ── ENEMY SIDEBAR ── */
-    .enemy-sidebar{display:none;flex-wrap:wrap;width:340px;gap:10px;justify-content:center;align-content:center;flex-shrink:0;}
-    .app-body.big-mode #enemySidebar{display:flex;position:relative;}
-    .enemy-slot{width:160px;height:160px;background:var(--slot-bg);border-radius:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
-    .enemy-slot:hover{transform:scale(1.05);box-shadow:0 6px 22px rgba(0,0,0,.2);background:#fff;}
+    .enemy-sidebar{display:none;flex-direction:column;width:112px;flex-shrink:0;gap:5px;padding:6px;align-items:center;margin-left:auto;}
+    .app-body.big-mode #enemySidebar{display:flex;}
+    .enemy-slot{width:94px;height:94px;background:var(--slot-bg);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
+    .enemy-slot:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(0,0,0,.2);background:#fff;}
     .enemy-slot:hover .slot-del.on{display:flex;}
     /* ── BIG MODE BUTTONS ── */
-    .big-mode-btns{position:absolute;top:calc(100% + 12px);left:0;width:340px;gap:8px;}
-    .big-act-btn{flex:1;padding:11px 0;border-radius:10px;border:none;font-size:12px;font-weight:700;cursor:pointer;transition:filter .15s;}
+    .big-mode-btns{display:flex;flex-direction:column;gap:4px;width:100%;padding-top:4px;}
+    .big-act-btn{width:100%;padding:7px 2px;border-radius:8px;border:none;font-size:10px;font-weight:700;cursor:pointer;transition:filter .15s;white-space:nowrap;text-align:center;}
     .big-act-btn:hover{filter:brightness(1.1);}
     .big-act-btn.load{background:var(--accent);color:#fff;}
     .big-act-btn.clear{background:#e8def8;color:#6040a0;}
+    /* ── BIG MODE CHART PANELS ── */
+    .big-mode-chart{display:none;background:var(--chart-bg);border-radius:12px;padding:10px 12px;overflow-y:auto;flex-shrink:0;scrollbar-width:none;transition:opacity .25s ease;}
+    .big-mode-chart::-webkit-scrollbar{display:none;}
+    .app-body.big-mode #bigPartyChart{display:flex;flex-direction:column;flex:1;min-width:0;}
+    .app-body.big-mode #bigEnemyChart{display:flex;flex-direction:column;flex:1;min-width:0;}
+    .big-chart-title{font-size:11px;font-weight:700;color:#9080c0;padding-bottom:5px;border-bottom:1px solid #332a50;margin-bottom:6px;letter-spacing:.4px;flex-shrink:0;}
+    /* scale-up ptc inside big-mode charts */
+    .big-mode-chart .ptc-lbl{flex:0 0 38px;font-size:10px;height:20px;line-height:20px;padding:0 3px;}
+    .big-mode-chart .ptc-cell{height:20px;font-size:10px;}
+    .big-mode-chart .ptc-th img{width:26px;height:26px;}
+    .big-mode-chart .ptc-header{padding-left:40px;margin-bottom:4px;}
+    .big-mode-chart .ptc-type-row{margin-bottom:2px;}
+    /* party chart summary */
+    .pcs-wrap{margin-top:8px;padding-top:8px;border-top:1px solid #332a50;flex-shrink:0;display:flex;flex-direction:column;gap:5px;}
+    .pcs-row{display:flex;align-items:flex-start;gap:6px;}
+    .pcs-lbl{font-size:9px;font-weight:700;color:#fff;padding:2px 6px;border-radius:4px;flex-shrink:0;margin-top:2px;min-width:28px;text-align:center;line-height:1.4;}
+    .pcs-lbl.pcs-weak{background:#c62828;}
+    .pcs-lbl.pcs-strong{background:#2e7d32;}
+    .pcs-lbl.pcs-neutral{background:#546e7a;}
+    .pcs-badges{display:flex;flex-wrap:wrap;gap:3px;}
+    .pcs-tbadge{font-size:9px;font-weight:700;color:#fff;padding:2px 6px;border-radius:4px;}
+    .pcs-none{font-size:9px;color:#6a5a90;margin-top:3px;}
+    /* ── BOTTOM AD ── */
+    .bottom-ad-panel{display:none;min-height:72px;background:#c8c8c8;border-radius:10px;margin:0 8px 8px;flex:1;}
+    #appBody.big-mode ~ .bottom-ad-panel{display:block;}
 
     /* ── DETAIL OVERLAY ── */
     .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:4;opacity:0;pointer-events:none;transition:opacity .3s ease;}
@@ -103,6 +155,8 @@
     .detail-area.visible{opacity:1;transform:translateX(0);pointer-events:all;}
     .party-sidebar{position:relative;z-index:5;}
     .detail-card{background:var(--card-bg);border-radius:14px;padding:12px 18px 14px;box-shadow:0 4px 22px rgba(0,0,0,.13);min-height:100%;}
+    .detail-charts{display:flex;flex-direction:row;gap:8px;padding:10px 0 14px;}
+    .detail-charts .analysis-box{flex:1;min-width:0;}
     .card-topbar{display:flex;align-items:center;margin-bottom:8px;gap:5px;}
     .btn-box-action{background:#e8d8f8;border:none;padding:3px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:#5a2d7a;transition:background .15s;font-family:inherit;}
     .btn-box-action:hover{background:#d0b8f0;}
@@ -199,7 +253,7 @@
     .type-badge{padding:2px 7px;border-radius:4px;font-size:10px;color:#fff;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.3);}
 
     /* ── CALC PANELS ── */
-    .calc-panel{flex:1;background:var(--card-bg);border-radius:14px;padding:12px 14px;overflow-y:auto;display:flex;flex-direction:column;min-width:0;box-shadow:0 4px 22px rgba(0,0,0,.08);opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .3s ease,transform .3s ease;}
+    .calc-panel{flex:1;background:var(--card-bg);border-radius:14px;padding:12px 14px;overflow-y:auto;scrollbar-gutter:stable;display:flex;flex-direction:column;min-width:0;box-shadow:0 4px 22px rgba(0,0,0,.08);opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .3s ease,transform .3s ease;}
     .calc-panel.visible{opacity:1;pointer-events:all;transform:translateY(0);}
     .calc-panel.speed-calc{flex:0 0 275px;scrollbar-width:thin;scrollbar-color:rgba(140,90,180,.25) transparent;}
 .calc-panel.speed-calc::-webkit-scrollbar{width:4px;}
@@ -301,11 +355,52 @@
     .dc-val-lbl{font-size:9px;color:#9070b0;font-weight:700;}
     .dc-val-num{font-size:11px;font-weight:900;color:#c4a8e8;}
 
+    /* ── SLOT TOOLTIP ── */
+    .slot-tooltip{position:fixed;z-index:200;background:rgba(18,10,34,.97);border:1px solid #6040a0;border-radius:10px;padding:9px 11px;width:230px;font-size:10px;color:#c8c0e8;pointer-events:none;opacity:0;transition:opacity .15s ease;box-shadow:0 6px 24px rgba(0,0,0,.55);line-height:1.45;}
+    .slot-tooltip.visible{opacity:1;}
+    .tt-header{display:flex;align-items:center;gap:4px;margin-bottom:6px;flex-wrap:wrap;}
+    .tt-pkname{font-size:11px;font-weight:700;color:#e8e0ff;flex-shrink:0;}
+    .tt-type{font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;color:#fff;flex-shrink:0;}
+    .tt-divider{border:none;border-top:1px solid #3a2860;margin:5px 0;}
+    .tt-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:3px;}
+    .tt-lbl{color:#8070b0;flex-shrink:0;}
+    .tt-ev{color:#a090c8;margin-bottom:3px;}
+    .tt-move{display:flex;align-items:center;gap:4px;padding:2px 0;}
+    .tt-mname{flex:1;color:#d0c8f0;}
+    .tt-pow{font-size:9px;font-weight:700;color:#c4a8e8;margin-left:auto;flex-shrink:0;}
+    .tt-cat{font-size:8px;flex-shrink:0;}
+    .tt-bottom{display:flex;gap:8px;flex-wrap:wrap;padding-top:5px;border-top:1px solid #3a2860;margin-top:4px;color:#a090c8;}
+    .tt-bottom b{color:#d8d0f8;}
+    .tt-meta-label{font-size:9px;color:#8070b0;font-weight:700;letter-spacing:.3px;margin-bottom:3px;text-transform:uppercase;}
+    .tt-sample-row{margin-bottom:3px;color:#a090c8;}
+    .tt-moves-enemy{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0;}
+    .tt-movename{background:#2a1a48;border-radius:4px;padding:2px 5px;font-size:9px;color:#c0b0e0;}
+    .tt-base-stats{color:#a090c8;margin-bottom:5px;}
+    .tt-bst{color:#7060a0;}
+    .tt-spd-range{margin-top:5px;padding-top:5px;border-top:1px solid #3a2860;color:#a090c8;}
+    .tt-spd-range b{color:#f0e8ff;}
     /* ── ANALYSIS SIDEBAR ── */
-    .analysis-sidebar{width:350px;flex-shrink:0;display:flex;flex-direction:row;gap:8px;overflow:hidden;position:relative;z-index:5;opacity:0;pointer-events:none;transform:translateX(16px);transition:opacity .3s ease .1s,transform .3s ease .1s;}
+    .analysis-sidebar{width:350px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;position:relative;z-index:5;opacity:0;pointer-events:none;transform:translateX(16px);transition:opacity .3s ease .1s,transform .3s ease .1s;}
     .analysis-sidebar.visible{opacity:1;pointer-events:all;transform:translateX(0);}
-    .speed-rank-col{flex:0 0 160px;min-width:0;display:flex;flex-direction:column;overflow-y:auto;background:var(--chart-bg);border-radius:10px;padding:10px 12px;}
-    .speed-rank-col .sr-title{font-size:11px;font-weight:700;color:#9080c0;padding-bottom:5px;border-bottom:1px solid #332a50;margin-bottom:6px;letter-spacing:.4px;}
+    .speed-rank-col{flex:1;min-width:0;display:flex;flex-direction:column;overflow-y:auto;background:var(--chart-bg);border-radius:10px;padding:10px 12px;}
+    .speed-rank-col .sr-title{font-size:11px;font-weight:700;color:#9080c0;padding-bottom:5px;border-bottom:1px solid #332a50;margin-bottom:4px;letter-spacing:.4px;}
+    .sr-header{display:flex;align-items:center;gap:3px;padding:0 4px 4px;border-bottom:1px solid #2a2040;margin-bottom:4px;}
+    .sr-hd-name{flex:1;min-width:0;}
+    .sr-hd-ev{font-size:8px;font-weight:700;color:#6a5a90;white-space:nowrap;flex-shrink:0;}
+    .sr-hd-spd{width:26px;font-size:8px;font-weight:700;color:#6a5a90;text-align:right;flex-shrink:0;}
+    .sr-item{display:flex;align-items:center;gap:3px;padding:5px 4px;border-radius:6px;min-height:32px;}
+    .sr-item.sr-me{background:rgba(155,89,182,.25);outline:1.5px solid #9b59b6;margin:2px 0;}
+    .sr-sprite{width:26px;height:26px;image-rendering:pixelated;object-fit:contain;flex-shrink:0;}
+    .sr-mega{font-size:7px;font-weight:800;color:#fff;background:#ab47bc;border-radius:3px;padding:1px 3px;flex-shrink:0;line-height:1.3;}
+    .sr-name-wrap{flex:1;display:flex;align-items:center;gap:3px;min-width:0;overflow:hidden;}
+    .sr-name{font-size:9px;color:#9080c0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+    .sr-item.sr-me .sr-name{color:#f0e8ff;font-weight:700;}
+    .sr-ev{font-size:8px;color:#7a6a9a;flex-shrink:0;white-space:nowrap;}
+    .sr-item.sr-me .sr-ev{color:#c4a8e8;}
+    .sr-rank{width:18px;font-size:8px;color:#6a5a90;text-align:right;flex-shrink:0;font-weight:600;}
+    .sr-item.sr-me .sr-rank{color:#c4a8e8;}
+    .sr-spd{width:26px;font-size:9px;font-weight:700;color:#b0a0d0;text-align:right;flex-shrink:0;}
+    .sr-item.sr-me .sr-spd{color:#fff;}
     .type-chart-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;overflow-y:auto;}
     .analysis-box{background:var(--chart-bg);border-radius:10px;padding:10px 12px;}
 .ptc-wrap{margin-top:0;}
@@ -427,21 +522,16 @@
     }
     @media(max-width:1300px){
       .analysis-sidebar{width:270px;}
-      .speed-rank-col{display:none;}
-      .type-chart-col{width:auto;flex:1;}
       .calc-panel.speed-calc{flex:0 0 190px;}
     }
     @media(max-width:1100px){
       .calc-panel{display:none;}
-      .analysis-sidebar{width:240px;flex-direction:column;}
-      .type-chart-col{width:auto;flex:1;}
+      .analysis-sidebar{width:240px;}
     }
     @media(max-width:960px){
-      .analysis-sidebar{display:none;position:fixed;top:54px;right:0;height:calc(100vh - 54px);width:260px;background:rgba(210,195,230,.98);padding:12px;z-index:15;border-radius:14px 0 0 14px;box-shadow:-4px 0 20px rgba(0,0,0,.15);overflow-y:auto;transform:translateX(100%);flex-direction:column;}
+      .analysis-sidebar{display:none;position:fixed;top:54px;right:0;height:calc(100vh - 54px);width:300px;background:rgba(210,195,230,.98);padding:12px;z-index:15;border-radius:14px 0 0 14px;box-shadow:-4px 0 20px rgba(0,0,0,.15);overflow-y:auto;flex-direction:column;}
       .analysis-sidebar.visible{display:flex;opacity:1;transform:translateX(0);}
       .analysis-sidebar.panel-open{transform:translateX(0);}
-      .speed-rank-col{display:none;}
-      .type-chart-col{width:auto;flex:1;}
       .nav-ana-toggle{display:block;}
     }
     @media(max-width:768px){
@@ -467,7 +557,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-  <div class="nav-logo">포챔스메타몽</div>
+  <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
     <a href="index.html" class="active">파티 구성</a>
     <a href="pokemon-box.html">포켓몬 박스</a>
@@ -485,6 +575,7 @@
 <div class="app-body" id="appBody">
   <div class="ad-panel" id="leftAd"></div>
   <aside class="party-sidebar" id="partySidebar"></aside>
+  <div id="bigPartyChart" class="big-mode-chart"></div>
   <main class="detail-area" id="detailArea">
     <div class="detail-card" id="detailCard"></div>
   </main>
@@ -499,30 +590,27 @@
   <aside class="analysis-sidebar" id="analysisSidebar">
     <div class="speed-rank-col">
       <div class="sr-title">스피드 샘플</div>
+      <div class="sr-header">
+        <span class="sr-hd-name"></span>
+        <span class="sr-hd-ev">노력치</span>
+        <span class="sr-hd-spd">실수치</span>
+      </div>
       <div id="speedRankList"></div>
     </div>
-    <div class="type-chart-col">
-      <div class="analysis-box">
-        <h3>방어 상성</h3>
-        <div id="anaDefChart"></div>
-      </div>
-      <div class="analysis-box">
-        <h3>공격 상성</h3>
-        <div id="anaAtkChart"></div>
-      </div>
-      <div class="analysis-box" id="anaEvalCard" style="flex:1;">
-        <h3>파티 상성</h3>
-        <div id="anaPartyChart"><span class="chart-empty">—</span></div>
-      </div>
-    </div>
   </aside>
+  <div id="bigEnemyChart" class="big-mode-chart"></div>
   <aside class="enemy-sidebar" id="enemySidebar"></aside>
   <div class="ad-panel" id="rightAd"></div>
 </div>
+<div id="slotTooltip" class="slot-tooltip"></div>
 <div class="rec-panel" id="recPanel">
-  <div class="rec-title">추천 포켓몬</div>
+  <div class="rec-title" id="recToggleBtn">
+    추천 포켓몬
+    <span class="rec-toggle-chevron">▲</span>
+  </div>
   <div class="rec-list" id="recPokemonList"></div>
 </div>
+<div class="bottom-ad-panel"></div>
 </div>
 
 <!-- POKEMON MODAL -->
@@ -631,6 +719,8 @@
 <script src="data.js"></script>
 <script src="learnset-data.js"></script>
 <script src="pochams-items.js"></script>
+<script src="meta-usage-data.js"></script>
+<script src="meta-usage-sets.js"></script>
 <script>
 /* ════════════════════════════
    CONSTANTS
@@ -731,6 +821,7 @@ function newSlot() { return {pokemon:null,item:null,ability:null,nature:null,mov
 const party = Array.from({length: PARTY_SIZE}, newSlot);
 let selectedSlot = -1;
 let modalSlot    = -1;
+let _modalSlotWasEmpty = false;
 let calcModalCallback = null;
 let editMoveIdx  = -1;
 let pokeFilter   = 'all';
@@ -763,10 +854,8 @@ function statColor(v) {
 }
 
 function calcStat(base, ev, isHP, natM=1) {
-  /* 포챔스 Lv.50: EV 직접 덧셈, max 32, total 66 */
-  const inner = Math.floor((2*base + 31 + (ev||0)) / 2);
-  const raw   = isHP ? inner + 60 : inner + 5;
-  return isHP ? raw : Math.floor(raw * natM);
+  if (isHP) return base + 75 + (ev||0);
+  return Math.floor((base + 20 + (ev||0)) * natM);
 }
 
 function totalEVs(evs) {
@@ -807,6 +896,12 @@ function getItemStatMult(item, pk, statKey) {
     return (statKey==='C'||statKey==='D') ? 1.5 : 1;
   /* 구애스카프 → 스피드 ×1.5 */
   if (n==='구애스카프' && statKey==='S') return 1.5;
+  /* 검은철구 → 스피드 ×0.5 */
+  if (n==='검은철구'   && statKey==='S') return 0.5;
+  /* 교정깁스 → 스피드 ×0.5 */
+  if (n==='교정깁스'   && statKey==='S') return 0.5;
+  /* 스피드파우더 → 스피드 ×2 */
+  if (n==='스피드파우더' && statKey==='S') return 2;
   return 1;
 }
 
@@ -1334,6 +1429,143 @@ function applyFormChange(slotIdx) {
 }
 
 /* ════════════════════════════
+   SLOT TOOLTIPS
+════════════════════════════ */
+function showSlotTooltip(anchorEl, html) {
+  const tt = document.getElementById('slotTooltip');
+  if (!tt || !html) return;
+  tt.innerHTML = html;
+  tt.classList.remove('visible');
+  const rect = anchorEl.getBoundingClientRect();
+  const goRight = (rect.left + rect.width / 2) < window.innerWidth / 2;
+  if (goRight) { tt.style.left = (rect.right + 10) + 'px'; tt.style.right = 'auto'; }
+  else          { tt.style.left = 'auto'; tt.style.right = (window.innerWidth - rect.left + 10) + 'px'; }
+  tt.style.top = rect.top + 'px'; tt.style.bottom = 'auto';
+  requestAnimationFrame(() => {
+    const tr = tt.getBoundingClientRect();
+    if (tr.bottom > window.innerHeight - 8) tt.style.top = Math.max(8, window.innerHeight - tr.height - 8) + 'px';
+    tt.classList.add('visible');
+  });
+}
+function hideSlotTooltip() {
+  const tt = document.getElementById('slotTooltip');
+  if (tt) tt.classList.remove('visible');
+}
+
+/* 메타 usage id → POKEMON_DATA 실제 폼 이름 매핑 */
+const FORM_IDX_TO_NAME = {
+  '0479-01': '히트로토무',
+  '0479-02': '워시로토무',
+  '0479-03': '프로스트로토무',
+  '0479-04': '스핀로토무',
+  '0479-05': '커트로토무',
+  '0670-05': '플라엣테(영원의꽃)',
+  '0503-01': '히스이 대검귀',
+  '0199-01': '가라르 야도킹',
+  '0706-01': '히스이 미끄래곤',
+  '0902-00': '대쓰여너♂',
+  '0902-01': '대쓰여너♀',
+  '0038-01': '알로라 나인테일',
+  '0571-01': '히스이 조로아크',
+  '0724-01': '히스이 모크나이퍼',
+  '0059-01': '히스이 윈디',
+  '0080-02': '가라르 야도란',
+};
+
+/* usage 항목에서 실제 POKEMON_DATA 폼을 찾는 헬퍼 */
+function resolveUsageForm(u) {
+  if (u.id && FORM_IDX_TO_NAME[u.id]) {
+    const mapped = POKEMON_DATA.find(p => p.name === FORM_IDX_TO_NAME[u.id]);
+    if (mapped) return mapped;
+  }
+  const direct = POKEMON_DATA.find(p => p.name === u.name && p.champions);
+  if (direct) return direct;
+  if (u.id) {
+    const dexNo = parseInt(u.id.split('-')[0]);
+    const forms = POKEMON_DATA.filter(p => p.no === dexNo && p.champions && !p.name.startsWith('메가'));
+    if (forms.length === 1) return forms[0];
+  }
+  return null;
+}
+
+function getMetaSet(pkNameOrNo) {
+  if (typeof META_USAGE_DATA === 'undefined' || typeof META_SETS_DATA === 'undefined') return null;
+  const key = 's1_single';
+  const usage = META_USAGE_DATA[key]?.usage || [];
+  const sets  = META_SETS_DATA[key]?.pokemon || [];
+  let u;
+  if (typeof pkNameOrNo === 'number') {
+    /* 덱스 번호: FORM_IDX_TO_NAME 매핑 우선, 없으면 일반 덱스 탐색 */
+    u = usage.slice(0, 50).find(u => u.id && FORM_IDX_TO_NAME[u.id] && parseInt(u.id.split('-')[0]) === pkNameOrNo)
+      || usage.slice(0, 50).find(u => u.id && parseInt(u.id.split('-')[0]) === pkNameOrNo);
+  } else {
+    /* 이름: FORM_IDX_TO_NAME 역매핑(이름→id) 먼저, 없으면 직접 이름 탐색 */
+    u = usage.slice(0, 50).find(u => u.id && FORM_IDX_TO_NAME[u.id] === pkNameOrNo)
+      || usage.slice(0, 50).find(u => u.name === pkNameOrNo);
+  }
+  if (!u) return null;
+  return sets.find(s => s.id === u.id) || null;
+}
+
+function buildMySlotTooltip(mem) {
+  const pk = mem.pokemon;
+  if (!pk) return '';
+  const evs = mem.evs || {};
+  const nature = mem.nature;
+  const moves = (mem.moves || []).filter(Boolean);
+  const speedStat = Math.floor(calcStat(pk.S, evs.S||0, false, natMult(nature,'S')) * getItemStatMult(mem.item, pk, 'S'));
+  const dur = calcDurability(pk, evs, nature, mem.item);
+  const evParts = ['H','A','B','C','D','S'].filter(s => evs[s]).map(s => `${s}:${evs[s]}`);
+  const typeBadges = [pk.type1, pk.type2].filter(Boolean)
+    .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
+  let movesHTML = '';
+  for (const mv of moves) {
+    const pow = mv.category !== '변화' ? calcDecisivePower(pk, evs, mv, nature, mem.item, mem.ability) : 0;
+    const col = mv.category==='물리'?'#e8a060':mv.category==='특수'?'#60a8e8':'#808098';
+    movesHTML += `<div class="tt-move"><span class="tt-cat" style="color:${col}">●</span><span class="tt-mname">${mv.name}</span>${pow>0?`<span class="tt-pow">${pow.toLocaleString()}</span>`:''}</div>`;
+  }
+  return `<div class="tt-header"><span class="tt-pkname">${pk.name}</span>${typeBadges}</div>` +
+    `<div class="tt-row">${mem.item?`<span><span class="tt-lbl">도구</span> ${mem.item.name}</span>`:''}${mem.ability?`<span><span class="tt-lbl">특성</span> ${mem.ability.name}</span>`:''}</div>` +
+    `<div class="tt-row">${nature?`<span class="tt-lbl">성격</span> ${nature.name}`:''}</div>` +
+    (evParts.length ? `<div class="tt-ev"><span class="tt-lbl">노력치</span> ${evParts.join(' ')}</div>` : '') +
+    (movesHTML ? `<hr class="tt-divider">${movesHTML}` : '') +
+    `<div class="tt-bottom"><span>물리내구 <b>${dur.phys.toLocaleString()}</b></span><span>특수내구 <b>${dur.spec.toLocaleString()}</b></span><span>스피드 <b>${speedStat}</b></span></div>`;
+}
+
+function buildEnemySlotTooltip(pk) {
+  if (!pk) return '';
+  const typeBadges = [pk.type1, pk.type2].filter(Boolean)
+    .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
+  const minSpd = calcStat(pk.S, 0, false, 0.9);
+  const maxSpd = calcStat(pk.S, 32, false, 1.1);
+  const spdLine = `<div class="tt-spd-range"><span class="tt-lbl">스피드</span> 최저 <b>${minSpd}</b> ~ 최속 <b>${maxSpd}</b></div>`;
+  /* 메가폼이면 base form 이름으로 메타 조회 */
+  let lookupName = pk.name;
+  if (pk.name.startsWith('메가') && pk.name !== '메가니움') {
+    const base = POKEMON_DATA.find(p => p.no === pk.no && !p.name.startsWith('메가'));
+    if (base) lookupName = base.name;
+  }
+  const ms = getMetaSet(lookupName);
+  if (ms) {
+    const natName = ms.natures?.[0]?.name || '—';
+    const itemName = ms.items?.[0]?.name || '없음';
+    const ev = ms.ev_spreads?.[0]?.evs || {};
+    const evStr = ['H','A','B','C','D','S'].filter(s => ev[s]).map(s => `${s}:${ev[s]}`).join(' ') || '미투자';
+    const mvTags = (ms.moves || []).slice(0, 4).map(m => `<span class="tt-movename">${m.name}</span>`).join('');
+    return `<div class="tt-header"><span class="tt-pkname">${pk.name}</span>${typeBadges}</div>` +
+      `<div class="tt-meta-label">주요 샘플</div>` +
+      `<div class="tt-sample-row"><span class="tt-lbl">성격</span> ${natName} &nbsp;<span class="tt-lbl">도구</span> ${itemName}</div>` +
+      `<div class="tt-sample-row"><span class="tt-lbl">노력치</span> ${evStr}</div>` +
+      `<div class="tt-moves-enemy">${mvTags}</div>` + spdLine;
+  } else {
+    const bst = pk.H + pk.A + pk.B + pk.C + pk.D + pk.S;
+    const sStr = `H:${pk.H} A:${pk.A} B:${pk.B} C:${pk.C} D:${pk.D} S:${pk.S}`;
+    return `<div class="tt-header"><span class="tt-pkname">${pk.name}</span>${typeBadges}</div>` +
+      `<div class="tt-base-stats">${sStr} <span class="tt-bst">(합계 ${bst})</span></div>` + spdLine;
+  }
+}
+
+/* ════════════════════════════
    RENDER SLOTS
 ════════════════════════════ */
 function renderSlots() {
@@ -1357,14 +1589,17 @@ function renderSlots() {
       plus.className = 'slot-plus'; plus.textContent = '+';
       slot.appendChild(plus);
     }
-    slot.addEventListener('click', () => onSlotClick(i));
+    slot.addEventListener('click', () => { hideSlotTooltip(); onSlotClick(i); });
+    if (mem.pokemon) {
+      slot.addEventListener('mouseenter', () => showSlotTooltip(slot, buildMySlotTooltip(mem)));
+      slot.addEventListener('mouseleave', hideSlotTooltip);
+    }
     sb.appendChild(slot);
   }
   const isBigMode = document.getElementById('appBody')?.classList.contains('big-mode');
   if (isBigMode) {
     const bigBtns = document.createElement('div');
     bigBtns.className = 'big-mode-btns';
-    bigBtns.style.display = 'flex';
     bigBtns.innerHTML = `
       <button class="big-act-btn load" id="bigLoadBtn">📂 파티 불러오기</button>
       <button class="big-act-btn clear" id="bigClearBtn">비우기</button>`;
@@ -1401,23 +1636,34 @@ function onSlotClick(idx) {
   else { selectedSlot=idx; localStorage.setItem('pochams_selected',idx); document.getElementById('appBody')?.classList.remove('big-mode'); renderSlots(); renderDetail(idx); showPanel(); }
 }
 
+let _hidePanelTimer = null;
+const _PANEL_IDS = ['detailArea','powerCalcPanel','speedCalcPanel','analysisSidebar','recPanel'];
+
 function showPanel() {
-  document.getElementById('appBody')?.classList.remove('big-mode');
-  requestAnimationFrame(() => {
-    document.getElementById('detailArea').classList.add('visible');
-    document.getElementById('powerCalcPanel').classList.add('visible');
-    document.getElementById('speedCalcPanel').classList.add('visible');
-    document.getElementById('analysisSidebar').classList.add('visible');
-    document.getElementById('recPanel').classList.add('visible');
-  });
+  clearTimeout(_hidePanelTimer); _hidePanelTimer = null;
+  /* 빅차트 페이드아웃 → 레이아웃 전환 → 패널 페이드인 */
+  const pc = document.getElementById('bigPartyChart');
+  const ec = document.getElementById('bigEnemyChart');
+  if (pc) pc.style.opacity = '0';
+  if (ec) ec.style.opacity = '0';
+  setTimeout(() => {
+    document.getElementById('appBody')?.classList.remove('big-mode');
+    if (pc) pc.style.opacity = '';
+    if (ec) ec.style.opacity = '';
+    requestAnimationFrame(() => {
+      _PANEL_IDS.forEach(id => document.getElementById(id)?.classList.add('visible'));
+    });
+  }, 240);
 }
 function hidePanel() {
-  document.getElementById('appBody')?.classList.add('big-mode');
-  document.getElementById('detailArea').classList.remove('visible');
-  document.getElementById('powerCalcPanel').classList.remove('visible');
-  document.getElementById('speedCalcPanel').classList.remove('visible');
-  document.getElementById('analysisSidebar').classList.remove('visible');
-  document.getElementById('recPanel').classList.remove('visible');
+  clearTimeout(_hidePanelTimer);
+  /* 패널 페이드아웃 → 레이아웃 전환 */
+  _PANEL_IDS.forEach(id => document.getElementById(id)?.classList.remove('visible'));
+  _hidePanelTimer = setTimeout(() => {
+    document.getElementById('appBody')?.classList.add('big-mode');
+    renderSlots();
+    _hidePanelTimer = null;
+  }, 300);
 }
 
 /* ════════════════════════════
@@ -1594,6 +1840,17 @@ function renderDetail(idx) {
         <div class="dur-item">특수내구 <span id="durSpec">${dur.spec.toLocaleString()}</span></div>
       </div>
     </div>
+
+    <div class="detail-charts">
+      <div class="analysis-box">
+        <h3>방어 상성</h3>
+        <div id="anaDefChart"></div>
+      </div>
+      <div class="analysis-box">
+        <h3>공격 상성</h3>
+        <div id="anaAtkChart"></div>
+      </div>
+    </div>
   `;
 
   updateAnalysis(idx);
@@ -1645,6 +1902,57 @@ function cardClickHandler(e) {
   else if (mi!==undefined)            openMoveModal(slotIdx, +mi);
 }
 
+function updateSGPanel(idx) {
+  const mem = party[idx];
+  const pk  = mem?.pokemon;
+  if (!pk) return;
+  const evs = mem.evs, nature = mem.nature;
+
+  const POW_BREAKS = [18000, 28000, 38000, 48000];
+  const DUR_BREAKS = [30000, 42500, 55000, 75000];
+  const SPD_BREAKS = [106, 136, 161, 181];
+
+  const dur = calcDurability(pk, evs, nature, mem.item);
+  const physEl = document.getElementById('durPhys');
+  const specEl = document.getElementById('durSpec');
+  if (physEl) physEl.textContent = dur.phys.toLocaleString();
+  if (specEl) specEl.textContent = dur.spec.toLocaleString();
+
+  const physMvs = (mem.moves||[]).filter(m=>m&&m.category==='물리');
+  const specMvs = (mem.moves||[]).filter(m=>m&&m.category==='특수');
+  const physPow = physMvs.length ? Math.max(...physMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
+  const specPow = specMvs.length ? Math.max(...specMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
+  const speedStat = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(mem.item, pk, 'S') * getAbilityStatMult(mem.ability, 'S'));
+
+  const physPowG = physPow>0 ? getStatGrade(physPow, POW_BREAKS) : null;
+  const specPowG = specPow>0 ? getStatGrade(specPow, POW_BREAKS) : null;
+  const physDurG = getStatGrade(dur.phys, DUR_BREAKS);
+  const specDurG = getStatGrade(dur.spec, DUR_BREAKS);
+  const speedG   = getStatGrade(speedStat, SPD_BREAKS);
+
+  const avgDur   = (dur.phys+dur.spec)/2;
+  const speedTag = speedStat>=161?'고스핏':speedStat>=136?'중스핏':'저스핏';
+  const durTag   = avgDur>=55000?'고내구':avgDur>=42500?'중내구':'저내구';
+  let roleTag;
+  if (physPow===0&&specPow===0)       roleTag='지원형';
+  else if (physPow>0&&specPow===0)    roleTag='물리 어태커';
+  else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
+  else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
+  else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
+  else                                roleTag='균형형';
+  if (avgDur>=55000&&physPow<18000&&specPow<18000) roleTag='탱커';
+
+  const arcEl = document.querySelector('.sg-archetype');
+  if (arcEl) arcEl.textContent = `${speedTag} ${durTag} ${roleTag}`;
+
+  const grades = [physPowG, physDurG, speedG, specPowG, specDurG];
+  document.querySelectorAll('.sg-val').forEach((el, i) => {
+    const g = grades[i];
+    el.className = `sg-val ${g?.cls||'sg-na'}`;
+    el.textContent = g?.label||'—';
+  });
+}
+
 function evChangeHandler(e) {
   const inp = e.target.closest('.ev-input');
   if (!inp) return;
@@ -1671,12 +1979,8 @@ function evChangeHandler(e) {
   const dispEl = document.getElementById('evTotalDisp');
   if (dispEl) dispEl.textContent = totalEVs(mem.evs);
 
-  /* update durability */
-  const dur = calcDurability(pk, mem.evs, mem.nature, mem.item);
-  const physEl = document.getElementById('durPhys');
-  const specEl = document.getElementById('durSpec');
-  if (physEl) physEl.textContent = dur.phys.toLocaleString();
-  if (specEl) specEl.textContent = dur.spec.toLocaleString();
+  /* update durability + sg panel */
+  updateSGPanel(slotIdx);
 
   /* update move decisive power */
   document.querySelectorAll('.move-power-txt').forEach((el, mi) => {
@@ -1687,6 +1991,7 @@ function evChangeHandler(e) {
   updateAnalysis(slotIdx);
   if (window.dcSyncFromSlot) window.dcSyncFromSlot(slotIdx);
   if (window.scSyncFromSlot) window.scSyncFromSlot(slotIdx);
+  renderSpeedRankList();
   saveParty();
 }
 
@@ -1749,20 +2054,12 @@ function updateAnalysis(idx) {
 
 }
 
-function renderPartyTypeChart() {
-  const el = document.getElementById('anaPartyChart');
-  if (!el) return;
-  const slots = party.filter(s => s.pokemon);
-  if (!slots.length) { el.innerHTML = ''; return; }
-
+function buildTypeChartHTML(slots) {
+  if (!slots.length) return '';
   const effs = slots.map(s => defEffectiveness(s.pokemon.type1, s.pokemon.type2||null));
-
   const headerHTML = slots.map(s =>
-    `<div class="ptc-th" title="${s.pokemon.name}">
-      <img src="${spriteUrl(s.pokemon.name, s.pokemon.no)}" alt="${s.pokemon.name}">
-    </div>`
+    `<div class="ptc-th" title="${s.pokemon.name}"><img src="${spriteUrl(s.pokemon.name, s.pokemon.no)}" alt="${s.pokemon.name}"></div>`
   ).join('');
-
   const rowsHTML = ALL_TYPES.map(atkType => {
     const cells = effs.map(eff => {
       const m = eff[atkType];
@@ -1775,17 +2072,44 @@ function renderPartyTypeChart() {
       else                { cls = 'ptc-n1'; txt = ''; }
       return `<div class="ptc-cell ${cls}">${txt}</div>`;
     }).join('');
-    return `<div class="ptc-type-row">
-      <div class="ptc-lbl" style="background:${TYPE_COLORS[atkType]}">${atkType}</div>
-      ${cells}
-    </div>`;
+    return `<div class="ptc-type-row"><div class="ptc-lbl" style="background:${TYPE_COLORS[atkType]}">${atkType}</div>${cells}</div>`;
   }).join('');
+  return `<div class="ptc-wrap"><div class="ptc-header">${headerHTML}</div>${rowsHTML}</div>`;
+}
 
-  el.innerHTML = `<div class="ptc-wrap">
-    <div class="ptc-sub">파티 상성</div>
-    <div class="ptc-header">${headerHTML}</div>
-    ${rowsHTML}
+function buildTypeChartSummaryHTML(slots) {
+  if (!slots.length) return '';
+  const effs = slots.map(s => defEffectiveness(s.pokemon.type1, s.pokemon.type2||null));
+  const weakTypes = [], strongTypes = [], neutralTypes = [];
+  const half = Math.ceil(effs.length / 2);
+  ALL_TYPES.forEach(t => {
+    let w = 0, r = 0, n = 0;
+    effs.forEach(eff => { const m = eff[t]; if (m > 1) w++; else if (m < 1) r++; else n++; });
+    if (w > r) weakTypes.push(t);
+    else if (r > w) strongTypes.push(t);
+    else if (n >= half) neutralTypes.push(t);
+  });
+  const tbadge = t => `<span class="pcs-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`;
+  return `<div class="pcs-wrap">
+    <div class="pcs-row"><span class="pcs-lbl pcs-weak">약점</span><div class="pcs-badges">${weakTypes.length ? weakTypes.map(tbadge).join('') : '<span class="pcs-none">없음</span>'}</div></div>
+    <div class="pcs-row"><span class="pcs-lbl pcs-neutral">1배</span><div class="pcs-badges">${neutralTypes.length ? neutralTypes.map(tbadge).join('') : '<span class="pcs-none">없음</span>'}</div></div>
+    <div class="pcs-row"><span class="pcs-lbl pcs-strong">강함</span><div class="pcs-badges">${strongTypes.length ? strongTypes.map(tbadge).join('') : '<span class="pcs-none">없음</span>'}</div></div>
   </div>`;
+}
+
+function renderPartyTypeChart() {
+  const slots = party.filter(s => s.pokemon);
+  const anaEl = document.getElementById('anaPartyChart');
+  if (anaEl) anaEl.innerHTML = buildTypeChartHTML(slots);
+  const bigEl = document.getElementById('bigPartyChart');
+  if (bigEl) bigEl.innerHTML = `<div class="big-chart-title">파티 상성</div>` + buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
+}
+
+function renderBigEnemyChart() {
+  const bigEl = document.getElementById('bigEnemyChart');
+  if (!bigEl) return;
+  const slots = enemyParty.filter(s => s.pokemon);
+  bigEl.innerHTML = `<div class="big-chart-title">파티 상성</div>` + buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
 }
 
 function empty() { return '<span class="chart-empty">없음</span>'; }
@@ -2904,36 +3228,230 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
 /* ════════════════════════════
    추천 포켓몬 패널
 ════════════════════════════ */
+function analyzeParty() {
+  const slots = party.filter(s => s.pokemon);
+  const weakMap = {};
+  ALL_TYPES.forEach(t => { weakMap[t] = 0; });
+  slots.forEach(({ pokemon: pk }) => {
+    const eff = defEffectiveness(pk.type1, pk.type2 || null);
+    ALL_TYPES.forEach(t => { if (eff[t] >= 2) weakMap[t]++; });
+  });
+  const offCovered = {};
+  ALL_TYPES.forEach(t => { offCovered[t] = false; });
+  slots.forEach(s => {
+    const moveTypes = [];
+    (s.moves || []).filter(Boolean).forEach(m => { if (m.type) moveTypes.push(m.type); });
+    const ms = getMetaSet(s.pokemon.name);
+    (ms?.moves || []).slice(0, 4).forEach(mv => {
+      const md = MOVE_DATA?.find(m => m.name === mv.name);
+      if (md?.type && md.category !== '변화') moveTypes.push(md.type);
+    });
+    ALL_TYPES.forEach(defT => {
+      moveTypes.forEach(mt => { if (defEffectiveness(defT, null)[mt] >= 2) offCovered[defT] = true; });
+    });
+  });
+  let physCount = 0, specCount = 0, tankCount = 0;
+  slots.forEach(s => {
+    const physMvs = (s.moves || []).filter(m => m?.category === '물리');
+    const specMvs = (s.moves || []).filter(m => m?.category === '특수');
+    const dur = calcDurability(s.pokemon, s.evs || {}, s.nature, s.item);
+    const avgDur = (dur.phys + dur.spec) / 2;
+    if ((physMvs.length === 0 && specMvs.length === 0) || avgDur >= 55000) tankCount++;
+    else if (physMvs.length >= specMvs.length) physCount++;
+    else specCount++;
+  });
+  return { weakMap, offCovered, physCount, specCount, tankCount, total: slots.length };
+}
+
+function scoreCandidate(pk, pa) {
+  const isMega = pk.name.startsWith('메가') && pk.name !== '메가니움';
+  const basePk = isMega ? (POKEMON_DATA.find(p => p.no === pk.no && !p.name.startsWith('메가')) || pk) : pk;
+  const key = 's1_single';
+  const usage = META_USAGE_DATA?.[key]?.usage || [];
+  /* FORM_IDX_TO_NAME 매핑 기반으로 이 폼이 맞는 메타 항목을 찾음 */
+  let rankIdx = usage.slice(0, 50).findIndex(u => {
+    if (u.id && FORM_IDX_TO_NAME[u.id]) return FORM_IDX_TO_NAME[u.id] === basePk.name;
+    return u.name === basePk.name;
+  });
+  /* 매핑 없는 폼: 같은 덱스번호 중 폼 매핑이 없는 항목으로만 재탐색 */
+  if (rankIdx < 0) {
+    rankIdx = usage.slice(0, 50).findIndex(u => {
+      if (!u.id) return false;
+      const dNo = parseInt(u.id.split('-')[0]);
+      if (dNo !== pk.no) return false;
+      if (FORM_IDX_TO_NAME[u.id]) return false; // 이미 다른 폼에 매핑된 항목 건너뜀
+      return true;
+    });
+  }
+  const rank = rankIdx >= 0 ? rankIdx + 1 : 99;
+  let ms = getMetaSet(basePk.name);
+  if (!ms) ms = getMetaSet(pk.no);
+
+  /* ── 사용순위 (max 50) ── */
+  let usageScore = rank <= 50 ? Math.round((51 - rank) * 1) : 0;
+  if (isMega) {
+    const stoneName = MEGA_STONE_MAP[pk.name];
+    const stoneItem = ms?.items?.find(it => it.name === stoneName);
+    const stoneRate = stoneItem ? stoneItem.rate / 100 : 0.05;
+    usageScore = Math.round(usageScore * stoneRate);
+  }
+
+  /* ── 타입 (max 80) ── */
+  const candEff = defEffectiveness(pk.type1, pk.type2 || null);
+  let typeScore = 0;
+  ALL_TYPES.forEach(t => {
+    const w = pa.weakMap[t]; if (!w) return;
+    const m = candEff[t];
+    if (m === 0)      typeScore += w * 22;
+    else if (m <= 0.5) typeScore += w * 16;
+    else if (m >= 2)  typeScore -= w * 10;
+  });
+  typeScore = Math.max(0, Math.min(80, typeScore));
+
+  /* ── 스피드 (max 15) ── */
+  const evS = ms?.ev_spreads?.[0]?.evs?.S || 0;
+  const natName = ms?.natures?.[0]?.name;
+  const spdNatM = natName ? natMult(NATURES?.find(n => n.name === natName), 'S') : 1;
+  const spd = calcStat(pk.S, evS, false, spdNatM);
+  let speedScore = 0, speedTag = '';
+  if (spd >= 161)      { speedScore = 15; speedTag = '고스핏'; }
+  else if (spd >= 136) { speedScore = 12; speedTag = '중고속'; }
+  else if (spd >= 106) { speedScore = 8;  speedTag = '중속'; }
+  else                 { speedScore = 3;  speedTag = '저속'; }
+
+  /* ── 조합 근거 (max 80) ── */
+  const topMoves = (ms?.moves || []).slice(0, 4);
+  const topMvData = topMoves.map(mv => MOVE_DATA?.find(m => m.name === mv.name)).filter(Boolean);
+  const candPhys = topMvData.filter(m => m.category === '물리').length;
+  const candSpec = topMvData.filter(m => m.category === '특수').length;
+  const zeroDur = calcDurability(pk, {H:0,A:0,B:0,C:0,D:0,S:0}, null, null);
+  const isTanky = (zeroDur.phys + zeroDur.spec) / 2 >= 40000 && candPhys === 0 && candSpec === 0;
+
+  let comboScore = 0, comboReason = '';
+  if (isTanky && pa.tankCount === 0 && pa.total >= 2)              { comboScore = 70; comboReason = '탱커 부재 보완'; }
+  else if (candSpec > candPhys && pa.physCount >= pa.specCount + 2) { comboScore = 60; comboReason = '특수딜 보강'; }
+  else if (candPhys > candSpec && pa.specCount >= pa.physCount + 2) { comboScore = 60; comboReason = '물리딜 보강'; }
+  else if (candSpec > candPhys && pa.specCount === 0)               { comboScore = 55; comboReason = '특수딜 추가'; }
+  else if (candPhys > candSpec && pa.physCount === 0)               { comboScore = 55; comboReason = '물리딜 추가'; }
+
+  let newCov = 0;
+  topMvData.forEach(mv => {
+    if (!mv.type || mv.category === '변화') return;
+    ALL_TYPES.forEach(defT => { if (!pa.offCovered[defT] && defEffectiveness(defT, null)[mv.type] >= 2) newCov++; });
+  });
+  if (newCov >= 3)      { comboScore = Math.min(80, comboScore + 20); if (!comboReason) comboReason = '타입 커버리지 확장'; }
+  else if (newCov >= 1) { comboScore = Math.min(80, comboScore + 8); }
+
+  const tags = [];
+  if (typeScore >= 10) tags.push('타입 보완');
+  if (speedTag !== '저속') tags.push(speedTag);
+  if (comboReason && !tags.includes(comboReason)) tags.push(comboReason);
+
+  return { pk, basePk, isMega, rank, ms, spd, usageScore, typeScore, speedScore, comboScore,
+    totalScore: usageScore + typeScore + speedScore + comboScore,
+    comboReason, tags, topMoves: topMoves.map(m => m.name) };
+}
+
 function renderRecommended() {
   const el = document.getElementById('recPokemonList');
-  if (!el || !POKEMON_DATA?.length) return;
+  if (!el) return;
+  if (typeof META_USAGE_DATA === 'undefined' || !POKEMON_DATA?.length) { el.innerHTML = ''; return; }
+
+  const key = 's1_single';
+  const usage = META_USAGE_DATA[key]?.usage || [];
   const inParty = new Set(party.map(s => s.pokemon?.name).filter(Boolean));
-  const pool = POKEMON_DATA.filter(pk => pk.champions && !inParty.has(pk.name));
-  el.innerHTML = pool.map(pk => {
-    const t1 = pk.type1 ? `<span class="pc-tbadge" style="background:${TYPE_COLORS[pk.type1]}">${pk.type1}</span>` : '';
-    const t2 = pk.type2 ? `<span class="pc-tbadge" style="background:${TYPE_COLORS[pk.type2]}">${pk.type2}</span>` : '';
-    return `<div class="rec-card" data-pkname="${pk.name}" title="${pk.name}">
-      <img src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}">
-      <span class="rec-card-name">${pk.name}</span>
-      <div class="rec-card-types">${t1}${t2}</div>
+
+  const candidates = [];
+  const seenMegas = new Set();
+  const seenCands = new Set();
+  const addCandWithMegas = pk => {
+    if (inParty.has(pk.name) || seenCands.has(pk.name)) return;
+    seenCands.add(pk.name);
+    candidates.push(pk);
+    POKEMON_DATA.filter(p => p.no === pk.no && p.name.startsWith('메가') && p.name !== '메가니움' && p.champions && !inParty.has(p.name) && !seenMegas.has(p.name))
+      .forEach(mega => { candidates.push(mega); seenMegas.add(mega.name); });
+  };
+  usage.slice(0, 50).forEach(u => {
+    const dexNo = u.id ? parseInt(u.id.split('-')[0]) : null;
+    /* 메타 항목이 가리키는 정확한 폼을 먼저 추가 */
+    const primaryPk = resolveUsageForm(u);
+    if (primaryPk) addCandWithMegas(primaryPk);
+    /* 같은 Pokédex 번호의 나머지 챔피언 폼도 추가 (다른 타입 커버리지 고려) */
+    if (dexNo && primaryPk) {
+      POKEMON_DATA.filter(p => p.no === dexNo && p.champions && !(p.name.startsWith('메가') && p.name !== '메가니움') && p.name !== primaryPk.name)
+        .forEach(altPk => addCandWithMegas(altPk));
+    }
+  });
+
+  const pa = analyzeParty();
+  const scored = candidates.map(pk => scoreCandidate(pk, pa)).sort((a, b) => b.totalScore - a.totalScore);
+
+  const top = []; const seenBase = new Set();
+  for (const r of scored) {
+    const bk = r.basePk.no + '_' + r.basePk.name;
+    if (r.isMega && seenBase.has(bk)) continue;
+    seenBase.add(bk);
+    top.push(r);
+    if (top.length >= 5) break;
+  }
+
+  const addPokemon = (pkName) => {
+    const pk = POKEMON_DATA.find(p => p.name === pkName);
+    if (!pk) return;
+    const emptySlot = party.findIndex(s => !s.pokemon);
+    if (emptySlot < 0) { showToast?.('빈 슬롯이 없습니다'); return; }
+    party[emptySlot].pokemon = pk;
+    party[emptySlot].ability = ABILITY_DATA?.[pk.name]?.normal?.[0] || null;
+    party[emptySlot].evs = {H:0,A:0,B:0,C:0,D:0,S:0};
+    party[emptySlot].moves = [null,null,null,null];
+    party[emptySlot].nature = null;
+    const autoItemName = MEGA_STONE_MAP[pk.name] || FORM_ITEM_MAP[pk.name] || DEFAULT_FORM_ITEM[getBaseName(pk.name)];
+    party[emptySlot].item = autoItemName ? (ITEM_DATA.find(it => it.name === autoItemName) || null) : null;
+    party[emptySlot].gender = pk.name.endsWith('♂') || GENDER_FORM_MAP[pk.name]?.male === pk.name ? '♂'
+      : pk.name.endsWith('♀') || GENDER_FORM_MAP[pk.name]?.female === pk.name ? '♀' : null;
+    applyFormChange(emptySlot);
+    saveParty(); renderSlots(); renderRecommended();
+  };
+
+  el.innerHTML = top.map(r => {
+    const { pk, rank, ms, spd, usageScore, typeScore, speedScore, comboScore, totalScore, comboReason, tags, topMoves } = r;
+    const typeBadges = [pk.type1, pk.type2].filter(Boolean)
+      .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
+    const tagChips = tags.slice(0, 3).map(t => `<span class="rcv-chip rcv-tag">${t}</span>`).join('');
+    const itemName = ms?.items?.[0]?.name || '—';
+    const topMove = topMoves[0] || '—';
+    const abilityName = ms?.abilities?.[0]?.name || '—';
+    /* 추천 아이템이 메가스톤이면 해당 메가폼 스프라이트 사용 */
+    const megaNameForItem = itemName !== '—' ? Object.entries(MEGA_STONE_MAP||{}).find(([mn,sn])=>sn===itemName)?.[0] : null;
+    const sprPk = megaNameForItem ? (POKEMON_DATA.find(p=>p.name===megaNameForItem)||pk) : pk;
+    return `<div class="rcv-card">
+      <div class="rcv-head">
+        <span class="rcv-name">${pk.name}</span>${typeBadges}
+        <span class="rcv-chip rcv-rank">사용순위 ${rank <= 50 ? rank : '—'}</span>
+        <span class="rcv-chip rcv-score">추천 점수 ${totalScore}</span>${tagChips}
+      </div>
+      <div class="rcv-body">
+        <img src="${spriteUrl(sprPk.name, sprPk.no)}" class="rcv-sprite" alt="${sprPk.name}">
+        <div class="rcv-stats-grid">
+          <div class="rcv-stat"><div class="rcv-stat-lbl">추천 도구</div><div class="rcv-stat-val">${itemName}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">추천 기술</div><div class="rcv-stat-val">${topMove}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">추천 특성</div><div class="rcv-stat-val">${abilityName}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">스피드</div><div class="rcv-stat-val rcv-spd">${spd}</div></div>
+        </div>
+      </div>
+      ${comboReason ? `<div class="rcv-reason">조합 근거 <span>${comboReason}</span></div>` : ''}
+      <div class="rcv-bottom">
+        <span class="rcv-sc">사용순위 ${usageScore}</span>
+        <span class="rcv-sc">타입 ${typeScore}</span>
+        <span class="rcv-sc">스피드 ${speedScore}</span>
+        <span class="rcv-sc">조합 근거 ${comboScore}</span>
+        <button class="rcv-add-btn" data-pkname="${pk.name}">빈 슬롯에 추가</button>
+      </div>
     </div>`;
   }).join('');
-  el.querySelectorAll('.rec-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const pk = POKEMON_DATA.find(p => p.name === card.dataset.pkname);
-      if (!pk) return;
-      const emptySlot = party.findIndex(s => !s.pokemon);
-      const slotIdx = emptySlot >= 0 ? emptySlot : 0;
-      party[slotIdx].pokemon = pk;
-      const abd = ABILITY_DATA?.[pk.name];
-      party[slotIdx].ability = abd?.normal?.[0] || null;
-      party[slotIdx].evs = {H:0,A:0,B:0,C:0,D:0,S:0};
-      if (pk.name.endsWith('♂') || GENDER_FORM_MAP[pk.name]?.male === pk.name) party[slotIdx].gender = '♂';
-      else if (pk.name.endsWith('♀') || GENDER_FORM_MAP[pk.name]?.female === pk.name) party[slotIdx].gender = '♀';
-      else party[slotIdx].gender = null;
-      saveParty(); renderSlots(); renderRecommended();
-      selectedSlot = slotIdx; renderDetail(slotIdx); showPanel();
-    });
+
+  el.querySelectorAll('.rcv-add-btn').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); addPokemon(btn.dataset.pkname); });
   });
 }
 
@@ -2942,6 +3460,7 @@ function renderRecommended() {
 ════════════════════════════ */
 function openPokeModal(slotIdx) {
   modalSlot = slotIdx;
+  _modalSlotWasEmpty = !party[slotIdx]?.pokemon;
   typeFilter = null;
   document.querySelectorAll('#typeFilterRow .tf-btn').forEach(b=>{b.style.opacity='.55';b.style.border='2px solid transparent';});
   document.getElementById('pokeModal').classList.add('open');
@@ -2983,11 +3502,15 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
   if (_dupIdx >= 0) {
     party[modalSlot] = { ...party[_dupIdx] };
     party[_dupIdx] = newSlot();
-    selectedSlot = modalSlot;
     saveParty();
     closePokeModal();
-    document.getElementById('appBody')?.classList.remove('big-mode');
-    renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
+    if (_modalSlotWasEmpty) {
+      renderSlots(); renderRecommended();
+    } else {
+      selectedSlot = modalSlot;
+      document.getElementById('appBody')?.classList.remove('big-mode');
+      renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
+    }
     return;
   }
   party[modalSlot].pokemon = pk;
@@ -3013,11 +3536,15 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
     if (autoItemObj) party[modalSlot].item = autoItemObj;
   }
   applyFormChange(modalSlot);
-  selectedSlot = modalSlot;
   saveParty();
   closePokeModal();
-  document.getElementById('appBody')?.classList.remove('big-mode');
-  renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
+  if (_modalSlotWasEmpty) {
+    renderSlots(); renderRecommended();
+  } else {
+    selectedSlot = modalSlot;
+    document.getElementById('appBody')?.classList.remove('big-mode');
+    renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
+  }
 });
 
 document.getElementById('closePokeModal').addEventListener('click', closePokeModal);
@@ -3262,7 +3789,7 @@ document.getElementById('natureModal').addEventListener('click', e=>{
   const n = NATURES[nidx];
   if (!n) return;
   party[modalSlot].nature = n;
-  saveParty(); closeNatureModal(); renderDetail(modalSlot);
+  saveParty(); closeNatureModal(); renderDetail(modalSlot); renderSpeedRankList();
 });
 
 /* ════════════════════════════
@@ -3341,6 +3868,7 @@ function saveToBox(slotIdx) {
 
 function openBoxModal(slotIdx) {
   modalSlot = slotIdx;
+  _modalSlotWasEmpty = !party[slotIdx]?.pokemon;
   renderBoxGrid();
   document.getElementById('boxModal').classList.add('open');
 }
@@ -3389,9 +3917,13 @@ document.getElementById('boxGrid').addEventListener('click', e => {
     applySlotData(box[bi], modalSlot);
     saveParty();
     document.getElementById('boxModal').classList.remove('open');
-    selectedSlot = modalSlot;
-    document.getElementById('appBody')?.classList.remove('big-mode');
-    renderSlots(); renderDetail(selectedSlot); showPanel();
+    if (_modalSlotWasEmpty) {
+      renderSlots();
+    } else {
+      selectedSlot = modalSlot;
+      document.getElementById('appBody')?.classList.remove('big-mode');
+      renderSlots(); renderDetail(selectedSlot); showPanel();
+    }
   }
 });
 document.getElementById('closeBoxModal').addEventListener('click', () => {
@@ -3434,7 +3966,7 @@ const _SC_WEATHERS = ['쾌청','비바라기','모래바람','설경'];
 const _SC_FIELDS   = ['일렉트릭필드','그래스필드','미스트필드','사이코필드'];
 
 function calcStatIV(base, ev, iv, natM) {
-  return Math.floor((Math.floor((2*base + (iv||31) + (ev||0)) / 2) + 5) * (natM||1));
+  return Math.floor((base + 20 + (ev||0)) * (natM||1));
 }
 
 function scIsSpeedHighest(pk) {
@@ -3531,6 +4063,7 @@ function loadEnemyParty() {
       }
     });
   } catch(e) {}
+  renderBigEnemyChart();
 }
 
 function renderEnemySlots() {
@@ -3555,6 +4088,10 @@ function renderEnemySlots() {
       plus.className = 'slot-plus'; plus.textContent = '+';
       slot.appendChild(plus);
     }
+    if (mem.pokemon) {
+      slot.addEventListener('mouseenter', () => showSlotTooltip(slot, buildEnemySlotTooltip(mem.pokemon)));
+      slot.addEventListener('mouseleave', hideSlotTooltip);
+    }
     slot.addEventListener('click', () => {
       calcModalCallback = (pk) => {
         const _eDupIdx = enemyParty.findIndex((s, j) => j !== i && s.pokemon?.no === pk.no && s.pokemon?.name === pk.name);
@@ -3572,15 +4109,14 @@ function renderEnemySlots() {
   }
   const enemyBtns = document.createElement('div');
   enemyBtns.className = 'big-mode-btns';
-  enemyBtns.style.display = 'flex';
   enemyBtns.innerHTML = `
-    <button class="big-act-btn load" id="enemyLoadBtn">📋 불러오기</button>
     <button class="big-act-btn clear" id="enemyClearBtn">비우기</button>`;
   enemyBtns.querySelector('#enemyClearBtn').addEventListener('click', () => {
     for (let i = 0; i < 6; i++) enemyParty[i] = { pokemon: null };
     saveEnemyParty(); renderEnemySlots();
   });
   el.appendChild(enemyBtns);
+  renderBigEnemyChart();
 }
 
 function scLoad() {
@@ -3607,6 +4143,132 @@ function scClear() {
   sc.tailwind = false; sc.stickyWeb = false; sc.unburden = false;
   localStorage.removeItem('pochams_sc');
   renderSpeedCalc();
+}
+
+/* ════════════════════════════
+   SPEED SAMPLE RANKING
+════════════════════════════ */
+let _speedSampleCache = null;
+
+/* 메타 usage id → POKEMON_DATA 실제 폼 이름 매핑 */
+function buildSpeedSample() {
+  if (_speedSampleCache) return _speedSampleCache;
+  if (typeof META_USAGE_DATA === 'undefined' || typeof META_SETS_DATA === 'undefined') return null;
+
+  const key = 's1_single';
+  const usage = META_USAGE_DATA[key]?.usage || [];
+  const setsMap = {};
+  (META_SETS_DATA[key]?.pokemon || []).forEach(p => { setsMap[p.id] = p; });
+
+  const baseEntries = usage.slice(0, 50).map(u => {
+    const pk = resolveUsageForm(u);
+    if (!pk) return null;
+
+    const setData = setsMap[u.id];
+    let evS = 0, natM = 1;
+
+    if (setData) {
+      evS = setData.ev_spreads?.[0]?.evs?.S || 0;
+      const natName = setData.natures?.[0]?.name;
+      if (natName) {
+        const nat = NATURES.find(n => n.name === natName);
+        natM = natMult(nat, 'S');
+      }
+    }
+
+    const speed = calcStat(pk.S, evS, false, natM);
+    return { name: pk.name, no: pk.no, speed, evS, natM };
+  }).filter(Boolean);
+
+  /* add mega forms for each top-50 Pokémon */
+  const megaEntries = [];
+  const seenMegas = new Set();
+  baseEntries.forEach(e => {
+    POKEMON_DATA.filter(p =>
+      p.no === e.no &&
+      p.name.startsWith('메가') &&
+      p.name !== '메가니움' &&
+      p.champions
+    ).forEach(mega => {
+      if (seenMegas.has(mega.name)) return;
+      seenMegas.add(mega.name);
+      const speed = calcStat(mega.S, e.evS, false, e.natM);
+      megaEntries.push({ name: mega.name, no: mega.no, speed, evS: e.evS });
+    });
+  });
+
+  const entries = [...baseEntries, ...megaEntries];
+  entries.sort((a, b) => b.speed - a.speed);
+  _speedSampleCache = entries;
+  return entries;
+}
+
+function renderSpeedRankList() {
+  const el = document.getElementById('speedRankList');
+  if (!el) return;
+
+  const entries = buildSpeedSample();
+  if (!entries || !entries.length) { el.innerHTML = ''; return; }
+
+  const sel = selectedSlot >= 0 ? party[selectedSlot] : null;
+  let mySpeed = null, myName = null, myNo = null;
+  if (sel?.pokemon) {
+    const pk = sel.pokemon;
+    const evS = sel.evs?.S || 0;
+    const nm = natMult(sel.nature, 'S');
+    mySpeed = Math.floor(calcStat(pk.S, evS, false, nm) * getItemStatMult(sel.item, pk, 'S'));
+    const _abl = sel.ability?.name;
+    if (sel.item?.name === '부스트에너지' && (_abl === '쿼크차지' || _abl === '고대활성') && scIsSpeedHighest(pk)) {
+      mySpeed = Math.floor(mySpeed * 1.5);
+    }
+    myName = pk.name;
+    myNo = pk.no;
+  }
+
+  const myEvS = sel?.pokemon ? (sel.evs?.S || 0) : 0;
+
+  const isMegaName = n => n.startsWith('메가') && n !== '메가니움';
+  const megaBadge = `<span class="sr-mega">메가</span>`;
+
+  const rows = [];
+  let myInserted = false;
+  let rankCounter = 0;
+
+  for (let i = 0; i < entries.length; i++) {
+    const e = entries[i];
+    if (mySpeed !== null && !myInserted && mySpeed > e.speed) {
+      rankCounter++;
+      rows.push({ isMe: true, rank: rankCounter, name: myName, no: myNo, speed: mySpeed, evS: myEvS });
+      myInserted = true;
+    }
+    rankCounter++;
+    rows.push({ isMe: false, rank: rankCounter, name: e.name, no: e.no, speed: e.speed, evS: e.evS });
+  }
+  if (mySpeed !== null && !myInserted) {
+    rankCounter++;
+    rows.push({ isMe: true, rank: rankCounter, name: myName, no: myNo, speed: mySpeed, evS: myEvS });
+  }
+
+  const rowHTML = r => {
+    const mega = isMegaName(r.name);
+    const displayName = mega ? r.name.replace(/^메가/, '') : r.name;
+    const rankSpan = `<span class="sr-rank">${r.rank}</span>`;
+    const sprite = `<img src="${spriteUrl(r.name, r.no)}" class="sr-sprite" alt="${r.name}">`;
+    const evTxt = `<span class="sr-ev">S:${r.evS}</span>`;
+    const namePart = `<div class="sr-name-wrap"><span class="sr-name">${displayName}</span>${mega ? megaBadge : ''}</div>`;
+    const spdPart = `<span class="sr-spd">${r.speed}</span>`;
+    if (r.isMe) {
+      return `<div class="sr-item sr-me">${rankSpan}${sprite}${namePart}${evTxt}${spdPart}</div>`;
+    }
+    return `<div class="sr-item">${rankSpan}${sprite}${namePart}${evTxt}${spdPart}</div>`;
+  };
+
+  el.innerHTML = rows.map(rowHTML).join('');
+
+  if (mySpeed !== null) {
+    const myIdx = rows.findIndex(r => r.isMe);
+    if (myIdx >= 0) el.children[myIdx]?.scrollIntoView({ block: 'nearest' });
+  }
 }
 
 function scLoadFromSlot(idx) {
@@ -3876,13 +4538,14 @@ window.scSyncFromSlot = function(idx) {
   if (sc.slotIdx !== idx) return;
   scLoadFromSlot(idx);
   renderSpeedCalc();
+  renderSpeedRankList();
 };
 
 /* ════════════════════════════
    INIT
 ════════════════════════════ */
 document.getElementById('detailCard').addEventListener('click', cardClickHandler);
-document.getElementById('detailCard').addEventListener('change', evChangeHandler);
+document.getElementById('detailCard').addEventListener('input', evChangeHandler);
 
 /* type filter buttons */
 (function() {
@@ -3929,7 +4592,19 @@ renderRecommended();
 if (selectedSlot >= 0) { renderDetail(selectedSlot); showPanel(); }
 scLoad();
 renderSpeedCalc();
-document.addEventListener('pochams:partychange', () => { renderSpeedCalc(); renderPartyTypeChart(); });
+renderSpeedRankList();
+document.addEventListener('pochams:partychange', () => { renderSpeedCalc(); renderPartyTypeChart(); renderSpeedRankList(); });
+renderPartyTypeChart();
+
+/* 추천 포켓몬 패널 접기 토글 */
+document.getElementById('recToggleBtn').addEventListener('click', () => {
+  const panel = document.getElementById('recPanel');
+  panel.classList.toggle('collapsed');
+  localStorage.setItem('pochams_rec_collapsed', panel.classList.contains('collapsed') ? '1' : '0');
+});
+if (localStorage.getItem('pochams_rec_collapsed') === '1') {
+  document.getElementById('recPanel').classList.add('collapsed');
+}
 </script>
 </body>
 </html>
