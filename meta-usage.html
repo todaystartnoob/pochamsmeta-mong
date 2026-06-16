@@ -227,7 +227,8 @@
       #metaSlider.show-teams{transform:translateX(-100vw);}
       #usagePanel{width:100vw!important;flex:none!important;box-sizing:border-box!important;padding:0 6px 6px;}
       #teamsPanel{width:100vw!important;flex:none!important;box-sizing:border-box!important;padding:0 6px 6px;}
-      .teams-grid{grid-template-columns:1fr;gap:8px;padding:6px 8px;}
+      #teamsPanel .panel-body{overflow-y:auto!important;display:block!important;}
+      .teams-grid{grid-template-columns:1fr;grid-auto-rows:auto!important;align-content:start!important;gap:8px;padding:6px 8px;}
       .team-card{padding:10px 14px;}
       .team-sprite-wrap img{width:52px;height:52px;}
       .usage-sprite{width:46px;height:46px;}
@@ -238,7 +239,7 @@
       .mob-meta-tab-bar{display:none!important;}
       #contentRow{padding:0 10px 10px;overflow:hidden;}
       #metaSlider{
-        flex:1!important;width:100%!important;gap:10px!important;
+        flex:1!important;width:auto!important;gap:10px!important;
         transform:none!important;transition:none!important;
       }
       #usagePanel{width:320px!important;flex:none!important;}
