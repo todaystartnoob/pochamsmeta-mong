@@ -551,7 +551,7 @@
     .mob-tab-btn.active{color:var(--accent);}
     .mob-tab-btn svg{display:block;width:22px;height:22px;}
 
-    @media(max-width:1024px){
+    @media(max-width:1280px),(pointer:coarse){
       /* ── Navbar ── */
       .navbar{height:48px;padding:0 16px;}
       .nav-logo img{height:36px;}
@@ -565,25 +565,43 @@
 
       /* ── Hide desktop-only elements ── */
       .ad-panel,.rec-panel,.detail-overlay,
-      #bigPartyChart,#bigEnemyChart,#enemySidebar,
+      #bigPartyChart,#bigEnemyChart,
       .analysis-sidebar{display:none!important;}
 
-      /* ── Party strip (always visible compact top bar) ── */
+      /* ── My party strip ── */
       #partySidebar{
         flex-direction:row!important;flex-wrap:nowrap;
         overflow-x:auto;overflow-y:hidden;
-        flex-shrink:0;height:64px;min-height:64px;max-height:64px;
-        padding:6px 8px;gap:5px;
+        flex-shrink:0;height:60px;min-height:60px;max-height:60px;
+        padding:5px 8px;gap:5px;
         background:var(--card-bg);
         border-bottom:1px solid rgba(100,80,160,.12);
-        border-radius:0;box-shadow:0 2px 6px rgba(0,0,0,.06);
+        border-radius:0;box-shadow:0 1px 4px rgba(0,0,0,.06);
         position:relative;z-index:5;scrollbar-width:none;
       }
       #partySidebar::-webkit-scrollbar{display:none;}
-      #partySidebar .party-slot{width:50px;height:50px;flex-shrink:0;border-radius:8px;}
-      #partySidebar .slot-img{width:42px;height:42px;}
+      #partySidebar .party-slot{width:48px;height:48px;flex-shrink:0;border-radius:8px;}
+      #partySidebar .slot-img{width:40px;height:40px;}
       #partySidebar .slot-plus{font-size:20px;}
       #partySidebar .party-action-btns{display:none!important;}
+
+      /* ── Enemy party strip ── */
+      #enemySidebar{
+        display:flex!important;
+        flex-direction:row!important;flex-wrap:nowrap;
+        overflow-x:auto;overflow-y:hidden;
+        flex-shrink:0;height:56px;min-height:56px;max-height:56px;
+        padding:4px 8px;gap:5px;
+        background:rgba(55,40,90,.18);
+        border-bottom:1px solid rgba(100,80,160,.18);
+        position:relative;z-index:5;scrollbar-width:none;
+      }
+      #enemySidebar::-webkit-scrollbar{display:none;}
+      #enemySidebar .enemy-slot{width:46px;height:46px;flex-shrink:0;border-radius:8px;}
+      #enemySidebar .slot-img{width:38px;height:38px;}
+      #enemySidebar .slot-plus{font-size:18px;color:#bbb;}
+      #enemySidebar .big-mode-btns{display:none!important;}
+      #enemySidebar .slot-del{display:none!important;}
 
       /* ── Panel wrapper becomes slide container ── */
       .mob-panel-wrap{
@@ -675,17 +693,18 @@
         padding:0!important;gap:0!important;
         position:relative!important;
       }
-      /* party strip: normal flow, 64px tall */
-      .app-body.big-mode #partySidebar{
+      /* party strips: normal flow */
+      .app-body.big-mode #partySidebar,
+      .app-body.big-mode #enemySidebar{
         position:relative!important;
         width:100%!important;
         flex:none!important;
       }
-      /* panel wrap: absolutely fill the space below party strip */
+      /* panel wrap: absolutely fill the space below both party strips */
       .app-body.big-mode .mob-panel-wrap{
         display:block!important;
         position:absolute!important;
-        top:64px!important;left:0!important;right:0!important;bottom:0!important;
+        top:116px!important;left:0!important;right:0!important;bottom:0!important;
         width:100%!important;height:auto!important;
         flex:none!important;
       }
@@ -4996,13 +5015,15 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
 
 /* ═══ MOBILE PANEL NAVIGATION ═══ */
 (function initMobileNav() {
-  const MOBILE_BP = 1024;
+  const MOBILE_BP = 1280;
   const PANELS = ['speed', 'detail', 'calc'];
   const wrap = document.getElementById('mobPanelWrap');
   const tabBar = document.getElementById('mobileTabBar');
   let curPanel = 'detail';
 
-  function isMobile() { return window.innerWidth <= MOBILE_BP; }
+  function isMobile() {
+    return window.innerWidth <= MOBILE_BP || window.matchMedia('(pointer:coarse)').matches;
+  }
 
   function setPanel(p) {
     if (!PANELS.includes(p)) return;
