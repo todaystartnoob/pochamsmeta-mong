@@ -661,10 +661,22 @@
       #speedCalcBody{max-height:none;overflow:visible;}
 
       /* ── Damage calc fixes ── */
-      #mobPanelWrap>#powerCalcPanel{flex:none;padding:10px;}
-      #powerCalcBody{overflow:visible!important;flex:none!important;min-height:0!important;}
-      .dc-cols{grid-template-columns:1fr!important;overflow:visible!important;flex:none!important;min-height:unset!important;}
-      .dc-col{overflow:visible!important;}
+      #mobPanelWrap>#powerCalcPanel{flex:none;padding:10px;overflow:hidden!important;}
+      #powerCalcBody{overflow:hidden!important;flex:1!important;min-height:0!important;}
+      .dc-cols{
+        display:flex!important;flex-direction:row!important;
+        grid-template-columns:unset!important;
+        width:200%!important;flex:1!important;min-height:0!important;
+        overflow:visible!important;
+        transform:translateX(0);
+        transition:transform .28s cubic-bezier(.4,0,.2,1);
+      }
+      .dc-cols.show-dur{transform:translateX(-50%);}
+      .dc-col{
+        width:50%!important;flex-shrink:0!important;
+        overflow-y:auto!important;overflow-x:hidden!important;
+        padding-right:4px;box-sizing:border-box;
+      }
       .dc-dmg-box{margin-top:6px;}
 
       /* ── Mobile tab bar ── */
@@ -5090,20 +5102,28 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
     }
   });
 
-  /* Touch swipe on panel wrapper */
-  let tx = 0, ty = 0;
-  if (wrap) {
-    wrap.addEventListener('touchstart', e => {
-      tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  /* Calc sub-panel: swipe within 계산기 tab to switch 결정력 ↔ 내구력 */
+  let dcSide = 'power';
+  function setDcSide(s) {
+    dcSide = s;
+    const cols = document.querySelector('#powerCalcBody .dc-cols');
+    if (cols) cols.classList.toggle('show-dur', s === 'dur');
+    const title = document.querySelector('#powerCalcPanel .calc-panel-title');
+    if (title) title.textContent = s === 'dur' ? '내구력 계산기' : '결정력 계산기';
+  }
+  let cx = 0, cy = 0;
+  const calcPanelEl = document.getElementById('powerCalcPanel');
+  if (calcPanelEl) {
+    calcPanelEl.addEventListener('touchstart', e => {
+      cx = e.touches[0].clientX; cy = e.touches[0].clientY;
     }, { passive: true });
-    wrap.addEventListener('touchend', e => {
+    calcPanelEl.addEventListener('touchend', e => {
       if (!isMobile()) return;
-      const dx = e.changedTouches[0].clientX - tx;
-      const dy = e.changedTouches[0].clientY - ty;
+      const dx = e.changedTouches[0].clientX - cx;
+      const dy = e.changedTouches[0].clientY - cy;
       if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-      const idx = PANELS.indexOf(curPanel);
-      if (dx < 0 && idx < PANELS.length - 1) setPanel(PANELS[idx + 1]); // 왼쪽 스와이프 → 다음
-      if (dx > 0 && idx > 0) setPanel(PANELS[idx - 1]);                  // 오른쪽 스와이프 → 이전
+      if (dx > 0 && dcSide === 'power') setDcSide('dur');  // 오른쪽 스와이프 → 내구력
+      if (dx < 0 && dcSide === 'dur') setDcSide('power');  // 왼쪽 스와이프 → 결정력
     }, { passive: true });
   }
 
