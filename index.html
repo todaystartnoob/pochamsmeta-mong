@@ -25,7 +25,7 @@
 
     /* ── NAVBAR ── */
     .navbar{height:54px;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 10px rgba(0,0,0,.12);position:relative;z-index:20;}
-    .nav-logo{display:flex;align-items:center;}.nav-logo img{height:38px;object-fit:contain;}
+    .nav-logo{display:flex;align-items:center;}.nav-logo img{height:46px;object-fit:contain;}
     .nav-links{display:flex;gap:6px;}
     .nav-links a{text-decoration:none;color:#444;font-size:14px;padding:5px 14px;border-radius:6px;transition:background .2s,color .2s;}
     .nav-links a:hover{background:#ede0f5;color:var(--accent);}
@@ -1888,7 +1888,7 @@ function cardClickHandler(e) {
     renderDetail(slotIdx);
     return;
   }
-  const btn = e.target.closest('.poke-img-col[data-action], .cfg-row[data-action], .move-row[data-mi], .btn-chg');
+  const btn = e.target.closest('.poke-img-col[data-action], .cfg-row[data-action], .move-row[data-mi], .btn-chg, .btn-box-action[data-action]');
   if (!btn) return;
   const slotIdx = +btn.dataset.slot;
   const action  =  btn.dataset.action;
@@ -3860,7 +3860,8 @@ function saveToBox(slotIdx) {
   };
   try {
     const box = JSON.parse(localStorage.getItem('pochams_box')||'[]');
-    box.push(entry);
+    const firstFree = box.findIndex(e => e == null || !POKEMON_DATA[e?.pkIdx]);
+    if (firstFree >= 0) box[firstFree] = entry; else box.push(entry);
     localStorage.setItem('pochams_box', JSON.stringify(box));
     showToast(`${mem.pokemon.name}을(를) 박스에 저장했습니다!`);
   } catch(e) { showToast('저장 실패'); }
@@ -3869,6 +3870,7 @@ function saveToBox(slotIdx) {
 function openBoxModal(slotIdx) {
   modalSlot = slotIdx;
   _modalSlotWasEmpty = !party[slotIdx]?.pokemon;
+  document.getElementById('boxGrid').dataset.targetSlot = slotIdx;
   renderBoxGrid();
   document.getElementById('boxModal').classList.add('open');
 }
@@ -3877,17 +3879,17 @@ function renderBoxGrid() {
   const grid = document.getElementById('boxGrid');
   let box = [];
   try { box = JSON.parse(localStorage.getItem('pochams_box')||'[]'); } catch(e) {}
-  if (!box.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:32px;font-size:13px">박스가 비어 있습니다</div>';
+  const filled = box.map((e, i) => ({e, i})).filter(({e}) => e && POKEMON_DATA[e?.pkIdx]);
+  if (!filled.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:32px;font-size:13px;line-height:1.8">박스가 비어 있습니다<br><span style="font-size:11px">💾 박스 저장 버튼으로 포켓몬을 박스에 저장하거나<br>포켓몬 박스 페이지에서 박스를 채워주세요</span></div>';
     return;
   }
-  grid.innerHTML = box.map((entry, bi) => {
+  grid.innerHTML = filled.map(({e:entry, i:bi}) => {
     const pk = POKEMON_DATA[entry.pkIdx];
-    if (!pk) return '';
     const nature = (entry.natIdx >= 0) ? NATURES[entry.natIdx] : null;
     const it = (entry.itIdx >= 0) ? ITEM_DATA[entry.itIdx] : null;
     return `
-    <div class="poke-card" style="position:relative;padding-bottom:6px;">
+    <div class="poke-card" data-entry-bi="${bi}" style="position:relative;padding-bottom:6px;">
       <img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}" loading="lazy">
       <div class="pc-no">#${pk.no}</div>
       <div class="pc-name">${pk.name}</div>
@@ -3910,20 +3912,26 @@ document.getElementById('boxGrid').addEventListener('click', e => {
   let box = [];
   try { box = JSON.parse(localStorage.getItem('pochams_box')||'[]'); } catch(e) {}
   if (act === 'del') {
-    box.splice(bi, 1);
+    box[bi] = null;
     localStorage.setItem('pochams_box', JSON.stringify(box));
     renderBoxGrid();
-  } else if (act === 'load' && modalSlot >= 0) {
-    applySlotData(box[bi], modalSlot);
+  } else if (act === 'load') {
+    const entry = box[bi];
+    if (!entry) { showToast('박스 데이터 오류'); return; }
+    const gridEl = document.getElementById('boxGrid');
+    const targetSlot = gridEl.dataset.targetSlot !== undefined ? +gridEl.dataset.targetSlot
+                     : modalSlot >= 0 ? modalSlot : 0;
+    const pk = POKEMON_DATA[entry.pkIdx];
+    if (!pk) { showToast('포켓몬 데이터 오류 (pkIdx=' + entry.pkIdx + ')'); return; }
+    applySlotData(entry, targetSlot);
     saveParty();
     document.getElementById('boxModal').classList.remove('open');
-    if (_modalSlotWasEmpty) {
-      renderSlots();
-    } else {
-      selectedSlot = modalSlot;
-      document.getElementById('appBody')?.classList.remove('big-mode');
-      renderSlots(); renderDetail(selectedSlot); showPanel();
-    }
+    selectedSlot = targetSlot;
+    document.getElementById('appBody')?.classList.remove('big-mode');
+    renderSlots();
+    renderDetail(targetSlot);
+    showPanel();
+    showToast(`${pk.name}을(를) 파티 ${targetSlot+1}번 슬롯에 불러왔습니다!`);
   }
 });
 document.getElementById('closeBoxModal').addEventListener('click', () => {
@@ -3932,6 +3940,46 @@ document.getElementById('closeBoxModal').addEventListener('click', () => {
 document.getElementById('boxModal').addEventListener('click', e => {
   if (e.target === e.currentTarget) document.getElementById('boxModal').classList.remove('open');
 });
+
+/* ── 박스 모달 포켓몬 카드 툴팁 ── */
+function buildBoxTooltipHtml(entry) {
+  const pk = POKEMON_DATA[entry.pkIdx];
+  if (!pk) return '';
+  const item   = (entry.itIdx  >= 0 && ITEM_DATA[entry.itIdx])  ? ITEM_DATA[entry.itIdx]  : null;
+  const nature = (entry.natIdx >= 0 && NATURES[entry.natIdx])   ? NATURES[entry.natIdx]   : null;
+  const evs    = entry.evs || {H:0,A:0,B:0,C:0,D:0,S:0};
+  const moves  = (entry.moves||[]).map(mi => (mi>=0&&MOVE_DATA[mi]) ? MOVE_DATA[mi] : null);
+  const hp   = calcStat(pk.H, evs.H, true);
+  const def  = Math.floor(calcStat(pk.B, evs.B, false, natMult(nature,'B')) * getItemStatMult(item,pk,'B'));
+  const spdf = Math.floor(calcStat(pk.D, evs.D, false, natMult(nature,'D')) * getItemStatMult(item,pk,'D'));
+  const spd  = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(item,pk,'S'));
+  const tb   = t => `<span style="background:${TYPE_COLORS[t]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${t}</span>`;
+  const evStr = ['H','A','B','C','D','S'].filter(k=>evs[k]>0).map(k=>`${k}:${evs[k]}`).join(' ');
+  return `
+    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${pk.name}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
+    ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`도구 ${item.name} `:''}${entry.ability?`특성 ${entry.ability.name}`:''}</div>`:''}
+    ${nature?`<div>성격 ${nature.name}</div>`:''}
+    ${evStr?`<div>노력치 ${evStr}</div>`:''}
+    <div style="margin-top:4px;color:#d0c8f0">${moves.map(mv=>mv?`<div>● ${mv.name}</div>`:'').join('')}</div>
+    <div style="margin-top:5px;border-top:1px solid #403060;padding-top:4px">물리내구 ${Math.floor(hp*def/0.411).toLocaleString()} 특수내구 ${Math.floor(hp*spdf/0.411).toLocaleString()}<br>스피드 ${spd}</div>
+  `;
+}
+(function(){
+  const grid = document.getElementById('boxGrid');
+  grid.addEventListener('mouseover', e => {
+    const card = e.target.closest('.poke-card[data-entry-bi]');
+    if (!card) return;
+    let box = [];
+    try { box = JSON.parse(localStorage.getItem('pochams_box')||'[]'); } catch(_) {}
+    const entry = box[+card.dataset.entryBi];
+    if (!entry) return;
+    showSlotTooltip(card, buildBoxTooltipHtml(entry));
+  });
+  grid.addEventListener('mouseleave', hideSlotTooltip);
+  grid.addEventListener('mouseout', e => {
+    if (!e.relatedTarget || !grid.contains(e.relatedTarget)) hideSlotTooltip();
+  });
+}());
 
 function showToast(msg) {
   let t = document.getElementById('toastEl');
@@ -4570,13 +4618,31 @@ document.getElementById('detailCard').addEventListener('input', evChangeHandler)
 loadParty();
 loadEnemyParty();
 
+/* ── 파티 저장/불러오기 버튼 (동적 생성이므로 이벤트 위임) ── */
+document.getElementById('partySidebar').addEventListener('click', e => {
+  if (e.target.closest('#partySaveBtn')) {
+    saveParty();
+    window.location.href = 'party-box.html';
+  }
+  if (e.target.closest('#partyLoadBtn') || e.target.closest('#bigLoadBtn')) {
+    window.location.href = 'party-box.html';
+  }
+});
+
 /* pending box import from pokemon-box.html */
 const _pendingBox = localStorage.getItem('pochams_box_add');
 if (_pendingBox) {
   try {
     const _pentry = JSON.parse(_pendingBox);
     const _pei = party.findIndex(s => !s.pokemon);
-    if (_pei >= 0) { applySlotData(_pentry, _pei); saveParty(); }
+    if (_pei >= 0) {
+      applySlotData(_pentry, _pei);
+      saveParty();
+      const _pk = POKEMON_DATA[_pentry.pkIdx];
+      if (_pk) setTimeout(() => showToast(`${_pk.name}을(를) 파티 ${_pei+1}번 슬롯에 추가했습니다!`), 300);
+    } else {
+      setTimeout(() => showToast('파티가 가득 찼습니다. 슬롯을 비운 후 다시 시도하세요.'), 300);
+    }
   } catch(e) {}
   localStorage.removeItem('pochams_box_add');
 }
