@@ -115,7 +115,12 @@
     .dc-sprite-wrap { flex-shrink: 0; width: 110px; height: 110px; display: flex; align-items: center; justify-content: center; background: rgba(160,120,200,.12); border-radius: 12px; }
     .dc-sprite { width: 94px; height: 94px; image-rendering: pixelated; object-fit: contain; }
     .dc-info { flex: 1; min-width: 0; }
-    .dc-name { font-size: 17px; font-weight: 700; color: #2a1050; margin-bottom: 6px; }
+    .dc-name { font-size: 17px; font-weight: 700; color: #2a1050; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dc-nickname-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+    .dc-nickname-inp { flex: 1; min-width: 0; border: 1.5px solid #d4b8e8; border-radius: 7px; padding: 4px 10px; font-size: 12px; font-family: inherit; outline: none; transition: border-color .15s; background: #faf6ff; }
+    .dc-nickname-inp:focus { border-color: #7b3fa0; background: #fff; }
+    .dc-save-nick-btn { flex-shrink: 0; background: #7b3fa0; color: #fff; border: none; border-radius: 7px; padding: 4px 11px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .14s; }
+    .dc-save-nick-btn:hover { background: #5a2d7a; }
     .dc-no { font-size: 10px; color: #aaa; margin-bottom: 4px; }
     .dc-types { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
     .type-badge { padding: 2px 8px; border-radius: 4px; font-size: 10px; color: #fff; font-weight: 700; }
@@ -510,7 +515,7 @@ function buildBoxTtHtml(entry) {
   const tb   = t => `<span style="background:${TYPE_COLORS[t]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${t}</span>`;
   const evStr = ['H','A','B','C','D','S'].filter(k=>evs[k]>0).map(k=>`${k}:${evs[k]}`).join(' ');
   return `
-    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${pk.name}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
+    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${entry.nickname || pk.name}${entry.nickname ? ` <span style="opacity:.6;font-size:9px;font-weight:400">(${pk.name})</span>` : ''}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
     ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`도구 ${item.name} `:''}${entry.ability?`특성 ${entry.ability.name}`:''}</div>`:''}
     ${nature?`<div>성격 ${nature.name}</div>`:''}
     ${evStr?`<div>노력치 ${evStr}</div>`:''}
@@ -562,8 +567,8 @@ function renderGrid(animate, dir) {
     const absIdx = start + i;
     if (entry && POKEMON_DATA[entry.pkIdx]) {
       const pk = POKEMON_DATA[entry.pkIdx];
-      html.push(`<div class="box-slot filled" data-idx="${absIdx}" title="${pk.name}">
-        <img src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}" loading="lazy">
+      html.push(`<div class="box-slot filled" data-idx="${absIdx}" title="${entry.nickname ? entry.nickname + ' (' + pk.name + ')' : pk.name}">
+        <img src="${spriteUrl(pk.name, pk.no)}" alt="${entry.nickname || pk.name}" loading="lazy">
       </div>`);
     } else {
       html.push(`<div class="box-slot empty" data-idx="${absIdx}"><span class="slot-plus">+</span></div>`);
@@ -665,8 +670,12 @@ function openDetail(absIdx) {
         <img class="dc-sprite" src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}">
       </div>
       <div class="dc-info">
-        <div class="dc-no">#${pk.no}</div>
-        <div class="dc-name">${pk.name}${entry.gender ? ' ' + entry.gender : ''}</div>
+        <div class="dc-no">#${pk.no} · ${pk.name}${entry.gender ? ' ' + entry.gender : ''}</div>
+        <div class="dc-name">${entry.nickname || pk.name}</div>
+        <div class="dc-nickname-row">
+          <input type="text" class="dc-nickname-inp" id="dcNicknameInp" placeholder="별명 입력..." maxlength="20" value="${(entry.nickname || '').replace(/"/g, '&quot;')}">
+          <button class="dc-save-nick-btn" id="dcSaveNickBtn">저장</button>
+        </div>
         <div class="dc-types">${types}</div>
         <div class="dc-build-chips">
           ${natChips}
@@ -683,6 +692,16 @@ function openDetail(absIdx) {
   `;
 
   document.getElementById('dcClose').onclick = closeDetail;
+  document.getElementById('dcSaveNickBtn').onclick = () => {
+    const nick = document.getElementById('dcNicknameInp').value.trim();
+    const b = getBoxData();
+    if (b[absIdx] != null) { b[absIdx].nickname = nick || undefined; setBoxData(b); }
+    showToast(nick ? `별명 "${nick}" 저장됨` : '별명이 삭제되었습니다.');
+    renderGrid(false);
+  };
+  document.getElementById('dcNicknameInp').addEventListener('keydown', ev => {
+    if (ev.key === 'Enter') document.getElementById('dcSaveNickBtn').click();
+  });
   document.getElementById('dcAddBtn').onclick = () => {
     localStorage.setItem('pochams_box_add', JSON.stringify(entry));
     window.location.href = 'index.html';

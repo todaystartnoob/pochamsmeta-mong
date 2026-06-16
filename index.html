@@ -180,6 +180,8 @@
     .poke-main-img{width:132px;height:132px;image-rendering:pixelated;object-fit:contain;}
     .poke-name-row{display:flex;align-items:center;gap:6px;}
     .poke-name{font-size:14px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:98px;}
+    .poke-nickname-inp{flex:1;min-width:0;border:1.5px solid #d4b8e8;border-radius:6px;padding:3px 8px;font-size:11px;font-family:inherit;outline:none;background:#faf6ff;transition:border-color .15s;}
+    .poke-nickname-inp:focus{border-color:#7b3fa0;background:#fff;}
     .poke-type-row{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;}
     .type-mini-badge{padding:2px 8px;border-radius:4px;font-size:11px;color:#fff;font-weight:600;}
 
@@ -1077,7 +1079,7 @@ function natMult(nature, stat) {
    STATE
 ════════════════════════════ */
 const PARTY_SIZE = 6;
-function newSlot() { return {pokemon:null,item:null,ability:null,nature:null,moves:[null,null,null,null],evs:{H:0,A:0,B:0,C:0,D:0,S:0},gender:null}; }
+function newSlot() { return {pokemon:null,item:null,ability:null,nature:null,moves:[null,null,null,null],evs:{H:0,A:0,B:0,C:0,D:0,S:0},gender:null,nickname:null}; }
 const party = Array.from({length: PARTY_SIZE}, newSlot);
 let selectedSlot = -1;
 let modalSlot    = -1;
@@ -1811,7 +1813,8 @@ function buildMySlotTooltip(mem) {
     const col = mv.category==='물리'?'#e8a060':mv.category==='특수'?'#60a8e8':'#808098';
     movesHTML += `<div class="tt-move"><span class="tt-cat" style="color:${col}">●</span><span class="tt-mname">${mv.name}</span>${pow>0?`<span class="tt-pow">${pow.toLocaleString()}</span>`:''}</div>`;
   }
-  return `<div class="tt-header"><span class="tt-pkname">${pk.name}</span>${typeBadges}</div>` +
+  const displayName = mem.nickname ? `${mem.nickname} <span style="opacity:.6;font-size:10px;font-weight:400">(${pk.name})</span>` : pk.name;
+  return `<div class="tt-header"><span class="tt-pkname">${displayName}</span>${typeBadges}</div>` +
     `<div class="tt-row">${mem.item?`<span><span class="tt-lbl">도구</span> ${mem.item.name}</span>`:''}${mem.ability?`<span><span class="tt-lbl">특성</span> ${mem.ability.name}</span>`:''}</div>` +
     `<div class="tt-row">${nature?`<span class="tt-lbl">성격</span> ${nature.name}`:''}</div>` +
     (evParts.length ? `<div class="tt-ev"><span class="tt-lbl">노력치</span> ${evParts.join(' ')}</div>` : '') +
@@ -2077,7 +2080,7 @@ function renderDetail(idx) {
       <div class="poke-img-col" data-slot="${idx}" data-action="changePoke">
         <img src="${spriteUrl(pk.name,pk.no)}" class="poke-main-img" alt="${pk.name}">
         <div class="poke-name-row">
-          <span class="poke-name" title="${pk.name}">${pk.name}</span>
+          <span class="poke-name" title="${pk.name}">${mem.nickname || pk.name}</span>
         </div>
         <div class="poke-type-row">${typeBadges}</div>
       </div>
@@ -2085,6 +2088,7 @@ function renderDetail(idx) {
       <div class="stats-col">
         ${statRows}
         <div class="ev-total-row">
+          <input type="text" class="poke-nickname-inp" id="pokeNicknameInp" placeholder="별명..." maxlength="20" value="${(mem.nickname||'').replace(/"/g,'&quot;')}">
           <div style="display:flex;gap:3px;flex-shrink:0;">
             <button class="det-gender-tab${!mem.gender?' on':''}" data-gender-slot="${idx}" data-gender="">무성</button>
             <button class="det-gender-tab male${mem.gender==='♂'?' on':''}" data-gender-slot="${idx}" data-gender="♂">♂</button>
@@ -2153,6 +2157,19 @@ function renderDetail(idx) {
   if (window.dcSyncFromSlot) window.dcSyncFromSlot(idx);
   if (window.scSyncFromSlot) window.scSyncFromSlot(idx);
   updateMobChartView();
+
+  const nickInp = document.getElementById('pokeNicknameInp');
+  if (nickInp) {
+    const applyNick = () => {
+      const nick = nickInp.value.trim();
+      party[idx].nickname = nick || null;
+      saveParty();
+      const nameEl = document.querySelector('.poke-name');
+      if (nameEl) nameEl.textContent = nick || pk.name;
+    };
+    nickInp.addEventListener('blur', applyNick);
+    nickInp.addEventListener('keydown', ev => { if (ev.key === 'Enter') nickInp.blur(); });
+  }
 }
 
 function updateMobChartView() {
@@ -4225,7 +4242,8 @@ function saveParty() {
       ability: slot.ability ? {name:slot.ability.name, desc:slot.ability.desc||''} : null,
       moves:   slot.moves.map(mv => mv ? MOVE_DATA.indexOf(mv) : -1),
       evs:     {...slot.evs},
-      gender:  slot.gender || null
+      gender:  slot.gender || null,
+      nickname: slot.nickname || null
     };
   });
   localStorage.setItem('pochams_party', JSON.stringify(data));
@@ -4243,6 +4261,7 @@ function applySlotData(d, i) {
   party[i].moves   = (d.moves||[-1,-1,-1,-1]).map(mi => (mi>=0 && MOVE_DATA[mi]) ? MOVE_DATA[mi] : null);
   party[i].evs     = d.evs || {H:0,A:0,B:0,C:0,D:0,S:0};
   party[i].gender  = d.gender || null;
+  party[i].nickname = d.nickname || null;
 }
 
 function loadParty() {
@@ -4267,6 +4286,7 @@ function saveToBox(slotIdx) {
     moves:   mem.moves.map(mv => mv ? MOVE_DATA.indexOf(mv) : -1),
     evs:     {...mem.evs},
     gender:  mem.gender || null,
+    nickname: mem.nickname || null,
     savedAt: Date.now()
   };
   try {
@@ -4303,7 +4323,7 @@ function renderBoxGrid() {
     <div class="poke-card" data-entry-bi="${bi}" style="position:relative;padding-bottom:6px;">
       <img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}" loading="lazy">
       <div class="pc-no">#${pk.no}</div>
-      <div class="pc-name">${pk.name}</div>
+      <div class="pc-name">${entry.nickname || pk.name}</div>
       <div class="pc-types">${[pk.type1,pk.type2].filter(Boolean).map(t=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')}</div>
       ${nature?`<div style="font-size:9px;color:#888;margin-top:1px">${nature.name}</div>`:''}
       ${it?`<div style="font-size:9px;color:#7b3fa0">${it.name}</div>`:''}
@@ -4366,8 +4386,9 @@ function buildBoxTooltipHtml(entry) {
   const spd  = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(item,pk,'S'));
   const tb   = t => `<span style="background:${TYPE_COLORS[t]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${t}</span>`;
   const evStr = ['H','A','B','C','D','S'].filter(k=>evs[k]>0).map(k=>`${k}:${evs[k]}`).join(' ');
+  const nickLine = entry.nickname ? `${entry.nickname} <span style="opacity:.6;font-size:9px;font-weight:400">(${pk.name})</span>` : pk.name;
   return `
-    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${pk.name}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
+    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${nickLine}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
     ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`도구 ${item.name} `:''}${entry.ability?`특성 ${entry.ability.name}`:''}</div>`:''}
     ${nature?`<div>성격 ${nature.name}</div>`:''}
     ${evStr?`<div>노력치 ${evStr}</div>`:''}

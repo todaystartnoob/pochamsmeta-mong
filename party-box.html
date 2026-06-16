@@ -89,6 +89,23 @@
     .save-btn:hover { background: #5a2d7a; }
     .save-btn:disabled { background: #bbb; cursor: default; }
 
+    .pc-rename-btn {
+      flex-shrink: 0; background: none; border: 1.5px solid #d4b8e8; color: #9060b8;
+      border-radius: 5px; padding: 2px 7px; font-size: 10px; cursor: pointer;
+      font-family: inherit; transition: all .14s; line-height: 1.4;
+    }
+    .pc-rename-btn:hover { background: #ede0f5; }
+    .pc-rename-inp {
+      flex: 1; min-width: 0; border: 1.5px solid #7b3fa0; border-radius: 6px;
+      padding: 3px 8px; font-size: 13px; font-weight: 700; color: #3a1a5c;
+      font-family: inherit; outline: none; background: #f8f0ff;
+    }
+    .pc-rename-confirm {
+      flex-shrink: 0; background: #7b3fa0; color: #fff; border: none;
+      border-radius: 5px; padding: 3px 9px; font-size: 10px; cursor: pointer;
+      font-family: inherit;
+    }
+
     .no-party-msg {
       color: #aaa; font-size: 13px; padding: 8px 0;
     }
@@ -312,6 +329,7 @@ function renderSaves() {
     <div class="party-card">
       <div class="pc-header">
         <div class="pc-name">${save.name || '이름 없음'}</div>
+        <button class="pc-rename-btn" data-rename="${i}">✏</button>
         <div class="pc-date">${formatDate(save.savedAt)}</div>
       </div>
       <div class="pc-slots">
@@ -342,6 +360,39 @@ document.getElementById('savePartyBtn').addEventListener('click', () => {
 });
 
 document.getElementById('partiesGrid').addEventListener('click', e => {
+  const renameBtn = e.target.closest('.pc-rename-btn');
+  if (renameBtn) {
+    const i = +renameBtn.dataset.rename;
+    const header = renameBtn.closest('.pc-header');
+    const nameEl = header.querySelector('.pc-name');
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.className = 'pc-rename-inp';
+    inp.value = nameEl.textContent === '이름 없음' ? '' : nameEl.textContent;
+    inp.maxLength = 20; inp.dataset.editIdx = i;
+    nameEl.replaceWith(inp);
+    inp.focus(); inp.select();
+    renameBtn.textContent = '저장'; renameBtn.className = 'pc-rename-confirm';
+    renameBtn.removeAttribute('data-rename'); renameBtn.dataset.confirmIdx = i;
+    const doSave = () => {
+      const newName = inp.value.trim() || '이름 없음';
+      const saves = getSaves();
+      if (saves[i]) { saves[i].name = newName; setSaves(saves); }
+      renderSaves();
+    };
+    inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') doSave(); if (ev.key === 'Escape') renderSaves(); });
+    inp.addEventListener('blur', () => setTimeout(() => { if (document.contains(inp)) doSave(); }, 200));
+    return;
+  }
+  const confirmBtn = e.target.closest('.pc-rename-confirm');
+  if (confirmBtn) {
+    const i = +confirmBtn.dataset.confirmIdx;
+    const inp = confirmBtn.closest('.pc-header').querySelector('.pc-rename-inp');
+    const newName = (inp ? inp.value.trim() : '') || '이름 없음';
+    const saves = getSaves();
+    if (saves[i]) { saves[i].name = newName; setSaves(saves); }
+    renderSaves(); return;
+  }
+
   const loadBtn = e.target.closest('[data-idx]');
   const delBtn  = e.target.closest('[data-del]');
 
