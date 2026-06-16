@@ -95,23 +95,38 @@ def pct_entries(lines, mapping=None, strip_paren=False, limit=10):
     return out
 
 def ev_entries(lines, limit=12):
-    """능력포인트: 라벨/%/(H 2 A 32 S 32...) 흩어진 구조에서 배분 추출."""
-    out, seen, i, label, n = [], set(), 0, None, len(lines)
-    while i < n and len(out) < limit:
+    """능력포인트: '개별(個別)' 배분만 추출한다.
+    pokedb 페이지는 '합산(合算)' 그룹 합계(예: AS=AS+h·AS+b... 총합, '余り'/'N件を合算' 표기)와
+    '개별' 단일 배분을 함께 렌더링한다. 余り/件を合算이 붙은 그룹 합계는 버리고 개별만 모아
+    사용률 내림차순으로 정렬한다.
+    """
+    out, seen, i, n = [], set(), 0, len(lines)
+    while i < n:
         ln = lines[i]
         if ln in ("合算", "個別", "+", "余り") or ln.endswith("件を合算") or re.fullmatch(r"\d{1,3}", ln):
             i += 1; continue
-        m = RATE.match(ln)
-        if m:
-            rate = float(m.group(1)); evs = {}; j = i + 1
+        # 라벨 다음 줄이 % 인 경우만 항목으로 인정
+        if i + 1 < n and RATE.match(lines[i + 1]):
+            label = ln
+            rate = float(RATE.match(lines[i + 1]).group(1))
+            evs = {}; j = i + 2
             while j + 1 < n and lines[j] in "HABCDS" and re.fullmatch(r"\d+", lines[j + 1]):
                 evs[lines[j]] = int(lines[j + 1]); j += 2
-            key = (tuple(sorted(evs.items())), rate)
-            if evs and key not in seen:
-                seen.add(key); out.append({"label": label, "evs": evs, "rate": rate})
-            i = j; continue
-        label = ln; i += 1
-    return out
+            # 뒤에 余り/件を合算이 따라오면 = 합산 그룹 -> 제외
+            is_group = False; k = j
+            while k < n and (lines[k] in ("+", "余り") or lines[k].endswith("件を合算")):
+                if lines[k] == "余り" or lines[k].endswith("件を合算"):
+                    is_group = True
+                k += 1
+            if evs and not is_group:
+                key = tuple(sorted(evs.items()))
+                if key not in seen:
+                    seen.add(key)
+                    out.append({"label": label, "evs": evs, "rate": rate})
+            i = k; continue
+        i += 1
+    out.sort(key=lambda x: -x["rate"])
+    return out[:limit]
 
 def scrape(poke_id, season, rule):
     url = PAGE.format(id=poke_id, season=season, r=RULE_CODE[rule])

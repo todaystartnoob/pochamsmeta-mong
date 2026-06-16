@@ -92,7 +92,7 @@
     .slot-del:hover{background:#c00;}
 
     /* ── AD PANELS ── */
-    .ad-panel{display:none;background:#c8c8c8;width:190px;flex-shrink:0;}
+    .ad-panel{display:none;background:rgba(0,0,0,.12);width:190px;flex-shrink:0;}
     /* ── BIG MODE (default state) ── */
     .app-body.big-mode{flex:0 0 auto;display:flex;flex-direction:row;align-items:stretch;padding:10px 8px;gap:8px;box-sizing:border-box;}
     #appBody.big-mode ~ #recPanel{display:none;}
@@ -144,7 +144,7 @@
     .pcs-tbadge{font-size:9px;font-weight:700;color:#fff;padding:2px 6px;border-radius:4px;}
     .pcs-none{font-size:9px;color:#6a5a90;margin-top:3px;}
     /* ── BOTTOM AD ── */
-    .bottom-ad-panel{display:none;min-height:72px;background:#c8c8c8;border-radius:10px;margin:0 8px 8px;flex:1;}
+    .bottom-ad-panel{display:none;min-height:72px;background:rgba(0,0,0,.12);border-radius:10px;margin:0 8px 8px;flex:1;}
     #appBody.big-mode ~ .bottom-ad-panel{display:block;}
 
     /* ── DETAIL OVERLAY ── */
@@ -531,11 +531,18 @@
       .calc-panel{display:none;}
       .analysis-sidebar{width:240px;}
       /* calc 패널 없을 때 상세카드가 남은 공간 채우기 */
-      .detail-area{flex:1!important;width:auto!important;max-width:560px;}
+      .detail-area{flex:1!important;width:auto!important;max-width:none;}
     }
     @media(max-width:960px){
       .nav-ana-toggle{display:block;}
     }
+
+    /* ── MOB CHART VIEW (mobile type chart when no slot selected) ── */
+    .mob-chart-view{display:none;} /* desktop: always hidden */
+    .mob-chart-tabs{display:flex;gap:0;padding:10px 10px 0;flex-shrink:0;background:var(--chart-bg);}
+    .mob-chart-tab{flex:1;border:none;padding:9px 0;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;color:#9080c0;background:rgba(255,255,255,.06);border-radius:8px 8px 0 0;transition:background .15s,color .15s;}
+    .mob-chart-tab.on{background:var(--accent);color:#fff;}
+    .mob-chart-body{padding:10px;overflow-y:auto;flex:1;min-height:0;}
 
     /* ═══ TABLET + MOBILE PANEL SYSTEM (≤ 1024px) ═══ */
     .mob-panel-wrap{display:contents;} /* desktop: transparent wrapper */
@@ -581,8 +588,9 @@
       /* ── Panel wrapper becomes slide container ── */
       .mob-panel-wrap{
         display:block!important;
-        flex:1;min-height:0;
+        flex:1;min-height:0;width:100%;
         position:relative;overflow:hidden;
+        -webkit-transform:translateZ(0);transform:translateZ(0);
       }
 
       /* ── Each panel: absolutely stacked, full area ── */
@@ -590,11 +598,14 @@
       #mobPanelWrap>#powerCalcPanel,
       #mobPanelWrap>#speedCalcPanel{
         display:flex!important;flex-direction:column;
-        position:absolute;inset:0;
-        width:100%;height:100%;
+        position:absolute;
+        top:0!important;right:0!important;bottom:0!important;left:0!important;
+        width:100%!important;max-width:none!important;min-width:0!important;
+        height:100%!important;max-height:none!important;
+        box-sizing:border-box;
         overflow-y:auto;overflow-x:hidden;
         opacity:1!important;pointer-events:all!important;
-        border-radius:0;background:#ede8f5;
+        border-radius:0!important;background:#ede8f5;
         will-change:transform;
         transition:transform .28s cubic-bezier(.4,0,.2,1)!important;
       }
@@ -619,6 +630,16 @@
 
       /* ── Detail area fixes ── */
       #mobPanelWrap>#detailArea.visible{opacity:1!important;}
+      /* mob chart view: absolutely fill detail area when no slot selected */
+      .mob-chart-view{
+        position:absolute;top:0;left:0;right:0;bottom:0;
+        display:flex;flex-direction:column;
+        background:var(--chart-bg);
+        overflow:hidden;
+        z-index:2;
+      }
+      .mob-chart-view.hidden{display:none!important;}
+      .mob-chart-body{overflow-y:auto;flex:1;min-height:0;}
       .detail-area .detail-card{width:100%!important;box-sizing:border-box;}
       .poke-header{flex-direction:column!important;align-items:center!important;}
       .poke-img-col{width:100%!important;flex-direction:row!important;gap:14px!important;justify-content:center!important;}
@@ -648,8 +669,28 @@
       }
 
       /* ── Big mode: disable on mobile ── */
-      .app-body.big-mode{flex-direction:column!important;}
-      .app-body.big-mode .mob-panel-wrap{display:block!important;}
+      /* app-body becomes position:relative so mob-panel-wrap can anchor absolutely */
+      .app-body.big-mode{
+        flex-direction:column!important;
+        padding:0!important;gap:0!important;
+        position:relative!important;
+      }
+      /* party strip: normal flow, 64px tall */
+      .app-body.big-mode #partySidebar{
+        position:relative!important;
+        width:100%!important;
+        flex:none!important;
+      }
+      /* panel wrap: absolutely fill the space below party strip */
+      .app-body.big-mode .mob-panel-wrap{
+        display:block!important;
+        position:absolute!important;
+        top:64px!important;left:0!important;right:0!important;bottom:0!important;
+        width:100%!important;height:auto!important;
+        flex:none!important;
+      }
+      /* hover tooltip: never on touch screens */
+      .slot-tooltip{display:none!important;}
       .app-body.big-mode .detail-area,
       .app-body.big-mode .calc-panel{display:flex!important;}
     }
@@ -681,11 +722,19 @@
 <!-- APP BODY -->
 <div class="app-wrap">
 <div class="app-body" id="appBody">
-  <div class="ad-panel" id="leftAd"></div>
+  <div class="ad-panel" id="leftAd">광고</div>
   <aside class="party-sidebar" id="partySidebar"></aside>
   <div id="bigPartyChart" class="big-mode-chart"></div>
   <div id="mobPanelWrap" class="mob-panel-wrap">
     <main class="detail-area" id="detailArea">
+      <div id="mobChartView" class="mob-chart-view">
+        <div class="mob-chart-tabs">
+          <button class="mob-chart-tab on" data-side="party">내 파티 상성</button>
+          <button class="mob-chart-tab" data-side="enemy">상대 파티 상성</button>
+        </div>
+        <div id="mobPartyChart" class="mob-chart-body"></div>
+        <div id="mobEnemyChart" class="mob-chart-body" style="display:none;"></div>
+      </div>
       <div class="detail-card" id="detailCard"></div>
     </main>
     <section class="calc-panel" id="powerCalcPanel">
@@ -710,7 +759,7 @@
   </aside>
   <div id="bigEnemyChart" class="big-mode-chart"></div>
   <aside class="enemy-sidebar" id="enemySidebar"></aside>
-  <div class="ad-panel" id="rightAd"></div>
+  <div class="ad-panel" id="rightAd">광고</div>
 </div>
 <div id="slotTooltip" class="slot-tooltip"></div>
 <div class="rec-panel" id="recPanel">
@@ -720,7 +769,7 @@
   </div>
   <div class="rec-list" id="recPokemonList"></div>
 </div>
-<div class="bottom-ad-panel"></div>
+<div class="bottom-ad-panel">광고</div>
 </div>
 
 <!-- POKEMON MODAL -->
@@ -1798,6 +1847,8 @@ function hidePanel() {
   clearTimeout(_hidePanelTimer);
   /* 패널 페이드아웃 → 레이아웃 전환 */
   _PANEL_IDS.forEach(id => document.getElementById(id)?.classList.remove('visible'));
+  document.getElementById('detailCard').innerHTML = '';
+  updateMobChartView();
   _hidePanelTimer = setTimeout(() => {
     document.getElementById('appBody')?.classList.add('big-mode');
     renderSlots();
@@ -2000,6 +2051,19 @@ function renderDetail(idx) {
   updateAnalysis(idx);
   if (window.dcSyncFromSlot) window.dcSyncFromSlot(idx);
   if (window.scSyncFromSlot) window.scSyncFromSlot(idx);
+  updateMobChartView();
+}
+
+function updateMobChartView() {
+  const view = document.getElementById('mobChartView');
+  const card = document.getElementById('detailCard');
+  if (!view) return;
+  const hasDetail = card && card.innerHTML.trim().length > 0;
+  if (hasDetail) {
+    view.classList.add('hidden');
+  } else {
+    view.classList.remove('hidden');
+  }
 }
 
 /* ════════════════════════════
@@ -2252,6 +2316,8 @@ function renderPartyTypeChart() {
   if (anaEl) anaEl.innerHTML = buildTypeChartHTML(slots);
   const bigEl = document.getElementById('bigPartyChart');
   if (bigEl) bigEl.innerHTML = `<div class="big-chart-title">파티 상성</div>` + buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
+  const mobEl = document.getElementById('mobPartyChart');
+  if (mobEl) mobEl.innerHTML = buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
 }
 
 function renderBigEnemyChart() {
@@ -2259,6 +2325,8 @@ function renderBigEnemyChart() {
   if (!bigEl) return;
   const slots = enemyParty.filter(s => s.pokemon);
   bigEl.innerHTML = `<div class="big-chart-title">파티 상성</div>` + buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
+  const mobEl = document.getElementById('mobEnemyChart');
+  if (mobEl) mobEl.innerHTML = buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
 }
 
 function empty() { return '<span class="chart-empty">없음</span>'; }
@@ -4903,6 +4971,18 @@ renderSpeedCalc();
 renderSpeedRankList();
 document.addEventListener('pochams:partychange', () => { renderSpeedCalc(); renderPartyTypeChart(); renderSpeedRankList(); });
 renderPartyTypeChart();
+updateMobChartView();
+
+/* 모바일 차트뷰 탭 전환 */
+document.querySelectorAll('.mob-chart-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mob-chart-tab').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const side = btn.dataset.side;
+    document.getElementById('mobPartyChart').style.display = side === 'party' ? '' : 'none';
+    document.getElementById('mobEnemyChart').style.display = side === 'enemy' ? '' : 'none';
+  });
+});
 
 /* 추천 포켓몬 패널 접기 토글 */
 document.getElementById('recToggleBtn').addEventListener('click', () => {
@@ -4937,9 +5017,11 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
     if (wrap && !wrap.dataset.panel) setPanel('detail');
   }
 
-  /* Tab bar clicks */
-  document.querySelectorAll('.mob-tab-btn').forEach(btn =>
-    btn.addEventListener('click', () => setPanel(btn.dataset.panel)));
+  /* Tab bar clicks — use delegation so HTML order doesn't matter */
+  document.body.addEventListener('click', e => {
+    const btn = e.target.closest('.mob-tab-btn');
+    if (btn) setPanel(btn.dataset.panel);
+  });
 
   /* Touch swipe on panel wrapper */
   let tx = 0, ty = 0;

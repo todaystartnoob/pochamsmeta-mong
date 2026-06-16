@@ -3,7 +3,7 @@
     "source": "PokeAPI + Bulbapedia(포챔스 도구 목록)",
     "spriteBase": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/{}.png",
     "note": "champions=true는 포챔스 참전 도구(베리28+지닌30+메가스톤59 기준). 출시/레귤레이션 변경 시 갱신. / 일부 8세대 지닌도구 스프라이트는 pokesprite(msikma) 출처. / Z-A 신규 메가스톤 추가(스프라이트는 공통 메가스톤 오브).",
-    "count": 372
+    "count": 382
   },
   "items": [
     {
@@ -2973,6 +2973,94 @@
       "fling": 10,
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/luck-incense.png"
+    },
+    {
+      "name": "부스트에너지",
+      "category": "전용도구",
+      "effect": "고대활성·쿼크차지 특성인 포켓몬에게 지니게 하면, 발동 조건(쾌청·일렉트릭필드)이 없어도 그 특성의 효과를 발동시킨다. 1회용.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/booster-energy.png"
+    },
+    {
+      "name": "특성가드",
+      "category": "지닌도구",
+      "effect": "지니게 한 포켓몬의 특성이 상대의 기술이나 특성으로 인해 사라지거나 무효화되지 않게 된다.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/ability-shield.png"
+    },
+    {
+      "name": "클리어참",
+      "category": "지닌도구",
+      "effect": "지니게 한 포켓몬의 능력이 상대에 의해 떨어지지 않게 된다.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/clear-amulet.png"
+    },
+    {
+      "name": "은밀망토",
+      "category": "지닌도구",
+      "effect": "지니게 한 포켓몬이 상대 기술의 추가 효과를 받지 않게 된다.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/covert-cloak.png"
+    },
+    {
+      "name": "속임수주사위",
+      "category": "지닌도구",
+      "effect": "지니게 하면 2~5번 공격하는 기술이 반드시 4~5번 맞게 된다.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/loaded-dice.png"
+    },
+    {
+      "name": "흉내허브",
+      "category": "지닌도구",
+      "effect": "상대 포켓몬의 능력이 올라갔을 때 지닌 포켓몬도 같은 능력이 올라간다. 1회용.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/mirror-herb.png"
+    },
+    {
+      "name": "펀치글러브",
+      "category": "지닌도구",
+      "effect": "지니게 하면 펀치 기술의 위력이 올라가고, 펀치 기술을 써도 상대와 접촉하지 않게 된다.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/punching-glove.png"
+    },
+    {
+      "name": "망나뇽나이트",
+      "category": "메가스톤",
+      "effect": "망나뇽에게 지니게 하면 배틀할 때 메가진화할 수 있는 신비한 메가스톤의 일종.",
+      "fling": 80,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/venusaurite.png"
+    },
+    {
+      "name": "우츠보트나이트",
+      "category": "메가스톤",
+      "effect": "우츠보트에게 지니게 하면 배틀할 때 메가진화할 수 있는 신비한 메가스톤의 일종.",
+      "fling": 80,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/venusaurite.png"
+    },
+    {
+      "name": "플라엣테나이트",
+      "category": "메가스톤",
+      "effect": "플라엣테에게 지니게 하면 배틀할 때 메가진화할 수 있는 신비한 메가스톤의 일종.",
+      "fling": 80,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/venusaurite.png"
+    },
+    {
+      "name": "요정의날개",
+      "category": "타입강화",
+      "effect": "페어리타입 기술의 위력이 강해진다.",
+      "fling": null,
+      "champions": true,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen9/fairy-feather.png"
     }
   ]
 }

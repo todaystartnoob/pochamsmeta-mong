@@ -14,8 +14,7 @@
   <script src="abilities-data.js"></script>
   <script src="learnset-data.js"></script>
   <script src="champions_loc_map.js"></script>
-  <script src="meta-usage-data.js"></script>
-  <script src="meta-usage-sets.js"></script>
+  <!-- meta-usage-data.js / meta-usage-sets.js 는 GitHub에서 직접 fetch -->
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     html{height:100%;overflow:hidden;}
@@ -358,6 +357,26 @@ function teamDisplayName(pk) {
   return name;
 }
 
+const GITHUB_RAW = 'https://raw.githubusercontent.com/todaystartnoob/pochamsmeta-mong/main/';
+const _ghCache = {}; // key → { usage, sets }
+
+async function ghFetch(path) {
+  const r = await fetch(GITHUB_RAW + path);
+  if (!r.ok) throw new Error(`fetch ${path} → ${r.status}`);
+  return r.json();
+}
+
+async function fetchSeasonData(season, rule) {
+  const key = `s${season}_${rule}`;
+  if (_ghCache[key]) return _ghCache[key];
+  const [usage, sets] = await Promise.all([
+    ghFetch(`data/champions_s${season}_${rule}.json`),
+    ghFetch(`data/champions_s${season}_${rule}_sets.json`).catch(() => null),
+  ]);
+  _ghCache[key] = { usage, sets };
+  return _ghCache[key];
+}
+
 let seasons = [];
 let curSeason = null;
 let curRule = 'single';
@@ -365,22 +384,13 @@ let mainData = null;
 let setsData = null;
 let selectedUsageIdx = -1;
 
-function getLocalData(season, rule) {
-  const key = `s${season}_${rule}`;
-  return (typeof META_USAGE_DATA !== 'undefined' && META_USAGE_DATA[key]) || null;
-}
-
-function getLocalSets(season, rule) {
-  const key = `s${season}_${rule}`;
-  return (typeof META_SETS_DATA !== 'undefined' && META_SETS_DATA[key]) || null;
-}
-
-function init() {
-  // 시즌/룰 목록을 META_USAGE_DATA 키에서 파싱
-  if (typeof META_USAGE_DATA !== 'undefined') {
+async function init() {
+  setLoading();
+  try {
+    const idx = await ghFetch('data/index.json');
     const seen = new Map();
-    for (const key of Object.keys(META_USAGE_DATA)) {
-      const m = key.match(/^s(\d+)_(single|double)$/);
+    for (const fname of (idx.files || [])) {
+      const m = fname.match(/champions_s(\d+)_(single|double)\.json$/);
       if (m) {
         const n = parseInt(m[1]);
         if (!seen.has(n)) seen.set(n, { number: n, rules: [] });
@@ -388,6 +398,8 @@ function init() {
       }
     }
     seasons = [...seen.values()].sort((a, b) => a.number - b.number);
+  } catch(e) {
+    console.error('index.json fetch 실패:', e);
   }
 
   if (!seasons.length) seasons = [{ number: 1, rules: ['single', 'double'] }];
@@ -395,7 +407,7 @@ function init() {
 
   renderSeasonTabs();
   bindRuleTabs();
-  loadData();
+  await loadData();
 }
 
 function renderSeasonTabs() {
@@ -445,13 +457,22 @@ function bindRuleTabs() {
   });
 }
 
-function loadData() {
+async function loadData() {
   setLoading();
-  mainData = getLocalData(curSeason, curRule);
-  setsData = getLocalSets(curSeason, curRule);
   usagePage = 0;
   teamsPage = 0;
-  // 시즌/룰 전환 시 탭은 유지, 버튼 상태만 동기화
+  try {
+    const cached = await fetchSeasonData(curSeason, curRule);
+    mainData = cached.usage;
+    setsData = cached.sets;
+  } catch(e) {
+    console.error('데이터 fetch 실패:', e);
+    mainData = null;
+    setsData = null;
+    document.getElementById('usageBody').innerHTML = '<div class="panel-msg" style="color:#c44">데이터를 불러올 수 없습니다</div>';
+    document.getElementById('teamsBody').innerHTML = '<div class="panel-msg" style="color:#c44">데이터를 불러올 수 없습니다</div>';
+    return;
+  }
   document.querySelectorAll('.usage-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.view === usageViewMode));
   renderUsage();
   renderTeams();
@@ -802,11 +823,24 @@ function openDetail(idx, u) {
     return;
   }
 
-  // 노력치 (우측 패널)
+  // 노력치 (우측 패널) — 동일 EV 배분 중복 제거 (비율 합산)
   let evHtml = '';
   if (pk.ev_spreads?.length) {
-    const evMax = pk.ev_spreads[0].rate || 1;
+    const _evSeen = new Map();
+    const _evDeduped = [];
     for (const ev of pk.ev_spreads) {
+      const k = JSON.stringify(ev.evs ?? {});
+      if (_evSeen.has(k)) {
+        _evSeen.get(k).rate = (_evSeen.get(k).rate || 0) + (ev.rate || 0);
+      } else {
+        const clone = { ...ev, rate: ev.rate || 0 };
+        _evSeen.set(k, clone);
+        _evDeduped.push(clone);
+      }
+    }
+    const spreads = _evDeduped.sort((a, b) => b.rate - a.rate);
+    const evMax = spreads[0].rate || 1;
+    for (const ev of spreads) {
       const evs = ev.evs ?? {};
       const chips = [['H',evs.H],['A',evs.A],['B',evs.B],['C',evs.C],['D',evs.D],['S',evs.S]]
         .filter(([,v]) => v > 0)
