@@ -96,9 +96,10 @@
     /* ── BIG MODE (default state) ── */
     .app-body.big-mode{flex:0 0 auto;display:flex;flex-direction:row;align-items:stretch;padding:10px 8px;gap:8px;box-sizing:border-box;}
     #appBody.big-mode ~ #recPanel{display:none;}
-    .app-body.big-mode > .detail-area,
-    .app-body.big-mode > .calc-panel,
+    .app-body.big-mode .detail-area,
+    .app-body.big-mode .calc-panel,
     .app-body.big-mode > .analysis-sidebar{display:none;}
+    .app-body.big-mode .mob-panel-wrap{display:none;}
     /* ad panels */
     .app-body.big-mode .ad-panel{display:flex;width:150px;flex-shrink:0;border-radius:10px;}
     /* party: narrow vertical column */
@@ -348,6 +349,8 @@
     .dc-toggle-btn{padding:2px 7px;border:1.5px solid #d0c0e0;border-radius:5px;background:#fff;font-size:10px;font-weight:700;cursor:pointer;color:#888;transition:all .13s;flex-shrink:0;white-space:nowrap;}
     .dc-toggle-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);}
     .dc-toggle-btn.on-w{background:#e65100;color:#fff;border-color:#e65100;}
+    .dc-pmove-btn.on{background:var(--accent)!important;border-color:var(--accent)!important;color:#fff!important;}
+    .dc-pmove-btn.on span{color:#fff!important;}
     .dc-env-row{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-top:4px;}
     .dc-env-lbl{font-size:9px;color:#9070b0;font-weight:700;white-space:nowrap;min-width:30px;}
     .dc-val-row{display:flex;gap:5px;margin-top:6px;}
@@ -524,31 +527,136 @@
       .analysis-sidebar{width:270px;}
       .calc-panel.speed-calc{flex:0 0 190px;}
     }
-    @media(max-width:1100px){
+    @media(max-width:1250px){
       .calc-panel{display:none;}
       .analysis-sidebar{width:240px;}
+      /* calc 패널 없을 때 상세카드가 남은 공간 채우기 */
+      .detail-area{flex:1!important;width:auto!important;max-width:560px;}
     }
     @media(max-width:960px){
-      .analysis-sidebar{display:none;position:fixed;top:54px;right:0;height:calc(100vh - 54px);width:300px;background:rgba(210,195,230,.98);padding:12px;z-index:15;border-radius:14px 0 0 14px;box-shadow:-4px 0 20px rgba(0,0,0,.15);overflow-y:auto;flex-direction:column;}
-      .analysis-sidebar.visible{display:flex;opacity:1;transform:translateX(0);}
-      .analysis-sidebar.panel-open{transform:translateX(0);}
       .nav-ana-toggle{display:block;}
     }
-    @media(max-width:768px){
-      body{overflow:auto;}
-      .app-wrap{height:auto;}
-      .app-body{flex-direction:column;flex:none;height:auto;overflow:auto;padding:10px;}
-      .rec-panel{flex:none;height:160px;margin:0 10px 8px;}
-      .party-sidebar{flex-direction:row;flex-wrap:wrap;gap:6px;}
-      .party-slot{width:60px;height:60px;}
-      .detail-area{width:100%;transform:none!important;}
-      .poke-header{flex-direction:column;align-items:center;}
-      .poke-img-col{width:100%;flex-direction:row;gap:14px;justify-content:center;}
-      .stats-col{width:100%;}
+
+    /* ═══ TABLET + MOBILE PANEL SYSTEM (≤ 1024px) ═══ */
+    .mob-panel-wrap{display:contents;} /* desktop: transparent wrapper */
+    .mobile-tab-bar{display:none;}     /* desktop: hidden */
+    .mob-tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:700;color:#bbb;background:none;border:none;cursor:pointer;transition:color .15s;font-family:inherit;padding:0;line-height:1.2;}
+    .mob-tab-btn.active{color:var(--accent);}
+    .mob-tab-btn svg{display:block;width:22px;height:22px;}
+
+    @media(max-width:1024px){
+      /* ── Navbar ── */
+      .navbar{height:48px;padding:0 16px;}
+      .nav-logo img{height:36px;}
+      .nav-links a{padding:5px 8px;font-size:11.5px;}
+      .nav-ana-toggle{display:none!important;}
+
+      /* ── Layout base ── */
+      body{overflow:hidden;touch-action:pan-y;}
+      .app-wrap{height:calc(100vh - 48px - 56px);height:calc(100dvh - 48px - 56px);overflow:hidden;display:flex;flex-direction:column;}
+      .app-body{flex:1;flex-direction:column;padding:0;gap:0;min-height:0;overflow:hidden;height:100%;}
+
+      /* ── Hide desktop-only elements ── */
+      .ad-panel,.rec-panel,.detail-overlay,
+      #bigPartyChart,#bigEnemyChart,#enemySidebar,
+      .analysis-sidebar{display:none!important;}
+
+      /* ── Party strip (always visible compact top bar) ── */
+      #partySidebar{
+        flex-direction:row!important;flex-wrap:nowrap;
+        overflow-x:auto;overflow-y:hidden;
+        flex-shrink:0;height:64px;min-height:64px;max-height:64px;
+        padding:6px 8px;gap:5px;
+        background:var(--card-bg);
+        border-bottom:1px solid rgba(100,80,160,.12);
+        border-radius:0;box-shadow:0 2px 6px rgba(0,0,0,.06);
+        position:relative;z-index:5;scrollbar-width:none;
+      }
+      #partySidebar::-webkit-scrollbar{display:none;}
+      #partySidebar .party-slot{width:50px;height:50px;flex-shrink:0;border-radius:8px;}
+      #partySidebar .slot-img{width:42px;height:42px;}
+      #partySidebar .slot-plus{font-size:20px;}
+      #partySidebar .party-action-btns{display:none!important;}
+
+      /* ── Panel wrapper becomes slide container ── */
+      .mob-panel-wrap{
+        display:block!important;
+        flex:1;min-height:0;
+        position:relative;overflow:hidden;
+      }
+
+      /* ── Each panel: absolutely stacked, full area ── */
+      #mobPanelWrap>#detailArea,
+      #mobPanelWrap>#powerCalcPanel,
+      #mobPanelWrap>#speedCalcPanel{
+        display:flex!important;flex-direction:column;
+        position:absolute;inset:0;
+        width:100%;height:100%;
+        overflow-y:auto;overflow-x:hidden;
+        opacity:1!important;pointer-events:all!important;
+        border-radius:0;background:#ede8f5;
+        will-change:transform;
+        transition:transform .28s cubic-bezier(.4,0,.2,1)!important;
+      }
+
+      /* ── Default positions: speed ← detail → calc ── */
+      #mobPanelWrap>#speedCalcPanel {transform:translateX(-100%);}
+      #mobPanelWrap>#detailArea     {transform:translateX(0);}
+      #mobPanelWrap>#powerCalcPanel {transform:translateX(100%);}
+
+      /* ── Panel state: speed ── */
+      #mobPanelWrap[data-panel="speed"]>#speedCalcPanel{transform:translateX(0);}
+      #mobPanelWrap[data-panel="speed"]>#detailArea    {transform:translateX(100%);}
+      #mobPanelWrap[data-panel="speed"]>#powerCalcPanel{transform:translateX(200%);}
+      /* ── Panel state: detail (default) ── */
+      #mobPanelWrap[data-panel="detail"]>#speedCalcPanel{transform:translateX(-100%);}
+      #mobPanelWrap[data-panel="detail"]>#detailArea    {transform:translateX(0);}
+      #mobPanelWrap[data-panel="detail"]>#powerCalcPanel{transform:translateX(100%);}
+      /* ── Panel state: calc ── */
+      #mobPanelWrap[data-panel="calc"]>#speedCalcPanel{transform:translateX(-200%);}
+      #mobPanelWrap[data-panel="calc"]>#detailArea    {transform:translateX(-100%);}
+      #mobPanelWrap[data-panel="calc"]>#powerCalcPanel{transform:translateX(0);}
+
+      /* ── Detail area fixes ── */
+      #mobPanelWrap>#detailArea.visible{opacity:1!important;}
+      .detail-area .detail-card{width:100%!important;box-sizing:border-box;}
+      .poke-header{flex-direction:column!important;align-items:center!important;}
+      .poke-img-col{width:100%!important;flex-direction:row!important;gap:14px!important;justify-content:center!important;}
+      .stats-col{width:100%!important;}
+
+      /* ── Speed calc fixes ── */
+      #mobPanelWrap>#speedCalcPanel{flex:none;}
+      #speedCalcBody{max-height:none;overflow:visible;}
+
+      /* ── Damage calc fixes ── */
+      #mobPanelWrap>#powerCalcPanel{flex:none;padding:10px;}
+      #powerCalcBody{overflow:visible!important;flex:none!important;min-height:0!important;}
+      .dc-cols{grid-template-columns:1fr!important;overflow:visible!important;flex:none!important;min-height:unset!important;}
+      .dc-col{overflow:visible!important;}
+      .dc-dmg-box{margin-top:6px;}
+
+      /* ── Mobile tab bar ── */
+      .mobile-tab-bar{
+        display:flex;
+        position:fixed;bottom:0;left:0;right:0;
+        height:56px;
+        background:var(--card-bg);
+        border-top:1.5px solid rgba(100,80,160,.15);
+        z-index:100;
+        box-shadow:0 -3px 16px rgba(0,0,0,.1);
+        padding-bottom:env(safe-area-inset-bottom);
+      }
+
+      /* ── Big mode: disable on mobile ── */
+      .app-body.big-mode{flex-direction:column!important;}
+      .app-body.big-mode .mob-panel-wrap{display:block!important;}
+      .app-body.big-mode .detail-area,
+      .app-body.big-mode .calc-panel{display:flex!important;}
     }
+
     @media(max-width:480px){
-      .navbar{padding:0 14px;}
-      .nav-links a{padding:4px 8px;font-size:12px;}
+      .navbar{padding:0 10px;}
+      .nav-links a{padding:4px 6px;font-size:11px;}
       .poke-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));}
     }
   </style>
@@ -576,17 +684,19 @@
   <div class="ad-panel" id="leftAd"></div>
   <aside class="party-sidebar" id="partySidebar"></aside>
   <div id="bigPartyChart" class="big-mode-chart"></div>
-  <main class="detail-area" id="detailArea">
-    <div class="detail-card" id="detailCard"></div>
-  </main>
-  <section class="calc-panel" id="powerCalcPanel">
-    <div class="calc-panel-title">결정력 계산기</div>
-    <div id="powerCalcBody" style="flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;"></div>
-  </section>
-  <section class="calc-panel speed-calc" id="speedCalcPanel">
-    <div class="calc-panel-title">스피드 계산기</div>
-    <div id="speedCalcBody"></div>
-  </section>
+  <div id="mobPanelWrap" class="mob-panel-wrap">
+    <main class="detail-area" id="detailArea">
+      <div class="detail-card" id="detailCard"></div>
+    </main>
+    <section class="calc-panel" id="powerCalcPanel">
+      <div class="calc-panel-title">결정력 계산기</div>
+      <div id="powerCalcBody" style="flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;"></div>
+    </section>
+    <section class="calc-panel speed-calc" id="speedCalcPanel">
+      <div class="calc-panel-title">스피드 계산기</div>
+      <div id="speedCalcBody"></div>
+    </section>
+  </div>
   <aside class="analysis-sidebar" id="analysisSidebar">
     <div class="speed-rank-col">
       <div class="sr-title">스피드 샘플</div>
@@ -1153,7 +1263,7 @@ function getMoveEffectiveType(pk, mv, item, ability, weather='') {
 /* ── 기술 유효 위력 (폼/도구/특성 오버라이드 포함) ── */
 function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
   const n = mv.name;
-  const { hpPct=100, defHpPct=100, defS=1, defWeight=null, status='' } = ctx;
+  const { hpPct=100, defHpPct=100, defS=1, defWeight=null, status='', field='', defStatus='' } = ctx;
 
   if (OVERRIDE_POWER[n]) return OVERRIDE_POWER[n];
 
@@ -1180,6 +1290,8 @@ function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
   if (n === '소금물') return defHpPct <= 50 ? 130 : 65;
   /* 묵사발: 상대 HP 비율에 비례 (max 120) */
   if (n === '묵사발') return Math.max(1, Math.floor(120 * defHpPct / 100));
+  /* 하드프레스: 상대 HP 비율에 비례 (max 100) */
+  if (n === '하드프레스') return Math.max(1, Math.floor(100 * defHpPct / 100));
   /* 객기 (기술): 상태이상일 때 위력 2배 */
   if (n === '객기' && status) return (mv.power || 70) * 2;
   /* 자이로볼: 상대 스피드가 높을수록 강함 (min 1, max 150) */
@@ -1220,6 +1332,31 @@ function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
   }
   /* 매그니튜드: 무작위 위력, 대표값 70 사용 */
   if (n === '매그니튜드') return 70;
+
+  /* ── 필드 연동 ── */
+  /* 라이징볼트: 일렉트릭필드에서 위력 2배 */
+  if (n === '라이징볼트' && field === '일렉') return (mv.power || 70) * 2;
+  /* 사이코블레이드: 일렉트릭필드에서 위력 1.5배 */
+  if (n === '사이코블레이드' && field === '일렉') return Math.floor((mv.power || 80) * 1.5);
+  /* 와이드포스: 사이코필드에서 위력 1.5배 */
+  if (n === '와이드포스' && field === '사이코') return Math.floor((mv.power || 80) * 1.5);
+  /* 미스트버스트: 미스트필드에서 위력 1.5배 */
+  if (n === '미스트버스트' && field === '미스트') return Math.floor((mv.power || 100) * 1.5);
+
+  /* ── 날씨 연동 ── */
+  /* 하이드로스팀: 쾌청에서 패널티 없이 1.5배 (calcDamage weatherM에서 처리) */
+
+  /* ── 상대 상태이상 연동 ── */
+  const isDefPoisoned = defStatus === '독' || defStatus === '맹독';
+  const isDefStatused = !!defStatus;
+  /* 베놈쇼크: 상대가 독/맹독 상태이면 위력 2배 */
+  if (n === '베놈쇼크' && isDefPoisoned) return (mv.power || 65) * 2;
+  /* 독침천발: 상대가 독/맹독 상태이면 위력 2배 */
+  if (n === '독침천발' && isDefPoisoned) return (mv.power || 60) * 2;
+  /* 병상첨병: 상대가 상태이상이면 위력 2배 */
+  if (n === '병상첨병' && isDefStatused) return (mv.power || 65) * 2;
+  /* 백귀야행: 상대가 상태이상이면 위력 2배 */
+  if (n === '백귀야행' && isDefStatused) return (mv.power || 65) * 2;
 
   return mv.power;
 }
@@ -1641,6 +1778,8 @@ const _PANEL_IDS = ['detailArea','powerCalcPanel','speedCalcPanel','analysisSide
 
 function showPanel() {
   clearTimeout(_hidePanelTimer); _hidePanelTimer = null;
+  /* 모바일: 상세보기 패널로 자동 전환 */
+  if (window._setMobPanel) window._setMobPanel('detail');
   /* 빅차트 페이드아웃 → 레이아웃 전환 → 패널 페이드인 */
   const pc = document.getElementById('bigPartyChart');
   const ec = document.getElementById('bigEnemyChart');
@@ -1694,8 +1833,9 @@ function renderDetail(idx) {
   const POW_BREAKS = [18000, 28000, 38000, 48000];
   const DUR_BREAKS = [30000, 42500, 55000, 75000];
   const SPD_BREAKS = [106, 136, 161, 181];
-  const physMvs = (mem.moves||[]).filter(m=>m&&m.category==='물리');
-  const specMvs = (mem.moves||[]).filter(m=>m&&m.category==='특수');
+  const physMvs  = (mem.moves||[]).filter(m=>m&&m.category==='물리');
+  const specMvs  = (mem.moves||[]).filter(m=>m&&m.category==='특수');
+  const statMvs  = (mem.moves||[]).filter(m=>m&&m.category==='변화');
   const physPow = physMvs.length ? Math.max(...physMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
   const specPow = specMvs.length ? Math.max(...specMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
   const speedStat = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(mem.item, pk, 'S') * getAbilityStatMult(mem.ability, 'S'));
@@ -1705,16 +1845,20 @@ function renderDetail(idx) {
   const specDurG = getStatGrade(dur.spec, DUR_BREAKS);
   const speedG   = getStatGrade(speedStat, SPD_BREAKS);
   const avgDur = (dur.phys+dur.spec)/2;
+  const maxPow = Math.max(physPow, specPow);
+  const damagingMvCnt = physMvs.length + specMvs.length;
   const speedTag = speedStat>=161?'고스핏':speedStat>=136?'중스핏':'저스핏';
   const durTag   = avgDur>=55000?'고내구':avgDur>=42500?'중내구':'저내구';
   let roleTag;
-  if (physPow===0&&specPow===0)       roleTag='지원형';
+  if (physPow===0&&specPow===0)                           roleTag='지원형';
+  else if (statMvs.length>damagingMvCnt&&maxPow<28000)   roleTag='지원형';
   else if (physPow>0&&specPow===0)    roleTag='물리 어태커';
   else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
   else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
   else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
   else                                roleTag='균형형';
-  if (avgDur>=55000&&physPow<18000&&specPow<18000) roleTag='탱커';
+  if      (avgDur>=75000&&maxPow<38000) roleTag='탱커';
+  else if (avgDur>=55000&&maxPow<28000) roleTag='탱커';
   const archetype = `${speedTag} ${durTag} ${roleTag}`;
 
   const typeBadges = [pk.type1, pk.type2].filter(Boolean)
@@ -1918,8 +2062,9 @@ function updateSGPanel(idx) {
   if (physEl) physEl.textContent = dur.phys.toLocaleString();
   if (specEl) specEl.textContent = dur.spec.toLocaleString();
 
-  const physMvs = (mem.moves||[]).filter(m=>m&&m.category==='물리');
-  const specMvs = (mem.moves||[]).filter(m=>m&&m.category==='특수');
+  const physMvs  = (mem.moves||[]).filter(m=>m&&m.category==='물리');
+  const specMvs  = (mem.moves||[]).filter(m=>m&&m.category==='특수');
+  const statMvs  = (mem.moves||[]).filter(m=>m&&m.category==='변화');
   const physPow = physMvs.length ? Math.max(...physMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
   const specPow = specMvs.length ? Math.max(...specMvs.map(m=>calcDecisivePower(pk,evs,m,nature,mem.item,mem.ability))) : 0;
   const speedStat = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(mem.item, pk, 'S') * getAbilityStatMult(mem.ability, 'S'));
@@ -1931,16 +2076,20 @@ function updateSGPanel(idx) {
   const speedG   = getStatGrade(speedStat, SPD_BREAKS);
 
   const avgDur   = (dur.phys+dur.spec)/2;
+  const maxPow = Math.max(physPow, specPow);
+  const damagingMvCnt = physMvs.length + specMvs.length;
   const speedTag = speedStat>=161?'고스핏':speedStat>=136?'중스핏':'저스핏';
   const durTag   = avgDur>=55000?'고내구':avgDur>=42500?'중내구':'저내구';
   let roleTag;
-  if (physPow===0&&specPow===0)       roleTag='지원형';
+  if (physPow===0&&specPow===0)                           roleTag='지원형';
+  else if (statMvs.length>damagingMvCnt&&maxPow<28000)   roleTag='지원형';
   else if (physPow>0&&specPow===0)    roleTag='물리 어태커';
   else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
   else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
   else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
   else                                roleTag='균형형';
-  if (avgDur>=55000&&physPow<18000&&specPow<18000) roleTag='탱커';
+  if      (avgDur>=75000&&maxPow<38000) roleTag='탱커';
+  else if (avgDur>=55000&&maxPow<28000) roleTag='탱커';
 
   const arcEl = document.querySelector('.sg-archetype');
   if (arcEl) arcEl.textContent = `${speedTag} ${durTag} ${roleTag}`;
@@ -2126,7 +2275,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     critical:false, charge:false, helpingHand:false, battery:false, powerSpot:false,
     supremeCount:0 };
   const def = { pokemon:null, hpEV:0, defEV:0, natM:1.0, rank:0, item:null, ability:null,
-    gender:'', hpPct:100,
+    gender:'', status:'', hpPct:100,
     reflect:false, lightScreen:false, auroraVeil:false, friendGuard:false };
   const env = { weather:'', field:'', aura:'', auraBreak:false,
     tabletRuin:false, vesselRuin:false, swordRuin:false, beadRuin:false };
@@ -2156,6 +2305,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
         <div class="dc-block">
           <div class="dc-block-title">기술</div>
           <div class="dc-drop"><input class="dc-input" id="dcMoveQ" placeholder="기술 검색..." autocomplete="off"><div class="dc-drop-list" id="dcMoveList"></div></div>
+          <div id="dcPartyMoves" style="display:none;margin-top:5px;flex-direction:column;gap:3px;"></div>
           <div id="dcMoveInfo" style="font-size:10px;color:#9070b0;margin-top:4px;min-height:14px;"></div>
         </div>
         <div class="dc-block">
@@ -2297,6 +2447,13 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
             <button class="dc-toggle-btn" id="dcAuVeil">오로라베일</button>
             <button class="dc-toggle-btn" id="dcFG">프렌드가드</button>
           </div>
+          <div class="dc-env-row" style="margin-top:5px;"><span class="dc-env-lbl">상태이상</span>
+            <button class="dc-toggle-btn" data-dst="독">독</button>
+            <button class="dc-toggle-btn" data-dst="맹독">맹독</button>
+            <button class="dc-toggle-btn" data-dst="마비">마비</button>
+            <button class="dc-toggle-btn" data-dst="화상">화상</button>
+            <button class="dc-toggle-btn" data-dst="잠듦">잠듦</button>
+          </div>
           <div class="dc-hp-row">
             <span class="dc-env-lbl" style="min-width:24px;">체력</span>
             <input type="range" class="dc-hp-slider" id="dcDefHPSlider" min="1" max="100" value="100">
@@ -2386,8 +2543,12 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
       /* 날씨는 아직 미확정이므로 env.weather 직접 사용 */
       const _effW = env.weather || (def.ability?.name==='타오르는불꽃'?'맑음':'');
       const hpAct = Math.floor(calcStat(defPk.H, hpEV, true, 1.0));
-      const defB  = Math.floor(calcStat(defPk.B, defEV, false, dNatM));
-      const defD  = Math.floor(calcStat(defPk.D, defEV, false, dNatM));
+      const _hasMove = !!atk.move && atk.move.category !== '변화';
+      const _isPhysMove = atk.move?.category === '물리';
+      const defBNatM = (!_hasMove || _isPhysMove) ? dNatM : 1.0;
+      const defDNatM = (!_hasMove || !_isPhysMove) ? dNatM : 1.0;
+      const defB  = Math.floor(calcStat(defPk.B, defEV, false, defBNatM));
+      const defD  = Math.floor(calcStat(defPk.D, defEV, false, defDNatM));
       const durBItM = getItemStatMult(def.item, defPk, 'B');
       const durDItM = getItemStatMult(def.item, defPk, 'D');
       const durBAbM = getAbilityStatMult(def.ability, 'B', {weather:_effW});
@@ -2446,7 +2607,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
 
     /* 유효 기술 타입/위력 — defPk 없이도 계산 가능 */
     const effType = getMoveEffectiveType(atkPk, mv, aItem, aAbil, effWeather);
-    const powerCtx = { hpPct:aHP, defHpPct:dHP, defS:defPk?.S||1, defWeight:defPk?.weight||null, status:aStatus };
+    const powerCtx = { hpPct:aHP, defHpPct:dHP, defS:defPk?.S||1, defWeight:defPk?.weight||null, status:aStatus, field:effField, defStatus:def.status||'' };
     const effPow  = getMoveEffectivePower(atkPk, mv, aAbil, effWeather, powerCtx);
     if (!effPow) {
       rangeEl.innerHTML = '<span class="dc-dmg-empty">상대 포켓몬을 선택하세요</span>';
@@ -2466,7 +2627,11 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
 
     /* 날씨 배율 */
     let weatherM=1;
-    if (effWeather==='맑음') { if(effType==='불꽃') weatherM=1.5; if(effType==='물') weatherM=0.5; }
+    if (effWeather==='맑음') {
+      if(effType==='불꽃') weatherM=1.5;
+      /* 하이드로스팀: 쾌청에서 물 패널티 없이 1.5배 */
+      if(effType==='물') weatherM = mv.name==='하이드로스팀' ? 1.5 : 0.5;
+    }
     else if (effWeather==='비') { if(effType==='물') weatherM=1.5; if(effType==='불꽃') weatherM=0.5; }
 
     /* 필드 배율 */
@@ -2666,13 +2831,16 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
       updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
       el.querySelectorAll('.dc-pill').forEach(b => b.classList.remove('dc-sel'));
       el.querySelector(`[data-pi="${idx}"]`)?.classList.add('dc-sel');
-      if (s.moves?.[0]) setMove(s.moves[0]);
+      renderPartyMoveButtons(s.moves);
+      const firstDmg = (s.moves||[]).find(m=>m&&m.category!=='변화');
+      if (firstDmg) setMove(firstDmg);
       atk.item = s.item; atk.ability = s.ability;
       atk.ev = s.evs?.[atk.move?.category==='물리'?'A':'C'] || 0;
       document.getElementById('dcEV').value = atk.ev;
       document.getElementById('dcItemQ').value = s.item?.name||'';
       document.getElementById('dcAbilSel').value = s.ability?.name||'';
-      const olRow=document.getElementById('dcOLRow'); if(olRow) olRow.style.display=s.ability?.name==='총대장'?'flex':'none';
+      const olRow=document.getElementById('dcOLRow');
+      if(olRow){const isOL=s.ability?.name==='총대장';olRow.style.display=isOL?'flex':'none';if(!isOL){atk.supremeCount=0;document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach((b,i)=>b.classList.toggle('on',i===0));}}
       calcDamage();
     }));
   }
@@ -2729,6 +2897,38 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     else { img.style.display='none'; if(plus) plus.style.display=''; }
   }
 
+  /* ── 파티 기술 빠른선택 버튼 ── */
+  function renderPartyMoveButtons(moves) {
+    const el = document.getElementById('dcPartyMoves');
+    if (!el) return;
+    const valid = (moves || []).filter(Boolean);
+    if (!valid.length) { el.style.display = 'none'; el.innerHTML = ''; return; }
+    /* 버튼만 준비, 표시는 입력창 클릭 시 */
+    el.style.display = 'none';
+    el.innerHTML = valid.map(mv => {
+      const tc = TYPE_COLORS[mv.type] || '#888';
+      const isStatus = mv.category === '변화';
+      return `<button class="dc-pmove-btn${atk.move?.name===mv.name?' on':''}" data-mv="${mv.name}"
+        style="display:flex;align-items:center;gap:5px;padding:3px 7px;border-radius:6px;
+          border:1px solid rgba(0,0,0,.12);background:#f4f0fc;cursor:pointer;text-align:left;
+          opacity:${isStatus?.55:1};" title="${mv.name}">
+        <span class="dc-type-tag" style="background:${tc};font-size:9px;padding:1px 4px;">${mv.type}</span>
+        <span style="font-size:11px;font-weight:600;flex:1;">${mv.name}</span>
+        <span style="font-size:9px;color:#9070b0;">${mv.category}${mv.power?' '+mv.power:''}</span>
+      </button>`;
+    }).join('');
+    el.querySelectorAll('.dc-pmove-btn').forEach(btn => {
+      const isStatus = valid.find(m=>m.name===btn.dataset.mv)?.category==='변화';
+      if (isStatus) return;
+      btn.addEventListener('click', () => {
+        const mv = (MOVE_DATA||[]).find(m => m.name === btn.dataset.mv);
+        if (!mv) return;
+        setMove(mv);
+        el.querySelectorAll('.dc-pmove-btn').forEach(b => b.classList.toggle('on', b === btn));
+      });
+    });
+  }
+
   /* ── 포켓몬 세팅 (공격) ── */
   function setAtkPokemon(pk) {
     atk.pokemon = pk;
@@ -2775,6 +2975,8 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const tc = TYPE_COLORS[mv.type]||'#888';
     document.getElementById('dcMoveInfo').innerHTML =
       `<span class="dc-type-tag" style="background:${tc}">${mv.type}</span> ${mv.category} | 위력 ${mv.power??'가변'}`;
+    const pmEl = document.getElementById('dcPartyMoves');
+    if (pmEl) { pmEl.style.display = 'none'; pmEl.querySelectorAll('.dc-pmove-btn').forEach(b => b.classList.toggle('on', b.dataset.mv===mv.name)); }
     if (atk.pokemon && selectedSlot >= 0) window.dcSyncFromSlot(selectedSlot);
     else calcDamage();
   }
@@ -2830,6 +3032,18 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
         <span style="color:#aaa;font-size:10px">${m.power??'가변'}</span></div>`, data:m })),
     m => setMove(m));
 
+  /* 기술 입력창: 빈 상태 클릭 → 파티 기술 표시, 타이핑 → 숨김 */
+  document.getElementById('dcMoveQ')?.addEventListener('click', () => {
+    const pmEl = document.getElementById('dcPartyMoves');
+    if (pmEl && pmEl.innerHTML && document.getElementById('dcMoveQ').value === '') pmEl.style.display = 'flex';
+  });
+  document.getElementById('dcMoveQ')?.addEventListener('input', function() {
+    const pmEl = document.getElementById('dcPartyMoves');
+    if (!pmEl) return;
+    if (this.value === '' && pmEl.innerHTML) pmEl.style.display = 'flex';
+    else pmEl.style.display = 'none';
+  });
+
   makeSearch('dcDefPokeQ','dcDefPokeList',
     q => POKEMON_DATA.filter(p=>p.name.includes(q)).map(p=>({
       html:`<div class="dc-drop-item">${p.name}</div>`, data:p })),
@@ -2884,7 +3098,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const hidn = !abd?.hidden ? [] : Array.isArray(abd.hidden) ? abd.hidden : [abd.hidden];
     atk.ability = [...norm,...hidn].find(ab=>ab.name===e.target.value)||null;
     const olRow = document.getElementById('dcOLRow');
-    if (olRow) olRow.style.display = atk.ability?.name==='총대장' ? 'flex' : 'none';
+    if (olRow) { const isOL = atk.ability?.name==='총대장'; olRow.style.display=isOL?'flex':'none'; if(!isOL){atk.supremeCount=0;document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach((b,i)=>b.classList.toggle('on',i===0));} }
     calcDamage();
   });
 
@@ -2952,6 +3166,14 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const val = btn.dataset.st;
     if (atk.status === val) { atk.status=''; document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.remove('on')); }
     else { document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); atk.status=val; }
+    calcDamage();
+  }));
+
+  /* ── 상태이상 (수비) ── */
+  document.querySelectorAll('.dc-toggle-btn[data-dst]').forEach(btn => btn.addEventListener('click', () => {
+    const val = btn.dataset.dst;
+    if (def.status === val) { def.status=''; document.querySelectorAll('.dc-toggle-btn[data-dst]').forEach(b=>b.classList.remove('on')); }
+    else { document.querySelectorAll('.dc-toggle-btn[data-dst]').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); def.status=val; }
     calcDamage();
   }));
 
@@ -3067,12 +3289,13 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const slA=document.getElementById('dcAtkHPSlider'); if(slA){slA.value=100;updateSliderBg(slA);}
     const pcA=document.getElementById('dcAtkHPPct'); if(pcA) pcA.textContent='100%';
     updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus',null);
+    renderPartyMoveButtons([]);
     updateAtkPillSel(); calcDamage();
   });
 
   document.getElementById('dcClearDef')?.addEventListener('click', () => {
     def.pokemon=null; def.hpEV=0; def.defEV=0; def.natM=1.0; def.rank=0;
-    def.item=null; def.ability=null; def.gender=''; def.hpPct=100;
+    def.item=null; def.ability=null; def.gender=''; def.status=''; def.hpPct=100;
     def.reflect=false; def.lightScreen=false; def.auroraVeil=false; def.friendGuard=false;
     document.getElementById('dcDefPokeQ').value='';
     document.getElementById('dcDefHPEV').value=0; document.getElementById('dcDefEV').value=0;
@@ -3082,6 +3305,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach((b,i)=>b.classList.toggle('on',i===1));
     document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach((b,i)=>b.classList.toggle('on',i===0));
     ['dcReflect','dcLightScr','dcAuVeil','dcFG'].forEach(id=>document.getElementById(id)?.classList.remove('on'));
+    document.querySelectorAll('.dc-toggle-btn[data-dst]').forEach(b=>b.classList.remove('on'));
     const slD=document.getElementById('dcDefHPSlider'); if(slD){slD.value=100;updateSliderBg(slD);}
     const pcD=document.getElementById('dcDefHPPct'); if(pcD) pcD.textContent='100%';
     updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus',null);
@@ -3104,7 +3328,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
           pkName:def.pokemon?.name||null, pkNo:def.pokemon?.no||null,
           hpEV:def.hpEV, defEV:def.defEV, natM:def.natM, rank:def.rank,
           itemName:def.item?.name||null, abilityName:def.ability?.name||null,
-          gender:def.gender, hpPct:def.hpPct,
+          gender:def.gender, status:def.status, hpPct:def.hpPct,
           reflect:def.reflect, lightScreen:def.lightScreen, auroraVeil:def.auroraVeil, friendGuard:def.friendGuard,
         },
         env: {...env},
@@ -3148,7 +3372,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
         if (a.abilityName != null) {
           atk.ability={name:a.abilityName};
           const sel=document.getElementById('dcAbilSel'); if(sel) sel.value=a.abilityName;
-          const olRow=document.getElementById('dcOLRow'); if(olRow) olRow.style.display=a.abilityName==='총대장'?'flex':'none';
+          const olRow=document.getElementById('dcOLRow'); if(olRow){const isOL=a.abilityName==='총대장';olRow.style.display=isOL?'flex':'none';if(!isOL){atk.supremeCount=0;document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach((b,i)=>b.classList.toggle('on',i===0));}}
         }
         if (a.gender != null) { atk.gender=a.gender; document.querySelectorAll('.dc-toggle-btn[data-ag]').forEach(b=>b.classList.toggle('on',b.dataset.ag===a.gender)); }
         if (a.status != null) { atk.status=a.status; document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.toggle('on',b.dataset.st===a.status&&a.status!=='')); }
@@ -3176,6 +3400,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
         if (d.itemName != null) { def.item={name:d.itemName}; document.getElementById('dcDefItemQ').value=d.itemName; }
         if (d.abilityName != null) { def.ability={name:d.abilityName}; const sel=document.getElementById('dcDefAbilSel'); if(sel) sel.value=d.abilityName; }
         if (d.gender != null) { def.gender=d.gender; document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach(b=>b.classList.toggle('on',b.dataset.dg===d.gender)); }
+        if (d.status != null) { def.status=d.status; document.querySelectorAll('.dc-toggle-btn[data-dst]').forEach(b=>b.classList.toggle('on',b.dataset.dst===d.status&&d.status!=='')); }
         if (d.hpPct != null) { def.hpPct=d.hpPct; const sl=document.getElementById('dcDefHPSlider'); if(sl){sl.value=d.hpPct;updateSliderBg(sl);} const pc=document.getElementById('dcDefHPPct'); if(pc) pc.textContent=d.hpPct+'%'; }
         const defBoolMap={reflect:'dcReflect',lightScreen:'dcLightScr',auroraVeil:'dcAuVeil',friendGuard:'dcFG'};
         Object.entries(defBoolMap).forEach(([k,id])=>{if(d[k]!=null){def[k]=d[k];document.getElementById(id)?.classList.toggle('on',d[k]);}});
@@ -3200,28 +3425,53 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   /* detail-card 변경 시 공격 side 동기화 */
   window.dcSyncFromSlot = function(idx) {
     const s = party[idx];
-    if (!s?.pokemon || !atk.pokemon) return;
-    if (atk.pokemon.name !== s.pokemon.name) return;
-    const isPhys = atk.move?.category === '물리';
-    const sk = isPhys ? 'A' : 'C';
-    atk.ev = s.evs?.[sk] || 0;
-    const evInp = document.getElementById('dcEV');
-    if (evInp) evInp.value = atk.ev;
-    const nm = s.nature ? natMult(s.nature, sk) : 1.0;
-    atk.natM = nm;
-    document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn')
-      .forEach(b => b.classList.toggle('on', +b.dataset.m === nm));
-    atk.item = s.item;
-    const iSel = document.getElementById('dcItemQ');
-    if (iSel) iSel.value = s.item?.name || '';
-    atk.ability = s.ability;
-    fillAbilSel(s.pokemon, 'dcAbilSel');
-    const aSel = document.getElementById('dcAbilSel');
-    if (aSel) aSel.value = s.ability?.name || '';
-    const olRow = document.getElementById('dcOLRow');
-    if (olRow) olRow.style.display = s.ability?.name==='총대장' ? 'flex' : 'none';
-    updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
-    calcDamage();
+    if (!s?.pokemon) return;
+    let changed = false;
+
+    /* 공격 측 동기화 */
+    if (atk.pokemon && atk.pokemon.name === s.pokemon.name) {
+      const isPhys = atk.move?.category === '물리';
+      const sk = isPhys ? 'A' : 'C';
+      atk.ev = s.evs?.[sk] || 0;
+      const evInp = document.getElementById('dcEV');
+      if (evInp) evInp.value = atk.ev;
+      const nm = s.nature ? natMult(s.nature, sk) : 1.0;
+      atk.natM = nm;
+      document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn')
+        .forEach(b => b.classList.toggle('on', +b.dataset.m === nm));
+      atk.item = s.item;
+      const iSel = document.getElementById('dcItemQ');
+      if (iSel) iSel.value = s.item?.name || '';
+      atk.ability = s.ability;
+      fillAbilSel(s.pokemon, 'dcAbilSel');
+      const aSel = document.getElementById('dcAbilSel');
+      if (aSel) aSel.value = s.ability?.name || '';
+      const olRow = document.getElementById('dcOLRow');
+      if (olRow) { const isOL = s.ability?.name==='총대장'; olRow.style.display=isOL?'flex':'none'; if(!isOL){atk.supremeCount=0;document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach((b,i)=>b.classList.toggle('on',i===0));} }
+      updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
+      renderPartyMoveButtons(s.moves);
+      changed = true;
+    }
+
+    /* 수비 측 동기화 */
+    if (def.pokemon && def.pokemon.name === s.pokemon.name) {
+      const defStatK = atk.move?.category === '물리' ? 'B' : 'D';
+      def.hpEV = s.evs?.H || 0;
+      def.defEV = s.evs?.[defStatK] || 0;
+      document.getElementById('dcDefHPEV').value = def.hpEV;
+      document.getElementById('dcDefEV').value = def.defEV;
+      def.item = s.item;
+      document.getElementById('dcDefItemQ').value = s.item?.name || '';
+      def.ability = s.ability;
+      const daSel = document.getElementById('dcDefAbilSel');
+      if (daSel) daSel.value = s.ability?.name || '';
+      def.natM = s.nature ? natMult(s.nature, defStatK) : 1.0;
+      document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn')
+        .forEach(b => b.classList.toggle('on', +b.dataset.m === def.natM));
+      changed = true;
+    }
+
+    if (changed) calcDamage();
   };
 })();
 
@@ -4663,6 +4913,86 @@ document.getElementById('recToggleBtn').addEventListener('click', () => {
 if (localStorage.getItem('pochams_rec_collapsed') === '1') {
   document.getElementById('recPanel').classList.add('collapsed');
 }
+
+/* ═══ MOBILE PANEL NAVIGATION ═══ */
+(function initMobileNav() {
+  const MOBILE_BP = 1024;
+  const PANELS = ['speed', 'detail', 'calc'];
+  const wrap = document.getElementById('mobPanelWrap');
+  const tabBar = document.getElementById('mobileTabBar');
+  let curPanel = 'detail';
+
+  function isMobile() { return window.innerWidth <= MOBILE_BP; }
+
+  function setPanel(p) {
+    if (!PANELS.includes(p)) return;
+    curPanel = p;
+    if (wrap) wrap.dataset.panel = p;
+    document.querySelectorAll('.mob-tab-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.panel === p));
+  }
+
+  function applyMobile() {
+    if (!isMobile()) return;
+    if (wrap && !wrap.dataset.panel) setPanel('detail');
+  }
+
+  /* Tab bar clicks */
+  document.querySelectorAll('.mob-tab-btn').forEach(btn =>
+    btn.addEventListener('click', () => setPanel(btn.dataset.panel)));
+
+  /* Touch swipe on panel wrapper */
+  let tx = 0, ty = 0;
+  if (wrap) {
+    wrap.addEventListener('touchstart', e => {
+      tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+    }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      if (!isMobile()) return;
+      const dx = e.changedTouches[0].clientX - tx;
+      const dy = e.changedTouches[0].clientY - ty;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+      const idx = PANELS.indexOf(curPanel);
+      if (dx < 0 && idx < PANELS.length - 1) setPanel(PANELS[idx + 1]); // 왼쪽 스와이프 → 다음
+      if (dx > 0 && idx > 0) setPanel(PANELS[idx - 1]);                  // 오른쪽 스와이프 → 이전
+    }, { passive: true });
+  }
+
+  /* Global setter (used by showPanel) */
+  window._setMobPanel = function(p) { if (isMobile()) setPanel(p); };
+
+  /* Init + resize */
+  applyMobile();
+  window.addEventListener('resize', applyMobile);
+})();
 </script>
+
+<!-- MOBILE TAB BAR -->
+<div id="mobileTabBar" class="mobile-tab-bar">
+  <button class="mob-tab-btn" data-panel="speed">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+    <span>스피드</span>
+  </button>
+  <button class="mob-tab-btn active" data-panel="detail">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="3"/>
+      <line x1="8" y1="8" x2="16" y2="8"/>
+      <line x1="8" y1="12" x2="16" y2="12"/>
+      <line x1="8" y1="16" x2="12" y2="16"/>
+    </svg>
+    <span>상세보기</span>
+  </button>
+  <button class="mob-tab-btn" data-panel="calc">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2"/>
+      <line x1="8" y1="7" x2="16" y2="7"/>
+      <line x1="8" y1="12" x2="11" y2="12"/><line x1="13" y1="12" x2="16" y2="12"/>
+      <line x1="8" y1="17" x2="11" y2="17"/><line x1="13" y1="17" x2="16" y2="17"/>
+    </svg>
+    <span>계산기</span>
+  </button>
+</div>
 </body>
 </html>
