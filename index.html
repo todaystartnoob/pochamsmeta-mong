@@ -983,6 +983,7 @@
 <script src="pochams-items.js"></script>
 <script src="meta-usage-data.js"></script>
 <script src="meta-usage-sets.js"></script>
+<script src="champions_loc_map.js"></script>
 <script>
 /* ════════════════════════════
    CONSTANTS
@@ -3856,7 +3857,8 @@ function renderRecommended() {
     const tagChips = tags.slice(0, 3).map(t => `<span class="rcv-chip rcv-tag">${t}</span>`).join('');
     const itemName = ms?.items?.[0]?.name || '—';
     const topMove = topMoves[0] || '—';
-    const abilityName = ms?.abilities?.[0]?.name || '—';
+    const rawAbility = ms?.abilities?.[0]?.name || '—';
+    const abilityName = (CHAMPIONS_LOC_MAP?.ability_ja2ko?.[rawAbility]) || rawAbility;
     /* 추천 아이템이 메가스톤이면 해당 메가폼 스프라이트 사용 */
     const megaNameForItem = itemName !== '—' ? Object.entries(MEGA_STONE_MAP||{}).find(([mn,sn])=>sn===itemName)?.[0] : null;
     const sprPk = megaNameForItem ? (POKEMON_DATA.find(p=>p.name===megaNameForItem)||pk) : pk;
