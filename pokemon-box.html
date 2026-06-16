@@ -7,7 +7,15 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <title>포챔스메타몽 - 박스</title>
+  <title>포챔스메타몽 - 박스 | 포챔스 파티·포켓몬 관리</title>
+  <meta name="description" content="포켓몬 챔피언스 파티 박스와 포켓몬 박스를 관리하세요.">
+  <meta property="og:title" content="포챔스메타몽 - 박스">
+  <meta property="og:description" content="포켓몬 챔피언십스 파티 박스와 포켓몬 박스를 관리하세요.">
+  <meta property="og:url" content="https://pochamsmetamong.com/pokemon-box.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://pochamsmetamong.com/pochamsMetamongLogo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://pochamsmetamong.com/pokemon-box.html">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #b89dcc; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
@@ -129,6 +137,27 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: rgba(0,0,0,.05); border-radius: 3px; }
     ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.18); border-radius: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:1280px),(pointer:coarse){
+      .navbar{height:48px;padding:0 16px;}
+      .nav-logo img{height:36px;}
+      .nav-links a{padding:5px 8px;font-size:11.5px;}
+    }
+    @media (max-width:1024px),(pointer:coarse){
+      .side-ad{display:none!important;}
+      .page-layout{flex-direction:column;gap:8px;padding:10px;}
+      .hub-center{gap:8px;}
+      .hub-cards{flex-direction:column;gap:8px;flex:none;}
+      .hub-card{flex:none;padding:22px 18px;gap:12px;transform:none!important;}
+      .hub-sprites-row img{width:52px;height:52px;}
+      .hub-sprites-row.back img{width:42px;height:42px;}
+      .hub-sprites-single{height:72px;}
+      .hub-sprites-single img{width:54px;height:54px;}
+      .hub-sprites-single img:nth-child(2){width:68px;height:68px;}
+      .hub-card-title{font-size:17px;}
+      .bottom-ad{flex:1;min-height:60px;}
+    }
   </style>
 </head>
 <body>
@@ -142,7 +171,6 @@
     <a href="pokedex.html">포켓몬 도감</a>
   </div>
 </nav>
-
 <div class="page-layout">
   <div class="side-ad">광고</div>
 

@@ -8,7 +8,15 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <title>포챔스메타몽 - 메타 사용률</title>
+  <title>포챔스메타몽 - 메타 사용률 | 포켓몬 챔피언십스 사용률 순위</title>
+  <meta name="description" content="포켓몬 챔피언스 메타 사용률 순위와 랭커들의 실제 파티 구성을 확인하세요. 싱글·더블 배틀 기준.">
+  <meta property="og:title" content="포챔스메타몽 - 메타 사용률">
+  <meta property="og:description" content="포켓몬 챔피언십스 메타 사용률 순위와 랭커들의 실제 파티 구성을 확인하세요.">
+  <meta property="og:url" content="https://pochamsmetamong.com/meta-usage.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://pochamsmetamong.com/pochamsMetamongLogo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://pochamsmetamong.com/meta-usage.html">
   <script src="pokemon-sprites.js"></script>
   <script src="data.js"></script>
   <script src="abilities-data.js"></script>
@@ -176,6 +184,72 @@
 
     /* LOADING / EMPTY */
     .panel-msg{text-align:center;padding:48px 20px;color:#bbb;font-size:14px;}
+
+    /* ── MOBILE ── */
+    #metaSlider{display:flex;flex:1;gap:12px;height:100%;min-width:0;}
+    .mob-meta-tab-bar{display:none;}
+
+    @media(max-width:1280px),(pointer:coarse){
+      .navbar{height:48px;padding:0 16px;}
+      .nav-logo img{height:36px;}
+      .nav-links a{padding:5px 8px;font-size:11.5px;}
+    }
+    /* ── 공통: 광고·컴팩트 ── */
+    @media(max-width:1024px),(pointer:coarse){
+      .ad-panel{display:none!important;}
+      #selectorBar{padding:6px 10px 8px;gap:6px;}
+      .season-tab{padding:5px 10px;font-size:12px;}
+      .rule-btn{padding:4px 14px;font-size:12px;}
+      .data-src{display:none;}
+      .team-card:hover{transform:none;box-shadow:none;}
+      .dc-wrap{flex-direction:column;}
+      .dc-right{width:100%!important;border-left:none;border-top:1px solid #eee8f8;}
+      #detailCard{height:auto;max-height:92vh;}
+    }
+    /* ── 폰(터치 ≤700px, 또는 화면폭 ≤600px): 스와이프 레이아웃 ── */
+    @media(pointer:coarse) and (max-width:700px),(max-width:600px){
+      .mob-meta-tab-bar{
+        display:flex;margin:0 10px 6px;flex-shrink:0;
+        background:rgba(255,255,255,.55);border-radius:10px;padding:3px;gap:3px;
+      }
+      .mob-meta-tab-btn{
+        flex:1;padding:8px 4px;border:none;border-radius:8px;
+        font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;
+        background:transparent;color:#777;transition:all .15s;
+      }
+      .mob-meta-tab-btn.active{background:var(--accent);color:#fff;}
+      #contentRow{padding:0;overflow:hidden;}
+      #metaSlider{
+        flex:none!important;width:200vw!important;gap:0!important;
+        transform:translateX(0);
+        transition:transform .28s cubic-bezier(.4,0,.2,1);
+      }
+      #metaSlider.show-teams{transform:translateX(-100vw);}
+      #usagePanel{width:100vw!important;flex:none!important;box-sizing:border-box!important;padding:0 6px 6px;}
+      #teamsPanel{width:100vw!important;flex:none!important;box-sizing:border-box!important;padding:0 6px 6px;}
+      .teams-grid{grid-template-columns:1fr;gap:8px;padding:6px 8px;}
+      .team-card{padding:10px 14px;}
+      .team-sprite-wrap img{width:52px;height:52px;}
+      .usage-sprite{width:46px;height:46px;}
+      .usage-sprite img{width:44px;height:44px;}
+    }
+    /* ── 태블릿(601px~, 터치): 양쪽 패널 나란히 ── */
+    @media(min-width:601px) and (max-width:1024px),(min-width:701px) and (pointer:coarse){
+      .mob-meta-tab-bar{display:none!important;}
+      #contentRow{padding:0 10px 10px;overflow:hidden;}
+      #metaSlider{
+        flex:1!important;width:100%!important;gap:10px!important;
+        transform:none!important;transition:none!important;
+      }
+      #usagePanel{width:320px!important;flex:none!important;}
+      #teamsPanel{flex:1!important;width:auto!important;min-width:0;}
+      .teams-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+      .team-card{padding:10px 12px;}
+      .team-sprite-wrap img{width:52px;height:52px;}
+      .usage-sprite{width:58px;height:58px;}
+      .usage-sprite img{width:56px;height:56px;}
+      .usage-row{padding:8px 12px;}
+    }
   </style>
 </head>
 <body>
@@ -203,33 +277,39 @@
       <span class="data-src">출처: champs.pokedb.tokyo</span>
     </div>
 
+    <div class="mob-meta-tab-bar">
+      <button class="mob-meta-tab-btn active" data-tab="usage">포켓몬 순위</button>
+      <button class="mob-meta-tab-btn" data-tab="teams">순위권 파티</button>
+    </div>
     <div id="contentRow">
-      <div class="meta-panel" id="usagePanel">
-        <div class="panel-header">
-          <div class="panel-header-left">
-            <div class="panel-title">포켓몬 사용 순위</div>
-            <div class="panel-sub" id="usageSub">불러오는 중...</div>
+      <div id="metaSlider">
+        <div class="meta-panel" id="usagePanel">
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <div class="panel-title">포켓몬 사용 순위</div>
+              <div class="panel-sub" id="usageSub">불러오는 중...</div>
+            </div>
+            <div class="usage-filter">
+              <button class="usage-filter-btn active" data-view="normal">전체</button>
+              <button class="usage-filter-btn" data-view="mega">메가진화</button>
+            </div>
           </div>
-          <div class="usage-filter">
-            <button class="usage-filter-btn active" data-view="normal">전체</button>
-            <button class="usage-filter-btn" data-view="mega">메가진화</button>
+          <div class="panel-body" id="usageBody">
+            <div class="panel-msg">불러오는 중...</div>
           </div>
+          <div id="usagePager"></div>
         </div>
-        <div class="panel-body" id="usageBody">
-          <div class="panel-msg">불러오는 중...</div>
-        </div>
-        <div id="usagePager"></div>
-      </div>
 
-      <div class="meta-panel" id="teamsPanel">
-        <div class="panel-header">
-          <div class="panel-title">포챔스 순위권 파티</div>
-          <div class="panel-sub" id="teamsSub">불러오는 중...</div>
+        <div class="meta-panel" id="teamsPanel">
+          <div class="panel-header">
+            <div class="panel-title">포챔스 순위권 파티</div>
+            <div class="panel-sub" id="teamsSub">불러오는 중...</div>
+          </div>
+          <div class="panel-body" id="teamsBody">
+            <div class="panel-msg">불러오는 중...</div>
+          </div>
+          <div id="teamsPager"></div>
         </div>
-        <div class="panel-body" id="teamsBody">
-          <div class="panel-msg">불러오는 중...</div>
-        </div>
-        <div id="teamsPager"></div>
       </div>
     </div>
   </div>
@@ -900,6 +980,52 @@ document.getElementById('detailOverlay').addEventListener('click', e => {
 });
 
 init();
+
+/* ── MOBILE TAB / SWIPE ── */
+;(function(){
+  const slider = document.getElementById('metaSlider');
+  const row = document.getElementById('contentRow');
+  if (!slider || !row) return;
+  let side = 'usage';
+  function setSide(s) {
+    side = s;
+    slider.classList.toggle('show-teams', s === 'teams');
+    document.querySelectorAll('.mob-meta-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === s);
+    });
+    // scroll top on panel switch
+    const panel = document.getElementById(s === 'teams' ? 'teamsBody' : 'usageBody');
+    if (panel) panel.scrollTop = 0;
+  }
+  document.querySelectorAll('.mob-meta-tab-btn').forEach(b => {
+    b.addEventListener('click', () => setSide(b.dataset.tab));
+  });
+  const tabBar = document.querySelector('.mob-meta-tab-bar');
+  function isSwipeMode() {
+    return tabBar && getComputedStyle(tabBar).display !== 'none';
+  }
+  let tx0 = 0, ty0 = 0;
+  row.addEventListener('touchstart', e => {
+    if (!isSwipeMode()) return;
+    tx0 = e.touches[0].clientX;
+    ty0 = e.touches[0].clientY;
+  }, {passive:true});
+  row.addEventListener('touchend', e => {
+    if (!isSwipeMode()) return;
+    const dx = e.changedTouches[0].clientX - tx0;
+    const dy = e.changedTouches[0].clientY - ty0;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    // 스와이프 → 현재 패널 페이지 이동 (왼쪽=다음, 오른쪽=이전)
+    const isNext = dx < 0;
+    if (side === 'usage') {
+      const btn = document.getElementById(isNext ? 'pgNext' : 'pgPrev');
+      if (btn && !btn.disabled) btn.click();
+    } else {
+      const btn = document.getElementById(isNext ? 'tpNext' : 'tpPrev');
+      if (btn && !btn.disabled) btn.click();
+    }
+  }, {passive:true});
+})();
 </script>
 </body>
 </html>
