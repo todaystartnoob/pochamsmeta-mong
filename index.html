@@ -540,6 +540,9 @@
     /* ── MOB CHART VIEW (mobile type chart when no slot selected) ── */
     .mob-chart-view{display:none;} /* desktop: always hidden */
     #mobActionBar{display:none;}   /* desktop: always hidden */
+    /* ── Speed sub-panel slider (transparent on desktop) ── */
+    .sc-cols{display:flex;flex-direction:column;flex:1;min-height:0;}
+    .sc-sample-page{display:none;} /* desktop: always hidden */
     .mob-chart-tabs{display:flex;gap:0;padding:10px 10px 0;flex-shrink:0;background:var(--chart-bg);}
     .mob-chart-tab{flex:1;border:none;padding:9px 0;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;color:#9080c0;background:rgba(255,255,255,.06);border-radius:8px 8px 0 0;transition:background .15s,color .15s;}
     .mob-chart-tab.on{background:var(--accent);color:#fff;}
@@ -574,7 +577,7 @@
         flex-direction:row!important;flex-wrap:nowrap;
         overflow-x:auto;overflow-y:hidden;
         flex-shrink:0;height:60px;min-height:60px;max-height:60px;
-        padding:5px 8px;gap:5px;
+        padding:5px 10px;gap:8px;
         background:var(--card-bg);
         border-bottom:1px solid rgba(100,80,160,.12);
         border-radius:0;box-shadow:0 1px 4px rgba(0,0,0,.06);
@@ -657,8 +660,23 @@
       .stats-col{width:100%!important;}
 
       /* ── Speed calc fixes ── */
-      #mobPanelWrap>#speedCalcPanel{flex:none;}
+      #mobPanelWrap>#speedCalcPanel{flex:none;overflow:hidden!important;}
       #speedCalcBody{max-height:none;overflow:visible;}
+      .sc-cols{
+        display:flex!important;flex-direction:row!important;
+        width:200%!important;flex:1!important;min-height:0!important;
+        overflow:visible!important;
+        transform:translateX(-50%); /* default: show right page = 계산기 */
+        transition:transform .28s cubic-bezier(.4,0,.2,1);
+      }
+      .sc-cols.show-sample{transform:translateX(0);} /* show left page = 샘플 */
+      .sc-page{
+        width:50%!important;flex-shrink:0!important;
+        overflow-y:auto!important;overflow-x:hidden!important;
+        box-sizing:border-box;
+      }
+      .sc-sample-page{display:flex!important;flex-direction:column;padding:10px 12px;}
+      .sc-sample-page .speed-rank-col{overflow-y:visible;flex:none;min-height:0;}
 
       /* ── Damage calc fixes ── */
       #mobPanelWrap>#powerCalcPanel{flex:none;padding:10px;overflow:hidden!important;}
@@ -710,7 +728,7 @@
         flex-direction:row!important;flex-wrap:nowrap;
         overflow-x:auto;overflow-y:hidden;
         flex-shrink:0;height:56px;min-height:56px;max-height:56px;
-        padding:4px 8px;gap:5px;
+        padding:4px 10px;gap:8px;
         background:rgba(55,40,90,.18);
         border-bottom:1px solid rgba(100,80,160,.18);
         position:relative!important;z-index:5;scrollbar-width:none;
@@ -800,7 +818,20 @@
     </section>
     <section class="calc-panel speed-calc" id="speedCalcPanel">
       <div class="calc-panel-title">스피드 계산기</div>
-      <div id="speedCalcBody"></div>
+      <div class="sc-cols" id="scCols">
+        <div class="sc-page sc-sample-page">
+          <div class="speed-rank-col">
+            <div class="sr-title">스피드 샘플</div>
+            <div class="sr-header">
+              <span class="sr-hd-name"></span>
+              <span class="sr-hd-ev">노력치</span>
+              <span class="sr-hd-spd">실수치</span>
+            </div>
+            <div id="mobSpeedRankList"></div>
+          </div>
+        </div>
+        <div id="speedCalcBody" class="sc-page"></div>
+      </div>
     </section>
   </div>
   <aside class="analysis-sidebar" id="analysisSidebar">
@@ -4683,7 +4714,10 @@ function renderSpeedRankList() {
     return `<div class="sr-item">${rankSpan}${sprite}${namePart}${evTxt}${spdPart}</div>`;
   };
 
-  el.innerHTML = rows.map(rowHTML).join('');
+  const html = rows.map(rowHTML).join('');
+  el.innerHTML = html;
+  const mobEl = document.getElementById('mobSpeedRankList');
+  if (mobEl) mobEl.innerHTML = html;
 
   if (mySpeed !== null) {
     const myIdx = rows.findIndex(r => r.isMe);
@@ -5122,8 +5156,33 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
       const dx = e.changedTouches[0].clientX - cx;
       const dy = e.changedTouches[0].clientY - cy;
       if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-      if (dx > 0 && dcSide === 'power') setDcSide('dur');  // 오른쪽 스와이프 → 내구력
-      if (dx < 0 && dcSide === 'dur') setDcSide('power');  // 왼쪽 스와이프 → 결정력
+      if (dx < 0 && dcSide === 'power') setDcSide('dur');  // 왼쪽 스와이프 → 내구력
+      if (dx > 0 && dcSide === 'dur') setDcSide('power');  // 오른쪽 스와이프 → 결정력
+    }, { passive: true });
+  }
+
+  /* Speed sub-panel: swipe within 스피드 tab to switch 계산기 ↔ 샘플 */
+  let scSide = 'calc';
+  function setScSide(s) {
+    scSide = s;
+    const cols = document.getElementById('scCols');
+    if (cols) cols.classList.toggle('show-sample', s === 'sample');
+    const title = document.querySelector('#speedCalcPanel .calc-panel-title');
+    if (title) title.textContent = s === 'sample' ? '스피드 샘플' : '스피드 계산기';
+  }
+  let sx = 0, sy = 0;
+  const speedPanelEl = document.getElementById('speedCalcPanel');
+  if (speedPanelEl) {
+    speedPanelEl.addEventListener('touchstart', e => {
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    }, { passive: true });
+    speedPanelEl.addEventListener('touchend', e => {
+      if (!isMobile()) return;
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+      if (dx > 0 && scSide === 'calc') setScSide('sample');   // 오른쪽 스와이프 → 샘플(왼쪽)
+      if (dx < 0 && scSide === 'sample') setScSide('calc');  // 왼쪽 스와이프 → 계산기(오른쪽)
     }, { passive: true });
   }
 
