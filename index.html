@@ -539,6 +539,7 @@
 
     /* ── MOB CHART VIEW (mobile type chart when no slot selected) ── */
     .mob-chart-view{display:none;} /* desktop: always hidden */
+    #mobActionBar{display:none;}   /* desktop: always hidden */
     .mob-chart-tabs{display:flex;gap:0;padding:10px 10px 0;flex-shrink:0;background:var(--chart-bg);}
     .mob-chart-tab{flex:1;border:none;padding:9px 0;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;color:#9080c0;background:rgba(255,255,255,.06);border-radius:8px 8px 0 0;transition:background .15s,color .15s;}
     .mob-chart-tab.on{background:var(--accent);color:#fff;}
@@ -584,18 +585,10 @@
       #partySidebar .slot-img{width:40px;height:40px;}
       #partySidebar .slot-plus{font-size:20px;}
       #partySidebar .party-action-btns{display:none!important;}
+      #partySidebar .big-mode-btns{display:none!important;}
 
-      /* ── Enemy party strip ── */
-      #enemySidebar{
-        display:flex!important;
-        flex-direction:row!important;flex-wrap:nowrap;
-        overflow-x:auto;overflow-y:hidden;
-        flex-shrink:0;height:56px;min-height:56px;max-height:56px;
-        padding:4px 8px;gap:5px;
-        background:rgba(55,40,90,.18);
-        border-bottom:1px solid rgba(100,80,160,.18);
-        position:relative;z-index:5;scrollbar-width:none;
-      }
+      /* ── Enemy party strip (only shown in big-mode) ── */
+      #enemySidebar{display:none!important;}
       #enemySidebar::-webkit-scrollbar{display:none;}
       #enemySidebar .enemy-slot{width:46px;height:46px;flex-shrink:0;border-radius:8px;}
       #enemySidebar .slot-img{width:38px;height:38px;}
@@ -693,18 +686,51 @@
         padding:0!important;gap:0!important;
         position:relative!important;
       }
-      /* party strips: normal flow */
-      .app-body.big-mode #partySidebar,
-      .app-body.big-mode #enemySidebar{
+      /* my party strip: normal flow */
+      .app-body.big-mode #partySidebar{
         position:relative!important;
         width:100%!important;
         flex:none!important;
       }
-      /* panel wrap: absolutely fill the space below both party strips */
+      /* enemy strip: shown only in big-mode, all strip properties here */
+      .app-body.big-mode #enemySidebar{
+        display:flex!important;
+        flex-direction:row!important;flex-wrap:nowrap;
+        overflow-x:auto;overflow-y:hidden;
+        flex-shrink:0;height:56px;min-height:56px;max-height:56px;
+        padding:4px 8px;gap:5px;
+        background:rgba(55,40,90,.18);
+        border-bottom:1px solid rgba(100,80,160,.18);
+        position:relative!important;z-index:5;scrollbar-width:none;
+        width:100%!important;flex:none!important;
+      }
+      /* mobile action bar: compact save/load/clear below enemy strip */
+      .mob-action-bar{display:none;}
+      .app-body.big-mode .mob-action-bar{
+        display:flex!important;
+        flex-shrink:0;height:38px;min-height:38px;
+        padding:3px 8px;gap:5px;
+        background:var(--card-bg);
+        border-bottom:1px solid rgba(100,80,160,.12);
+        align-items:center;
+        width:100%;box-sizing:border-box;
+      }
+      .mob-act-btn{
+        flex:1;height:30px;
+        border:none;border-radius:7px;
+        font-size:11px;font-weight:700;
+        cursor:pointer;font-family:inherit;
+        transition:filter .15s;
+      }
+      .mob-act-btn:active{filter:brightness(.9);}
+      .mob-act-btn.save{background:var(--accent);color:#fff;}
+      .mob-act-btn.load{background:#e8d8f8;color:#5a2d7a;}
+      .mob-act-btn.enemy-clear{background:rgba(160,100,220,.15);color:#8040b0;}
+      /* panel wrap: absolutely fill space below strips + action bar (60+56+38=154px) */
       .app-body.big-mode .mob-panel-wrap{
         display:block!important;
         position:absolute!important;
-        top:116px!important;left:0!important;right:0!important;bottom:0!important;
+        top:154px!important;left:0!important;right:0!important;bottom:0!important;
         width:100%!important;height:auto!important;
         flex:none!important;
       }
@@ -778,6 +804,11 @@
   </aside>
   <div id="bigEnemyChart" class="big-mode-chart"></div>
   <aside class="enemy-sidebar" id="enemySidebar"></aside>
+  <div id="mobActionBar" class="mob-action-bar">
+    <button class="mob-act-btn save" id="mobSaveBtn">💾 저장</button>
+    <button class="mob-act-btn load" id="mobLoadBtn">📂 불러오기</button>
+    <button class="mob-act-btn enemy-clear" id="mobEnemyClearBtn">상대 비우기</button>
+  </div>
   <div class="ad-panel" id="rightAd">광고</div>
 </div>
 <div id="slotTooltip" class="slot-tooltip"></div>
@@ -5042,6 +5073,21 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
   document.body.addEventListener('click', e => {
     const btn = e.target.closest('.mob-tab-btn');
     if (btn) setPanel(btn.dataset.panel);
+  });
+
+  /* Mobile action bar buttons */
+  document.body.addEventListener('click', e => {
+    if (e.target.closest('#mobSaveBtn')) {
+      saveParty();
+      window.location.href = 'party-box.html';
+    }
+    if (e.target.closest('#mobLoadBtn')) {
+      window.location.href = 'party-box.html';
+    }
+    if (e.target.closest('#mobEnemyClearBtn')) {
+      for (let i = 0; i < 6; i++) enemyParty[i] = { pokemon: null };
+      saveEnemyParty(); renderEnemySlots();
+    }
   });
 
   /* Touch swipe on panel wrapper */
