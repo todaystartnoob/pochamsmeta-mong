@@ -3504,13 +3504,9 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
     party[_dupIdx] = newSlot();
     saveParty();
     closePokeModal();
-    if (_modalSlotWasEmpty) {
-      renderSlots(); renderRecommended();
-    } else {
-      selectedSlot = modalSlot;
-      document.getElementById('appBody')?.classList.remove('big-mode');
-      renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
-    }
+    selectedSlot = modalSlot;
+    document.getElementById('appBody')?.classList.remove('big-mode');
+    renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
     return;
   }
   party[modalSlot].pokemon = pk;
@@ -3538,13 +3534,9 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
   applyFormChange(modalSlot);
   saveParty();
   closePokeModal();
-  if (_modalSlotWasEmpty) {
-    renderSlots(); renderRecommended();
-  } else {
-    selectedSlot = modalSlot;
-    document.getElementById('appBody')?.classList.remove('big-mode');
-    renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
-  }
+  selectedSlot = modalSlot;
+  document.getElementById('appBody')?.classList.remove('big-mode');
+  renderSlots(); renderRecommended(); renderDetail(selectedSlot); showPanel();
 });
 
 document.getElementById('closePokeModal').addEventListener('click', closePokeModal);
