@@ -192,6 +192,15 @@
     .ds-fill { height: 100%; border-radius: 4px; transition: width .5s; }
     .ds-val { font-size: 11px; color: #777; width: 26px; text-align: right; }
 
+    .dd-abilities { margin-bottom: 14px; }
+    .dd-abilities h3 { font-size: 13px; color: #555; margin-bottom: 8px; }
+    .da-item { display: flex; align-items: baseline; gap: 7px; padding: 5px 0; border-bottom: 1px solid #f0e8ff; }
+    .da-item:last-child { border-bottom: none; }
+    .da-name { font-size: 13px; font-weight: 700; color: #5a2d7a; flex-shrink: 0; }
+    .da-tag  { font-size: 10px; background: #ede0f5; color: #7b3fa0; border-radius: 4px; padding: 1px 5px; flex-shrink: 0; }
+    .da-tag.hidden { background: #f3e8ff; color: #9060c0; }
+    .da-desc { font-size: 11px; color: #777; line-height: 1.5; }
+
     .dd-close {
       display: block; width: 100%;
       background: #7b3fa0; color: #fff;
@@ -263,6 +272,7 @@
 
 <script src="pokemon-sprites.js"></script>
 <script src="data.js"></script>
+<script src="abilities-data.js"></script>
 <script>
   const TYPE_COLORS = {
     '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
@@ -377,6 +387,17 @@
             <span class="ds-val">${s.v}</span>
           </div>`).join('')}
       </div>
+      ${(() => {
+        const abd = (typeof ABILITY_DATA !== 'undefined') && ABILITY_DATA[pk.name];
+        if (!abd) return '';
+        const rows = (abd.normal || []).map(a =>
+          `<div class="da-item"><span class="da-name">${a.name}</span><span class="da-tag">일반</span><span class="da-desc">${a.desc || ''}</span></div>`
+        ).join('');
+        const hidden = abd.hidden
+          ? `<div class="da-item"><span class="da-name">${abd.hidden.name}</span><span class="da-tag hidden">숨겨진</span><span class="da-desc">${abd.hidden.desc || ''}</span></div>`
+          : '';
+        return rows || hidden ? `<div class="dd-abilities"><h3>특성</h3>${rows}${hidden}</div>` : '';
+      })()}
       <button class="dd-close" id="ddCloseBtn">닫기</button>
     `;
 
