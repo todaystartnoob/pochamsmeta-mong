@@ -1111,6 +1111,33 @@ function defEffectiveness(t1, t2) {
   return r;
 }
 
+/* 특성에 의한 타입 방어 보정 (0=무효, 그 외=현재값에 곱셈) */
+const ABILITY_DEF_MOD = {
+  '부유':         { '땅': 0 },
+  '타오르는불꽃': { '불꽃': 0 },
+  '저수':         { '물': 0 },
+  '전기엔진':     { '전기': 0 },
+  '건조피부':     { '물': 0 },
+  '축전':         { '전기': 0 },
+  '피뢰침':       { '전기': 0 },
+  '마중물':       { '물': 0 },
+  '초식':         { '풀': 0 },
+  '내열':         { '불꽃': 0.5 },
+  '두꺼운지방':   { '불꽃': 0.5, '얼음': 0.5 },
+  '노릇노릇바디': { '불꽃': 0 },
+  '수포':         { '불꽃': 0.5 },
+};
+function applyAbilityDefEff(eff, ability) {
+  if (!ability?.name) return eff;
+  const mod = ABILITY_DEF_MOD[ability.name];
+  if (!mod) return eff;
+  const result = { ...eff };
+  for (const [type, mult] of Object.entries(mod)) {
+    result[type] = mult === 0 ? 0 : result[type] * mult;
+  }
+  return result;
+}
+
 function statColor(v) {
   if (v>=130) return '#43a047'; if (v>=100) return '#7cb342';
   if (v>=75)  return '#fbc02d'; if (v>=50)  return '#ef6c00';
@@ -1976,7 +2003,7 @@ function renderDetail(idx) {
   const stats  = ['H','A','B','C','D','S'];
   const bases  = {H:pk.H,A:pk.A,B:pk.B,C:pk.C,D:pk.D,S:pk.S};
 
-  const eff  = defEffectiveness(pk.type1, pk.type2||null);
+  const eff  = applyAbilityDefEff(defEffectiveness(pk.type1, pk.type2||null), mem.ability);
   const x4   = ALL_TYPES.filter(t => eff[t]===4);
   const x2   = ALL_TYPES.filter(t => eff[t]===2);
   const x1   = ALL_TYPES.filter(t => eff[t]===1);
@@ -2337,7 +2364,7 @@ function updateAnalysis(idx) {
   const moves = party[idx].moves;
   if (!pk) return;
 
-  const defEff = defEffectiveness(pk.type1, pk.type2||null);
+  const defEff = applyAbilityDefEff(defEffectiveness(pk.type1, pk.type2||null), party[idx].ability);
   const badge  = (t, label) => `<span class="type-badge" style="background:${TYPE_COLORS[t]||'#888'}">${label||t}</span>`;
   const row    = (lbl, color, html) =>
     html ? `<div class="chart-row"><span class="chart-lbl" style="color:${color}">${lbl}</span><div class="chart-types">${html}</div></div>` : '';
@@ -2390,7 +2417,7 @@ function updateAnalysis(idx) {
 
 function buildTypeChartHTML(slots) {
   if (!slots.length) return '';
-  const effs = slots.map(s => defEffectiveness(s.pokemon.type1, s.pokemon.type2||null));
+  const effs = slots.map(s => applyAbilityDefEff(defEffectiveness(s.pokemon.type1, s.pokemon.type2||null), s.ability));
   const headerHTML = slots.map(s =>
     `<div class="ptc-th" title="${s.pokemon.name}"><img src="${spriteUrl(s.pokemon.name, s.pokemon.no)}" alt="${s.pokemon.name}"></div>`
   ).join('');
@@ -2413,7 +2440,7 @@ function buildTypeChartHTML(slots) {
 
 function buildTypeChartSummaryHTML(slots) {
   if (!slots.length) return '';
-  const effs = slots.map(s => defEffectiveness(s.pokemon.type1, s.pokemon.type2||null));
+  const effs = slots.map(s => applyAbilityDefEff(defEffectiveness(s.pokemon.type1, s.pokemon.type2||null), s.ability));
   const weakTypes = [], strongTypes = [], neutralTypes = [];
   const half = Math.ceil(effs.length / 2);
   ALL_TYPES.forEach(t => {
@@ -3671,8 +3698,8 @@ function analyzeParty() {
   const slots = party.filter(s => s.pokemon);
   const weakMap = {};
   ALL_TYPES.forEach(t => { weakMap[t] = 0; });
-  slots.forEach(({ pokemon: pk }) => {
-    const eff = defEffectiveness(pk.type1, pk.type2 || null);
+  slots.forEach(({ pokemon: pk, ability }) => {
+    const eff = applyAbilityDefEff(defEffectiveness(pk.type1, pk.type2 || null), ability);
     ALL_TYPES.forEach(t => { if (eff[t] >= 2) weakMap[t]++; });
   });
   const offCovered = {};
