@@ -1,0 +1,1470 @@
+{
+  "season": "M-2",
+  "season_number": 2,
+  "rule": "double",
+  "updated_at": "2026-06-18 00:47:50",
+  "team_count": 18,
+  "usage": [
+    {
+      "id": "0983-00",
+      "name": "대도각참",
+      "count": 9,
+      "rate": 50.0
+    },
+    {
+      "id": "0981-00",
+      "name": "키키링",
+      "count": 7,
+      "rate": 38.89
+    },
+    {
+      "id": "0903-00",
+      "name": "포푸니크",
+      "count": 7,
+      "rate": 38.89
+    },
+    {
+      "id": "1013-00",
+      "name": "그우린차",
+      "count": 6,
+      "rate": 33.33
+    },
+    {
+      "id": "0727-00",
+      "name": "어흥염",
+      "count": 6,
+      "rate": 33.33
+    },
+    {
+      "id": "0445-00",
+      "name": "한카리아스",
+      "count": 5,
+      "rate": 27.78
+    },
+    {
+      "id": "0478-00",
+      "name": "눈여아",
+      "count": 5,
+      "rate": 27.78
+    },
+    {
+      "id": "0700-00",
+      "name": "님피아",
+      "count": 5,
+      "rate": 27.78
+    },
+    {
+      "id": "0902-00",
+      "name": "대쓰여너",
+      "count": 4,
+      "rate": 22.22
+    },
+    {
+      "id": "0006-00",
+      "name": "리자몽",
+      "count": 3,
+      "rate": 16.67
+    },
+    {
+      "id": "1018-00",
+      "name": "브리두라스",
+      "count": 3,
+      "rate": 16.67
+    },
+    {
+      "id": "0009-00",
+      "name": "거북왕",
+      "count": 3,
+      "rate": 16.67
+    },
+    {
+      "id": "0428-00",
+      "name": "이어롭",
+      "count": 3,
+      "rate": 16.67
+    },
+    {
+      "id": "0142-00",
+      "name": "프테라",
+      "count": 3,
+      "rate": 16.67
+    },
+    {
+      "id": "0670-05",
+      "name": "플라엣테",
+      "count": 3,
+      "rate": 16.67
+    },
+    {
+      "id": "0547-00",
+      "name": "엘풍",
+      "count": 2,
+      "rate": 11.11
+    },
+    {
+      "id": "0823-00",
+      "name": "아머까오",
+      "count": 2,
+      "rate": 11.11
+    },
+    {
+      "id": "0530-00",
+      "name": "몰드류",
+      "count": 2,
+      "rate": 11.11
+    },
+    {
+      "id": "0248-00",
+      "name": "마기라스",
+      "count": 2,
+      "rate": 11.11
+    },
+    {
+      "id": "0324-00",
+      "name": "코터스",
+      "count": 2,
+      "rate": 11.11
+    },
+    {
+      "id": "0094-00",
+      "name": "팬텀",
+      "count": 2,
+      "rate": 11.11
+    },
+    {
+      "id": "0279-00",
+      "name": "패리퍼",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0970-00",
+      "name": "킬라플로르",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0925-00",
+      "name": "파밀리쥐",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0887-00",
+      "name": "드래펄트",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0784-00",
+      "name": "짜랑고우거",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0149-00",
+      "name": "망나뇽",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0745-02",
+      "name": "루가루암",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0763-00",
+      "name": "달코퀸",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0003-00",
+      "name": "이상해꽃",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0186-00",
+      "name": "왕구리",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0740-00",
+      "name": "모단단게",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0323-00",
+      "name": "폭타",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0655-00",
+      "name": "마폭시",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0635-00",
+      "name": "삼삼드래",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0623-00",
+      "name": "골루그",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0666-18",
+      "name": "비비용",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0184-00",
+      "name": "마릴리",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0937-00",
+      "name": "파라블레이즈",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0181-00",
+      "name": "전룡",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0475-00",
+      "name": "엘레이드",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0350-00",
+      "name": "밀로틱",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0959-00",
+      "name": "두드리짱",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0658-00",
+      "name": "개굴닌자",
+      "count": 1,
+      "rate": 5.56
+    },
+    {
+      "id": "0660-00",
+      "name": "파르토",
+      "count": 1,
+      "rate": 5.56
+    }
+  ],
+  "teams": [
+    {
+      "rank": 16,
+      "rating": 2352.447,
+      "team": [
+        {
+          "id": "0547-00",
+          "name": "엘풍",
+          "form": "",
+          "type1": "풀",
+          "type2": "페어리",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0006-00",
+          "name": "리자몽",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "비행",
+          "terastal": "",
+          "item": "리자몽나이트Y",
+          "category": "一般"
+        },
+        {
+          "id": "0279-00",
+          "name": "패리퍼",
+          "form": "",
+          "type1": "물",
+          "type2": "비행",
+          "terastal": "",
+          "item": "루미열매",
+          "category": "一般"
+        },
+        {
+          "id": "0902-00",
+          "name": "대쓰여너",
+          "form": "수컷의 모습",
+          "type1": "물",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        },
+        {
+          "id": "1018-00",
+          "name": "브리두라스",
+          "form": "",
+          "type1": "강철",
+          "type2": "드래곤",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0445-00",
+          "name": "한카리아스",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "땅",
+          "terastal": "",
+          "item": "로셀열매",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 22,
+      "rating": 2335.119,
+      "team": [
+        {
+          "id": "0478-00",
+          "name": "눈여아",
+          "form": "",
+          "type1": "얼음",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "눈여아나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0970-00",
+          "name": "킬라플로르",
+          "form": "",
+          "type1": "바위",
+          "type2": "독",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "검은안경",
+          "category": "一般"
+        },
+        {
+          "id": "0823-00",
+          "name": "아머까오",
+          "form": "",
+          "type1": "비행",
+          "type2": "강철",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0445-00",
+          "name": "한카리아스",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "땅",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        },
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 51,
+      "rating": 2292.379,
+      "team": [
+        {
+          "id": "1013-00",
+          "name": "그우린차",
+          "form": "범작의 모습",
+          "type1": "풀",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0925-00",
+          "name": "파밀리쥐",
+          "form": "３びきかぞく",
+          "type1": "노말",
+          "type2": "",
+          "terastal": "",
+          "item": "로플열매",
+          "category": "一般"
+        },
+        {
+          "id": "0009-00",
+          "name": "거북왕",
+          "form": "",
+          "type1": "물",
+          "type2": "",
+          "terastal": "",
+          "item": "거북왕나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "하양허브",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 80,
+      "rating": 2268.183,
+      "team": [
+        {
+          "id": "0887-00",
+          "name": "드래펄트",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "용의이빨",
+          "category": "一般"
+        },
+        {
+          "id": "0700-00",
+          "name": "님피아",
+          "form": "",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "ようせいのハネ",
+          "category": "一般"
+        },
+        {
+          "id": "0530-00",
+          "name": "몰드류",
+          "form": "",
+          "type1": "땅",
+          "type2": "강철",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0248-00",
+          "name": "마기라스",
+          "form": "",
+          "type1": "바위",
+          "type2": "악",
+          "terastal": "",
+          "item": "마기라스나이트",
+          "category": "一般"
+        },
+        {
+          "id": "1013-00",
+          "name": "그우린차",
+          "form": "범작의 모습",
+          "type1": "풀",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0823-00",
+          "name": "아머까오",
+          "form": "",
+          "type1": "비행",
+          "type2": "강철",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 132,
+      "rating": 2255.777,
+      "team": [
+        {
+          "id": "0248-00",
+          "name": "마기라스",
+          "form": "",
+          "type1": "바위",
+          "type2": "악",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        },
+        {
+          "id": "0530-00",
+          "name": "몰드류",
+          "form": "",
+          "type1": "땅",
+          "type2": "강철",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0428-00",
+          "name": "이어롭",
+          "form": "",
+          "type1": "노말",
+          "type2": "",
+          "terastal": "",
+          "item": "이어롭나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0478-00",
+          "name": "눈여아",
+          "form": "",
+          "type1": "얼음",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "눈여아나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0784-00",
+          "name": "짜랑고우거",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "격투",
+          "terastal": "",
+          "item": "용의이빨",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "하양허브",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 149,
+      "rating": 2254.268,
+      "team": [
+        {
+          "id": "0902-00",
+          "name": "대쓰여너",
+          "form": "수컷의 모습",
+          "type1": "물",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "검은안경",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "하양허브",
+          "category": "一般"
+        },
+        {
+          "id": "0149-00",
+          "name": "망나뇽",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "비행",
+          "terastal": "",
+          "item": "망나뇽나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0478-00",
+          "name": "눈여아",
+          "form": "",
+          "type1": "얼음",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "눈여아나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0745-02",
+          "name": "루가루암",
+          "form": "황혼의 모습",
+          "type1": "바위",
+          "type2": "",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 155,
+      "rating": 2253.89,
+      "team": [
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "1018-00",
+          "name": "브리두라스",
+          "form": "",
+          "type1": "강철",
+          "type2": "드래곤",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0009-00",
+          "name": "거북왕",
+          "form": "",
+          "type1": "물",
+          "type2": "",
+          "terastal": "",
+          "item": "거북왕나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "로플열매",
+          "category": "一般"
+        },
+        {
+          "id": "0478-00",
+          "name": "눈여아",
+          "form": "",
+          "type1": "얼음",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "눈여아나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 183,
+      "rating": 2251.679,
+      "team": [
+        {
+          "id": "0763-00",
+          "name": "달코퀸",
+          "form": "",
+          "type1": "풀",
+          "type2": "",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        },
+        {
+          "id": "0727-00",
+          "name": "어흥염",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "악",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "검은안경",
+          "category": "一般"
+        },
+        {
+          "id": "0142-00",
+          "name": "프테라",
+          "form": "",
+          "type1": "바위",
+          "type2": "비행",
+          "terastal": "",
+          "item": "프테라나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0670-05",
+          "name": "플라엣테",
+          "form": "영원의 꽃",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "플라엣테나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 274,
+      "rating": 2244.311,
+      "team": [
+        {
+          "id": "0324-00",
+          "name": "코터스",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "",
+          "terastal": "",
+          "item": "목탄",
+          "category": "一般"
+        },
+        {
+          "id": "0003-00",
+          "name": "이상해꽃",
+          "form": "",
+          "type1": "풀",
+          "type2": "독",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0700-00",
+          "name": "님피아",
+          "form": "",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "ようせいのハネ",
+          "category": "一般"
+        },
+        {
+          "id": "0142-00",
+          "name": "프테라",
+          "form": "",
+          "type1": "바위",
+          "type2": "비행",
+          "terastal": "",
+          "item": "프테라나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0009-00",
+          "name": "거북왕",
+          "form": "",
+          "type1": "물",
+          "type2": "",
+          "terastal": "",
+          "item": "거북왕나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 290,
+      "rating": 2242.841,
+      "team": [
+        {
+          "id": "0094-00",
+          "name": "팬텀",
+          "form": "",
+          "type1": "고스트",
+          "type2": "독",
+          "terastal": "",
+          "item": "팬텀나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0727-00",
+          "name": "어흥염",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "악",
+          "terastal": "",
+          "item": "꼬시개열매",
+          "category": "一般"
+        },
+        {
+          "id": "0186-00",
+          "name": "왕구리",
+          "form": "",
+          "type1": "물",
+          "type2": "",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "1013-00",
+          "name": "그우린차",
+          "form": "범작의 모습",
+          "type1": "풀",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "마코열매",
+          "category": "一般"
+        },
+        {
+          "id": "1018-00",
+          "name": "브리두라스",
+          "form": "",
+          "type1": "강철",
+          "type2": "드래곤",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0478-00",
+          "name": "눈여아",
+          "form": "",
+          "type1": "얼음",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "눈여아나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 305,
+      "rating": 2240.306,
+      "team": [
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "검은안경",
+          "category": "一般"
+        },
+        {
+          "id": "1013-00",
+          "name": "그우린차",
+          "form": "범작의 모습",
+          "type1": "풀",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "마코열매",
+          "category": "一般"
+        },
+        {
+          "id": "0727-00",
+          "name": "어흥염",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "악",
+          "terastal": "",
+          "item": "목탄",
+          "category": "一般"
+        },
+        {
+          "id": "0740-00",
+          "name": "모단단게",
+          "form": "",
+          "type1": "격투",
+          "type2": "얼음",
+          "terastal": "",
+          "item": "모단단게나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0323-00",
+          "name": "폭타",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "땅",
+          "terastal": "",
+          "item": "폭타나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 345,
+      "rating": 2210.132,
+      "team": [
+        {
+          "id": "0700-00",
+          "name": "님피아",
+          "form": "",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "하양허브",
+          "category": "一般"
+        },
+        {
+          "id": "0655-00",
+          "name": "마폭시",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "마폭시나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0635-00",
+          "name": "삼삼드래",
+          "form": "",
+          "type1": "악",
+          "type2": "드래곤",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "검은안경",
+          "category": "一般"
+        },
+        {
+          "id": "0445-00",
+          "name": "한카리아스",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "땅",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 381,
+      "rating": 2190.338,
+      "team": [
+        {
+          "id": "0623-00",
+          "name": "골루그",
+          "form": "",
+          "type1": "땅",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "골루그나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0700-00",
+          "name": "님피아",
+          "form": "",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "ようせいのハネ",
+          "category": "一般"
+        },
+        {
+          "id": "0727-00",
+          "name": "어흥염",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "악",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "마코열매",
+          "category": "一般"
+        },
+        {
+          "id": "0903-00",
+          "name": "포푸니크",
+          "form": "",
+          "type1": "격투",
+          "type2": "독",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0324-00",
+          "name": "코터스",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "",
+          "terastal": "",
+          "item": "목탄",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 493,
+      "rating": 2150.689,
+      "team": [
+        {
+          "id": "0670-05",
+          "name": "플라엣테",
+          "form": "영원의 꽃",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "플라엣테나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0006-00",
+          "name": "리자몽",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "비행",
+          "terastal": "",
+          "item": "리자몽나이트Y",
+          "category": "一般"
+        },
+        {
+          "id": "0547-00",
+          "name": "엘풍",
+          "form": "",
+          "type1": "풀",
+          "type2": "페어리",
+          "terastal": "",
+          "item": "돌격조끼",
+          "category": "一般"
+        },
+        {
+          "id": "0445-00",
+          "name": "한카리아스",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "땅",
+          "terastal": "",
+          "item": "로셀열매",
+          "category": "一般"
+        },
+        {
+          "id": "0902-00",
+          "name": "대쓰여너",
+          "form": "수컷의 모습",
+          "type1": "물",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "신비의물방울",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "오카열매",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 991,
+      "rating": 2072,
+      "team": [
+        {
+          "id": "0094-00",
+          "name": "팬텀",
+          "form": "",
+          "type1": "고스트",
+          "type2": "독",
+          "terastal": "",
+          "item": "팬텀나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0727-00",
+          "name": "어흥염",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "악",
+          "terastal": "",
+          "item": "로플열매",
+          "category": "一般"
+        },
+        {
+          "id": "1013-00",
+          "name": "그우린차",
+          "form": "범작의 모습",
+          "type1": "풀",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "마코열매",
+          "category": "一般"
+        },
+        {
+          "id": "0666-18",
+          "name": "비비용",
+          "form": "팬시한 모양",
+          "type1": "벌레",
+          "type2": "비행",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0428-00",
+          "name": "이어롭",
+          "form": "",
+          "type1": "노말",
+          "type2": "",
+          "terastal": "",
+          "item": "이어롭나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0184-00",
+          "name": "마릴리",
+          "form": "",
+          "type1": "물",
+          "type2": "페어리",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 1195,
+      "rating": 2041.178,
+      "team": [
+        {
+          "id": "0428-00",
+          "name": "이어롭",
+          "form": "",
+          "type1": "노말",
+          "type2": "",
+          "terastal": "",
+          "item": "이어롭나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0700-00",
+          "name": "님피아",
+          "form": "",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "ようせいのハネ",
+          "category": "一般"
+        },
+        {
+          "id": "0937-00",
+          "name": "파라블레이즈",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "마코열매",
+          "category": "一般"
+        },
+        {
+          "id": "0902-00",
+          "name": "대쓰여너",
+          "form": "수컷의 모습",
+          "type1": "물",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0983-00",
+          "name": "대도각참",
+          "form": "",
+          "type1": "악",
+          "type2": "강철",
+          "terastal": "",
+          "item": "로플열매",
+          "category": "一般"
+        },
+        {
+          "id": "0142-00",
+          "name": "프테라",
+          "form": "",
+          "type1": "바위",
+          "type2": "비행",
+          "terastal": "",
+          "item": "프테라나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 1484,
+      "rating": 2019.884,
+      "team": [
+        {
+          "id": "0181-00",
+          "name": "전룡",
+          "form": "",
+          "type1": "전기",
+          "type2": "",
+          "terastal": "",
+          "item": "전룡나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0445-00",
+          "name": "한카리아스",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "땅",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        },
+        {
+          "id": "0475-00",
+          "name": "엘레이드",
+          "form": "",
+          "type1": "에스퍼",
+          "type2": "격투",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0350-00",
+          "name": "밀로틱",
+          "form": "",
+          "type1": "물",
+          "type2": "",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0959-00",
+          "name": "두드리짱",
+          "form": "",
+          "type1": "페어리",
+          "type2": "강철",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0658-00",
+          "name": "개굴닌자",
+          "form": "",
+          "type1": "물",
+          "type2": "악",
+          "terastal": "",
+          "item": "개굴닌자나이트",
+          "category": "一般"
+        }
+      ]
+    },
+    {
+      "rank": 1531,
+      "rating": 2017.004,
+      "team": [
+        {
+          "id": "0006-00",
+          "name": "리자몽",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "비행",
+          "terastal": "",
+          "item": "리자몽나이트X",
+          "category": "一般"
+        },
+        {
+          "id": "0670-05",
+          "name": "플라엣테",
+          "form": "영원의 꽃",
+          "type1": "페어리",
+          "type2": "",
+          "terastal": "",
+          "item": "플라엣테나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0981-00",
+          "name": "키키링",
+          "form": "",
+          "type1": "노말",
+          "type2": "에스퍼",
+          "terastal": "",
+          "item": "마코열매",
+          "category": "一般"
+        },
+        {
+          "id": "1013-00",
+          "name": "그우린차",
+          "form": "범작의 모습",
+          "type1": "풀",
+          "type2": "고스트",
+          "terastal": "",
+          "item": "바코열매",
+          "category": "一般"
+        },
+        {
+          "id": "0727-00",
+          "name": "어흥염",
+          "form": "",
+          "type1": "불꽃",
+          "type2": "악",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "0660-00",
+          "name": "파르토",
+          "form": "",
+          "type1": "노말",
+          "type2": "땅",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        }
+      ]
+    }
+  ],
+  "source": "champs.pokedb.tokyo opendata"
+}
