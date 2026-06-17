@@ -1363,6 +1363,7 @@ const MEGA_STONE_MAP = {
   '메가갑주무사':'갑주무사나이트','메가할비롱':'할비롱나이트','메가마기아나':'마기아나나이트',
   '메가제라오라':'제라오라나이트','메가대여르':'대여르나이트','메가스코빌런':'스코빌런나이트',
   '메가킬라플로르':'킬라플로르나이트','메가싸리용':'싸리용나이트','메가드닐레이브':'드닐레이브나이트',
+  '메가망나뇽':'망나뇽나이트','메가우츠보트':'우츠보트나이트','메가플라엣테':'플라엣테나이트',
 };
 
 function getAbilityStatMult(ability, statKey, ctx={}) {
@@ -3824,11 +3825,10 @@ function renderRecommended() {
   const pa = analyzeParty();
   const scored = candidates.map(pk => scoreCandidate(pk, pa)).sort((a, b) => b.totalScore - a.totalScore);
 
-  const top = []; const seenBase = new Set();
+  const top = []; const seenDex = new Set();
   for (const r of scored) {
-    const bk = r.basePk.no + '_' + r.basePk.name;
-    if (r.isMega && seenBase.has(bk)) continue;
-    seenBase.add(bk);
+    if (seenDex.has(r.pk.no)) continue;
+    seenDex.add(r.pk.no);
     top.push(r);
     if (top.length >= 5) break;
   }
@@ -3856,7 +3856,8 @@ function renderRecommended() {
     const typeBadges = [pk.type1, pk.type2].filter(Boolean)
       .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
     const tagChips = tags.slice(0, 3).map(t => `<span class="rcv-chip rcv-tag">${t}</span>`).join('');
-    const itemName = ms?.items?.[0]?.name || '—';
+    const rawItemName = ms?.items?.[0]?.name || '—';
+    const itemName = (CHAMPIONS_LOC_MAP?.item_ja2ko?.[rawItemName]) || rawItemName;
     const topMove = topMoves[0] || '—';
     const rawAbility = ms?.abilities?.[0]?.name || '—';
     const abilityName = (CHAMPIONS_LOC_MAP?.ability_ja2ko?.[rawAbility]) || rawAbility;
