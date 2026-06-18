@@ -36,7 +36,7 @@
       --accent:#7b3fa0;
       --slot-bg:rgba(255,255,255,.92);
     }
-    body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--purple);height:100vh;overflow:hidden;display:flex;flex-direction:column;}
+    body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--purple);height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;}
 
     /* NAVBAR */
     .navbar{height:54px;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 10px rgba(0,0,0,.12);position:sticky;top:0;z-index:20;flex-shrink:0;}
@@ -47,7 +47,7 @@
     .nav-links a.active{background:#d4b8e8;color:#4a1d8a;font-weight:600;}
 
     /* PAGE LAYOUT */
-    #pageWrap{display:flex;flex:1;height:calc(100vh - 54px);overflow:hidden;}
+    #pageWrap{display:flex;flex:1;height:calc(100vh - 54px);height:calc(100dvh - 54px);overflow:hidden;}
     .ad-panel{width:190px;flex-shrink:0;background:#c8c8c8;margin:14px 12px;border-radius:10px;opacity:0;}
     #mainContent{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:14px 0 0;}
 
@@ -128,7 +128,7 @@
     .team-poke-name{font-size:10px;color:#666;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;}
 
     /* DETAIL OVERLAY */
-    #detailOverlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;}
+    #detailOverlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;}
     #detailOverlay.open{display:flex;}
     #detailCard{background:#fff;border-radius:18px;width:1160px;max-width:98vw;height:88vh;display:flex;flex-direction:column;position:relative;box-shadow:0 12px 48px rgba(0,0,0,.28);overflow:hidden;}
     .dc-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#bbb;line-height:1;transition:color .12s;z-index:10;}
@@ -205,9 +205,17 @@
       .rule-btn{padding:4px 14px;font-size:12px;}
       .data-src{display:none;}
       .team-card:hover{transform:none;box-shadow:none;}
-      .dc-wrap{flex-direction:column;}
-      .dc-right{width:100%!important;border-left:none;border-top:1px solid #eee8f8;}
-      #detailCard{height:auto;max-height:92vh;}
+      /* 모달 전체를 하나의 스크롤 영역으로: 카드를 vh로 가둬서 가운데 정렬하지 않고,
+         오버레이 자체를 스크롤시켜 카드가 항상 위에서부터 온전히 보이게 함 */
+      #detailOverlay{align-items:flex-start!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;padding:16px 0 32px;}
+      #detailCard{height:auto!important;max-height:none!important;margin:0 auto;}
+      #detailContent{overflow-y:visible!important;flex:none!important;}
+      .dc-wrap{flex-direction:column;height:auto!important;}
+      .dc-left{flex:none!important;overflow:visible!important;}
+      .dc-panels{flex:none!important;height:auto!important;overflow:visible!important;grid-template-columns:1fr!important;grid-template-rows:none!important;}
+      .dc-panel{overflow:visible!important;}
+      .dc-panel-body{flex:none!important;overflow:visible!important;}
+      .dc-right{width:100%!important;border-left:none;border-top:1px solid #eee8f8;overflow:visible!important;flex-shrink:0;}
     }
     /* ── 폰(터치 ≤700px, 또는 화면폭 ≤600px): 스와이프 레이아웃 ── */
     @media(pointer:coarse) and (max-width:700px),(max-width:600px){

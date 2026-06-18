@@ -32,7 +32,7 @@
       --btn-red:#e53935;
       --accent:#7b3fa0;
     }
-    body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--purple);height:100vh;overflow:hidden;}
+    body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--purple);height:100vh;height:100dvh;overflow:hidden;}
 
     /* ── NAVBAR ── */
     .navbar{height:54px;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 10px rgba(0,0,0,.12);position:relative;z-index:20;}
@@ -919,7 +919,7 @@
       <span class="modal-title">포켓몬 선택</span>
       <button class="modal-x" id="closePokeModal">✕</button>
     </div>
-    <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색...">
+    <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색..." autocomplete="off">
     <div class="filter-row" id="pokeFilterRow">
       <button class="f-btn on" data-f="all">전체</button>
       <button class="f-btn" data-f="ingame">포챔스</button>
@@ -936,7 +936,7 @@
       <span class="modal-title">기술 선택</span>
       <button class="modal-x" id="closeMoveModal">✕</button>
     </div>
-    <input type="text" class="modal-search" id="moveSearch" placeholder="기술명 검색...">
+    <input type="text" class="modal-search" id="moveSearch" placeholder="기술명 검색..." autocomplete="off">
     <div class="filter-row" id="moveFilterRow">
       <button class="f-btn on" data-mf="all">전체</button>
       <button class="f-btn" data-mf="물리">물리</button>
@@ -957,7 +957,7 @@
       <span class="modal-title">도구 선택</span>
       <button class="modal-x" id="closeItemModal">✕</button>
     </div>
-    <input type="text" class="modal-search" id="itemSearch" placeholder="도구명 검색...">
+    <input type="text" autocomplete="off" class="modal-search" id="itemSearch" placeholder="도구명 검색..." autocomplete="off">
     <div class="filter-row" id="itemFilterRow">
       <button class="f-btn on" data-if="all">전체</button>
       <button class="f-btn" data-if="포챔스">포챔스</button>
@@ -2100,7 +2100,7 @@ function renderDetail(idx) {
       <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${pct}%;background:${statColor(base)};"></div></div>
       <span class="stat-actual${lblCls}">${actual}</span>
       <span class="stat-base">(${base})</span>
-      <input class="ev-input" type="number" min="0" max="32" value="${evs[s]||0}" data-stat="${s}" data-slot="${idx}">
+      <input class="ev-input" autocomplete="off" type="number" min="0" max="32" value="${evs[s]||0}" data-stat="${s}" data-slot="${idx}">
     </div>`;
   }).join('');
 
@@ -2155,7 +2155,7 @@ function renderDetail(idx) {
       <div class="stats-col">
         ${statRows}
         <div class="ev-total-row">
-          <input type="text" class="poke-nickname-inp" id="pokeNicknameInp" placeholder="별명..." maxlength="20" value="${(mem.nickname||'').replace(/"/g,'&quot;')}">
+          <input type="text" class="poke-nickname-inp" id="pokeNicknameInp" placeholder="별명..." maxlength="20" autocomplete="off" value="${(mem.nickname||'').replace(/"/g,'&quot;')}">
           <div style="display:flex;gap:3px;flex-shrink:0;">
             <button class="det-gender-tab${!mem.gender?' on':''}" data-gender-slot="${idx}" data-gender="">무성</button>
             <button class="det-gender-tab male${mem.gender==='♂'?' on':''}" data-gender-slot="${idx}" data-gender="♂">♂</button>
@@ -3085,8 +3085,9 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
       el.querySelectorAll('.dc-pill').forEach(b => b.classList.remove('dc-sel'));
       el.querySelector(`[data-pi="${idx}"]`)?.classList.add('dc-sel');
       renderPartyMoveButtons(s.moves);
-      const firstDmg = (s.moves||[]).find(m=>m&&m.category!=='변화');
-      if (firstDmg) setMove(firstDmg);
+      atk.move = null;
+      document.getElementById('dcMoveQ').value = '';
+      document.getElementById('dcMoveInfo').innerHTML = '';
       atk.item = s.item; atk.ability = s.ability;
       atk.ev = s.evs?.[atk.move?.category==='물리'?'A':'C'] || 0;
       document.getElementById('dcEV').value = atk.ev;
@@ -3156,8 +3157,8 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     if (!el) return;
     const valid = (moves || []).filter(Boolean);
     if (!valid.length) { el.style.display = 'none'; el.innerHTML = ''; return; }
-    /* 버튼만 준비, 표시는 입력창 클릭 시 */
-    el.style.display = 'none';
+    /* 기술 미선택 상태(검색창 비어있음)이면 바로 보이게 */
+    el.style.display = document.getElementById('dcMoveQ')?.value ? 'none' : 'flex';
     el.innerHTML = valid.map(mv => {
       const tc = TYPE_COLORS[mv.type] || '#888';
       const isStatus = mv.category === '변화';
@@ -4758,22 +4759,13 @@ function renderSpeedRankList() {
   const entries = buildSpeedSample();
   if (!entries || !entries.length) { el.innerHTML = ''; return; }
 
-  const sel = selectedSlot >= 0 ? party[selectedSlot] : null;
-  let mySpeed = null, myName = null, myNo = null;
-  if (sel?.pokemon) {
-    const pk = sel.pokemon;
-    const evS = sel.evs?.S || 0;
-    const nm = natMult(sel.nature, 'S');
-    mySpeed = Math.floor(calcStat(pk.S, evS, false, nm) * getItemStatMult(sel.item, pk, 'S'));
-    const _abl = sel.ability?.name;
-    if (sel.item?.name === '부스트에너지' && (_abl === '쿼크차지' || _abl === '고대활성') && scIsSpeedHighest(pk)) {
-      mySpeed = Math.floor(mySpeed * 1.5);
-    }
-    myName = pk.name;
-    myNo = pk.no;
+  let mySpeed = null, myName = null, myNo = null, myEvS = 0;
+  if (sc.pokemon) {
+    mySpeed = calcSCFinal().speed;
+    myName = sc.pokemon.name;
+    myNo = sc.pokemon.no;
+    myEvS = sc.ev;
   }
-
-  const myEvS = sel?.pokemon ? (sel.evs?.S || 0) : 0;
 
   const isMegaName = n => n.startsWith('메가') && n !== '메가니움';
   const megaBadge = `<span class="sr-mega">메가</span>`;
@@ -5083,6 +5075,8 @@ function renderSpeedCalc() {
   tog('scTailwind',  () => sc.tailwind  = !sc.tailwind);
   tog('scStickyWeb', () => sc.stickyWeb = !sc.stickyWeb);
   tog('scUnburden',  () => sc.unburden  = !sc.unburden);
+
+  renderSpeedRankList();
 }
 
 window.scSyncFromSlot = function(idx) {
