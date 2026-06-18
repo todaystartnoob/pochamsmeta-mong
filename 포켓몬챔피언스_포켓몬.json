@@ -8459,7 +8459,7 @@
         "불꽃",
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/257.png",
       "weight": 52.0
     },
@@ -8551,7 +8551,7 @@
         "물",
         "땅"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/260.png",
       "weight": 81.9
     },
@@ -9946,7 +9946,7 @@
         "강철",
         "페어리"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/303.png",
       "weight": 11.5
     },
@@ -12287,7 +12287,7 @@
         "강철",
         "에스퍼"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png",
       "weight": 550.0
     },
@@ -12937,7 +12937,7 @@
         "노말",
         "비행"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/398.png",
       "weight": 24.9
     },
@@ -17691,7 +17691,7 @@
         "벌레",
         "독"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/545.png",
       "weight": 200.5
     },
@@ -18202,7 +18202,7 @@
         "악",
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/560.png",
       "weight": 30.0
     },
@@ -19631,7 +19631,7 @@
       "types": [
         "전기"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/604.png",
       "weight": 80.5
     },
@@ -21683,7 +21683,7 @@
         "불꽃",
         "노말"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/668.png",
       "weight": 81.5
     },
@@ -22271,7 +22271,7 @@
         "악",
         "에스퍼"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/687.png",
       "weight": 47.0
     },
@@ -22341,7 +22341,7 @@
         "바위",
         "물"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/689.png",
       "weight": 96.0
     },
@@ -22411,7 +22411,7 @@
         "독",
         "드래곤"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/691.png",
       "weight": 81.5
     },
@@ -28063,7 +28063,7 @@
       "types": [
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/870.png",
       "weight": 62.0
     },
@@ -33200,7 +33200,7 @@
       "types": [
         "전기"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10304.png",
       "weight": 38.0
     },
@@ -33228,7 +33228,7 @@
       "types": [
         "전기"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10305.png",
       "weight": 26.0
     },
@@ -35298,7 +35298,7 @@
         "풀",
         "드래곤"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10065.png",
       "weight": 55.2
     },
@@ -35327,7 +35327,7 @@
         "불꽃",
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10050.png",
       "weight": 52.0
     },
@@ -35356,7 +35356,7 @@
         "물",
         "땅"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10064.png",
       "weight": 102.0
     },
@@ -35515,7 +35515,7 @@
         "강철",
         "페어리"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10052.png",
       "weight": 23.5
     },
@@ -35966,7 +35966,7 @@
         "강철",
         "에스퍼"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10076.png",
       "weight": 942.9
     },
@@ -36218,7 +36218,7 @@
         "격투",
         "비행"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10308.png",
       "weight": 50.0
     },
@@ -37436,7 +37436,7 @@
         "벌레",
         "독"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10288.png",
       "weight": 230.5
     },
@@ -37622,7 +37622,7 @@
         "악",
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10289.png",
       "weight": 31.0
     },
@@ -37804,7 +37804,7 @@
       "types": [
         "전기"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10290.png",
       "weight": 180.0
     },
@@ -38240,7 +38240,7 @@
         "불꽃",
         "노말"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10295.png",
       "weight": 93.3
     },
@@ -38276,7 +38276,7 @@
         "불꽃",
         "노말"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/668.png",
       "weight": 81.5
     },
@@ -38451,7 +38451,7 @@
         "악",
         "에스퍼"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10297.png",
       "weight": 69.8
     },
@@ -38475,7 +38475,7 @@
         "바위",
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10298.png",
       "weight": 100.0
     },
@@ -38499,7 +38499,7 @@
         "독",
         "드래곤"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10299.png",
       "weight": 100.3
     },
@@ -40120,7 +40120,7 @@
       "types": [
         "격투"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10303.png",
       "weight": 99.0
     },

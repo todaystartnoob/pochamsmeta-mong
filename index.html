@@ -18,6 +18,8 @@
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://pochamsmetamong.com/">
   <meta name="author" content="pochamsmetamog@gmail.com">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2434435606645762"
+     crossorigin="anonymous"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{
@@ -109,6 +111,16 @@
     .app-body.big-mode .calc-panel,
     .app-body.big-mode > .analysis-sidebar{display:none;}
     .app-body.big-mode .mob-panel-wrap{display:none;}
+    /* party-enemy-stage: transparent passthrough on desktop so partySidebar/enemySidebar act as direct flex children */
+    .party-enemy-stage{display:contents;}
+    .pe-stage-dots{display:none;}
+    /* explicit flex order so desktop visual sequence is DOM-position independent (party-enemy-stage groups them in markup) */
+    .app-body.big-mode #leftAd{order:1;}
+    .app-body.big-mode #partySidebar{order:2;}
+    .app-body.big-mode #bigPartyChart{order:3;}
+    .app-body.big-mode #bigEnemyChart{order:4;}
+    .app-body.big-mode #enemySidebar{order:5;}
+    .app-body.big-mode #rightAd{order:6;}
     /* ad panels */
     .app-body.big-mode .ad-panel{display:flex;width:150px;flex-shrink:0;border-radius:10px;}
     /* party: narrow vertical column */
@@ -119,7 +131,7 @@
     .app-body.big-mode .slot-plus{font-size:28px;}
     .app-body.big-mode .party-action-btns{display:none;}
     /* ── ENEMY SIDEBAR ── */
-    .enemy-sidebar{display:none;flex-direction:column;width:112px;flex-shrink:0;gap:5px;padding:6px;align-items:center;margin-left:auto;}
+    .enemy-sidebar{display:none;flex-direction:column;width:112px;flex-shrink:0;gap:5px;padding:6px;align-items:center;}
     .app-body.big-mode #enemySidebar{display:flex;}
     .enemy-slot{width:94px;height:94px;background:var(--slot-bg);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .18s ease;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0;}
     .enemy-slot:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(0,0,0,.2);background:#fff;}
@@ -727,25 +739,43 @@
         padding:0!important;gap:0!important;
         position:relative!important;
       }
-      /* my party strip: normal flow */
-      .app-body.big-mode #partySidebar{
+      /* party/enemy swipe stage: one 60px strip, swipe left/right to switch sides */
+      .app-body.big-mode .party-enemy-stage{
+        display:block!important;
         position:relative!important;
-        width:100%!important;
-        flex:none!important;
+        width:100%!important;height:60px!important;min-height:60px!important;max-height:60px!important;
+        flex:none!important;overflow:hidden!important;
+        background:var(--card-bg);
+        border-bottom:1px solid rgba(100,80,160,.12);
       }
-      /* enemy strip: shown only in big-mode, all strip properties here */
-      .app-body.big-mode #enemySidebar{
+      .app-body.big-mode .party-enemy-stage #partySidebar,
+      .app-body.big-mode .party-enemy-stage #enemySidebar{
         display:flex!important;
         flex-direction:row!important;flex-wrap:nowrap;
         overflow-x:auto;overflow-y:hidden;
-        flex-shrink:0;height:56px;min-height:56px;max-height:56px;
-        padding:4px 10px;gap:8px;
-        background:rgba(55,40,90,.18);
-        border-bottom:1px solid rgba(100,80,160,.18);
-        position:relative!important;z-index:5;scrollbar-width:none;
-        width:100%!important;flex:none!important;
+        position:absolute!important;top:0!important;left:0!important;right:0!important;
+        width:100%!important;height:60px!important;min-height:60px!important;max-height:60px!important;
+        padding:5px 10px;gap:8px;box-sizing:border-box;
+        z-index:5;scrollbar-width:none;
+        border-bottom:none;
+        transition:transform .28s cubic-bezier(.4,0,.2,1);
       }
-      /* mobile action bar: compact save/load/clear below enemy strip */
+      .app-body.big-mode .party-enemy-stage #partySidebar{transform:translateX(0);}
+      .app-body.big-mode .party-enemy-stage #enemySidebar{transform:translateX(100%);background:rgba(55,40,90,.18);}
+      .app-body.big-mode.show-enemy-strip .party-enemy-stage #partySidebar{transform:translateX(-100%);}
+      .app-body.big-mode.show-enemy-strip .party-enemy-stage #enemySidebar{transform:translateX(0);}
+      .app-body.big-mode .party-enemy-stage #enemySidebar .enemy-slot{width:48px;height:48px;}
+      .app-body.big-mode .party-enemy-stage #enemySidebar .slot-img{width:40px;height:40px;}
+      .app-body.big-mode .party-enemy-stage #enemySidebar .slot-plus{font-size:20px;}
+      /* swipe page-dots indicator, centered over the strip */
+      .app-body.big-mode .pe-stage-dots{
+        display:flex!important;gap:5px;
+        position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+        z-index:6;pointer-events:none;
+      }
+      .pe-dot{width:5px;height:5px;border-radius:50%;background:rgba(120,90,170,.35);transition:background .2s,transform .2s;}
+      .pe-dot.on{background:var(--accent);transform:scale(1.3);}
+      /* mobile action bar: compact save/load/clear below the strip */
       .mob-action-bar{display:none;}
       .app-body.big-mode .mob-action-bar{
         display:flex!important;
@@ -767,11 +797,11 @@
       .mob-act-btn.save{background:var(--accent);color:#fff;}
       .mob-act-btn.load{background:#e8d8f8;color:#5a2d7a;}
       .mob-act-btn.enemy-clear{background:rgba(160,100,220,.15);color:#8040b0;}
-      /* panel wrap: absolutely fill space below strips + action bar (60+56+38=154px) */
+      /* panel wrap: absolutely fill space below strip + action bar (60+38=98px) */
       .app-body.big-mode .mob-panel-wrap{
         display:block!important;
         position:absolute!important;
-        top:154px!important;left:0!important;right:0!important;bottom:0!important;
+        top:98px!important;left:0!important;right:0!important;bottom:0!important;
         width:100%!important;height:auto!important;
         flex:none!important;
       }
@@ -809,7 +839,14 @@
 <div class="app-wrap">
 <div class="app-body" id="appBody">
   <div class="ad-panel" id="leftAd">광고</div>
-  <aside class="party-sidebar" id="partySidebar"></aside>
+  <div class="party-enemy-stage" id="partyEnemyStage">
+    <aside class="party-sidebar" id="partySidebar"></aside>
+    <aside class="enemy-sidebar" id="enemySidebar"></aside>
+    <div class="pe-stage-dots" id="peStageDots">
+      <span class="pe-dot on" data-side="party"></span>
+      <span class="pe-dot" data-side="enemy"></span>
+    </div>
+  </div>
   <div id="bigPartyChart" class="big-mode-chart"></div>
   <div id="mobPanelWrap" class="mob-panel-wrap">
     <main class="detail-area" id="detailArea">
@@ -857,7 +894,6 @@
     </div>
   </aside>
   <div id="bigEnemyChart" class="big-mode-chart"></div>
-  <aside class="enemy-sidebar" id="enemySidebar"></aside>
   <div id="mobActionBar" class="mob-action-bar">
     <button class="mob-act-btn save" id="mobSaveBtn">💾 저장</button>
     <button class="mob-act-btn load" id="mobLoadBtn">📂 불러오기</button>
@@ -5130,16 +5166,35 @@ document.addEventListener('pochams:partychange', () => { renderSpeedCalc(); rend
 renderPartyTypeChart();
 updateMobChartView();
 
-/* 모바일 차트뷰 탭 전환 */
+/* 모바일: 내 파티/상대 파티 뷰 전환 (차트 탭 + 슬롯 스와이프 통합 상태) */
+function setPartyEnemyView(side) {
+  document.querySelectorAll('.mob-chart-tab').forEach(b => b.classList.toggle('on', b.dataset.side === side));
+  document.getElementById('mobPartyChart').style.display = side === 'party' ? '' : 'none';
+  document.getElementById('mobEnemyChart').style.display = side === 'enemy' ? '' : 'none';
+  document.getElementById('appBody')?.classList.toggle('show-enemy-strip', side === 'enemy');
+  document.querySelectorAll('.pe-dot').forEach(d => d.classList.toggle('on', d.dataset.side === side));
+}
 document.querySelectorAll('.mob-chart-tab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.mob-chart-tab').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const side = btn.dataset.side;
-    document.getElementById('mobPartyChart').style.display = side === 'party' ? '' : 'none';
-    document.getElementById('mobEnemyChart').style.display = side === 'enemy' ? '' : 'none';
-  });
+  btn.addEventListener('click', () => setPartyEnemyView(btn.dataset.side));
 });
+
+/* 내/상대 파티 슬롯 스트립: 좌우 스와이프로 전환 (방어 상성도 같이 전환) */
+(function initPartyEnemySwipe() {
+  const stage = document.getElementById('partyEnemyStage');
+  if (!stage) return;
+  let px = 0, py = 0;
+  stage.addEventListener('touchstart', e => {
+    px = e.touches[0].clientX; py = e.touches[0].clientY;
+  }, { passive: true });
+  stage.addEventListener('touchend', e => {
+    if (!document.getElementById('appBody')?.classList.contains('big-mode')) return;
+    const dx = e.changedTouches[0].clientX - px;
+    const dy = e.changedTouches[0].clientY - py;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    if (dx < 0) setPartyEnemyView('enemy');  // 왼쪽 스와이프 → 상대 파티
+    if (dx > 0) setPartyEnemyView('party');  // 오른쪽 스와이프 → 내 파티
+  }, { passive: true });
+})();
 
 /* 추천 포켓몬 패널 접기 토글 */
 document.getElementById('recToggleBtn').addEventListener('click', () => {
