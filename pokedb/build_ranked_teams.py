@@ -149,8 +149,13 @@ def build_from_opendata(season, rule, data):
 SHOW_RE = re.compile(r"/pokemon/show/(\d{4}-\d{2})")
 RANK_RE = re.compile(r"^\s*(\d+)\s+(.+?)\s*$")
 
+CANON_RE = re.compile(r'season=(\d+)')
+
 def scrape_usage(season, rule):
-    """진행중 시즌: /pokemon/list 페이지에서 사용률 순위(순위+id+이름)를 긁는다."""
+    """진행중 시즌: /pokemon/list 페이지에서 사용률 순위를 긁는다.
+    핵심: 순위는 '등장 순서', 이름은 'id(dex)→dex2ko' 로 뽑는다.
+    (페이지의 일본어 텍스트에 의존하지 않음 → 음역/구조변경에 강함)
+    """
     try:
         from bs4 import BeautifulSoup
     except ImportError:
@@ -166,8 +171,17 @@ def scrape_usage(season, rule):
     except Exception as e:
         print(f"  [skip] {url} -> {e}")
         return []
+
+    # 폴백 가드: 요청 시즌과 다른 시즌으로 리다이렉트/폴백되면 빈 값 (존재하지 않는 시즌)
+    if "fallback=1" in html or "まだ取得できない" in html:
+        return []
+    cano = re.search(r'rel=["\']canonical["\'][^>]*?' + CANON_RE.pattern, html) \
+        or re.search(r'og:url[^>]*?' + CANON_RE.pattern, html)
+    if cano and int(cano.group(1)) != season:
+        return []
+
     soup = BeautifulSoup(html, "html.parser")
-    out, seen = [], set()
+    out, seen, order = [], set(), 0
     for a in soup.find_all("a", href=True):
         m = SHOW_RE.search(a["href"])
         if not m:
@@ -175,16 +189,17 @@ def scrape_usage(season, rule):
         rid = m.group(1)
         if rid in seen:
             continue
+        seen.add(rid)
+        order += 1
+        # 순위: 링크 텍스트에 숫자가 있으면 그걸, 없으면 등장 순서
         txt = a.get_text(" ", strip=True)
         rm = RANK_RE.match(txt)
-        if not rm:                      # 순위 숫자로 시작하는 링크만 = 랭킹 항목
-            continue
-        seen.add(rid)
-        rank = int(rm.group(1)); jp = rm.group(2)
+        rank = int(rm.group(1)) if rm else order
+        jp = rm.group(2) if rm else txt
         dex = safe_dex(rid)
         out.append({
             "id": rid,
-            "name": (DEX2KO.get(dex) if dex else None) or jp,
+            "name": (DEX2KO.get(dex) if dex else None) or jp,  # 무조건 id→공식한글 우선
             "rank": rank,
             # 사용률 %는 list 페이지에 없음 -> count/rate 없음(순위만)
         })
@@ -192,19 +207,18 @@ def scrape_usage(season, rule):
     return out
 
 def build(season, rule):
-    # 1) 오픈데이터 시도
+    # 1) 오픈데이터 시도 (종료 시즌). 실패하면 무조건 크롤로 폴백.
     od_url = OPENDATA.format(season=season, rule=rule)
+    data = None
     try:
         data = fetch_json(od_url)
-        return build_from_opendata(season, rule, data)
     except urllib.error.HTTPError as e:
         if e.code != 404:
-            print(f"  [skip] {od_url} -> HTTP {e.code}")
-            return None
-        # 404 -> 진행중 시즌일 수 있음 -> 크롤로 폴백
+            print(f"  [info] {od_url} -> HTTP {e.code} (크롤로 폴백)")
     except Exception as e:
-        print(f"  [skip] {od_url} -> {e}")
-        return None
+        print(f"  [info] {od_url} -> {e} (크롤로 폴백)")
+    if data is not None:
+        return build_from_opendata(season, rule, data)
 
     # 2) 크롤(진행중 시즌 사용률)
     usage = scrape_usage(season, rule)
