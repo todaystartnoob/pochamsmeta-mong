@@ -69,7 +69,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 3,
@@ -100,7 +100,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-      "weight": 100.0
+      "weight": 100
     },
     {
       "dex": 4,
@@ -160,7 +160,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-      "weight": 19.0
+      "weight": 19
     },
     {
       "dex": 6,
@@ -221,7 +221,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 8,
@@ -369,7 +369,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
-      "weight": 32.0
+      "weight": 32
     },
     {
       "dex": 13,
@@ -428,7 +428,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
-      "weight": 10.0
+      "weight": 10
     },
     {
       "dex": 15,
@@ -529,7 +529,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 18,
@@ -663,7 +663,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 22,
@@ -694,7 +694,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
-      "weight": 38.0
+      "weight": 38
     },
     {
       "dex": 23,
@@ -762,7 +762,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png",
-      "weight": 65.0
+      "weight": 65
     },
     {
       "dex": 25,
@@ -792,7 +792,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 26,
@@ -822,7 +822,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 27,
@@ -852,7 +852,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/27.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 28,
@@ -916,7 +916,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/29.png",
-      "weight": 7.0
+      "weight": 7
     },
     {
       "dex": 30,
@@ -950,7 +950,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/30.png",
-      "weight": 20.0
+      "weight": 20
     },
     {
       "dex": 31,
@@ -985,7 +985,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 32,
@@ -1019,7 +1019,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/32.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 33,
@@ -1088,7 +1088,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/34.png",
-      "weight": 62.0
+      "weight": 62
     },
     {
       "dex": 35,
@@ -1156,7 +1156,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 37,
@@ -1286,7 +1286,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/40.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 41,
@@ -1348,7 +1348,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 43,
@@ -1546,7 +1546,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/48.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 49,
@@ -1717,7 +1717,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/53.png",
-      "weight": 32.0
+      "weight": 32
     },
     {
       "dex": 54,
@@ -1819,7 +1819,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 57,
@@ -1853,7 +1853,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/57.png",
-      "weight": 32.0
+      "weight": 32
     },
     {
       "dex": 58,
@@ -1887,7 +1887,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png",
-      "weight": 19.0
+      "weight": 19
     },
     {
       "dex": 59,
@@ -1921,7 +1921,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",
-      "weight": 155.0
+      "weight": 155
     },
     {
       "dex": 60,
@@ -1989,7 +1989,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png",
-      "weight": 20.0
+      "weight": 20
     },
     {
       "dex": 62,
@@ -2024,7 +2024,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/62.png",
-      "weight": 54.0
+      "weight": 54
     },
     {
       "dex": 63,
@@ -2126,7 +2126,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",
-      "weight": 48.0
+      "weight": 48
     },
     {
       "dex": 66,
@@ -2228,7 +2228,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png",
-      "weight": 130.0
+      "weight": 130
     },
     {
       "dex": 69,
@@ -2259,7 +2259,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/69.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 70,
@@ -2391,7 +2391,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/73.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 74,
@@ -2426,7 +2426,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png",
-      "weight": 20.0
+      "weight": 20
     },
     {
       "dex": 75,
@@ -2461,7 +2461,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/75.png",
-      "weight": 105.0
+      "weight": 105
     },
     {
       "dex": 76,
@@ -2496,7 +2496,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/76.png",
-      "weight": 300.0
+      "weight": 300
     },
     {
       "dex": 77,
@@ -2530,7 +2530,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 78,
@@ -2564,7 +2564,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/78.png",
-      "weight": 95.0
+      "weight": 95
     },
     {
       "dex": 79,
@@ -2599,7 +2599,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/79.png",
-      "weight": 36.0
+      "weight": 36
     },
     {
       "dex": 80,
@@ -2669,7 +2669,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 82,
@@ -2704,7 +2704,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/82.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 83,
@@ -2739,7 +2739,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/83.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 84,
@@ -2843,7 +2843,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/86.png",
-      "weight": 90.0
+      "weight": 90
     },
     {
       "dex": 87,
@@ -2878,7 +2878,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 88,
@@ -2912,7 +2912,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/88.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 89,
@@ -2946,7 +2946,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/89.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 90,
@@ -2980,7 +2980,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/90.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 91,
@@ -3134,7 +3134,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png",
-      "weight": 210.0
+      "weight": 210
     },
     {
       "dex": 96,
@@ -3270,7 +3270,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/99.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 100,
@@ -3400,7 +3400,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/103.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 104,
@@ -3468,7 +3468,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/105.png",
-      "weight": 45.0
+      "weight": 45
     },
     {
       "dex": 106,
@@ -3604,7 +3604,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/109.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 110,
@@ -3673,7 +3673,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/111.png",
-      "weight": 115.0
+      "weight": 115
     },
     {
       "dex": 112,
@@ -3708,7 +3708,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 113,
@@ -3776,7 +3776,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/114.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 115,
@@ -3810,7 +3810,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/115.png",
-      "weight": 80.0
+      "weight": 80
     },
     {
       "dex": 116,
@@ -3844,7 +3844,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/116.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 117,
@@ -3878,7 +3878,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/117.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 118,
@@ -3912,7 +3912,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/118.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 119,
@@ -3946,7 +3946,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/119.png",
-      "weight": 39.0
+      "weight": 39
     },
     {
       "dex": 120,
@@ -4015,7 +4015,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/121.png",
-      "weight": 80.0
+      "weight": 80
     },
     {
       "dex": 122,
@@ -4085,7 +4085,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/123.png",
-      "weight": 56.0
+      "weight": 56
     },
     {
       "dex": 124,
@@ -4150,7 +4150,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/125.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 126,
@@ -4214,7 +4214,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/127.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 128,
@@ -4278,7 +4278,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/129.png",
-      "weight": 10.0
+      "weight": 10
     },
     {
       "dex": 130,
@@ -4309,7 +4309,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png",
-      "weight": 235.0
+      "weight": 235
     },
     {
       "dex": 131,
@@ -4344,7 +4344,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png",
-      "weight": 220.0
+      "weight": 220
     },
     {
       "dex": 132,
@@ -4374,7 +4374,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 133,
@@ -4438,7 +4438,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png",
-      "weight": 29.0
+      "weight": 29
     },
     {
       "dex": 135,
@@ -4498,7 +4498,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/136.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 137,
@@ -4602,7 +4602,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/139.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 140,
@@ -4707,7 +4707,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/142.png",
-      "weight": 59.0
+      "weight": 59
     },
     {
       "dex": 143,
@@ -4741,7 +4741,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
-      "weight": 460.0
+      "weight": 460
     },
     {
       "dex": 144,
@@ -4834,7 +4834,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/146.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 147,
@@ -4925,7 +4925,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
-      "weight": 210.0
+      "weight": 210
     },
     {
       "dex": 150,
@@ -4955,7 +4955,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
-      "weight": 122.0
+      "weight": 122
     },
     {
       "dex": 151,
@@ -4982,7 +4982,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 152,
@@ -5132,7 +5132,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/156.png",
-      "weight": 19.0
+      "weight": 19
     },
     {
       "dex": 157,
@@ -5222,7 +5222,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/159.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 160,
@@ -5286,7 +5286,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/161.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 162,
@@ -5561,7 +5561,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/169.png",
-      "weight": 75.0
+      "weight": 75
     },
     {
       "dex": 170,
@@ -5596,7 +5596,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/170.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 171,
@@ -5661,7 +5661,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/172.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 173,
@@ -5695,7 +5695,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/173.png",
-      "weight": 3.0
+      "weight": 3
     },
     {
       "dex": 174,
@@ -5730,7 +5730,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/174.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 175,
@@ -5834,7 +5834,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/177.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 178,
@@ -5869,7 +5869,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/178.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 179,
@@ -6093,7 +6093,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/185.png",
-      "weight": 38.0
+      "weight": 38
     },
     {
       "dex": 186,
@@ -6197,7 +6197,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/188.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 189,
@@ -6232,7 +6232,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/189.png",
-      "weight": 3.0
+      "weight": 3
     },
     {
       "dex": 190,
@@ -6369,7 +6369,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/193.png",
-      "weight": 38.0
+      "weight": 38
     },
     {
       "dex": 194,
@@ -6439,7 +6439,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/195.png",
-      "weight": 75.0
+      "weight": 75
     },
     {
       "dex": 196,
@@ -6499,7 +6499,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png",
-      "weight": 27.0
+      "weight": 27
     },
     {
       "dex": 198,
@@ -6596,7 +6596,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/200.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 201,
@@ -6623,7 +6623,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 202,
@@ -6783,7 +6783,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/206.png",
-      "weight": 14.0
+      "weight": 14
     },
     {
       "dex": 207,
@@ -6853,7 +6853,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png",
-      "weight": 400.0
+      "weight": 400
     },
     {
       "dex": 209,
@@ -6991,7 +6991,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",
-      "weight": 118.0
+      "weight": 118
     },
     {
       "dex": 213,
@@ -7061,7 +7061,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/214.png",
-      "weight": 54.0
+      "weight": 54
     },
     {
       "dex": 215,
@@ -7096,7 +7096,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/215.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 216,
@@ -7198,7 +7198,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/218.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 219,
@@ -7233,7 +7233,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/219.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 220,
@@ -7338,7 +7338,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/222.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 223,
@@ -7372,7 +7372,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/223.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 224,
@@ -7441,7 +7441,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/225.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 226,
@@ -7476,7 +7476,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/226.png",
-      "weight": 220.0
+      "weight": 220
     },
     {
       "dex": 227,
@@ -7581,7 +7581,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/229.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 230,
@@ -7616,7 +7616,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/230.png",
-      "weight": 152.0
+      "weight": 152
     },
     {
       "dex": 231,
@@ -7676,7 +7676,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/232.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 233,
@@ -7778,7 +7778,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/235.png",
-      "weight": 58.0
+      "weight": 58
     },
     {
       "dex": 236,
@@ -7812,7 +7812,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/236.png",
-      "weight": 21.0
+      "weight": 21
     },
     {
       "dex": 237,
@@ -7846,7 +7846,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/237.png",
-      "weight": 48.0
+      "weight": 48
     },
     {
       "dex": 238,
@@ -7881,7 +7881,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/238.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 239,
@@ -8039,7 +8039,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/243.png",
-      "weight": 178.0
+      "weight": 178
     },
     {
       "dex": 244,
@@ -8069,7 +8069,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/244.png",
-      "weight": 198.0
+      "weight": 198
     },
     {
       "dex": 245,
@@ -8099,7 +8099,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/245.png",
-      "weight": 187.0
+      "weight": 187
     },
     {
       "dex": 246,
@@ -8130,7 +8130,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/246.png",
-      "weight": 72.0
+      "weight": 72
     },
     {
       "dex": 247,
@@ -8158,7 +8158,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/247.png",
-      "weight": 152.0
+      "weight": 152
     },
     {
       "dex": 248,
@@ -8189,7 +8189,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",
-      "weight": 202.0
+      "weight": 202
     },
     {
       "dex": 249,
@@ -8220,7 +8220,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
-      "weight": 216.0
+      "weight": 216
     },
     {
       "dex": 250,
@@ -8251,7 +8251,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png",
-      "weight": 199.0
+      "weight": 199
     },
     {
       "dex": 251,
@@ -8279,7 +8279,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/251.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 252,
@@ -8309,7 +8309,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/252.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 253,
@@ -8461,7 +8461,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/257.png",
-      "weight": 52.0
+      "weight": 52
     },
     {
       "dex": 258,
@@ -8522,7 +8522,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/259.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 260,
@@ -8621,7 +8621,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/262.png",
-      "weight": 37.0
+      "weight": 37
     },
     {
       "dex": 263,
@@ -8746,7 +8746,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/266.png",
-      "weight": 10.0
+      "weight": 10
     },
     {
       "dex": 267,
@@ -8940,7 +8940,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/272.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 273,
@@ -8974,7 +8974,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/273.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 274,
@@ -9009,7 +9009,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/274.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 275,
@@ -9176,7 +9176,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 280,
@@ -9439,7 +9439,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/287.png",
-      "weight": 24.0
+      "weight": 24
     },
     {
       "dex": 288,
@@ -9555,7 +9555,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/291.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 292,
@@ -9673,7 +9673,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/295.png",
-      "weight": 84.0
+      "weight": 84
     },
     {
       "dex": 296,
@@ -9776,7 +9776,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/298.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 299,
@@ -9810,7 +9810,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/299.png",
-      "weight": 97.0
+      "weight": 97
     },
     {
       "dex": 300,
@@ -9844,7 +9844,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/300.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 301,
@@ -9913,7 +9913,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/302.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 303,
@@ -9983,7 +9983,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/304.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 305,
@@ -10018,7 +10018,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/305.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 306,
@@ -10053,7 +10053,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png",
-      "weight": 360.0
+      "weight": 360
     },
     {
       "dex": 307,
@@ -10346,7 +10346,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/315.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 316,
@@ -10414,7 +10414,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/317.png",
-      "weight": 80.0
+      "weight": 80
     },
     {
       "dex": 318,
@@ -10510,7 +10510,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/320.png",
-      "weight": 130.0
+      "weight": 130
     },
     {
       "dex": 321,
@@ -10544,7 +10544,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/321.png",
-      "weight": 398.0
+      "weight": 398
     },
     {
       "dex": 322,
@@ -10579,7 +10579,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/322.png",
-      "weight": 24.0
+      "weight": 24
     },
     {
       "dex": 323,
@@ -10614,7 +10614,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/323.png",
-      "weight": 220.0
+      "weight": 220
     },
     {
       "dex": 324,
@@ -10750,7 +10750,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/327.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 328,
@@ -10784,7 +10784,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/328.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 329,
@@ -10840,7 +10840,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png",
-      "weight": 82.0
+      "weight": 82
     },
     {
       "dex": 331,
@@ -11051,7 +11051,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/337.png",
-      "weight": 168.0
+      "weight": 168
     },
     {
       "dex": 338,
@@ -11079,7 +11079,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/338.png",
-      "weight": 154.0
+      "weight": 154
     },
     {
       "dex": 339,
@@ -11274,7 +11274,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/344.png",
-      "weight": 108.0
+      "weight": 108
     },
     {
       "dex": 345,
@@ -11466,7 +11466,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png",
-      "weight": 162.0
+      "weight": 162
     },
     {
       "dex": 351,
@@ -11523,7 +11523,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/352.png",
-      "weight": 22.0
+      "weight": 22
     },
     {
       "dex": 353,
@@ -11621,7 +11621,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/355.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 356,
@@ -11686,7 +11686,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/357.png",
-      "weight": 100.0
+      "weight": 100
     },
     {
       "dex": 358,
@@ -11713,7 +11713,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/358.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 359,
@@ -11747,7 +11747,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/359.png",
-      "weight": 47.0
+      "weight": 47
     },
     {
       "dex": 360,
@@ -11777,7 +11777,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/360.png",
-      "weight": 14.0
+      "weight": 14
     },
     {
       "dex": 361,
@@ -12010,7 +12010,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/367.png",
-      "weight": 27.0
+      "weight": 27
     },
     {
       "dex": 368,
@@ -12289,7 +12289,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png",
-      "weight": 550.0
+      "weight": 550
     },
     {
       "dex": 377,
@@ -12319,7 +12319,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/377.png",
-      "weight": 230.0
+      "weight": 230
     },
     {
       "dex": 378,
@@ -12349,7 +12349,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/378.png",
-      "weight": 175.0
+      "weight": 175
     },
     {
       "dex": 379,
@@ -12379,7 +12379,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/379.png",
-      "weight": 205.0
+      "weight": 205
     },
     {
       "dex": 380,
@@ -12407,7 +12407,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/380.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 381,
@@ -12435,7 +12435,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/381.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 382,
@@ -12462,7 +12462,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png",
-      "weight": 352.0
+      "weight": 352
     },
     {
       "dex": 383,
@@ -12489,7 +12489,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png",
-      "weight": 950.0
+      "weight": 950
     },
     {
       "dex": 384,
@@ -12632,7 +12632,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/388.png",
-      "weight": 97.0
+      "weight": 97
     },
     {
       "dex": 389,
@@ -12663,7 +12663,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/389.png",
-      "weight": 310.0
+      "weight": 310
     },
     {
       "dex": 390,
@@ -12724,7 +12724,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/391.png",
-      "weight": 22.0
+      "weight": 22
     },
     {
       "dex": 392,
@@ -12755,7 +12755,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/392.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 393,
@@ -12815,7 +12815,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/394.png",
-      "weight": 23.0
+      "weight": 23
     },
     {
       "dex": 395,
@@ -12877,7 +12877,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/396.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 397,
@@ -12973,7 +12973,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/399.png",
-      "weight": 20.0
+      "weight": 20
     },
     {
       "dex": 400,
@@ -13170,7 +13170,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/405.png",
-      "weight": 42.0
+      "weight": 42
     },
     {
       "dex": 406,
@@ -13331,7 +13331,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/410.png",
-      "weight": 57.0
+      "weight": 57
     },
     {
       "dex": 411,
@@ -13837,7 +13837,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/426.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 427,
@@ -14132,7 +14132,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/435.png",
-      "weight": 38.0
+      "weight": 38
     },
     {
       "dex": 436,
@@ -14202,7 +14202,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/437.png",
-      "weight": 187.0
+      "weight": 187
     },
     {
       "dex": 438,
@@ -14236,7 +14236,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/438.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 439,
@@ -14271,7 +14271,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/439.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 440,
@@ -14371,7 +14371,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/442.png",
-      "weight": 108.0
+      "weight": 108
     },
     {
       "dex": 443,
@@ -14433,7 +14433,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/444.png",
-      "weight": 56.0
+      "weight": 56
     },
     {
       "dex": 445,
@@ -14464,7 +14464,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png",
-      "weight": 95.0
+      "weight": 95
     },
     {
       "dex": 446,
@@ -14498,7 +14498,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/446.png",
-      "weight": 105.0
+      "weight": 105
     },
     {
       "dex": 447,
@@ -14567,7 +14567,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png",
-      "weight": 54.0
+      "weight": 54
     },
     {
       "dex": 449,
@@ -14627,7 +14627,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/450.png",
-      "weight": 300.0
+      "weight": 300
     },
     {
       "dex": 451,
@@ -14662,7 +14662,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/451.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 452,
@@ -14732,7 +14732,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/453.png",
-      "weight": 23.0
+      "weight": 23
     },
     {
       "dex": 454,
@@ -14794,7 +14794,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/455.png",
-      "weight": 27.0
+      "weight": 27
     },
     {
       "dex": 456,
@@ -14828,7 +14828,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/456.png",
-      "weight": 7.0
+      "weight": 7
     },
     {
       "dex": 457,
@@ -14862,7 +14862,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/457.png",
-      "weight": 24.0
+      "weight": 24
     },
     {
       "dex": 458,
@@ -14897,7 +14897,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/458.png",
-      "weight": 65.0
+      "weight": 65
     },
     {
       "dex": 459,
@@ -14990,7 +14990,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/461.png",
-      "weight": 34.0
+      "weight": 34
     },
     {
       "dex": 462,
@@ -15025,7 +15025,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/462.png",
-      "weight": 180.0
+      "weight": 180
     },
     {
       "dex": 463,
@@ -15059,7 +15059,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/463.png",
-      "weight": 140.0
+      "weight": 140
     },
     {
       "dex": 464,
@@ -15188,7 +15188,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/467.png",
-      "weight": 68.0
+      "weight": 68
     },
     {
       "dex": 468,
@@ -15223,7 +15223,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/468.png",
-      "weight": 38.0
+      "weight": 38
     },
     {
       "dex": 469,
@@ -15388,7 +15388,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/473.png",
-      "weight": 291.0
+      "weight": 291
     },
     {
       "dex": 474,
@@ -15422,7 +15422,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/474.png",
-      "weight": 34.0
+      "weight": 34
     },
     {
       "dex": 475,
@@ -15457,7 +15457,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png",
-      "weight": 52.0
+      "weight": 52
     },
     {
       "dex": 476,
@@ -15492,7 +15492,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/476.png",
-      "weight": 340.0
+      "weight": 340
     },
     {
       "dex": 477,
@@ -15693,7 +15693,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/483.png",
-      "weight": 683.0
+      "weight": 683
     },
     {
       "dex": 484,
@@ -15724,7 +15724,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/484.png",
-      "weight": 336.0
+      "weight": 336
     },
     {
       "dex": 485,
@@ -15755,7 +15755,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/485.png",
-      "weight": 430.0
+      "weight": 430
     },
     {
       "dex": 486,
@@ -15782,7 +15782,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/486.png",
-      "weight": 420.0
+      "weight": 420
     },
     {
       "dex": 487,
@@ -15813,7 +15813,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/487.png",
-      "weight": 750.0
+      "weight": 750
     },
     {
       "dex": 488,
@@ -15975,7 +15975,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 494,
@@ -16003,7 +16003,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/494.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 495,
@@ -16063,7 +16063,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/496.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 497,
@@ -16093,7 +16093,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png",
-      "weight": 63.0
+      "weight": 63
     },
     {
       "dex": 498,
@@ -16185,7 +16185,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/500.png",
-      "weight": 150.0
+      "weight": 150
     },
     {
       "dex": 501,
@@ -16343,7 +16343,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/505.png",
-      "weight": 27.0
+      "weight": 27
     },
     {
       "dex": 506,
@@ -16445,7 +16445,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/508.png",
-      "weight": 61.0
+      "weight": 61
     },
     {
       "dex": 509,
@@ -16603,7 +16603,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/513.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 514,
@@ -16633,7 +16633,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/514.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 515,
@@ -16693,7 +16693,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/516.png",
-      "weight": 29.0
+      "weight": 29
     },
     {
       "dex": 517,
@@ -16831,7 +16831,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/520.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 521,
@@ -16866,7 +16866,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/521.png",
-      "weight": 29.0
+      "weight": 29
     },
     {
       "dex": 522,
@@ -16968,7 +16968,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/524.png",
-      "weight": 18.0
+      "weight": 18
     },
     {
       "dex": 525,
@@ -17002,7 +17002,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/525.png",
-      "weight": 102.0
+      "weight": 102
     },
     {
       "dex": 526,
@@ -17036,7 +17036,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/526.png",
-      "weight": 260.0
+      "weight": 260
     },
     {
       "dex": 527,
@@ -17209,7 +17209,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/531.png",
-      "weight": 31.0
+      "weight": 31
     },
     {
       "dex": 532,
@@ -17277,7 +17277,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/533.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 534,
@@ -17311,7 +17311,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/534.png",
-      "weight": 87.0
+      "weight": 87
     },
     {
       "dex": 535,
@@ -17380,7 +17380,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/536.png",
-      "weight": 17.0
+      "weight": 17
     },
     {
       "dex": 537,
@@ -17415,7 +17415,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/537.png",
-      "weight": 62.0
+      "weight": 62
     },
     {
       "dex": 538,
@@ -17483,7 +17483,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/539.png",
-      "weight": 51.0
+      "weight": 51
     },
     {
       "dex": 540,
@@ -17865,7 +17865,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/550.png",
-      "weight": 18.0
+      "weight": 18
     },
     {
       "dex": 551,
@@ -18064,7 +18064,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/556.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 557,
@@ -18134,7 +18134,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/558.png",
-      "weight": 200.0
+      "weight": 200
     },
     {
       "dex": 559,
@@ -18204,7 +18204,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/560.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 561,
@@ -18239,7 +18239,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/561.png",
-      "weight": 14.0
+      "weight": 14
     },
     {
       "dex": 562,
@@ -18363,7 +18363,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/565.png",
-      "weight": 81.0
+      "weight": 81
     },
     {
       "dex": 566,
@@ -18419,7 +18419,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/567.png",
-      "weight": 32.0
+      "weight": 32
     },
     {
       "dex": 568,
@@ -18453,7 +18453,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/568.png",
-      "weight": 31.0
+      "weight": 31
     },
     {
       "dex": 569,
@@ -18677,7 +18677,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/575.png",
-      "weight": 18.0
+      "weight": 18
     },
     {
       "dex": 576,
@@ -18711,7 +18711,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/576.png",
-      "weight": 44.0
+      "weight": 44
     },
     {
       "dex": 577,
@@ -18745,7 +18745,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/577.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 578,
@@ -18779,7 +18779,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/578.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 579,
@@ -18951,7 +18951,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/583.png",
-      "weight": 41.0
+      "weight": 41
     },
     {
       "dex": 584,
@@ -19086,7 +19086,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/587.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 588,
@@ -19155,7 +19155,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/589.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 590,
@@ -19186,7 +19186,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/590.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 591,
@@ -19252,7 +19252,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/592.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 593,
@@ -19287,7 +19287,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/593.png",
-      "weight": 135.0
+      "weight": 135
     },
     {
       "dex": 594,
@@ -19450,7 +19450,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/598.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 599,
@@ -19484,7 +19484,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/599.png",
-      "weight": 21.0
+      "weight": 21
     },
     {
       "dex": 600,
@@ -19518,7 +19518,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/600.png",
-      "weight": 51.0
+      "weight": 51
     },
     {
       "dex": 601,
@@ -19552,7 +19552,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/601.png",
-      "weight": 81.0
+      "weight": 81
     },
     {
       "dex": 602,
@@ -19606,7 +19606,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/603.png",
-      "weight": 22.0
+      "weight": 22
     },
     {
       "dex": 604,
@@ -19667,7 +19667,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/605.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 606,
@@ -19771,7 +19771,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/608.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 609,
@@ -19840,7 +19840,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/610.png",
-      "weight": 18.0
+      "weight": 18
     },
     {
       "dex": 611,
@@ -19874,7 +19874,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/611.png",
-      "weight": 36.0
+      "weight": 36
     },
     {
       "dex": 612,
@@ -19976,7 +19976,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/614.png",
-      "weight": 260.0
+      "weight": 260
     },
     {
       "dex": 615,
@@ -20003,7 +20003,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/615.png",
-      "weight": 148.0
+      "weight": 148
     },
     {
       "dex": 616,
@@ -20106,7 +20106,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/618.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 619,
@@ -20140,7 +20140,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/619.png",
-      "weight": 20.0
+      "weight": 20
     },
     {
       "dex": 620,
@@ -20208,7 +20208,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/621.png",
-      "weight": 139.0
+      "weight": 139
     },
     {
       "dex": 622,
@@ -20243,7 +20243,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/622.png",
-      "weight": 92.0
+      "weight": 92
     },
     {
       "dex": 623,
@@ -20278,7 +20278,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/623.png",
-      "weight": 330.0
+      "weight": 330
     },
     {
       "dex": 624,
@@ -20348,7 +20348,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/625.png",
-      "weight": 70.0
+      "weight": 70
     },
     {
       "dex": 626,
@@ -20452,7 +20452,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/628.png",
-      "weight": 41.0
+      "weight": 41
     },
     {
       "dex": 629,
@@ -20487,7 +20487,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/629.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 630,
@@ -20556,7 +20556,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/631.png",
-      "weight": 58.0
+      "weight": 58
     },
     {
       "dex": 632,
@@ -20591,7 +20591,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/632.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 633,
@@ -20647,7 +20647,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/634.png",
-      "weight": 50.0
+      "weight": 50
     },
     {
       "dex": 635,
@@ -20675,7 +20675,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/635.png",
-      "weight": 160.0
+      "weight": 160
     },
     {
       "dex": 636,
@@ -20737,7 +20737,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/637.png",
-      "weight": 46.0
+      "weight": 46
     },
     {
       "dex": 638,
@@ -20765,7 +20765,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/638.png",
-      "weight": 250.0
+      "weight": 250
     },
     {
       "dex": 639,
@@ -20793,7 +20793,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/639.png",
-      "weight": 260.0
+      "weight": 260
     },
     {
       "dex": 640,
@@ -20821,7 +20821,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/640.png",
-      "weight": 200.0
+      "weight": 200
     },
     {
       "dex": 641,
@@ -20851,7 +20851,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/641.png",
-      "weight": 63.0
+      "weight": 63
     },
     {
       "dex": 642,
@@ -20882,7 +20882,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/642.png",
-      "weight": 61.0
+      "weight": 61
     },
     {
       "dex": 643,
@@ -20910,7 +20910,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/643.png",
-      "weight": 330.0
+      "weight": 330
     },
     {
       "dex": 644,
@@ -20938,7 +20938,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/644.png",
-      "weight": 345.0
+      "weight": 345
     },
     {
       "dex": 645,
@@ -20969,7 +20969,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/645.png",
-      "weight": 68.0
+      "weight": 68
     },
     {
       "dex": 646,
@@ -20997,7 +20997,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/646.png",
-      "weight": 325.0
+      "weight": 325
     },
     {
       "dex": 647,
@@ -21111,7 +21111,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/650.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 651,
@@ -21141,7 +21141,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/651.png",
-      "weight": 29.0
+      "weight": 29
     },
     {
       "dex": 652,
@@ -21172,7 +21172,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/652.png",
-      "weight": 90.0
+      "weight": 90
     },
     {
       "dex": 653,
@@ -21263,7 +21263,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/655.png",
-      "weight": 39.0
+      "weight": 39
     },
     {
       "dex": 656,
@@ -21293,7 +21293,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/656.png",
-      "weight": 7.0
+      "weight": 7
     },
     {
       "dex": 657,
@@ -21354,7 +21354,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 659,
@@ -21388,7 +21388,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/659.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 660,
@@ -21485,7 +21485,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/662.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 663,
@@ -21615,7 +21615,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/666.png",
-      "weight": 17.0
+      "weight": 17
     },
     {
       "dex": 667,
@@ -21775,7 +21775,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/671.png",
-      "weight": 10.0
+      "weight": 10
     },
     {
       "dex": 672,
@@ -21805,7 +21805,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/672.png",
-      "weight": 31.0
+      "weight": 31
     },
     {
       "dex": 673,
@@ -21835,7 +21835,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/673.png",
-      "weight": 91.0
+      "weight": 91
     },
     {
       "dex": 674,
@@ -21869,7 +21869,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/674.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 675,
@@ -21904,7 +21904,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/675.png",
-      "weight": 136.0
+      "weight": 136
     },
     {
       "dex": 676,
@@ -21931,7 +21931,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/676.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 677,
@@ -22027,7 +22027,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/679.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 680,
@@ -22083,7 +22083,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/681.png",
-      "weight": 53.0
+      "weight": 53
     },
     {
       "dex": 682,
@@ -22203,7 +22203,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/685.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 686,
@@ -22273,7 +22273,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/687.png",
-      "weight": 47.0
+      "weight": 47
     },
     {
       "dex": 688,
@@ -22308,7 +22308,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/688.png",
-      "weight": 31.0
+      "weight": 31
     },
     {
       "dex": 689,
@@ -22343,7 +22343,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/689.png",
-      "weight": 96.0
+      "weight": 96
     },
     {
       "dex": 690,
@@ -22502,7 +22502,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/694.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 695,
@@ -22537,7 +22537,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/695.png",
-      "weight": 21.0
+      "weight": 21
     },
     {
       "dex": 696,
@@ -22568,7 +22568,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/696.png",
-      "weight": 26.0
+      "weight": 26
     },
     {
       "dex": 697,
@@ -22599,7 +22599,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/697.png",
-      "weight": 270.0
+      "weight": 270
     },
     {
       "dex": 698,
@@ -22661,7 +22661,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/699.png",
-      "weight": 225.0
+      "weight": 225
     },
     {
       "dex": 700,
@@ -22925,7 +22925,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/707.png",
-      "weight": 3.0
+      "weight": 3
     },
     {
       "dex": 708,
@@ -22960,7 +22960,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/708.png",
-      "weight": 7.0
+      "weight": 7
     },
     {
       "dex": 709,
@@ -22995,7 +22995,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/709.png",
-      "weight": 71.0
+      "weight": 71
     },
     {
       "dex": 710,
@@ -23030,7 +23030,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/710.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 711,
@@ -23133,7 +23133,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/713.png",
-      "weight": 505.0
+      "weight": 505
     },
     {
       "dex": 714,
@@ -23168,7 +23168,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/714.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 715,
@@ -23203,7 +23203,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/715.png",
-      "weight": 85.0
+      "weight": 85
     },
     {
       "dex": 716,
@@ -23230,7 +23230,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/716.png",
-      "weight": 215.0
+      "weight": 215
     },
     {
       "dex": 717,
@@ -23258,7 +23258,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/717.png",
-      "weight": 203.0
+      "weight": 203
     },
     {
       "dex": 718,
@@ -23286,7 +23286,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/718.png",
-      "weight": 305.0
+      "weight": 305
     },
     {
       "dex": 719,
@@ -23342,7 +23342,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/720.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 721,
@@ -23370,7 +23370,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/721.png",
-      "weight": 195.0
+      "weight": 195
     },
     {
       "dex": 722,
@@ -23432,7 +23432,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/723.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 724,
@@ -23523,7 +23523,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/726.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 727,
@@ -23554,7 +23554,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/727.png",
-      "weight": 83.0
+      "weight": 83
     },
     {
       "dex": 728,
@@ -23645,7 +23645,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/730.png",
-      "weight": 44.0
+      "weight": 44
     },
     {
       "dex": 731,
@@ -23750,7 +23750,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/733.png",
-      "weight": 26.0
+      "weight": 26
     },
     {
       "dex": 734,
@@ -23784,7 +23784,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/734.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 735,
@@ -23901,7 +23901,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/738.png",
-      "weight": 45.0
+      "weight": 45
     },
     {
       "dex": 739,
@@ -23935,7 +23935,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/739.png",
-      "weight": 7.0
+      "weight": 7
     },
     {
       "dex": 740,
@@ -23970,7 +23970,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/740.png",
-      "weight": 180.0
+      "weight": 180
     },
     {
       "dex": 741,
@@ -24136,7 +24136,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/745.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 746,
@@ -24198,7 +24198,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/747.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 748,
@@ -24267,7 +24267,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/749.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 750,
@@ -24301,7 +24301,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/750.png",
-      "weight": 920.0
+      "weight": 920
     },
     {
       "dex": 751,
@@ -24332,7 +24332,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/751.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 752,
@@ -24363,7 +24363,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/752.png",
-      "weight": 82.0
+      "weight": 82
     },
     {
       "dex": 753,
@@ -24625,7 +24625,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/760.png",
-      "weight": 135.0
+      "weight": 135
     },
     {
       "dex": 761,
@@ -24796,7 +24796,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/765.png",
-      "weight": 76.0
+      "weight": 76
     },
     {
       "dex": 766,
@@ -24854,7 +24854,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/767.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 768,
@@ -24882,7 +24882,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/768.png",
-      "weight": 108.0
+      "weight": 108
     },
     {
       "dex": 769,
@@ -24913,7 +24913,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/769.png",
-      "weight": 70.0
+      "weight": 70
     },
     {
       "dex": 770,
@@ -24944,7 +24944,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/770.png",
-      "weight": 250.0
+      "weight": 250
     },
     {
       "dex": 771,
@@ -25056,7 +25056,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/774.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 775,
@@ -25111,7 +25111,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/776.png",
-      "weight": 212.0
+      "weight": 212
     },
     {
       "dex": 777,
@@ -25209,7 +25209,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/779.png",
-      "weight": 19.0
+      "weight": 19
     },
     {
       "dex": 780,
@@ -25244,7 +25244,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/780.png",
-      "weight": 185.0
+      "weight": 185
     },
     {
       "dex": 781,
@@ -25272,7 +25272,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/781.png",
-      "weight": 210.0
+      "weight": 210
     },
     {
       "dex": 782,
@@ -25341,7 +25341,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/783.png",
-      "weight": 47.0
+      "weight": 47
     },
     {
       "dex": 784,
@@ -25582,7 +25582,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/791.png",
-      "weight": 230.0
+      "weight": 230
     },
     {
       "dex": 792,
@@ -25610,7 +25610,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/792.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 793,
@@ -25694,7 +25694,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/795.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 796,
@@ -25721,7 +25721,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/796.png",
-      "weight": 100.0
+      "weight": 100
     },
     {
       "dex": 797,
@@ -25805,7 +25805,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/799.png",
-      "weight": 888.0
+      "weight": 888
     },
     {
       "dex": 800,
@@ -25832,7 +25832,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/800.png",
-      "weight": 230.0
+      "weight": 230
     },
     {
       "dex": 801,
@@ -25943,7 +25943,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/804.png",
-      "weight": 150.0
+      "weight": 150
     },
     {
       "dex": 805,
@@ -25971,7 +25971,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/805.png",
-      "weight": 820.0
+      "weight": 820
     },
     {
       "dex": 806,
@@ -25999,7 +25999,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/806.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 807,
@@ -26053,7 +26053,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/808.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 809,
@@ -26080,7 +26080,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/809.png",
-      "weight": 800.0
+      "weight": 800
     },
     {
       "dex": 810,
@@ -26110,7 +26110,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/810.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 811,
@@ -26140,7 +26140,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/811.png",
-      "weight": 14.0
+      "weight": 14
     },
     {
       "dex": 812,
@@ -26170,7 +26170,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/812.png",
-      "weight": 90.0
+      "weight": 90
     },
     {
       "dex": 813,
@@ -26230,7 +26230,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/814.png",
-      "weight": 9.0
+      "weight": 9
     },
     {
       "dex": 815,
@@ -26260,7 +26260,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/815.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 816,
@@ -26290,7 +26290,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/816.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 817,
@@ -26410,7 +26410,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/820.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 821,
@@ -26478,7 +26478,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/822.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 823,
@@ -26513,7 +26513,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/823.png",
-      "weight": 75.0
+      "weight": 75
     },
     {
       "dex": 824,
@@ -26547,7 +26547,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/824.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 825,
@@ -26787,7 +26787,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/831.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 832,
@@ -26821,7 +26821,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/832.png",
-      "weight": 43.0
+      "weight": 43
     },
     {
       "dex": 833,
@@ -26950,7 +26950,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/836.png",
-      "weight": 34.0
+      "weight": 34
     },
     {
       "dex": 837,
@@ -26984,7 +26984,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/837.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 838,
@@ -27019,7 +27019,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/838.png",
-      "weight": 78.0
+      "weight": 78
     },
     {
       "dex": 839,
@@ -27124,7 +27124,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/841.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 842,
@@ -27159,7 +27159,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/842.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 843,
@@ -27255,7 +27255,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/845.png",
-      "weight": 18.0
+      "weight": 18
     },
     {
       "dex": 846,
@@ -27285,7 +27285,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/846.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 847,
@@ -27315,7 +27315,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/847.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 848,
@@ -27350,7 +27350,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/848.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 849,
@@ -27385,7 +27385,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/849.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 850,
@@ -27420,7 +27420,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/850.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 851,
@@ -27455,7 +27455,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/851.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 852,
@@ -27485,7 +27485,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/852.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 853,
@@ -27515,7 +27515,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/853.png",
-      "weight": 39.0
+      "weight": 39
     },
     {
       "dex": 854,
@@ -27783,7 +27783,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/861.png",
-      "weight": 61.0
+      "weight": 61
     },
     {
       "dex": 862,
@@ -27818,7 +27818,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/862.png",
-      "weight": 46.0
+      "weight": 46
     },
     {
       "dex": 863,
@@ -27852,7 +27852,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/863.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 864,
@@ -27912,7 +27912,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/865.png",
-      "weight": 117.0
+      "weight": 117
     },
     {
       "dex": 866,
@@ -28065,7 +28065,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/870.png",
-      "weight": 62.0
+      "weight": 62
     },
     {
       "dex": 871,
@@ -28095,7 +28095,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/871.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 872,
@@ -28157,7 +28157,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/873.png",
-      "weight": 42.0
+      "weight": 42
     },
     {
       "dex": 874,
@@ -28184,7 +28184,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/874.png",
-      "weight": 520.0
+      "weight": 520
     },
     {
       "dex": 875,
@@ -28211,7 +28211,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/875.png",
-      "weight": 89.0
+      "weight": 89
     },
     {
       "dex": 876,
@@ -28246,7 +28246,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/876.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 877,
@@ -28274,7 +28274,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/877.png",
-      "weight": 3.0
+      "weight": 3
     },
     {
       "dex": 878,
@@ -28304,7 +28304,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/878.png",
-      "weight": 100.0
+      "weight": 100
     },
     {
       "dex": 879,
@@ -28334,7 +28334,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/879.png",
-      "weight": 650.0
+      "weight": 650
     },
     {
       "dex": 880,
@@ -28369,7 +28369,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/880.png",
-      "weight": 190.0
+      "weight": 190
     },
     {
       "dex": 881,
@@ -28404,7 +28404,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/881.png",
-      "weight": 150.0
+      "weight": 150
     },
     {
       "dex": 882,
@@ -28439,7 +28439,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/882.png",
-      "weight": 215.0
+      "weight": 215
     },
     {
       "dex": 883,
@@ -28474,7 +28474,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/883.png",
-      "weight": 175.0
+      "weight": 175
     },
     {
       "dex": 884,
@@ -28509,7 +28509,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/884.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 885,
@@ -28544,7 +28544,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/885.png",
-      "weight": 2.0
+      "weight": 2
     },
     {
       "dex": 886,
@@ -28579,7 +28579,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/886.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 887,
@@ -28614,7 +28614,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/887.png",
-      "weight": 50.0
+      "weight": 50
     },
     {
       "dex": 888,
@@ -28641,7 +28641,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/888.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 889,
@@ -28668,7 +28668,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/889.png",
-      "weight": 210.0
+      "weight": 210
     },
     {
       "dex": 890,
@@ -28696,7 +28696,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/890.png",
-      "weight": 950.0
+      "weight": 950
     },
     {
       "dex": 891,
@@ -28723,7 +28723,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/891.png",
-      "weight": 12.0
+      "weight": 12
     },
     {
       "dex": 892,
@@ -28751,7 +28751,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/892.png",
-      "weight": 105.0
+      "weight": 105
     },
     {
       "dex": 893,
@@ -28779,7 +28779,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/893.png",
-      "weight": 70.0
+      "weight": 70
     },
     {
       "dex": 894,
@@ -28806,7 +28806,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/894.png",
-      "weight": 145.0
+      "weight": 145
     },
     {
       "dex": 895,
@@ -28833,7 +28833,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/895.png",
-      "weight": 200.0
+      "weight": 200
     },
     {
       "dex": 896,
@@ -28860,7 +28860,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/896.png",
-      "weight": 800.0
+      "weight": 800
     },
     {
       "dex": 897,
@@ -28985,7 +28985,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/900.png",
-      "weight": 89.0
+      "weight": 89
     },
     {
       "dex": 901,
@@ -29020,7 +29020,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/901.png",
-      "weight": 290.0
+      "weight": 290
     },
     {
       "dex": 902,
@@ -29055,7 +29055,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/902.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 903,
@@ -29090,7 +29090,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/903.png",
-      "weight": 43.0
+      "weight": 43
     },
     {
       "dex": 904,
@@ -29156,7 +29156,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/905.png",
-      "weight": 48.0
+      "weight": 48
     },
     {
       "dex": 906,
@@ -29497,7 +29497,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/916.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 917,
@@ -29527,7 +29527,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/917.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 918,
@@ -29587,7 +29587,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/919.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 920,
@@ -29722,7 +29722,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/923.png",
-      "weight": 41.0
+      "weight": 41
     },
     {
       "dex": 924,
@@ -30012,7 +30012,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/932.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 933,
@@ -30046,7 +30046,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/933.png",
-      "weight": 105.0
+      "weight": 105
     },
     {
       "dex": 934,
@@ -30080,7 +30080,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/934.png",
-      "weight": 240.0
+      "weight": 240
     },
     {
       "dex": 935,
@@ -30141,7 +30141,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/936.png",
-      "weight": 85.0
+      "weight": 85
     },
     {
       "dex": 937,
@@ -30172,7 +30172,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/937.png",
-      "weight": 62.0
+      "weight": 62
     },
     {
       "dex": 938,
@@ -30240,7 +30240,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/939.png",
-      "weight": 113.0
+      "weight": 113
     },
     {
       "dex": 940,
@@ -30344,7 +30344,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/942.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 943,
@@ -30378,7 +30378,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/943.png",
-      "weight": 61.0
+      "weight": 61
     },
     {
       "dex": 944,
@@ -30510,7 +30510,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/947.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 948,
@@ -30538,7 +30538,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/948.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 949,
@@ -30566,7 +30566,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/949.png",
-      "weight": 58.0
+      "weight": 58
     },
     {
       "dex": 950,
@@ -30600,7 +30600,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/950.png",
-      "weight": 79.0
+      "weight": 79
     },
     {
       "dex": 951,
@@ -30634,7 +30634,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png",
-      "weight": 3.0
+      "weight": 3
     },
     {
       "dex": 952,
@@ -30669,7 +30669,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/952.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 953,
@@ -30699,7 +30699,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/953.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 954,
@@ -30798,7 +30798,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/956.png",
-      "weight": 90.0
+      "weight": 90
     },
     {
       "dex": 957,
@@ -31091,7 +31091,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/965.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 966,
@@ -31122,7 +31122,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/966.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 967,
@@ -31153,7 +31153,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/967.png",
-      "weight": 63.0
+      "weight": 63
     },
     {
       "dex": 968,
@@ -31183,7 +31183,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/968.png",
-      "weight": 310.0
+      "weight": 310
     },
     {
       "dex": 969,
@@ -31214,7 +31214,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/969.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 970,
@@ -31245,7 +31245,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/970.png",
-      "weight": 45.0
+      "weight": 45
     },
     {
       "dex": 971,
@@ -31275,7 +31275,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/971.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 972,
@@ -31305,7 +31305,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/972.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 973,
@@ -31340,7 +31340,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/973.png",
-      "weight": 37.0
+      "weight": 37
     },
     {
       "dex": 974,
@@ -31374,7 +31374,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/974.png",
-      "weight": 45.0
+      "weight": 45
     },
     {
       "dex": 975,
@@ -31408,7 +31408,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/975.png",
-      "weight": 700.0
+      "weight": 700
     },
     {
       "dex": 976,
@@ -31439,7 +31439,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/976.png",
-      "weight": 90.0
+      "weight": 90
     },
     {
       "dex": 977,
@@ -31473,7 +31473,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/977.png",
-      "weight": 220.0
+      "weight": 220
     },
     {
       "dex": 978,
@@ -31504,7 +31504,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/978.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 979,
@@ -31539,7 +31539,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/979.png",
-      "weight": 56.0
+      "weight": 56
     },
     {
       "dex": 980,
@@ -31574,7 +31574,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/980.png",
-      "weight": 223.0
+      "weight": 223
     },
     {
       "dex": 981,
@@ -31609,7 +31609,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/981.png",
-      "weight": 160.0
+      "weight": 160
     },
     {
       "dex": 982,
@@ -31678,7 +31678,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/983.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 984,
@@ -31706,7 +31706,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/984.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 985,
@@ -31734,7 +31734,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/985.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 986,
@@ -31762,7 +31762,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/986.png",
-      "weight": 21.0
+      "weight": 21
     },
     {
       "dex": 987,
@@ -31790,7 +31790,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/987.png",
-      "weight": 4.0
+      "weight": 4
     },
     {
       "dex": 988,
@@ -31818,7 +31818,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/988.png",
-      "weight": 92.0
+      "weight": 92
     },
     {
       "dex": 989,
@@ -31846,7 +31846,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/989.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 990,
@@ -31874,7 +31874,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/990.png",
-      "weight": 240.0
+      "weight": 240
     },
     {
       "dex": 991,
@@ -31902,7 +31902,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/991.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 992,
@@ -31958,7 +31958,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/993.png",
-      "weight": 111.0
+      "weight": 111
     },
     {
       "dex": 994,
@@ -31986,7 +31986,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/994.png",
-      "weight": 36.0
+      "weight": 36
     },
     {
       "dex": 995,
@@ -32014,7 +32014,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/995.png",
-      "weight": 303.0
+      "weight": 303
     },
     {
       "dex": 996,
@@ -32045,7 +32045,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/996.png",
-      "weight": 17.0
+      "weight": 17
     },
     {
       "dex": 997,
@@ -32076,7 +32076,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/997.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 998,
@@ -32107,7 +32107,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/998.png",
-      "weight": 210.0
+      "weight": 210
     },
     {
       "dex": 999,
@@ -32134,7 +32134,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/999.png",
-      "weight": 5.0
+      "weight": 5
     },
     {
       "dex": 1000,
@@ -32162,7 +32162,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1000.png",
-      "weight": 30.0
+      "weight": 30
     },
     {
       "dex": 1001,
@@ -32302,7 +32302,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1005.png",
-      "weight": 380.0
+      "weight": 380
     },
     {
       "dex": 1006,
@@ -32330,7 +32330,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1006.png",
-      "weight": 35.0
+      "weight": 35
     },
     {
       "dex": 1007,
@@ -32358,7 +32358,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1007.png",
-      "weight": 303.0
+      "weight": 303
     },
     {
       "dex": 1008,
@@ -32386,7 +32386,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1008.png",
-      "weight": 240.0
+      "weight": 240
     },
     {
       "dex": 1009,
@@ -32414,7 +32414,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1009.png",
-      "weight": 280.0
+      "weight": 280
     },
     {
       "dex": 1010,
@@ -32442,7 +32442,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1010.png",
-      "weight": 125.0
+      "weight": 125
     },
     {
       "dex": 1011,
@@ -32694,7 +32694,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1018.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 1019,
@@ -32729,7 +32729,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1019.png",
-      "weight": 93.0
+      "weight": 93
     },
     {
       "dex": 1020,
@@ -32757,7 +32757,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1020.png",
-      "weight": 590.0
+      "weight": 590
     },
     {
       "dex": 1021,
@@ -32785,7 +32785,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1021.png",
-      "weight": 480.0
+      "weight": 480
     },
     {
       "dex": 1022,
@@ -32841,7 +32841,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1023.png",
-      "weight": 156.0
+      "weight": 156
     },
     {
       "dex": 1024,
@@ -33174,7 +33174,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10158.png",
-      "weight": 6.0
+      "weight": 6
     },
     {
       "dex": 26,
@@ -33202,7 +33202,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10304.png",
-      "weight": 38.0
+      "weight": 38
     },
     {
       "dex": 26,
@@ -33230,7 +33230,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10305.png",
-      "weight": 26.0
+      "weight": 26
     },
     {
       "dex": 26,
@@ -33259,7 +33259,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10100.png",
-      "weight": 21.0
+      "weight": 21
     },
     {
       "dex": 27,
@@ -33291,7 +33291,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10101.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 28,
@@ -33323,7 +33323,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10102.png",
-      "weight": 55.0
+      "weight": 55
     },
     {
       "dex": 36,
@@ -33451,7 +33451,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10105.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 51,
@@ -33592,7 +33592,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10108.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 58,
@@ -33664,7 +33664,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10230.png",
-      "weight": 168.0
+      "weight": 168
     },
     {
       "dex": 65,
@@ -33692,7 +33692,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10037.png",
-      "weight": 48.0
+      "weight": 48
     },
     {
       "dex": 71,
@@ -33793,7 +33793,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10110.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 76,
@@ -33829,7 +33829,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10111.png",
-      "weight": 316.0
+      "weight": 316
     },
     {
       "dex": 77,
@@ -33864,7 +33864,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10162.png",
-      "weight": 24.0
+      "weight": 24
     },
     {
       "dex": 78,
@@ -33900,7 +33900,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10163.png",
-      "weight": 80.0
+      "weight": 80
     },
     {
       "dex": 79,
@@ -33935,7 +33935,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10164.png",
-      "weight": 36.0
+      "weight": 36
     },
     {
       "dex": 80,
@@ -34000,7 +34000,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10071.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 83,
@@ -34031,7 +34031,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10166.png",
-      "weight": 42.0
+      "weight": 42
     },
     {
       "dex": 88,
@@ -34067,7 +34067,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10112.png",
-      "weight": 42.0
+      "weight": 42
     },
     {
       "dex": 89,
@@ -34103,7 +34103,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10113.png",
-      "weight": 52.0
+      "weight": 52
     },
     {
       "dex": 94,
@@ -34168,7 +34168,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10231.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 101,
@@ -34204,7 +34204,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10232.png",
-      "weight": 71.0
+      "weight": 71
     },
     {
       "dex": 103,
@@ -34272,7 +34272,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10115.png",
-      "weight": 34.0
+      "weight": 34
     },
     {
       "dex": 110,
@@ -34308,7 +34308,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10167.png",
-      "weight": 16.0
+      "weight": 16
     },
     {
       "dex": 115,
@@ -34336,7 +34336,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10039.png",
-      "weight": 100.0
+      "weight": 100
     },
     {
       "dex": 121,
@@ -34365,7 +34365,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10280.png",
-      "weight": 80.0
+      "weight": 80
     },
     {
       "dex": 122,
@@ -34430,7 +34430,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10040.png",
-      "weight": 59.0
+      "weight": 59
     },
     {
       "dex": 128,
@@ -34466,7 +34466,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10251.png",
-      "weight": 85.0
+      "weight": 85
     },
     {
       "dex": 128,
@@ -34502,7 +34502,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10252.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 128,
@@ -34537,7 +34537,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10250.png",
-      "weight": 115.0
+      "weight": 115
     },
     {
       "dex": 130,
@@ -34566,7 +34566,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10041.png",
-      "weight": 305.0
+      "weight": 305
     },
     {
       "dex": 133,
@@ -34630,7 +34630,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10042.png",
-      "weight": 79.0
+      "weight": 79
     },
     {
       "dex": 144,
@@ -34717,7 +34717,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10171.png",
-      "weight": 66.0
+      "weight": 66
     },
     {
       "dex": 149,
@@ -34746,7 +34746,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10281.png",
-      "weight": 290.0
+      "weight": 290
     },
     {
       "dex": 150,
@@ -34775,7 +34775,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10043.png",
-      "weight": 127.0
+      "weight": 127
     },
     {
       "dex": 150,
@@ -34803,7 +34803,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10044.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 154,
@@ -34832,7 +34832,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10282.png",
-      "weight": 201.0
+      "weight": 201
     },
     {
       "dex": 157,
@@ -34958,7 +34958,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10253.png",
-      "weight": 11.0
+      "weight": 11
     },
     {
       "dex": 199,
@@ -35023,7 +35023,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10072.png",
-      "weight": 740.0
+      "weight": 740
     },
     {
       "dex": 211,
@@ -35088,7 +35088,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10046.png",
-      "weight": 125.0
+      "weight": 125
     },
     {
       "dex": 214,
@@ -35153,7 +35153,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10235.png",
-      "weight": 27.0
+      "weight": 27
     },
     {
       "dex": 222,
@@ -35271,7 +35271,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10049.png",
-      "weight": 255.0
+      "weight": 255
     },
     {
       "dex": 254,
@@ -35329,7 +35329,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10050.png",
-      "weight": 52.0
+      "weight": 52
     },
     {
       "dex": 260,
@@ -35358,7 +35358,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10064.png",
-      "weight": 102.0
+      "weight": 102
     },
     {
       "dex": 263,
@@ -35488,7 +35488,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10066.png",
-      "weight": 161.0
+      "weight": 161
     },
     {
       "dex": 303,
@@ -35545,7 +35545,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10053.png",
-      "weight": 395.0
+      "weight": 395
     },
     {
       "dex": 308,
@@ -35602,7 +35602,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10055.png",
-      "weight": 44.0
+      "weight": 44
     },
     {
       "dex": 319,
@@ -35801,7 +35801,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10056.png",
-      "weight": 13.0
+      "weight": 13
     },
     {
       "dex": 358,
@@ -35830,7 +35830,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10306.png",
-      "weight": 8.0
+      "weight": 8
     },
     {
       "dex": 359,
@@ -35858,7 +35858,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10057.png",
-      "weight": 49.0
+      "weight": 49
     },
     {
       "dex": 359,
@@ -35882,7 +35882,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10307.png",
-      "weight": 49.0
+      "weight": 49
     },
     {
       "dex": 362,
@@ -35997,7 +35997,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10062.png",
-      "weight": 52.0
+      "weight": 52
     },
     {
       "dex": 381,
@@ -36026,7 +36026,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10063.png",
-      "weight": 70.0
+      "weight": 70
     },
     {
       "dex": 382,
@@ -36054,7 +36054,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10077.png",
-      "weight": 430.0
+      "weight": 430
     },
     {
       "dex": 383,
@@ -36112,7 +36112,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10079.png",
-      "weight": 392.0
+      "weight": 392
     },
     {
       "dex": 386,
@@ -36203,7 +36203,12 @@
       "name": "메가찌르호크",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "심술꾸러기",
+            "desc": "능력의 변화가 역전해서 올라갈 때 떨어지고 떨어질 때 올라간다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -36220,7 +36225,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10308.png",
-      "weight": 50.0
+      "weight": 50
     },
     {
       "dex": 413,
@@ -36342,7 +36347,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10058.png",
-      "weight": 95.0
+      "weight": 95
     },
     {
       "dex": 445,
@@ -36365,7 +36370,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10309.png",
-      "weight": 99.0
+      "weight": 99
     },
     {
       "dex": 448,
@@ -36447,7 +36452,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10060.png",
-      "weight": 185.0
+      "weight": 185
     },
     {
       "dex": 475,
@@ -36714,7 +36719,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10246.png",
-      "weight": 659.0
+      "weight": 659
     },
     {
       "dex": 485,
@@ -36738,7 +36743,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10311.png",
-      "weight": 570.0
+      "weight": 570
     },
     {
       "dex": 487,
@@ -36767,7 +36772,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10007.png",
-      "weight": 650.0
+      "weight": 650
     },
     {
       "dex": 491,
@@ -36790,7 +36795,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10312.png",
-      "weight": 240.0
+      "weight": 240
     },
     {
       "dex": 492,
@@ -36847,7 +36852,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-steel.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -36875,7 +36880,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-fighting.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -36903,7 +36908,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-ghost.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -36931,7 +36936,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-poison.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -36959,7 +36964,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-dragon.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -36987,7 +36992,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-ground.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37015,7 +37020,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-water.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37043,7 +37048,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-rock.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37071,7 +37076,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-bug.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37099,7 +37104,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-fire.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37127,7 +37132,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-flying.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37155,7 +37160,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-dark.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37183,7 +37188,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-ice.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37211,7 +37216,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-psychic.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37239,7 +37244,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-electric.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37267,7 +37272,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-fairy.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 493,
@@ -37295,7 +37300,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493-grass.png",
-      "weight": 320.0
+      "weight": 320
     },
     {
       "dex": 500,
@@ -37385,7 +37390,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10287.png",
-      "weight": 60.0
+      "weight": 60
     },
     {
       "dex": 531,
@@ -37414,14 +37419,19 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10069.png",
-      "weight": 32.0
+      "weight": 32
     },
     {
       "dex": 545,
       "name": "메가펜드라",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "조가비갑옷",
+            "desc": "단단한 껍질의 보호를 받아 상대의 공격이 급소에 맞지 않는다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -37505,7 +37515,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10176.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 555,
@@ -37536,7 +37546,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10177.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 555,
@@ -37568,7 +37578,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10178.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 555,
@@ -37607,7 +37617,12 @@
       "name": "메가곤율거니",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "위협",
+            "desc": "등장했을 때 위협해서 상대를 위축시켜 상대의 공격을 떨어뜨린다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -37624,7 +37639,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10289.png",
-      "weight": 31.0
+      "weight": 31
     },
     {
       "dex": 562,
@@ -37711,7 +37726,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10239.png",
-      "weight": 73.0
+      "weight": 73
     },
     {
       "dex": 592,
@@ -37747,7 +37762,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/592.png",
-      "weight": 33.0
+      "weight": 33
     },
     {
       "dex": 593,
@@ -37783,14 +37798,19 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/593.png",
-      "weight": 135.0
+      "weight": 135
     },
     {
       "dex": 604,
       "name": "메가저리더프",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "천정부지",
+            "desc": "땅타입 기술에 맞지 않는다. 공격으로 상대를 쓰러뜨리면 자신의 가장 높은 능력이 1단계 올라간다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -37806,7 +37826,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10290.png",
-      "weight": 180.0
+      "weight": 180
     },
     {
       "dex": 609,
@@ -37893,7 +37913,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10313.png",
-      "weight": 330.0
+      "weight": 330
     },
     {
       "dex": 628,
@@ -37957,7 +37977,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10019.png",
-      "weight": 63.0
+      "weight": 63
     },
     {
       "dex": 642,
@@ -37986,7 +38006,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10020.png",
-      "weight": 61.0
+      "weight": 61
     },
     {
       "dex": 645,
@@ -38015,7 +38035,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10021.png",
-      "weight": 68.0
+      "weight": 68
     },
     {
       "dex": 646,
@@ -38044,7 +38064,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10022.png",
-      "weight": 325.0
+      "weight": 325
     },
     {
       "dex": 646,
@@ -38073,7 +38093,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10023.png",
-      "weight": 325.0
+      "weight": 325
     },
     {
       "dex": 648,
@@ -38131,7 +38151,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10292.png",
-      "weight": 90.0
+      "weight": 90
     },
     {
       "dex": 655,
@@ -38160,7 +38180,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10293.png",
-      "weight": 39.0
+      "weight": 39
     },
     {
       "dex": 658,
@@ -38189,7 +38209,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10294.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 658,
@@ -38218,14 +38238,19 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10117.png",
-      "weight": 40.0
+      "weight": 40
     },
     {
       "dex": 668,
       "name": "메가화염레오",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "불꽃의갈기",
+            "desc": "불꽃타입 기술의 위력이 1.5배 오른다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -38429,14 +38454,19 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10026.png",
-      "weight": 53.0
+      "weight": 53
     },
     {
       "dex": 687,
       "name": "메가칼라마네로",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "심술꾸러기",
+            "desc": "능력의 변화가 역전해서 올라갈 때 떨어지고 떨어질 때 올라간다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -38460,7 +38490,12 @@
       "name": "메가거북손데스",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "단단한발톱",
+            "desc": "상대에게 접촉하는 기술의 위력이 올라간다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -38477,14 +38512,19 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10298.png",
-      "weight": 100.0
+      "weight": 100
     },
     {
       "dex": 691,
       "name": "메가드래캄",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "재생력",
+            "desc": "지닌 포켓몬으로 돌아오면 HP를 조금 회복한다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -38530,7 +38570,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10300.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 705,
@@ -38710,7 +38750,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10029.png",
-      "weight": 15.0
+      "weight": 15
     },
     {
       "dex": 711,
@@ -38782,7 +38822,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10031.png",
-      "weight": 14.0
+      "weight": 14
     },
     {
       "dex": 711,
@@ -38818,7 +38858,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10032.png",
-      "weight": 39.0
+      "weight": 39
     },
     {
       "dex": 713,
@@ -38878,7 +38918,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10301.png",
-      "weight": 610.0
+      "weight": 610
     },
     {
       "dex": 718,
@@ -38936,7 +38976,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10120.png",
-      "weight": 610.0
+      "weight": 610
     },
     {
       "dex": 719,
@@ -38994,7 +39034,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10086.png",
-      "weight": 490.0
+      "weight": 490
     },
     {
       "dex": 724,
@@ -39026,7 +39066,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10244.png",
-      "weight": 37.0
+      "weight": 37
     },
     {
       "dex": 740,
@@ -39177,7 +39217,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10126.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 745,
@@ -39205,7 +39245,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10152.png",
-      "weight": 25.0
+      "weight": 25
     },
     {
       "dex": 746,
@@ -39257,7 +39297,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10316.png",
-      "weight": 148.0
+      "weight": 148
     },
     {
       "dex": 773,
@@ -39994,7 +40034,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10156.png",
-      "weight": 350.0
+      "weight": 350
     },
     {
       "dex": 800,
@@ -40023,7 +40063,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10155.png",
-      "weight": 460.0
+      "weight": 460
     },
     {
       "dex": 800,
@@ -40052,7 +40092,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10157.png",
-      "weight": 230.0
+      "weight": 230
     },
     {
       "dex": 801,
@@ -40106,7 +40146,12 @@
       "name": "메가대여르",
       "kind": "메가진화",
       "abilities": {
-        "normal": [],
+        "normal": [
+          {
+            "name": "오기",
+            "desc": "능력이 떨어지면 공격이 크게 올라간다."
+          }
+        ],
         "hidden": null
       },
       "stats": {
@@ -40122,7 +40167,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10303.png",
-      "weight": 99.0
+      "weight": 99
     },
     {
       "dex": 875,
@@ -40150,7 +40195,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10185.png",
-      "weight": 89.0
+      "weight": 89
     },
     {
       "dex": 876,
@@ -40186,7 +40231,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10186.png",
-      "weight": 28.0
+      "weight": 28
     },
     {
       "dex": 888,
@@ -40215,7 +40260,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10188.png",
-      "weight": 355.0
+      "weight": 355
     },
     {
       "dex": 889,
@@ -40244,7 +40289,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10189.png",
-      "weight": 785.0
+      "weight": 785
     },
     {
       "dex": 892,
@@ -40273,7 +40318,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10191.png",
-      "weight": 105.0
+      "weight": 105
     },
     {
       "dex": 898,
@@ -40360,7 +40405,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10272.png",
-      "weight": 290.0
+      "weight": 290
     },
     {
       "dex": 902,
@@ -40396,7 +40441,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10248.png",
-      "weight": 110.0
+      "weight": 110
     },
     {
       "dex": 905,
@@ -40425,7 +40470,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10249.png",
-      "weight": 48.0
+      "weight": 48
     },
     {
       "dex": 916,
@@ -40460,7 +40505,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10254.png",
-      "weight": 120.0
+      "weight": 120
     },
     {
       "dex": 952,
@@ -40489,7 +40534,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10320.png",
-      "weight": 22.0
+      "weight": 22
     },
     {
       "dex": 964,
@@ -40546,7 +40591,7 @@
       ],
       "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10321.png",
-      "weight": 77.0
+      "weight": 77
     },
     {
       "dex": 978,
@@ -40570,7 +40615,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10324.png",
-      "weight": 24.0
+      "weight": 24
     },
     {
       "dex": 998,
@@ -40594,7 +40639,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10325.png",
-      "weight": 315.0
+      "weight": 315
     },
     {
       "dex": 999,
@@ -40622,7 +40667,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10263.png",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "dex": 1017,
@@ -40737,7 +40782,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10277.png",
-      "weight": 77.0
+      "weight": 77
     },
     {
       "dex": 1024,
@@ -40765,7 +40810,7 @@
       ],
       "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10276.png",
-      "weight": 16.0
+      "weight": 16
     }
   ]
 }

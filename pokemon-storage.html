@@ -341,7 +341,7 @@
       <span class="modal-title">포켓몬 선택</span>
       <button class="modal-x" id="closePokeModal">✕</button>
     </div>
-    <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색...">
+    <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색..." autocomplete="off">
     <div class="filter-row" id="pokeFilterRow">
       <button class="f-btn on" data-f="all">전체</button>
       <button class="f-btn" data-f="ingame">포챔스</button>
@@ -358,7 +358,7 @@
       <span class="modal-title" id="moveModalTitle">기술 선택</span>
       <button class="modal-x" id="closeMoveModal">✕</button>
     </div>
-    <input type="text" class="modal-search" id="moveSearch" placeholder="기술명 검색...">
+    <input type="text" class="modal-search" id="moveSearch" placeholder="기술명 검색..." autocomplete="off">
     <div class="filter-row" id="moveFilterRow">
       <button class="f-btn on" data-mf="all">전체</button>
       <button class="f-btn" data-mf="물리">물리</button>
@@ -378,7 +378,7 @@
       <span class="modal-title">도구 선택</span>
       <button class="modal-x" id="closeItemModal">✕</button>
     </div>
-    <input type="text" class="modal-search" id="itemSearch" placeholder="도구명 검색...">
+    <input type="text" class="modal-search" id="itemSearch" placeholder="도구명 검색..." autocomplete="off">
     <div class="filter-row" id="itemFilterRow">
       <button class="f-btn on" data-if="all">전체</button>
       <button class="f-btn" data-if="포챔스">포챔스</button>
@@ -677,7 +677,7 @@ function openDetail(absIdx) {
         <div class="dc-no">#${pk.no} · ${pk.name}${entry.gender ? ' ' + entry.gender : ''}</div>
         <div class="dc-name">${entry.nickname || pk.name}</div>
         <div class="dc-nickname-row">
-          <input type="text" class="dc-nickname-inp" id="dcNicknameInp" placeholder="별명 입력..." maxlength="20" value="${(entry.nickname || '').replace(/"/g, '&quot;')}">
+          <input type="text" class="dc-nickname-inp" id="dcNicknameInp" placeholder="별명 입력..." maxlength="20" autocomplete="off" value="${(entry.nickname || '').replace(/"/g, '&quot;')}">
           <button class="dc-save-nick-btn" id="dcSaveNickBtn">저장</button>
         </div>
         <div class="dc-types">${types}</div>
@@ -894,7 +894,7 @@ function renderBuilder() {
       <div class="b-stat-base">${pk[k]}</div>
       <div class="b-stat-bar-wrap"><div class="b-stat-bar" style="width:${pct}%;background:${col}"></div></div>
       <div class="b-stat-val">${val}</div>
-      <input class="b-ev-input" type="text" inputmode="numeric" value="${addEvs[k]||0}" data-stat="${k}">
+      <input class="b-ev-input" type="text" inputmode="numeric" value="${addEvs[k]||0}" data-stat="${k}" autocomplete="off">
     </div>`;
   }).join('');
   const evTotal = Object.values(addEvs).reduce((a,b)=>a+b,0);

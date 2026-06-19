@@ -2565,7 +2565,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
           <div class="dc-block-title">공격 스탯</div>
           <div class="dc-stat-grid">
             <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcBase">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcEV" type="number" min="0" max="32" value="0"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
             <div class="dc-stat-box"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcActual">—</span></div>
             <div class="dc-stat-box"><span class="dc-stat-lbl">랭크</span>
               <div class="dc-rank-row"><button class="dc-rank-btn" id="dcRkDn">−</button><span class="dc-rank-val" id="dcRkVal">0</span><button class="dc-rank-btn" id="dcRkUp">+</button></div>
@@ -2669,7 +2669,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
           <div class="dc-block-title">HP 스탯</div>
           <div class="dc-stat-grid">
             <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcDefHBase">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefHPEV" type="number" min="0" max="32" value="0"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefHPEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
             <div class="dc-stat-box" style="grid-column:span 2"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcDefHActual">—</span></div>
           </div>
         </div>
@@ -2677,7 +2677,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
           <div class="dc-block-title">방어 스탯</div>
           <div class="dc-stat-grid">
             <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcDefDBase">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefEV" type="number" min="0" max="32" value="0"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
             <div class="dc-stat-box"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcDefActual">—</span></div>
             <div class="dc-stat-box"><span class="dc-stat-lbl">랭크</span>
               <div class="dc-rank-row"><button class="dc-rank-btn" id="dcDefRkDn">−</button><span class="dc-rank-val" id="dcDefRkVal">0</span><button class="dc-rank-btn" id="dcDefRkUp">+</button></div>
@@ -4868,11 +4868,11 @@ function renderSpeedCalc() {
       </div>
       <div class="dc-stat-box">
         <span class="dc-stat-lbl">노력치</span>
-        <input class="dc-ev-inp" id="scEV" type="number" min="0" max="32" value="${sc.ev}">
+        <input class="dc-ev-inp" id="scEV" type="number" min="0" max="32" value="${sc.ev}" autocomplete="off">
       </div>
       <div class="dc-stat-box">
         <span class="dc-stat-lbl">개체값</span>
-        <input class="dc-ev-inp" id="scIV" type="number" min="0" max="31" value="${sc.iv}">
+        <input class="dc-ev-inp" id="scIV" type="number" min="0" max="31" value="${sc.iv}" autocomplete="off">
       </div>
       <div class="dc-stat-box">
         <span class="dc-stat-lbl">실수값</span>
