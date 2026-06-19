@@ -247,7 +247,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "한카리아스",
-      "usage_rate": 45.45
+      "usage_rate": 45.78
     },
     {
       "id": "1018-00",
@@ -499,7 +499,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "브리두라스",
-      "usage_rate": 42.42
+      "usage_rate": 42.77
     },
     {
       "id": "0450-00",
@@ -744,7 +744,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "하마돈",
-      "usage_rate": 25.45
+      "usage_rate": 25.9
     },
     {
       "id": "0428-00",
@@ -997,7 +997,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "이어롭",
-      "usage_rate": 23.64
+      "usage_rate": 24.1
     },
     {
       "id": "0902-00",
@@ -1247,7 +1247,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "대쓰여너",
-      "usage_rate": 23.03
+      "usage_rate": 22.89
     },
     {
       "id": "0778-00",
@@ -1493,7 +1493,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "따라큐",
-      "usage_rate": 20.0
+      "usage_rate": 19.88
     },
     {
       "id": "0908-00",
@@ -1740,7 +1740,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "마스카나",
-      "usage_rate": 19.39
+      "usage_rate": 19.28
     },
     {
       "id": "0670-05",
@@ -1989,7 +1989,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "플라엣테",
-      "usage_rate": 15.76
+      "usage_rate": 15.66
     },
     {
       "id": "0730-00",
@@ -2234,7 +2234,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "누리레느",
-      "usage_rate": 15.76
+      "usage_rate": 15.66
     },
     {
       "id": "0503-01",
@@ -2482,7 +2482,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "대검귀",
-      "usage_rate": 15.76
+      "usage_rate": 15.66
     },
     {
       "id": "0681-00",
@@ -2727,7 +2727,255 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "킬가르도",
-      "usage_rate": 15.76
+      "usage_rate": 15.66
+    },
+    {
+      "id": "0823-00",
+      "moves": [
+        {
+          "name": "날개쉬기",
+          "rate": 97.9
+        },
+        {
+          "name": "바디프레스",
+          "rate": 70.5
+        },
+        {
+          "name": "철벽",
+          "rate": 63.2
+        },
+        {
+          "name": "유턴",
+          "rate": 61.8
+        },
+        {
+          "name": "아이언헤드",
+          "rate": 30.7
+        },
+        {
+          "name": "브레이브버드",
+          "rate": 19.6
+        },
+        {
+          "name": "벌크업",
+          "rate": 14.8
+        },
+        {
+          "name": "안개제거",
+          "rate": 14.7
+        },
+        {
+          "name": "도발",
+          "rate": 14.4
+        },
+        {
+          "name": "기어오르기",
+          "rate": 5.6
+        }
+      ],
+      "abilities": [
+        {
+          "name": "프레셔",
+          "rate": 62.9
+        },
+        {
+          "name": "미러아머",
+          "rate": 36.0
+        },
+        {
+          "name": "긴장감",
+          "rate": 1.1
+        }
+      ],
+      "natures": [
+        {
+          "name": "장난꾸러기",
+          "rate": 48.3
+        },
+        {
+          "name": "무사태평",
+          "rate": 28.8
+        },
+        {
+          "name": "신중",
+          "rate": 15.2
+        },
+        {
+          "name": "건방",
+          "rate": 4.3
+        },
+        {
+          "name": "고집",
+          "rate": 1.4
+        },
+        {
+          "name": "대담",
+          "rate": 1.1
+        },
+        {
+          "name": "명랑",
+          "rate": 0.4
+        },
+        {
+          "name": "차분",
+          "rate": 0.2
+        }
+      ],
+      "items": [
+        {
+          "name": "먹다남은음식",
+          "rate": 65.7
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 26.8
+        },
+        {
+          "name": "반짝가루",
+          "rate": 2.3
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.6
+        },
+        {
+          "name": "예리한부리",
+          "rate": 0.8
+        },
+        {
+          "name": "오카열매",
+          "rate": 0.5
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.3
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "금속코트",
+          "rate": 0.2
+        },
+        {
+          "name": "초나열매",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 43.3
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "D": 32
+          },
+          "rate": 6.7
+        },
+        {
+          "label": "HB + s",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "S": 2
+          },
+          "rate": 6.3
+        },
+        {
+          "label": "HBD",
+          "evs": {
+            "H": 32,
+            "B": 18,
+            "D": 16
+          },
+          "rate": 4.5
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 25,
+            "D": 9
+          },
+          "rate": 3.1
+        },
+        {
+          "label": "HB + a",
+          "evs": {
+            "H": 32,
+            "A": 2,
+            "B": 32
+          },
+          "rate": 2.3
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 9,
+            "D": 25
+          },
+          "rate": 2.2
+        },
+        {
+          "label": "HD + s",
+          "evs": {
+            "H": 32,
+            "D": 28,
+            "S": 9
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "HD + s",
+          "evs": {
+            "H": 32,
+            "D": 32,
+            "S": 2
+          },
+          "rate": 1.5
+        },
+        {
+          "label": "HB + ds",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 1,
+            "S": 1
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "HB",
+          "evs": {
+            "H": 32,
+            "B": 32
+          },
+          "rate": 1.1
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 15,
+            "D": 19
+          },
+          "rate": 1.0
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "아머까오",
+      "usage_rate": 15.66
     },
     {
       "id": "0130-00",
@@ -2978,255 +3226,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "갸라도스",
-      "usage_rate": 15.15
-    },
-    {
-      "id": "0823-00",
-      "moves": [
-        {
-          "name": "날개쉬기",
-          "rate": 97.9
-        },
-        {
-          "name": "바디프레스",
-          "rate": 70.5
-        },
-        {
-          "name": "철벽",
-          "rate": 63.2
-        },
-        {
-          "name": "유턴",
-          "rate": 61.8
-        },
-        {
-          "name": "아이언헤드",
-          "rate": 30.7
-        },
-        {
-          "name": "브레이브버드",
-          "rate": 19.6
-        },
-        {
-          "name": "벌크업",
-          "rate": 14.8
-        },
-        {
-          "name": "안개제거",
-          "rate": 14.7
-        },
-        {
-          "name": "도발",
-          "rate": 14.4
-        },
-        {
-          "name": "기어오르기",
-          "rate": 5.6
-        }
-      ],
-      "abilities": [
-        {
-          "name": "프레셔",
-          "rate": 62.9
-        },
-        {
-          "name": "미러아머",
-          "rate": 36.0
-        },
-        {
-          "name": "긴장감",
-          "rate": 1.1
-        }
-      ],
-      "natures": [
-        {
-          "name": "장난꾸러기",
-          "rate": 48.3
-        },
-        {
-          "name": "무사태평",
-          "rate": 28.8
-        },
-        {
-          "name": "신중",
-          "rate": 15.2
-        },
-        {
-          "name": "건방",
-          "rate": 4.3
-        },
-        {
-          "name": "고집",
-          "rate": 1.4
-        },
-        {
-          "name": "대담",
-          "rate": 1.1
-        },
-        {
-          "name": "명랑",
-          "rate": 0.4
-        },
-        {
-          "name": "차분",
-          "rate": 0.2
-        }
-      ],
-      "items": [
-        {
-          "name": "먹다남은음식",
-          "rate": 65.7
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 26.8
-        },
-        {
-          "name": "반짝가루",
-          "rate": 2.3
-        },
-        {
-          "name": "리샘열매",
-          "rate": 1.6
-        },
-        {
-          "name": "예리한부리",
-          "rate": 0.8
-        },
-        {
-          "name": "오카열매",
-          "rate": 0.5
-        },
-        {
-          "name": "멘탈허브",
-          "rate": 0.3
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 0.3
-        },
-        {
-          "name": "금속코트",
-          "rate": 0.2
-        },
-        {
-          "name": "초나열매",
-          "rate": 0.2
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "HB + d",
-          "evs": {
-            "H": 32,
-            "B": 32,
-            "D": 2
-          },
-          "rate": 43.3
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "D": 32
-          },
-          "rate": 6.7
-        },
-        {
-          "label": "HB + s",
-          "evs": {
-            "H": 32,
-            "B": 32,
-            "S": 2
-          },
-          "rate": 6.3
-        },
-        {
-          "label": "HBD",
-          "evs": {
-            "H": 32,
-            "B": 18,
-            "D": 16
-          },
-          "rate": 4.5
-        },
-        {
-          "label": "HB + d",
-          "evs": {
-            "H": 32,
-            "B": 25,
-            "D": 9
-          },
-          "rate": 3.1
-        },
-        {
-          "label": "HB + a",
-          "evs": {
-            "H": 32,
-            "A": 2,
-            "B": 32
-          },
-          "rate": 2.3
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 9,
-            "D": 25
-          },
-          "rate": 2.2
-        },
-        {
-          "label": "HD + s",
-          "evs": {
-            "H": 32,
-            "D": 28,
-            "S": 9
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "HD + s",
-          "evs": {
-            "H": 32,
-            "D": 32,
-            "S": 2
-          },
-          "rate": 1.5
-        },
-        {
-          "label": "HB + ds",
-          "evs": {
-            "H": 32,
-            "B": 32,
-            "D": 1,
-            "S": 1
-          },
-          "rate": 1.2
-        },
-        {
-          "label": "HB",
-          "evs": {
-            "H": 32,
-            "B": 32
-          },
-          "rate": 1.1
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 15,
-            "D": 19
-          },
-          "rate": 1.0
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "아머까오",
-      "usage_rate": 15.15
+      "usage_rate": 15.06
     },
     {
       "id": "0655-00",
@@ -3474,7 +3474,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "마폭시",
-      "usage_rate": 14.55
+      "usage_rate": 14.46
     },
     {
       "id": "0970-00",
@@ -3720,7 +3720,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "킬라플로르",
-      "usage_rate": 14.55
+      "usage_rate": 14.46
     },
     {
       "id": "0009-00",
@@ -3969,7 +3969,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "거북왕",
-      "usage_rate": 13.33
+      "usage_rate": 13.86
     },
     {
       "id": "0637-00",
@@ -4216,7 +4216,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "불카모스",
-      "usage_rate": 12.12
+      "usage_rate": 12.05
     },
     {
       "id": "0658-00",
@@ -4463,7 +4463,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "개굴닌자",
-      "usage_rate": 12.12
+      "usage_rate": 12.05
     },
     {
       "id": "0212-00",
@@ -4715,7 +4715,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "핫삼",
-      "usage_rate": 11.52
+      "usage_rate": 11.45
     },
     {
       "id": "0094-00",
@@ -4960,7 +4960,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "팬텀",
-      "usage_rate": 11.52
+      "usage_rate": 11.45
     },
     {
       "id": "0006-00",
@@ -5208,7 +5208,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "리자몽",
-      "usage_rate": 11.52
+      "usage_rate": 11.45
     },
     {
       "id": "0983-00",
@@ -5460,7 +5460,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "대도각참",
-      "usage_rate": 10.91
+      "usage_rate": 10.84
     },
     {
       "id": "0149-00",
@@ -5709,7 +5709,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "망나뇽",
-      "usage_rate": 10.3
+      "usage_rate": 10.24
     },
     {
       "id": "0937-00",
@@ -5956,7 +5956,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "파라블레이즈",
-      "usage_rate": 7.88
+      "usage_rate": 7.83
     },
     {
       "id": "0121-00",
@@ -6209,7 +6209,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "아쿠스타",
-      "usage_rate": 7.88
+      "usage_rate": 7.83
     },
     {
       "id": "0154-00",
@@ -6455,7 +6455,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "메가니움",
-      "usage_rate": 7.88
+      "usage_rate": 7.83
     },
     {
       "id": "0036-00",
@@ -6707,7 +6707,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "픽시",
-      "usage_rate": 7.88
+      "usage_rate": 7.83
     },
     {
       "id": "0479-02",
@@ -6949,7 +6949,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "로토무",
-      "usage_rate": 6.67
+      "usage_rate": 6.63
     },
     {
       "id": "0003-00",
@@ -7193,7 +7193,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "이상해꽃",
-      "usage_rate": 6.67
+      "usage_rate": 6.63
     },
     {
       "id": "0748-00",
@@ -7440,7 +7440,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "더시마사리",
-      "usage_rate": 6.67
+      "usage_rate": 6.63
     },
     {
       "id": "0227-00",
@@ -7690,7 +7690,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "무장조",
-      "usage_rate": 6.67
+      "usage_rate": 6.63
     },
     {
       "id": "0903-00",
@@ -7941,7 +7941,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "포푸니크",
-      "usage_rate": 6.67
+      "usage_rate": 6.63
     },
     {
       "id": "0635-00",
@@ -8183,7 +8183,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "삼삼드래",
-      "usage_rate": 6.06
+      "usage_rate": 6.02
     },
     {
       "id": "0199-01",
@@ -8431,7 +8431,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "야도킹",
-      "usage_rate": 6.06
+      "usage_rate": 6.02
     },
     {
       "id": "0197-00",
@@ -8676,7 +8676,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "블래키",
-      "usage_rate": 5.45
+      "usage_rate": 5.42
     },
     {
       "id": "0956-00",
@@ -8929,7 +8929,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "클레스퍼트라",
-      "usage_rate": 5.45
+      "usage_rate": 5.42
     },
     {
       "id": "0448-00",
@@ -9178,7 +9178,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "루카리오",
-      "usage_rate": 4.85
+      "usage_rate": 4.82
     },
     {
       "id": "0939-00",
@@ -9428,7 +9428,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "찌리배리",
-      "usage_rate": 4.85
+      "usage_rate": 4.82
     },
     {
       "id": "0530-00",
@@ -9681,7 +9681,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "몰드류",
-      "usage_rate": 4.85
+      "usage_rate": 4.82
     },
     {
       "id": "0952-00",
@@ -9932,7 +9932,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "스코빌런",
-      "usage_rate": 4.85
+      "usage_rate": 4.82
     },
     {
       "id": "0038-01",
@@ -10179,7 +10179,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "나인테일",
-      "usage_rate": 4.24
+      "usage_rate": 4.22
     },
     {
       "id": "0282-00",
@@ -10434,7 +10434,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "가디안",
-      "usage_rate": 4.24
+      "usage_rate": 4.22
     },
     {
       "id": "0911-00",
@@ -10680,7 +10680,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "라우드본",
-      "usage_rate": 4.24
+      "usage_rate": 4.22
     },
     {
       "id": "0080-00",
@@ -10928,7 +10928,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "야도란",
-      "usage_rate": 4.24
+      "usage_rate": 4.22
     },
     {
       "id": "0143-00",
@@ -11178,7 +11178,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "잠만보",
-      "usage_rate": 3.64
+      "usage_rate": 3.61
     },
     {
       "id": "0071-00",
@@ -11422,7 +11422,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "우츠보트",
-      "usage_rate": 3.03
+      "usage_rate": 3.01
     },
     {
       "id": "0700-00",
@@ -11668,7 +11668,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "님피아",
-      "usage_rate": 3.03
+      "usage_rate": 3.01
     },
     {
       "id": "0652-00",
@@ -11912,7 +11912,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "브리가론",
-      "usage_rate": 3.03
+      "usage_rate": 3.01
     },
     {
       "id": "0248-00",
@@ -12157,7 +12157,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "마기라스",
-      "usage_rate": 2.42
+      "usage_rate": 2.41
     },
     {
       "id": "0666-18",
@@ -12408,7 +12408,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "비비용",
-      "usage_rate": 2.42
+      "usage_rate": 2.41
     }
   ],
   "source": "champs.pokedb.tokyo"
