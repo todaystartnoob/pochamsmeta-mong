@@ -16,7 +16,7 @@
 출처/정책: https://champs.pokedb.tokyo/guide/opendata
   - 엔드유저 기기 직접 요청 금지. CI에서 1회 받아 자기 호스팅으로 서빙. 과도한 폴링 금지.
 """
-import json, os, re, time, urllib.request, urllib.error
+import glob, json, os, re, time, urllib.request, urllib.error
 from collections import Counter, defaultdict
 
 OPENDATA = "https://champs.pokedb.tokyo/opendata/s{season}_{rule}_ranked_teams.json"
@@ -207,7 +207,8 @@ def scrape_usage(season, rule):
     return out
 
 def build(season, rule):
-    # 1) 오픈데이터 시도 (종료 시즌). 실패하면 무조건 크롤로 폴백.
+    """반환: (결과dict 또는 None, 'opendata' | 'crawl' | None)"""
+    # 1) 오픈데이터 시도 (종료 시즌). 실패하면 크롤로 폴백.
     od_url = OPENDATA.format(season=season, rule=rule)
     data = None
     try:
@@ -218,12 +219,12 @@ def build(season, rule):
     except Exception as e:
         print(f"  [info] {od_url} -> {e} (크롤로 폴백)")
     if data is not None:
-        return build_from_opendata(season, rule, data)
+        return build_from_opendata(season, rule, data), "opendata"
 
     # 2) 크롤(진행중 시즌 사용률)
     usage = scrape_usage(season, rule)
     if not usage:
-        return None
+        return None, None
     return {
         "season": f"M-{season}",
         "season_number": season,
@@ -234,25 +235,40 @@ def build(season, rule):
         "pokemon": [],         # 랭커파티 미공개 -> 집계 불가
         "teams": [],           # 트레이너 랭킹은 시즌 시작 1주 후 공개
         "source": "champs.pokedb.tokyo /pokemon/list (crawl)",
-    }
+    }, "crawl"
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
+    # 이전 실행의 잔재(특히 가짜 미래 시즌 s4~) 정리: champions_s*.json 전부 삭제 후 재생성.
+    # (_sets.json 도 같이 지워지지만 직후 build_pokemon_sets.py가 유효 시즌만 재생성함)
+    for f in glob.glob(os.path.join(OUT_DIR, "champions_s*.json")):
+        os.remove(f)
     wrote = []
+    stop_after = False   # 현재(크롤) 시즌을 만들었으면 그 이후는 만들지 않음
     for season in range(1, MAX_SEASON + 1):
         found_any = False
+        used_crawl = False
         for rule in RULES:
-            res = build(season, rule)
+            res, kind = build(season, rule)
             time.sleep(1)
             if res is None:
                 continue
             found_any = True
+            if kind == "crawl":
+                used_crawl = True
             path = os.path.join(OUT_DIR, f"champions_s{season}_{rule}.json")
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(res, f, ensure_ascii=False, indent=2)
             wrote.append(os.path.basename(path))
             print(f"  생성: {os.path.basename(path)} "
-                  f"(usage {len(res['usage'])}, teams {len(res['teams'])}, src={res['source'].split()[-1]})")
+                  f"(usage {len(res['usage'])}, teams {len(res['teams'])}, src={kind})")
+        # 종료 조건:
+        #  - 이 시즌이 '크롤'로 만들어졌다 = 진행중(최신) 시즌 = 여기서 멈춤
+        #    (그 다음 시즌부터는 pokedb가 최신으로 폴백해서 가짜 시즌이 생기므로)
+        #  - 아무 데이터도 없으면 멈춤
+        if used_crawl:
+            print(f"  [stop] 진행중 시즌(s{season})까지 처리 완료 — 이후 시즌은 폴백이므로 중단")
+            break
         if not found_any and season > 1:
             break
     with open(os.path.join(OUT_DIR, "index.json"), "w", encoding="utf-8") as f:
