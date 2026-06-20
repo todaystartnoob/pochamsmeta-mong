@@ -2092,7 +2092,7 @@ function renderDetail(idx) {
     const isHP   = s==='H';
     const nm     = isHP ? 1 : natMult(nature, s);
     const actual = calcStat(base, evs[s], isHP, nm);
-    const pct    = Math.min(100, base/255*100).toFixed(1);
+    const pct    = Math.min(100, base/200*100).toFixed(1);
     const lblCls = isHP ? '' : (nature?.up===s ? ' nat-up' : nature?.dn===s ? ' nat-dn' : '');
     return `
     <div class="stat-row">

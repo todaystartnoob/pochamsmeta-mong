@@ -54,9 +54,8 @@
     /* SELECTOR BAR */
     #selectorBar{display:flex;align-items:center;gap:10px;padding:0 14px 12px;flex-shrink:0;flex-wrap:wrap;}
     .season-tabs{display:flex;gap:6px;}
-    .season-tab{padding:6px 14px;border-radius:8px;border:none;background:rgba(255,255,255,.55);color:#555;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
-    .season-tab:hover{background:rgba(255,255,255,.8);}
-    .season-tab.active{background:var(--accent);color:#fff;}
+    .season-select{padding:7px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:filter .15s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23fff'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;}
+    .season-select:hover{filter:brightness(1.08);}
     .rule-toggle{display:flex;background:rgba(255,255,255,.45);border-radius:8px;padding:3px;gap:2px;}
     .rule-btn{padding:5px 18px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;background:transparent;color:#555;transition:all .15s;}
     .rule-btn.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.12);}
@@ -201,7 +200,7 @@
     @media(max-width:1024px),(pointer:coarse){
       .ad-panel{display:none!important;}
       #selectorBar{padding:6px 10px 8px;gap:6px;}
-      .season-tab{padding:5px 10px;font-size:12px;}
+      .season-select{padding:6px 24px 6px 10px;font-size:12px;background-position:right 8px center;}
       .rule-btn{padding:4px 14px;font-size:12px;}
       .data-src{display:none;}
       .team-card:hover{transform:none;box-shadow:none;}
@@ -504,26 +503,24 @@ async function init() {
 function renderSeasonTabs() {
   const el = document.getElementById('seasonTabs');
   el.innerHTML = '';
-  for (const s of seasons) {
-    const btn = document.createElement('button');
-    btn.className = 'season-tab' + (s.number === curSeason ? ' active' : '');
-    btn.textContent = `시즌 ${s.number}`;
-    btn.addEventListener('click', () => {
-      if (curSeason === s.number) return;
-      curSeason = s.number;
-      if (!s.rules.includes(curRule)) {
-        curRule = s.rules[0];
-        document.querySelectorAll('.rule-btn').forEach(b => {
-          b.classList.toggle('active', b.dataset.rule === curRule);
-        });
-      }
-      document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedUsageIdx = -1;
-      loadData();
-    });
-    el.appendChild(btn);
-  }
+  const sel = document.createElement('select');
+  sel.className = 'season-select';
+  sel.innerHTML = seasons.map(s => `<option value="${s.number}"${s.number === curSeason ? ' selected' : ''}>시즌 ${s.number}</option>`).join('');
+  sel.addEventListener('change', () => {
+    const n = parseInt(sel.value);
+    if (curSeason === n) return;
+    curSeason = n;
+    const s = seasons.find(x => x.number === n);
+    if (s && !s.rules.includes(curRule)) {
+      curRule = s.rules[0];
+      document.querySelectorAll('.rule-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.rule === curRule);
+      });
+    }
+    selectedUsageIdx = -1;
+    loadData();
+  });
+  el.appendChild(sel);
 }
 
 function bindRuleTabs() {
@@ -707,6 +704,7 @@ function renderUsage() {
     const i = start + pi;
     const no = idToNo(u.id);
     const moves = getMoves(u.id);
+    const hasRate = Number.isFinite(u.rate);
     const rankNum = i + 1;
     let rankHtml;
     if (rankNum === 1) rankHtml = `<span class="rank-medal">🥇</span>`;
@@ -741,8 +739,8 @@ function renderUsage() {
         ${subLine}
       </div>
       <div class="usage-right">
-        <div class="usage-pct" style="${u.rate === 0 ? 'color:#ccc' : ''}">${u.rate === 0 ? '-' : u.rate.toFixed(1) + '%'}</div>
-        <div class="usage-bar"><div class="usage-bar-fill" style="width:${Math.min(100, u.rate).toFixed(1)}%"></div></div>
+        <div class="usage-pct" style="${(!hasRate || u.rate === 0) ? 'color:#ccc' : ''}">${hasRate ? (u.rate === 0 ? '-' : u.rate.toFixed(1) + '%') : '—'}</div>
+        <div class="usage-bar"><div class="usage-bar-fill" style="width:${hasRate ? Math.min(100, u.rate).toFixed(1) : 0}%"></div></div>
       </div>`;
     row.addEventListener('click', () => openDetail(i, u));
     body.appendChild(row);
@@ -767,7 +765,10 @@ function renderTeams() {
   const pager = document.getElementById('teamsPager');
 
   if (!mainData?.teams?.length) {
-    body.innerHTML = '<div class="panel-msg">데이터가 없습니다</div>';
+    const isCrawl = !!mainData?.source?.includes?.('crawl');
+    body.innerHTML = isCrawl
+      ? '<div class="panel-msg">랭커 파티는 시즌 시작 1주일 후 공개됩니다</div>'
+      : '<div class="panel-msg">데이터가 없습니다</div>';
     sub.textContent = '';
     pager.innerHTML = '';
     return;
@@ -869,7 +870,7 @@ function openDetail(idx, u) {
       <div class="dc-sprite"><img src="${usageSpriteUrl(u, no)}" alt="${dname}"></div>
       <div class="dc-info">
         <div class="dc-name">${dname}</div>
-        <div class="dc-rate">사용률 ${u.rate.toFixed(1)}% · ${idx + 1}위</div>
+        <div class="dc-rate">${Number.isFinite(u.rate) ? `사용률 ${u.rate.toFixed(1)}% · ` : ''}${idx + 1}위</div>
         ${statsHtml}
       </div>
     </div>`;
