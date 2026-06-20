@@ -239,9 +239,10 @@ def build(season, rule):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    # 이전 실행의 잔재(특히 가짜 미래 시즌 s4~) 정리: champions_s*.json 전부 삭제 후 재생성.
-    # (_sets.json 도 같이 지워지지만 직후 build_pokemon_sets.py가 유효 시즌만 재생성함)
-    for f in glob.glob(os.path.join(OUT_DIR, "champions_s*.json")):
+    # 이전 실행의 잔재(특히 가짜 미래 시즌 s4~) 정리: ranked 파일만 삭제.
+    # _sets.json은 종료 시즌 캐시로 재사용하므로 건드리지 않음(고아 _sets는 build_pokemon_sets가 정리).
+    for f in (glob.glob(os.path.join(OUT_DIR, "champions_s*_single.json")) +
+              glob.glob(os.path.join(OUT_DIR, "champions_s*_double.json"))):
         os.remove(f)
     wrote = []
     stop_after = False   # 현재(크롤) 시즌을 만들었으면 그 이후는 만들지 않음
