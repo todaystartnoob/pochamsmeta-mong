@@ -163,7 +163,28 @@
       .hub-card-title{font-size:17px;}
       .bottom-ad{flex:1;min-height:60px;}
     }
-  </style>
+  
+    /* ── SETTINGS MODAL ── */
+    .nav-logo{cursor:pointer;}
+    .nav-logo img{transition:transform .2s cubic-bezier(.34,1.56,.64,1);}
+    .nav-logo:hover img{transform:scale(1.1);}
+    .set-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .set-overlay.open{opacity:1;pointer-events:all;}
+    .set-box{background:#fff;border-radius:14px;padding:18px 20px;width:380px;max-width:92vw;max-height:84vh;overflow-y:auto;box-shadow:0 12px 44px rgba(0,0,0,.3);}
+    .set-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+    .set-title{font-size:15px;font-weight:700;color:#333;}
+    .set-x{background:none;border:none;font-size:17px;cursor:pointer;color:#777;transition:color .15s;}
+    .set-x:hover{color:#c00;}
+    .set-section{margin-bottom:16px;}
+    .set-section:last-child{margin-bottom:0;}
+    .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+    .set-danger-btn:hover{background:#ffe5e5;}
+    .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
+    .set-email{font-size:12px;color:#7b3fa0;text-decoration:none;font-weight:600;}
+    .set-email:hover{text-decoration:underline;}
+</style>
 </head>
 <body>
 
@@ -246,6 +267,50 @@ if (pokemonBox.length >= 3 && typeof POKEMON_SPRITES !== 'undefined') {
   const picks = pokemonBox.slice(0, 3);
   // We'd need POKEMON_DATA for pkIdx→name, skip if not available
 }
+</script>
+<!-- SETTINGS MODAL -->
+<div class="set-overlay" id="setOverlay">
+  <div class="set-box">
+    <div class="set-head">
+      <span class="set-title">⚙ 설정</span>
+      <button class="set-x" id="setCloseBtn">✕</button>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">언어</div>
+      <select class="set-sel" disabled><option selected>한국어</option></select>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">테마</div>
+      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">데이터 관리</div>
+      <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
+      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">문의 / 버그 리포트</div>
+      <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
+    </div>
+  </div>
+</div>
+<script>
+(function initSettingsModal() {
+  const overlay = document.getElementById('setOverlay');
+  const logo = document.querySelector('.nav-logo');
+  const closeBtn = document.getElementById('setCloseBtn');
+  const clearBtn = document.getElementById('setClearBtn');
+  if (!overlay || !logo) return;
+  logo.addEventListener('click', () => overlay.classList.add('open'));
+  closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+  clearBtn?.addEventListener('click', () => {
+    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
+    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    location.reload();
+  });
+})();
 </script>
 </body>
 </html>

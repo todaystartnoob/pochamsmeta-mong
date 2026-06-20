@@ -816,7 +816,28 @@
       .nav-links a{padding:4px 6px;font-size:11px;}
       .poke-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));}
     }
-  </style>
+  
+    /* ── SETTINGS MODAL ── */
+    .nav-logo{cursor:pointer;}
+    .nav-logo img{transition:transform .2s cubic-bezier(.34,1.56,.64,1);}
+    .nav-logo:hover img{transform:scale(1.1);}
+    .set-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .set-overlay.open{opacity:1;pointer-events:all;}
+    .set-box{background:#fff;border-radius:14px;padding:18px 20px;width:380px;max-width:92vw;max-height:84vh;overflow-y:auto;box-shadow:0 12px 44px rgba(0,0,0,.3);}
+    .set-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+    .set-title{font-size:15px;font-weight:700;color:#333;}
+    .set-x{background:none;border:none;font-size:17px;cursor:pointer;color:#777;transition:color .15s;}
+    .set-x:hover{color:#c00;}
+    .set-section{margin-bottom:16px;}
+    .set-section:last-child{margin-bottom:0;}
+    .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+    .set-danger-btn:hover{background:#ffe5e5;}
+    .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
+    .set-email{font-size:12px;color:#7b3fa0;text-decoration:none;font-weight:600;}
+    .set-email:hover{text-decoration:underline;}
+</style>
 </head>
 <body>
 
@@ -1018,8 +1039,6 @@
 <script src="data.js"></script>
 <script src="learnset-data.js"></script>
 <script src="pochams-items.js"></script>
-<script src="meta-usage-data.js"></script>
-<script src="meta-usage-sets.js"></script>
 <script src="champions_loc_map.js"></script>
 <script>
 /* ════════════════════════════
@@ -4002,11 +4021,12 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
     closePokeModal(); cb(pk); return;
   }
   if (modalSlot < 0) return;
-  /* 중복 체크: 이미 파티에 있으면 해당 슬롯 데이터를 새 슬롯으로 이동, 기존 슬롯은 비움 */
+  /* 중복 체크: 이미 파티에 있으면 두 슬롯의 자리를 서로 맞바꿈 */
   const _dupIdx = party.findIndex((s, i) => i !== modalSlot && s.pokemon?.no === pk.no && s.pokemon?.name === pk.name);
   if (_dupIdx >= 0) {
-    party[modalSlot] = { ...party[_dupIdx] };
-    party[_dupIdx] = newSlot();
+    const _tmp = party[modalSlot];
+    party[modalSlot] = party[_dupIdx];
+    party[_dupIdx] = _tmp;
     saveParty();
     closePokeModal();
     selectedSlot = modalSlot;
@@ -4104,7 +4124,12 @@ function renderMoveList(q) {
 document.getElementById('moveList').addEventListener('click', e=>{
   const item=e.target.closest('.move-item');
   if (!item||modalSlot<0||editMoveIdx<0) return;
-  party[modalSlot].moves[editMoveIdx] = MOVE_DATA[+item.dataset.idx];
+  const _newMove = MOVE_DATA[+item.dataset.idx];
+  const _moves = party[modalSlot].moves;
+  /* 같은 기술이 이미 다른 칸에 있으면 자리를 서로 맞바꿔 중복 방지 */
+  const _moveDupIdx = _moves.findIndex((m, i) => i !== editMoveIdx && m?.name === _newMove.name);
+  if (_moveDupIdx >= 0) _moves[_moveDupIdx] = _moves[editMoveIdx];
+  _moves[editMoveIdx] = _newMove;
   saveParty();
   closeMoveModal(); renderDetail(modalSlot); updateAnalysis(modalSlot);
 });
@@ -4645,8 +4670,9 @@ function renderEnemySlots() {
       calcModalCallback = (pk) => {
         const _eDupIdx = enemyParty.findIndex((s, j) => j !== i && s.pokemon?.no === pk.no && s.pokemon?.name === pk.name);
         if (_eDupIdx >= 0) {
-          enemyParty[i] = { ...enemyParty[_eDupIdx] };
-          enemyParty[_eDupIdx] = { pokemon: null };
+          const _eTmp = enemyParty[i];
+          enemyParty[i] = enemyParty[_eDupIdx];
+          enemyParty[_eDupIdx] = _eTmp;
         } else {
           enemyParty[i].pokemon = pk;
         }
@@ -5160,6 +5186,37 @@ document.addEventListener('pochams:partychange', () => { renderSpeedCalc(); rend
 renderPartyTypeChart();
 updateMobChartView();
 
+/* ── 메타 사용률/세트 데이터: 항상 깃허브 최신 시즌을 fetch (로컬 정적 파일 미사용) ── */
+(async function loadMetaFromGithub() {
+  const GITHUB_RAW = 'https://raw.githubusercontent.com/todaystartnoob/pochamsmeta-mong/main/';
+  async function ghFetch(path) {
+    const r = await fetch(GITHUB_RAW + path);
+    if (!r.ok) throw new Error(`fetch ${path} → ${r.status}`);
+    return r.json();
+  }
+  try {
+    const idx = await ghFetch('data/index.json');
+    let latest = 1;
+    (idx.files || []).forEach(fname => {
+      const m = fname.match(/champions_s(\d+)_single\.json$/);
+      if (m) latest = Math.max(latest, parseInt(m[1]));
+    });
+    const [usage, sets] = await Promise.all([
+      ghFetch(`data/champions_s${latest}_single.json`),
+      ghFetch(`data/champions_s${latest}_single_sets.json`).catch(() => null),
+    ]);
+    window.META_USAGE_DATA = { s1_single: usage };
+    window.META_SETS_DATA  = { s1_single: sets || { pokemon: [] } };
+  } catch (e) {
+    console.error('메타 사용률 데이터 fetch 실패:', e);
+    return;
+  }
+  /* 데이터가 늦게 도착하므로 의존 렌더를 다시 실행 */
+  _speedSampleCache = null;
+  renderRecommended();
+  renderSpeedRankList();
+})();
+
 /* 모바일: 내 파티/상대 파티 뷰 전환 (차트 탭 + 슬롯 스와이프 통합 상태) */
 function setPartyEnemyView(side) {
   document.querySelectorAll('.mob-chart-tab').forEach(b => b.classList.toggle('on', b.dataset.side === side));
@@ -5332,5 +5389,49 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
     <span>계산기</span>
   </button>
 </div>
+<!-- SETTINGS MODAL -->
+<div class="set-overlay" id="setOverlay">
+  <div class="set-box">
+    <div class="set-head">
+      <span class="set-title">⚙ 설정</span>
+      <button class="set-x" id="setCloseBtn">✕</button>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">언어</div>
+      <select class="set-sel" disabled><option selected>한국어</option></select>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">테마</div>
+      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">데이터 관리</div>
+      <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
+      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+    </div>
+    <div class="set-section">
+      <div class="set-lbl">문의 / 버그 리포트</div>
+      <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
+    </div>
+  </div>
+</div>
+<script>
+(function initSettingsModal() {
+  const overlay = document.getElementById('setOverlay');
+  const logo = document.querySelector('.nav-logo');
+  const closeBtn = document.getElementById('setCloseBtn');
+  const clearBtn = document.getElementById('setClearBtn');
+  if (!overlay || !logo) return;
+  logo.addEventListener('click', () => overlay.classList.add('open'));
+  closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+  clearBtn?.addEventListener('click', () => {
+    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
+    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    location.reload();
+  });
+})();
+</script>
 </body>
 </html>

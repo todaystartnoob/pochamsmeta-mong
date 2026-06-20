@@ -1439,7 +1439,7 @@
         "풀",
         "독"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",
       "weight": 18.6
     },
@@ -6954,7 +6954,7 @@
         "물",
         "독"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/211.png",
       "weight": 3.9
     },
@@ -8367,7 +8367,7 @@
       "types": [
         "풀"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png",
       "weight": 52.2
     },
@@ -16759,7 +16759,7 @@
       "types": [
         "에스퍼"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/518.png",
       "weight": 60.5
     },
@@ -27781,7 +27781,7 @@
         "악",
         "페어리"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/861.png",
       "weight": 61
     },
@@ -29123,7 +29123,7 @@
         "악",
         "독"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/904.png",
       "weight": 60.5
     },
@@ -31303,7 +31303,7 @@
       "types": [
         "고스트"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/972.png",
       "weight": 15
     },
@@ -31537,7 +31537,7 @@
         "격투",
         "고스트"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/979.png",
       "weight": 56
     },
@@ -32160,7 +32160,7 @@
         "강철",
         "고스트"
       ],
-      "champions": false,
+      "champions": true,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1000.png",
       "weight": 30
     },
