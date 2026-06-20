@@ -1845,6 +1845,20 @@ const FORM_IDX_TO_NAME = {
   '0724-01': '히스이 모크나이퍼',
   '0059-01': '히스이 윈디',
   '0080-02': '가라르 야도란',
+  '0026-01': '알로라 라이츄',
+  '0745-01': '루가루암(한밤중의모습)',
+  '0745-02': '루가루암(황혼의모습)',
+  '0678-00': '냐오닉스♂',
+  '0678-01': '냐오닉스♀',
+  '0618-01': '가라르 메더',
+  '0711-01': '펌킨인(작은사이즈)',
+  '0711-02': '펌킨인(큰사이즈)',
+  '0711-03': '펌킨인(특대사이즈)',
+  '0713-01': '히스이 크레베이스',
+  '0128-01': '팔데아 켄타로스(콤뱃종)',
+  '0128-02': '팔데아 켄타로스(아쿠아종)',
+  '0128-03': '팔데아 켄타로스(블레이즈종)',
+  '0157-01': '히스이 블레이범',
 };
 
 /* usage 항목에서 실제 POKEMON_DATA 폼을 찾는 헬퍼 */
@@ -2097,7 +2111,7 @@ function renderDetail(idx) {
   else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
   else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
   else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
-  else                                roleTag='균형형';
+  else                                roleTag='쌍두형';
   if      (avgDur>=75000&&maxPow<38000) roleTag='탱커';
   else if (avgDur>=55000&&maxPow<28000) roleTag='탱커';
   const archetype = `${speedTag} ${durTag} ${roleTag}`;
@@ -2355,7 +2369,7 @@ function updateSGPanel(idx) {
   else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
   else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
   else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
-  else                                roleTag='균형형';
+  else                                roleTag='쌍두형';
   if      (avgDur>=75000&&maxPow<38000) roleTag='탱커';
   else if (avgDur>=55000&&maxPow<28000) roleTag='탱커';
 
@@ -3796,8 +3810,9 @@ function scoreCandidate(pk, pa) {
     if (u.id && FORM_IDX_TO_NAME[u.id]) return FORM_IDX_TO_NAME[u.id] === basePk.name;
     return u.name === basePk.name;
   });
-  /* 매핑 없는 폼: 같은 덱스번호 중 폼 매핑이 없는 항목으로만 재탐색 */
-  if (rankIdx < 0) {
+  /* 매핑 없는 폼: 같은 덱스번호 중 폼 매핑이 없는 항목으로만 재탐색
+     단, 리전폼은 다른 폼(기본형 등)과 정체성이 완전히 다르므로 덱스번호만으로 빌려오면 안 됨 */
+  if (rankIdx < 0 && pk.form !== '리전폼') {
     rankIdx = usage.slice(0, 50).findIndex(u => {
       if (!u.id) return false;
       const dNo = parseInt(u.id.split('-')[0]);
@@ -3808,7 +3823,7 @@ function scoreCandidate(pk, pa) {
   }
   const rank = rankIdx >= 0 ? rankIdx + 1 : 99;
   let ms = getMetaSet(basePk.name);
-  if (!ms) ms = getMetaSet(pk.no);
+  if (!ms && pk.form !== '리전폼') ms = getMetaSet(pk.no);
 
   /* ── 사용순위 (max 50) ── */
   let usageScore = rank <= 50 ? Math.round((51 - rank) * 1) : 0;
@@ -3945,12 +3960,18 @@ function renderRecommended() {
     const topMove = topMoves[0] || '—';
     const rawAbility = ms?.abilities?.[0]?.name || '—';
     const abilityName = (CHAMPIONS_LOC_MAP?.ability_ja2ko?.[rawAbility]) || rawAbility;
-    /* 추천 아이템이 메가스톤이면 해당 메가폼 스프라이트 사용 */
+    /* 추천 아이템이 메가스톤이면 카드 전체를 해당 메가폼 기준으로 표시 (이름·타입·스피드) */
     const megaNameForItem = itemName !== '—' ? Object.entries(MEGA_STONE_MAP||{}).find(([mn,sn])=>sn===itemName)?.[0] : null;
-    const sprPk = megaNameForItem ? (POKEMON_DATA.find(p=>p.name===megaNameForItem)||pk) : pk;
+    const megaPk = megaNameForItem ? POKEMON_DATA.find(p=>p.name===megaNameForItem) : null;
+    const displayPk = megaPk || pk;
+    const sprPk = displayPk;
+    const dispTypeBadges = megaPk
+      ? [megaPk.type1, megaPk.type2].filter(Boolean).map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')
+      : typeBadges;
+    const dispSpeed = megaPk ? calcStat(megaPk.S, ms?.ev_spreads?.[0]?.evs?.S || 0, false, ms?.natures?.[0]?.name ? natMult(NATURES?.find(n=>n.name===ms.natures[0].name), 'S') : 1) : spd;
     return `<div class="rcv-card">
       <div class="rcv-head">
-        <span class="rcv-name">${pk.name}</span>${typeBadges}
+        <span class="rcv-name">${displayPk.name}</span>${dispTypeBadges}
         <span class="rcv-chip rcv-rank">사용순위 ${rank <= 50 ? rank : '—'}</span>
         <span class="rcv-chip rcv-score">추천 점수 ${totalScore}</span>${tagChips}
       </div>
@@ -3960,7 +3981,7 @@ function renderRecommended() {
           <div class="rcv-stat"><div class="rcv-stat-lbl">추천 도구</div><div class="rcv-stat-val">${itemName}</div></div>
           <div class="rcv-stat"><div class="rcv-stat-lbl">추천 기술</div><div class="rcv-stat-val">${topMove}</div></div>
           <div class="rcv-stat"><div class="rcv-stat-lbl">추천 특성</div><div class="rcv-stat-val">${abilityName}</div></div>
-          <div class="rcv-stat"><div class="rcv-stat-lbl">스피드</div><div class="rcv-stat-val rcv-spd">${spd}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">스피드</div><div class="rcv-stat-val rcv-spd">${dispSpeed}</div></div>
         </div>
       </div>
       ${comboReason ? `<div class="rcv-reason">조합 근거 <span>${comboReason}</span></div>` : ''}
@@ -3969,7 +3990,7 @@ function renderRecommended() {
         <span class="rcv-sc">타입 ${typeScore}</span>
         <span class="rcv-sc">스피드 ${speedScore}</span>
         <span class="rcv-sc">조합 근거 ${comboScore}</span>
-        <button class="rcv-add-btn" data-pkname="${pk.name}">빈 슬롯에 추가</button>
+        <button class="rcv-add-btn" data-pkname="${displayPk.name}">빈 슬롯에 추가</button>
       </div>
     </div>`;
   }).join('');

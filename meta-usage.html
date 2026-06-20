@@ -22,6 +22,7 @@
   <script src="data.js"></script>
   <script src="abilities-data.js"></script>
   <script src="learnset-data.js"></script>
+  <script src="items-data.js"></script>
   <script src="champions_loc_map.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2434435606645762"
      crossorigin="anonymous"></script>
@@ -123,6 +124,8 @@
     .team-sprites{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1;align-content:center;min-width:0;}
     .team-sprite-wrap{display:flex;flex-direction:column;align-items:center;min-width:0;}
     .team-sprite-wrap img{width:100%;max-width:52px;height:auto;aspect-ratio:1/1;object-fit:contain;image-rendering:pixelated;}
+    .team-sprite-img-box{position:relative;width:100%;max-width:52px;}
+    .team-sprite-img-box img.team-item-icon{position:absolute;bottom:-2px;right:-2px;width:45%;max-width:24px;height:45%;max-height:24px;object-fit:contain;background:#fff;border-radius:4px;border:1px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.25);image-rendering:pixelated;aspect-ratio:1/1;}
     .tera-badge{font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.4);margin-top:1px;}
     .team-poke-name{font-size:10px;color:#666;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;}
 
@@ -241,6 +244,7 @@
       .teams-grid{grid-template-columns:1fr;grid-auto-rows:auto!important;align-content:start!important;gap:8px;padding:6px 8px;}
       .team-card{padding:10px 14px;}
       .team-sprite-wrap img{width:52px;height:52px;}
+      .team-sprite-img-box{width:52px;}
       .usage-sprite{width:46px;height:46px;}
       .usage-sprite img{width:44px;height:44px;}
     }
@@ -365,6 +369,16 @@ function translateName(s) {
 
 // ID(도감번호-폼번호) → 표시명 (폼 구분이 필요한 경우)
 const FORM_NAMES = {
+  '0026-01': '알로라 라이츄',
+  '0745-01': '루가루암(한밤중의모습)',
+  '0745-02': '루가루암(황혼의모습)',
+  '0678-00': '냐오닉스♂',
+  '0678-01': '냐오닉스♀',
+  '0618-01': '가라르 메더',
+  '0711-01': '펌킨인(작은사이즈)',
+  '0711-02': '펌킨인(큰사이즈)',
+  '0711-03': '펌킨인(특대사이즈)',
+  '0713-01': '히스이 크레베이스',
   '0038-01': '알로라 나인테일',
   '0059-01': '히스이 윈디',
   '0080-02': '가라르 야도란',
@@ -654,9 +668,12 @@ function buildMegaUsageList(baseUsage, setsData) {
       if (!item.name?.includes('나이트')) return;
       const megaName = megaNameFromStone(item.name);
       if (!megaName) return;
-      const megaRate = parseFloat((u.rate * item.rate / 100).toFixed(2));
+      const hasBaseRate = Number.isFinite(u.rate);
+      const megaRate = hasBaseRate ? parseFloat((u.rate * item.rate / 100).toFixed(2)) : NaN;
+      /* 사용률(rate)이 없는 진행중 시즌: 순위(낮을수록 인기)와 메가스톤 채용률로 정렬 점수를 대신 계산 */
+      const sortKey = hasBaseRate ? megaRate : (Number.isFinite(u.rank) && u.rank > 0 ? (item.rate || 0) / u.rank : 0);
       const existing = megaMap.get(megaName);
-      if (!existing || megaRate > existing.rate) {
+      if (!existing || sortKey > existing._sortKey) {
         megaMap.set(megaName, {
           id: u.id,
           name: u.name,
@@ -664,6 +681,7 @@ function buildMegaUsageList(baseUsage, setsData) {
           _stoneName: item.name,
           _stoneRate: item.rate,
           rate: megaRate,
+          _sortKey: sortKey,
           count: Math.round((u.count || 0) * item.rate / 100),
         });
       }
@@ -689,11 +707,12 @@ function buildMegaUsageList(baseUsage, setsData) {
         _stoneName: baseName + '나이트' + suffix,
         _stoneRate: 0,
         rate: 0,
+        _sortKey: 0,
         count: 0,
       });
     });
   }
-  return [...megaMap.values()].sort((a, b) => b.rate - a.rate);
+  return [...megaMap.values()].sort((a, b) => b._sortKey - a._sortKey);
 }
 
 function renderUsage() {
@@ -817,8 +836,12 @@ function renderTeams() {
     const spritesHtml = (t.team || []).slice(0, 6).map(pk => {
       const tc = typeColor(pk.terastal);
       const dispName = teamDisplayName(pk);
+      const itemSprite = pk.item ? (typeof ITEM_DATA !== 'undefined' ? ITEM_DATA.find(it => it.name === pk.item)?.sprite : null) : null;
       return `<div class="team-sprite-wrap">
-        <img src="${teamSpriteUrl(pk)}" alt="${dispName}" loading="lazy">
+        <div class="team-sprite-img-box">
+          <img src="${teamSpriteUrl(pk)}" alt="${dispName}" loading="lazy">
+          ${itemSprite ? `<img class="team-item-icon" src="${itemSprite}" alt="${pk.item}" title="${pk.item}" loading="lazy">` : ''}
+        </div>
         ${pk.terastal ? `<span class="tera-badge" style="background:${tc}">${pk.terastal}</span>` : ''}
         <div class="team-poke-name">${dispName}</div>
       </div>`;

@@ -33172,7 +33172,7 @@
       "types": [
         "전기"
       ],
-      "champions": true,
+      "champions": false,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10158.png",
       "weight": 6
     },
