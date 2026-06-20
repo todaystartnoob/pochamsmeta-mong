@@ -3,7 +3,9 @@
     "champions_s1_single.json",
     "champions_s1_double.json",
     "champions_s2_single.json",
-    "champions_s2_double.json"
+    "champions_s2_double.json",
+    "champions_s3_single.json",
+    "champions_s3_double.json"
   ],
-  "generated_at": "2026-06-19 23:20:56 UTC"
+  "generated_at": "2026-06-20 00:11:24 UTC"
 }
