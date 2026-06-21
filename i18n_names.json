@@ -25107,6 +25107,41 @@
    "ko": "순위권 파티",
    "en": "Ranked Teams",
    "ja": "上位チーム"
+  },
+  "mob_save_btn": {
+   "ko": "저장",
+   "en": "Save",
+   "ja": "保存"
+  },
+  "mob_load_btn": {
+   "ko": "불러오기",
+   "en": "Load",
+   "ja": "読込"
+  },
+  "mob_enemy_clear_btn": {
+   "ko": "상대 비우기",
+   "en": "Clear Opponent",
+   "ja": "相手を空にする"
+  },
+  "my_party_matchup_tab": {
+   "ko": "내 파티 상성",
+   "en": "My Party Matchup",
+   "ja": "自分のパーティ相性"
+  },
+  "opp_party_matchup_tab": {
+   "ko": "상대 파티 상성",
+   "en": "Opponent Party Matchup",
+   "ja": "相手パーティ相性"
+  },
+  "party_detail_title": {
+   "ko": "파티 상세보기",
+   "en": "Party Details",
+   "ja": "パーティ詳細"
+  },
+  "no_item_short": {
+   "ko": "-",
+   "en": "-",
+   "ja": "-"
   }
  }
 }

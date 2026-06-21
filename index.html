@@ -9,9 +9,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <title>포챔스메타몽 - 파티 구성 | 포켓몬 챔피언십스 배틀 도우미</title>
-  <meta name="description" content="포켓몬 챔피언스 파티를 구성하고 메타 사용률·랭커 파티·포켓몬 도감을 한 곳에서 확인하세요.">
+  <meta name="description" content="포켓몬 챔피언스 파티 구성 도우미. 타입 상성 차트, 결정력 계산기, 스피드 계산기로 전략을 분석하고, 메타 사용률 기반 추천 포켓몬으로 최강의 파티를 만들어보세요.">
   <meta property="og:title" content="포챔스메타몽 - 파티 구성">
-  <meta property="og:description" content="포켓몬 챔피언십스 파티를 구성하고 메타 사용률·랭커 파티·포켓몬 도감을 한 곳에서 확인하세요.">
+  <meta property="og:description" content="포켓몬 챔피언스 파티 구성 도우미. 타입 상성 차트, 결정력 계산기, 스피드 계산기로 전략을 분석하고, 메타 사용률 기반 추천 포켓몬으로 최강의 파티를 만들어보세요.">
   <meta property="og:url" content="https://pochamsmetamong.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://pochamsmetamong.com/pochamsMetamongLogo.png">
@@ -886,8 +886,8 @@
     <main class="detail-area" id="detailArea">
       <div id="mobChartView" class="mob-chart-view">
         <div class="mob-chart-tabs">
-          <button class="mob-chart-tab on" data-side="party">내 파티 상성</button>
-          <button class="mob-chart-tab" data-side="enemy">상대 파티 상성</button>
+          <button class="mob-chart-tab on" data-side="party" id="mobChartTabParty">내 파티 상성</button>
+          <button class="mob-chart-tab" data-side="enemy" id="mobChartTabEnemy">상대 파티 상성</button>
         </div>
         <div id="mobPartyChart" class="mob-chart-body"></div>
         <div id="mobEnemyChart" class="mob-chart-body" style="display:none;"></div>
@@ -929,9 +929,9 @@
   </aside>
   <div id="bigEnemyChart" class="big-mode-chart"></div>
   <div id="mobActionBar" class="mob-action-bar">
-    <button class="mob-act-btn save" id="mobSaveBtn">💾 저장</button>
-    <button class="mob-act-btn load" id="mobLoadBtn">📂 불러오기</button>
-    <button class="mob-act-btn enemy-clear" id="mobEnemyClearBtn">상대 비우기</button>
+    <button class="mob-act-btn save" id="mobSaveBtn">💾 <span id="mobSaveBtnTxt">저장</span></button>
+    <button class="mob-act-btn load" id="mobLoadBtn">📂 <span id="mobLoadBtnTxt">불러오기</span></button>
+    <button class="mob-act-btn enemy-clear" id="mobEnemyClearBtn"><span id="mobEnemyClearBtnTxt">상대 비우기</span></button>
   </div>
   <div class="ad-panel" id="rightAd">광고</div>
 </div>
@@ -5654,6 +5654,11 @@ function applyNavSettingsLabels() {
   if (recTitleText) recTitleText.textContent = t('recommended_pokemon_title');
   const mobTabMap = { mobTabSpeedTxt: 'mob_tab_speed', mobTabDetailTxt: 'mob_tab_detail', mobTabCalcTxt: 'mob_tab_calc' };
   for (const id in mobTabMap) { const el = document.getElementById(id); if (el) el.textContent = t(mobTabMap[id]); }
+  const mobActMap = {
+    mobSaveBtnTxt: 'mob_save_btn', mobLoadBtnTxt: 'mob_load_btn', mobEnemyClearBtnTxt: 'mob_enemy_clear_btn',
+    mobChartTabParty: 'my_party_matchup_tab', mobChartTabEnemy: 'opp_party_matchup_tab',
+  };
+  for (const id in mobActMap) { const el = document.getElementById(id); if (el) el.textContent = t(mobActMap[id]); }
 
   const staticModalMap = {
     pokeModalTitle: 'select_pokemon_title', moveModalTitleStatic: 'select_move_title',

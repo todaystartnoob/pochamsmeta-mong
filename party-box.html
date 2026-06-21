@@ -177,6 +177,47 @@
     ::-webkit-scrollbar-track { background: rgba(0,0,0,.05); border-radius: 3px; }
     ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.18); border-radius: 3px; }
 
+    /* ── PARTY DETAIL MODAL ── */
+    .pd-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .2s;
+    }
+    .pd-overlay.open { opacity: 1; pointer-events: all; }
+    .pd-card {
+      background: #2a1a48; border-radius: 16px; padding: 18px 20px;
+      width: 1060px; max-width: 95vw; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 14px 50px rgba(0,0,0,.4);
+    }
+    .pd-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .pd-title { font-size: 15px; font-weight: 700; color: #f0e8ff; }
+    .pd-close { background: none; border: none; font-size: 18px; cursor: pointer; color: #b0a0d8; }
+    .pd-close:hover { color: #fff; }
+    .pd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pd-mon { background: rgba(255,255,255,.05); border: 1px solid #4a3a6a; border-radius: 10px; padding: 10px 12px; display: flex; gap: 10px; }
+    .pd-mon-empty { display: flex; align-items: center; justify-content: center; color: #6a5a88; font-size: 12px; }
+    .pd-sprite-col { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 84px; }
+    .pd-sprite { width: 56px; height: 56px; image-rendering: pixelated; object-fit: contain; }
+    .pd-name { font-size: 11px; font-weight: 700; color: #e8e0ff; text-align: center; line-height: 1.3; }
+    .pd-gender { font-size: 10px; }
+    .pd-gender.male { color: #6890F0; }
+    .pd-gender.female { color: #F85888; }
+    .pd-types { display: flex; gap: 2px; margin-top: 2px; flex-wrap: wrap; justify-content: center; }
+    .pd-type-badge { font-size: 7.5px; font-weight: 700; color: #fff; padding: 1px 4px; border-radius: 3px; }
+    .pd-info-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+    .pd-row { display: flex; gap: 5px; font-size: 10.5px; align-items: baseline; }
+    .pd-row-lbl { color: #8070a8; flex-shrink: 0; min-width: 30px; }
+    .pd-row-val { color: #d8d0f0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pd-moves { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 2px; }
+    .pd-move { display: flex; align-items: center; gap: 4px; font-size: 9.5px; padding: 2px 5px; border-radius: 4px; background: rgba(255,255,255,.06); color: #d8d0f0; overflow: hidden; }
+    .pd-move-type { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .pd-move-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pd-ev-chip { font-size: 9px; background: rgba(123,63,160,.3); color: #c8a8e8; border-radius: 3px; padding: 1px 5px; margin-right: 3px; }
+    @media (max-width: 700px) {
+      .pd-grid { grid-template-columns: 1fr; }
+      .pd-card { padding: 14px 14px; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width:1280px),(pointer:coarse){
       .navbar{height:48px;padding:0 16px;}
@@ -264,8 +305,20 @@
 
 <div class="toast" id="toastEl"></div>
 
+<div class="pd-overlay" id="pdOverlay">
+  <div class="pd-card">
+    <div class="pd-head">
+      <span class="pd-title" id="pdTitle">파티 상세보기</span>
+      <button class="pd-close" id="pdCloseBtn">✕</button>
+    </div>
+    <div class="pd-grid" id="pdGrid"></div>
+  </div>
+</div>
+
 <script src="pokemon-sprites.js"></script>
 <script src="data.js"></script>
+<script src="items-data.js"></script>
+<script src="champions_loc_map.js"></script>
 <script>
 /* ── i18n (한/영/일) — 메인 스크립트보다 먼저 정의되어야 함 ── */
 let I18N = null;
@@ -334,20 +387,44 @@ function t(key, vars) {
 </script>
 <script>
 const NATURES = [
-  {name:'덜렁이',  up:null,dn:null},{name:'외로움',    up:'A',dn:'B'},
-  {name:'개구장이',up:'A', dn:'C'},{name:'장난꾸러기', up:'A',dn:'D'},
-  {name:'용감',    up:'A', dn:'S'},{name:'겁쟁이',     up:'B',dn:'A'},
-  {name:'온순',    up:null,dn:null},{name:'촐랑이',     up:'B',dn:'C'},
-  {name:'버릇없이',up:'B', dn:'D'},{name:'느긋이',     up:'B',dn:'S'},
-  {name:'얌전이',  up:'C', dn:'A'},{name:'온화',       up:'C',dn:'B'},
-  {name:'수줍음',  up:null,dn:null},{name:'건방짐',     up:'C',dn:'D'},
-  {name:'조용이',  up:'C', dn:'S'},{name:'차분',       up:'D',dn:'A'},
-  {name:'부드러운',up:'D', dn:'B'},{name:'신중',       up:'D',dn:'C'},
-  {name:'고집',    up:'D', dn:'S'},{name:'조심',       up:null,dn:null},
-  {name:'성급이',  up:'S', dn:'A'},{name:'서두름',     up:'S',dn:'B'},
-  {name:'경솔',    up:'S', dn:'C'},{name:'천진난만',   up:'S',dn:'D'},
-  {name:'진지',    up:null,dn:null}
+  /* +Atk */
+  {name:'변덕',      up:null, dn:null},
+  {name:'외로움',    up:'A',  dn:'B'},
+  {name:'고집',      up:'A',  dn:'C'},
+  {name:'개구쟁이',  up:'A',  dn:'D'},
+  {name:'용감',      up:'A',  dn:'S'},
+  /* +Def */
+  {name:'대담',      up:'B',  dn:'A'},
+  {name:'수줍',      up:null, dn:null},
+  {name:'장난꾸러기',up:'B',  dn:'C'},
+  {name:'촐랑',      up:'B',  dn:'D'},
+  {name:'무사태평',  up:'B',  dn:'S'},
+  /* +SpAtk */
+  {name:'조심',      up:'C',  dn:'A'},
+  {name:'의젓',      up:'C',  dn:'B'},
+  {name:'노력',      up:null, dn:null},
+  {name:'덜렁',      up:'C',  dn:'D'},
+  {name:'냉정',      up:'C',  dn:'S'},
+  /* +SpDef */
+  {name:'차분',      up:'D',  dn:'A'},
+  {name:'얌전',      up:'D',  dn:'B'},
+  {name:'신중',      up:'D',  dn:'C'},
+  {name:'온순',      up:'D',  dn:'S'},
+  {name:'건방',      up:null, dn:null},
+  /* +Spe */
+  {name:'겁쟁이',    up:'S',  dn:'A'},
+  {name:'성급',      up:'S',  dn:'B'},
+  {name:'명랑',      up:'S',  dn:'C'},
+  {name:'천진난만',  up:'S',  dn:'D'},
+  {name:'성실',      up:null, dn:null},
 ];
+const TYPE_COLORS = {
+  '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
+  '전기':'#F8C600','얼음':'#98D8D8','격투':'#C03028','독':'#A040A0',
+  '땅':'#C8A840','비행':'#A890F0','에스퍼':'#F85888','벌레':'#A8B820',
+  '바위':'#B8A038','고스트':'#705898','드래곤':'#7038F8','악':'#6B5040',
+  '강철':'#A8A8C0','페어리':'#EE99AC'
+};
 
 function spriteUrl(name, no) {
   const v = POKEMON_SPRITES?.[name];
@@ -427,10 +504,10 @@ function renderSaves() {
         <button class="pc-rename-btn" data-rename="${i}">✏</button>
         <div class="pc-date">${formatDate(save.savedAt)}</div>
       </div>
-      <div class="pc-slots">
+      <div class="pc-slots" data-view="${i}" style="cursor:pointer" title="${t('party_detail_title')}">
         ${slots.map(s => slotHtml(s, 52)).join('')}
       </div>
-      <div class="pc-pokemon-names">${names || t('empty_parens')}</div>
+      <div class="pc-pokemon-names" data-view="${i}" style="cursor:pointer">${names || t('empty_parens')}</div>
       <div class="pc-actions">
         <button class="pc-btn pc-btn-load" data-idx="${i}">${t('load_to_party_builder_btn')}</button>
         <button class="pc-btn pc-btn-del"  data-del="${i}">${t('delete_btn')}</button>
@@ -440,6 +517,60 @@ function renderSaves() {
 }
 
 function dispPartyName(name) { return (!name || name === '이름 없음') ? t('unnamed_party') : name; }
+
+/* ── 파티 상세보기 모달 ── */
+function buildMonDetailHtml(slot) {
+  if (!slot || slot.pkIdx == null || slot.pkIdx < 0 || !POKEMON_DATA[slot.pkIdx]) {
+    return `<div class="pd-mon pd-mon-empty">${t('no_pokemon')}</div>`;
+  }
+  const pk = POKEMON_DATA[slot.pkIdx];
+  const dispName = pokeName(pk.name, pk.no);
+  const it = (slot.itIdx >= 0 && typeof ITEM_DATA !== 'undefined' && ITEM_DATA[slot.itIdx]) ? ITEM_DATA[slot.itIdx] : null;
+  const nat = (slot.natIdx >= 0 && NATURES[slot.natIdx]) ? NATURES[slot.natIdx] : null;
+  const ability = slot.ability || null;
+  const moves = (slot.moves || []).map(mi => (mi >= 0 && typeof MOVE_DATA !== 'undefined' && MOVE_DATA[mi]) ? MOVE_DATA[mi] : null);
+  const evs = slot.evs || {};
+  const evStr = ['H','A','B','C','D','S'].filter(k => evs[k] > 0).map(k => `${k}:${evs[k]}`).join(' ');
+
+  const genderIcon = slot.gender === '♂' ? `<span class="pd-gender male">♂</span>` : slot.gender === '♀' ? `<span class="pd-gender female">♀</span>` : '';
+  const typesHtml = [pk.type1, pk.type2].filter(Boolean).map(tp =>
+    `<span class="pd-type-badge" style="background:${TYPE_COLORS[tp]||'#888'}">${term('types', tp)}</span>`
+  ).join('');
+  const movesHtml = [0,1,2,3].map(i => {
+    const mv = moves[i];
+    if (!mv) return `<div class="pd-move"><span class="pd-move-name" style="opacity:.4">${t('no_move_set')}</span></div>`;
+    return `<div class="pd-move"><span class="pd-move-type" style="background:${TYPE_COLORS[mv.type]||'#888'}"></span><span class="pd-move-name">${term('moves', mv.name)}</span></div>`;
+  }).join('');
+
+  return `
+  <div class="pd-mon">
+    <div class="pd-sprite-col">
+      <img class="pd-sprite" src="${spriteUrl(pk.name, pk.no)}" alt="${dispName}">
+      <div class="pd-name">${slot.nickname || dispName}${genderIcon}</div>
+      <div class="pd-types">${typesHtml}</div>
+    </div>
+    <div class="pd-info-col">
+      <div class="pd-row"><span class="pd-row-lbl">${t('item')}</span><span class="pd-row-val">${it ? term('items', it.name) : t('item_none')}</span></div>
+      <div class="pd-row"><span class="pd-row-lbl">${t('ability')}</span><span class="pd-row-val">${ability ? term('abilities', ability.name) : t('ability_none')}</span></div>
+      <div class="pd-row"><span class="pd-row-lbl">${t('nature')}</span><span class="pd-row-val">${nat ? term('natures', nat.name) : t('nature_none')}</span></div>
+      ${evStr ? `<div class="pd-row"><span class="pd-row-lbl">${t('evs')}</span><span class="pd-row-val">${evStr}</span></div>` : ''}
+      <div class="pd-moves">${movesHtml}</div>
+    </div>
+  </div>`;
+}
+
+function openPartyDetail(saveIdx) {
+  const saves = getSaves();
+  const save = saves[saveIdx];
+  if (!save) return;
+  document.getElementById('pdTitle').textContent = dispPartyName(save.name);
+  const slots = save.slots || [];
+  document.getElementById('pdGrid').innerHTML = Array.from({length: 6}, (_, i) => buildMonDetailHtml(slots[i])).join('');
+  document.getElementById('pdOverlay').classList.add('open');
+}
+function closePartyDetail() { document.getElementById('pdOverlay').classList.remove('open'); }
+document.getElementById('pdCloseBtn').addEventListener('click', closePartyDetail);
+document.getElementById('pdOverlay').addEventListener('click', e => { if (e.target === document.getElementById('pdOverlay')) closePartyDetail(); });
 
 document.getElementById('savePartyBtn').addEventListener('click', () => {
   const slots = getCurrentParty();
@@ -457,6 +588,8 @@ document.getElementById('savePartyBtn').addEventListener('click', () => {
 });
 
 document.getElementById('partiesGrid').addEventListener('click', e => {
+  const viewTrigger = e.target.closest('[data-view]');
+  if (viewTrigger) { openPartyDetail(+viewTrigger.dataset.view); return; }
   const renameBtn = e.target.closest('.pc-rename-btn');
   if (renameBtn) {
     const i = +renameBtn.dataset.rename;
