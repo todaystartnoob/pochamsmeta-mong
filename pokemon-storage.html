@@ -295,7 +295,12 @@
     .type-f-btn.on{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--btn-col,#888);}
     .box-tt{position:fixed;z-index:500;background:rgba(18,10,34,.97);border:1px solid #6040a0;border-radius:10px;padding:9px 11px;width:220px;font-size:10px;color:#c8c0e8;pointer-events:none;opacity:0;transition:opacity .15s ease;box-shadow:0 6px 24px rgba(0,0,0,.55);line-height:1.55;}
     .box-tt.show{opacity:1;}
-  
+
+    @media (max-width:480px) {
+      .navbar { padding:0 10px; }
+      .nav-links a { padding:4px 6px; font-size:11px; }
+    }
+
     /* ── SETTINGS MODAL ── */
     .nav-logo{cursor:pointer;}
     .nav-logo img{transition:transform .2s cubic-bezier(.34,1.56,.64,1);}
