@@ -45,6 +45,8 @@
       transition: background .2s, color .2s;
     }
     .nav-links a:hover  { background: #ede0f5; color: #7b3fa0; }
+    .nav-settings-btn{background:none;border:none;font-size:17px;cursor:pointer;color:#777;padding:4px 9px;border-radius:6px;transition:background .15s,color .15s;margin-left:2px;line-height:1;}
+    .nav-settings-btn:hover{background:#ede0f5;color:#7b3fa0;}
     .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
 
     .page-body {
@@ -252,7 +254,8 @@
     .set-section{margin-bottom:16px;}
     .set-section:last-child{margin-bottom:0;}
     .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
-    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:pointer;}
+    .set-sel:disabled{cursor:not-allowed;}
     .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
     .set-danger-btn:hover{background:#ffe5e5;}
     .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
@@ -265,10 +268,11 @@
 <nav class="navbar">
   <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
-    <a href="index.html">파티 구성</a>
-    <a href="pokemon-box.html">포켓몬 박스</a>
-    <a href="meta-usage.html">메타 사용률</a>
-    <a href="pokedex.html" class="active">포켓몬 도감</a>
+    <a href="index.html" id="navParty">파티 구성</a>
+    <a href="pokemon-box.html" id="navBox">포켓몬 박스</a>
+    <a href="meta-usage.html" id="navMeta">메타 사용률</a>
+    <a href="pokedex.html" class="active" id="navDex">포켓몬 도감</a>
+    <button class="nav-settings-btn" id="navSettingsBtn" title="Settings">⚙</button>
   </div>
 </nav>
 
@@ -276,8 +280,8 @@
   <div class="toolbar">
     <input type="text" class="search-input" id="dexSearch" placeholder="포켓몬 이름 검색..." autocomplete="off">
     <div class="filter-row" id="modeFilter">
-      <button class="f-btn on" data-mode="all">전체</button>
-      <button class="f-btn" data-mode="ingame">포챔스</button>
+      <button class="f-btn on" data-mode="all" id="modeAllBtn">전체</button>
+      <button class="f-btn" data-mode="ingame" id="modeIngameBtn">포챔스</button>
     </div>
     <div class="filter-row" id="megaFilter">
       <button class="f-btn" id="megaToggle">메가진화</button>
@@ -294,8 +298,109 @@
 </div>
 
 <script src="pokemon-sprites.js"></script>
+<script src="champions_loc_map.js"></script>
 <script src="data.js"></script>
 <script src="abilities-data.js"></script>
+<script>
+/* ── i18n (한/영/일) — 메인 스크립트보다 먼저 정의되어야 함 ── */
+let I18N = null;
+let LANG = localStorage.getItem('lang') || 'ko';
+
+async function loadI18n() {
+  try { I18N = await fetch('i18n_names.json').then(r => r.json()); }
+  catch (e) { console.error('i18n_names.json fetch 실패:', e); I18N = null; }
+}
+
+function pokeName(koName, dexNo) {
+  if (LANG === 'ko' || !I18N || !koName) return koName;
+  const p = I18N.pokemon[String(dexNo)];
+  if (!p) return koName;
+  const base = p[LANG] || p.ko;
+  let result = koName.split(p.ko).join(base);
+  /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
+  const suffixMatch = result.match(/\(([^)]+)\)$/);
+  if (suffixMatch) {
+    const formKo = suffixMatch[1];
+    const src = I18N.forms[formKo] || I18N.types[formKo];
+    const formTrans = src && src[LANG];
+    if (formTrans) result = result.slice(0, suffixMatch.index) + '(' + formTrans + ')';
+  }
+  for (const formKo in I18N.forms) {
+    if (result.includes(formKo)) {
+      const f = (I18N.forms[formKo][LANG] || formKo) + ' ';
+      result = result.split(formKo).join(f);
+    }
+  }
+  return result.replace(/\s+/g, ' ').trim();
+}
+
+const LOC_MAP_FIELD = {items:'item_ja2ko', abilities:'ability_ja2ko', moves:'move_ja2ko', natures:'nature_ja2ko'};
+function normKoName(category, koName) {
+  if (typeof CHAMPIONS_LOC_MAP !== 'undefined') {
+    const field = LOC_MAP_FIELD[category];
+    const fixed = field && CHAMPIONS_LOC_MAP[field]?.[koName];
+    if (fixed) return fixed;
+  }
+  return koName;
+}
+function term(category, koName) {
+  if (!koName) return koName;
+  koName = normKoName(category, koName);
+  if (LANG === 'ko' || !I18N) return koName;
+  const m = I18N[category]?.[koName];
+  return (m && m[LANG]) || koName;
+}
+function termDesc(category, koName, koDesc) {
+  if (LANG === 'ko' || !koName || !I18N) return koDesc;
+  koName = normKoName(category, koName);
+  const m = I18N[category]?.[koName];
+  if (!m) return koDesc;
+  const d = LANG === 'en' ? m.descEn : LANG === 'ja' ? m.descJa : null;
+  return d || koDesc;
+}
+
+/* 검색어가 한국어 원문 또는 영/일 번역명과 일치하는지 확인 (언어 모드와 무관하게 항상 다 검사) */
+function matchPokemonQuery(pk, q) {
+  if (!q) return true;
+  if (pk.name.includes(q)) return true;
+  if (!I18N) return false;
+  const ql = q.toLowerCase();
+  const p = I18N.pokemon[String(pk.no)];
+  if (p) {
+    if (p.en && p.en.toLowerCase().includes(ql)) return true;
+    if (p.ja && p.ja.includes(q)) return true;
+  }
+  for (const formKo in I18N.forms) {
+    if (pk.name.includes(formKo)) {
+      const f = I18N.forms[formKo];
+      if (f.en && p?.en && (f.en + ' ' + p.en).toLowerCase().includes(ql)) return true;
+      if (f.ja && p?.ja && (f.ja + p.ja).includes(q)) return true;
+    }
+  }
+  return false;
+}
+function matchTermQuery(category, koName, q) {
+  if (!q) return true;
+  if (koName.includes(q)) return true;
+  if (!I18N) return false;
+  koName = normKoName(category, koName);
+  if (koName.includes(q)) return true;
+  const m = I18N[category]?.[koName];
+  if (!m) return false;
+  const ql = q.toLowerCase();
+  if (m.en && m.en.toLowerCase().includes(ql)) return true;
+  if (m.ja && m.ja.includes(q)) return true;
+  return false;
+}
+
+function t(key, vars) {
+  if (!I18N) return key;
+  const e = I18N.ui[key];
+  let s = (e && (e[LANG] || e.ko)) || key;
+  if (vars) for (const k in vars) s = s.replace(`{${k}}`, vars[k]);
+  return s;
+}
+</script>
 <script>
   const TYPE_COLORS = {
     '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
@@ -331,15 +436,15 @@
     const allBtn = document.createElement('button');
     allBtn.className = 'f-btn on';
     allBtn.dataset.type = '';
-    allBtn.textContent = '전체 타입';
+    allBtn.textContent = t('all_types_btn');
     row.appendChild(allBtn);
 
-    ALL_TYPES.forEach(t => {
+    ALL_TYPES.forEach(tp => {
       const btn = document.createElement('button');
       btn.className = 'f-btn';
-      btn.dataset.type = t;
-      btn.textContent = t;
-      btn.style.setProperty('--tc', TYPE_COLORS[t]);
+      btn.dataset.type = tp;
+      btn.textContent = term('types', tp);
+      btn.style.setProperty('--tc', TYPE_COLORS[tp]);
       row.appendChild(btn);
     });
   })();
@@ -353,25 +458,25 @@
       (p.type1 === dexTypes[0] || p.type2 === dexTypes[0]) &&
       (p.type1 === dexTypes[1] || p.type2 === dexTypes[1])
     );
-    if (dexQuery) list = list.filter(p => p.name.includes(dexQuery));
+    if (dexQuery) list = list.filter(p => matchPokemonQuery(p, dexQuery));
     return list;
   }
 
   function renderGrid() {
     const list = getFiltered();
-    document.getElementById('dexCount').textContent = `${list.length}마리`;
+    document.getElementById('dexCount').textContent = t('count_creatures', {n: list.length});
 
     document.getElementById('dexGrid').innerHTML = list.map(pk => `
       <div class="dex-card ${pk.inGame ? 'ingame' : ''}" data-idx="${POKEMON_DATA.indexOf(pk)}">
-        <img src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}" loading="lazy">
+        <img src="${spriteUrl(pk.name, pk.no)}" alt="${pokeName(pk.name, pk.no)}" loading="lazy">
         <div class="dex-no">#${pk.no}</div>
-        <div class="dex-name">${pk.name}</div>
+        <div class="dex-name">${pokeName(pk.name, pk.no)}</div>
         <div class="dex-types">
-          ${[pk.type1, pk.type2].filter(Boolean).map(t =>
-            `<span class="dt-badge" style="background:${TYPE_COLORS[t]||'#888'}">${t}</span>`
+          ${[pk.type1, pk.type2].filter(Boolean).map(tp =>
+            `<span class="dt-badge" style="background:${TYPE_COLORS[tp]||'#888'}">${term('types', tp)}</span>`
           ).join('')}
         </div>
-        ${pk.inGame ? '<div class="ingame-mark">포챔스</div>' : ''}
+        ${pk.inGame ? `<div class="ingame-mark">${t('champions_legal')}</div>` : ''}
       </div>`).join('');
   }
 
@@ -383,24 +488,27 @@
       {l:'C',v:pk.C},{l:'D',v:pk.D},{l:'S',v:pk.S}
     ];
     const total = pk.H+pk.A+pk.B+pk.C+pk.D+pk.S;
+    const dispName = pokeName(pk.name, pk.no);
+    const FORM_CAT_I18N = {'메가진화':'form_cat_mega','리전폼':'form_cat_region','폼':'form_cat_generic','암컷폼':'form_cat_female'};
+    const formLabel = pk.form ? (FORM_CAT_I18N[pk.form] ? t(FORM_CAT_I18N[pk.form]) : pk.form) : '';
 
     document.getElementById('dexDetail').innerHTML = `
       <div class="dd-head">
-        <img class="dd-img" src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}">
+        <img class="dd-img" src="${spriteUrl(pk.name, pk.no)}" alt="${dispName}">
         <div class="dd-info">
           <div class="dd-no">#${pk.no}</div>
-          <div class="dd-name">${pk.name}</div>
+          <div class="dd-name">${dispName}</div>
           <div class="dd-types">
-            ${[pk.type1, pk.type2].filter(Boolean).map(t =>
-              `<span class="dt-badge" style="background:${TYPE_COLORS[t]||'#888'};font-size:12px;padding:2px 8px">${t}</span>`
+            ${[pk.type1, pk.type2].filter(Boolean).map(tp =>
+              `<span class="dt-badge" style="background:${TYPE_COLORS[tp]||'#888'};font-size:12px;padding:2px 8px">${term('types', tp)}</span>`
             ).join('')}
           </div>
-          ${pk.form ? `<div class="dd-form">분류: ${pk.form}</div>` : ''}
-          ${pk.inGame ? '<div class="ingame-mark" style="display:inline-block">포챔스 포켓몬</div>' : ''}
+          ${pk.form ? `<div class="dd-form">${t('classification')}: ${formLabel}</div>` : ''}
+          ${pk.inGame ? `<div class="ingame-mark" style="display:inline-block">${t('champions_legal_full')}</div>` : ''}
         </div>
       </div>
       <div class="dd-stats">
-        <h3>종족값 (합계: ${total})</h3>
+        <h3>${t('base_stats')} (${t('total_short')}: ${total})</h3>
         ${stats.map(s => `
           <div class="ds-row">
             <span class="ds-lbl">${s.l}</span>
@@ -414,14 +522,14 @@
         const abd = (typeof ABILITY_DATA !== 'undefined') && ABILITY_DATA[pk.name];
         if (!abd) return '';
         const rows = (abd.normal || []).map(a =>
-          `<div class="da-item"><span class="da-name">${a.name}</span><span class="da-tag">일반</span><span class="da-desc">${a.desc || ''}</span></div>`
+          `<div class="da-item"><span class="da-name">${term('abilities', a.name)}</span><span class="da-tag">${t('ability_tag_normal')}</span><span class="da-desc">${termDesc('abilities', a.name, a.desc || '')}</span></div>`
         ).join('');
         const hidden = abd.hidden
-          ? `<div class="da-item"><span class="da-name">${abd.hidden.name}</span><span class="da-tag hidden">숨겨진</span><span class="da-desc">${abd.hidden.desc || ''}</span></div>`
+          ? `<div class="da-item"><span class="da-name">${term('abilities', abd.hidden.name)}</span><span class="da-tag hidden">${t('ability_tag_hidden')}</span><span class="da-desc">${termDesc('abilities', abd.hidden.name, abd.hidden.desc || '')}</span></div>`
           : '';
-        return rows || hidden ? `<div class="dd-abilities"><h3>특성</h3>${rows}${hidden}</div>` : '';
+        return rows || hidden ? `<div class="dd-abilities"><h3>${t('ability')}</h3>${rows}${hidden}</div>` : '';
       })()}
-      <button class="dd-close" id="ddCloseBtn">닫기</button>
+      <button class="dd-close" id="ddCloseBtn">${t('close')}</button>
     `;
 
     document.getElementById('dexModal').classList.add('open');
@@ -495,44 +603,86 @@
 <div class="set-overlay" id="setOverlay">
   <div class="set-box">
     <div class="set-head">
-      <span class="set-title">⚙ 설정</span>
+      <span class="set-title" id="setTitleLbl">⚙ 설정</span>
       <button class="set-x" id="setCloseBtn">✕</button>
     </div>
     <div class="set-section">
-      <div class="set-lbl">언어</div>
-      <select class="set-sel" disabled><option selected>한국어</option></select>
+      <div class="set-lbl" id="setLangLbl">언어</div>
+      <select class="set-sel" id="setLangSel">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">테마</div>
-      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+      <div class="set-lbl" id="setThemeLbl">테마</div>
+      <select class="set-sel" disabled><option selected id="setThemeOpt">메타몽 테마 (기본)</option></select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">데이터 관리</div>
+      <div class="set-lbl" id="setDataMgmtLbl">데이터 관리</div>
       <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
-      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+      <div class="set-desc" id="setClearDesc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
     </div>
     <div class="set-section">
-      <div class="set-lbl">문의 / 버그 리포트</div>
+      <div class="set-lbl" id="setContactLbl">문의 / 버그 리포트</div>
       <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
     </div>
   </div>
 </div>
+<script>
+/* i18n 핵심 함수(I18N/LANG/loadI18n/pokeName/term/t)는 파일 상단으로 이동됨 */
+function applyNavSettingsLabels() {
+  const navMap = { navParty: 'nav_party', navBox: 'nav_box', navMeta: 'nav_meta', navDex: 'nav_dex' };
+  for (const id in navMap) { const el = document.getElementById(id); if (el) el.textContent = t(navMap[id]); }
+  const navSettingsBtn = document.getElementById('navSettingsBtn');
+  if (navSettingsBtn) navSettingsBtn.title = t('settings_btn_title');
+  const setMap = {
+    setTitleLbl: 'settings_title', setLangLbl: 'lang_lbl', setThemeLbl: 'theme_lbl',
+    setThemeOpt: 'theme_default', setDataMgmtLbl: 'data_mgmt_lbl', setClearBtn: 'clear_btn',
+    setClearDesc: 'clear_desc', setContactLbl: 'contact_lbl',
+  };
+  for (const id in setMap) { const el = document.getElementById(id); if (el) el.textContent = t(setMap[id]); }
+  const modeAllBtn = document.getElementById('modeAllBtn');
+  if (modeAllBtn) modeAllBtn.textContent = t('all');
+  const modeIngameBtn = document.getElementById('modeIngameBtn');
+  if (modeIngameBtn) modeIngameBtn.textContent = t('champions_legal');
+  const megaToggle = document.getElementById('megaToggle');
+  if (megaToggle) megaToggle.textContent = t('mega');
+  const dexSearch = document.getElementById('dexSearch');
+  if (dexSearch) dexSearch.placeholder = t('pokemon_search_placeholder');
+  if (typeof renderGrid === 'function') renderGrid();
+  document.querySelectorAll('#typeFilter .f-btn[data-type]').forEach(b => {
+    b.textContent = b.dataset.type ? term('types', b.dataset.type) : t('all_types_btn');
+  });
+}
+
+loadI18n().then(applyNavSettingsLabels);
+</script>
 <script>
 (function initSettingsModal() {
   const overlay = document.getElementById('setOverlay');
   const logo = document.querySelector('.nav-logo');
   const closeBtn = document.getElementById('setCloseBtn');
   const clearBtn = document.getElementById('setClearBtn');
+  const langSel = document.getElementById('setLangSel');
   if (!overlay || !logo) return;
-  logo.addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('navSettingsBtn')?.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
   clearBtn?.addEventListener('click', () => {
-    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    if (!confirm(t('confirm_clear_all_data'))) return;
     Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
-    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    alert(t('alert_data_cleared'));
     location.reload();
   });
+  if (langSel) {
+    langSel.value = localStorage.getItem('lang') || 'ko';
+    langSel.addEventListener('change', () => {
+      localStorage.setItem('lang', langSel.value);
+      LANG = langSel.value;
+      applyNavSettingsLabels();
+    });
+  }
 })();
 </script>
 </body>

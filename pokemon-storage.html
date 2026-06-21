@@ -36,6 +36,8 @@
     .nav-links { display: flex; gap: 6px; }
     .nav-links a { text-decoration: none; color: #444; font-size: 14px; padding: 5px 14px; border-radius: 6px; transition: background .2s,color .2s; }
     .nav-links a:hover  { background: #ede0f5; color: var(--accent); }
+    .nav-settings-btn{background:none;border:none;font-size:17px;cursor:pointer;color:#777;padding:4px 9px;border-radius:6px;transition:background .15s,color .15s;margin-left:2px;line-height:1;}
+    .nav-settings-btn:hover{background:#ede0f5;color:#7b3fa0;}
     .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
 
     /* ── LAYOUT ── */
@@ -308,7 +310,8 @@
     .set-section{margin-bottom:16px;}
     .set-section:last-child{margin-bottom:0;}
     .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
-    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:pointer;}
+    .set-sel:disabled{cursor:not-allowed;}
     .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
     .set-danger-btn:hover{background:#ffe5e5;}
     .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
@@ -321,10 +324,11 @@
 <nav class="navbar">
   <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
-    <a href="index.html">파티 구성</a>
-    <a href="pokemon-box.html" class="active">포켓몬 박스</a>
-    <a href="meta-usage.html">메타 사용률</a>
-    <a href="pokedex.html">포켓몬 도감</a>
+    <a href="index.html" id="navParty">파티 구성</a>
+    <a href="pokemon-box.html" class="active" id="navBox">포켓몬 박스</a>
+    <a href="meta-usage.html" id="navMeta">메타 사용률</a>
+    <a href="pokedex.html" id="navDex">포켓몬 도감</a>
+    <button class="nav-settings-btn" id="navSettingsBtn" title="Settings">⚙</button>
   </div>
 </nav>
 
@@ -333,7 +337,7 @@
 
   <div class="box-center">
     <div class="box-header">
-      <a href="pokemon-box.html" class="back-link">← 박스 홈</a>
+      <a href="pokemon-box.html" class="back-link" id="boxHomeLink">← 박스 홈</a>
       <span class="box-name" id="boxName">박스 1</span>
       <div class="box-dots" id="boxDots"></div>
       <span class="box-count" id="boxCount"></span>
@@ -342,7 +346,7 @@
     <div class="box-viewport">
       <div class="box-grid" id="boxGrid"></div>
     </div>
-    <div class="mob-box-ad">광고</div>
+    <div class="mob-box-ad" id="mobBoxAd">광고</div>
   </div>
 
   <button class="nav-arrow-btn" id="nextBtn">&#9654;</button>
@@ -359,7 +363,7 @@
 <div class="modal-overlay" id="pokeModal">
   <div class="modal-box">
     <div class="modal-head">
-      <span class="modal-title">포켓몬 선택</span>
+      <span class="modal-title" id="pokeModalTitle">포켓몬 선택</span>
       <button class="modal-x" id="closePokeModal">✕</button>
     </div>
     <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색..." autocomplete="off">
@@ -396,7 +400,7 @@
 <div class="modal-overlay" id="itemModal">
   <div class="modal-box">
     <div class="modal-head">
-      <span class="modal-title">도구 선택</span>
+      <span class="modal-title" id="itemModalTitle">도구 선택</span>
       <button class="modal-x" id="closeItemModal">✕</button>
     </div>
     <input type="text" class="modal-search" id="itemSearch" placeholder="도구명 검색..." autocomplete="off">
@@ -432,10 +436,10 @@
 <div class="modal-overlay" id="natureModal">
   <div class="modal-box" style="max-width:540px;">
     <div class="modal-head">
-      <span class="modal-title">성격 선택</span>
+      <span class="modal-title" id="natureModalTitle">성격 선택</span>
       <button class="modal-x" id="closeNatureModal">✕</button>
     </div>
-    <div style="font-size:11px;color:#888;margin:-4px 0 4px">빨간 행 = 올라가는 능력치 / 파란 열 = 내려가는 능력치</div>
+    <div style="font-size:11px;color:#888;margin:-4px 0 4px" id="natureTableHint">빨간 행 = 올라가는 능력치 / 파란 열 = 내려가는 능력치</div>
     <div style="overflow-x:auto;">
       <table class="nature-table" id="natureTable"></table>
     </div>
@@ -448,12 +452,123 @@
 </div>
 
 <script src="pokemon-sprites.js"></script>
+<script src="champions_loc_map.js"></script>
 <script src="items-data.js"></script>
 <script src="pochams-items.js"></script>
 <script src="abilities-data.js"></script>
 <script src="move-descs.js"></script>
 <script src="learnset-data.js"></script>
 <script src="data.js"></script>
+<script>
+/* ── i18n (한/영/일) — 메인 스크립트보다 먼저 정의되어야 함 ── */
+let I18N = null;
+let LANG = localStorage.getItem('lang') || 'ko';
+
+async function loadI18n() {
+  try { I18N = await fetch('i18n_names.json').then(r => r.json()); }
+  catch (e) { console.error('i18n_names.json fetch 실패:', e); I18N = null; }
+}
+
+function pokeName(koName, dexNo) {
+  if (LANG === 'ko' || !I18N || !koName) return koName;
+  const p = I18N.pokemon[String(dexNo)];
+  if (!p) return koName;
+  const base = p[LANG] || p.ko;
+  let result = koName.split(p.ko).join(base);
+  /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
+  const suffixMatch = result.match(/\(([^)]+)\)$/);
+  if (suffixMatch) {
+    const formKo = suffixMatch[1];
+    const src = I18N.forms[formKo] || I18N.types[formKo];
+    const formTrans = src && src[LANG];
+    if (formTrans) result = result.slice(0, suffixMatch.index) + '(' + formTrans + ')';
+  }
+  for (const formKo in I18N.forms) {
+    if (result.includes(formKo)) {
+      const f = (I18N.forms[formKo][LANG] || formKo) + ' ';
+      result = result.split(formKo).join(f);
+    }
+  }
+  return result.replace(/\s+/g, ' ').trim();
+}
+
+const LOC_MAP_FIELD = {items:'item_ja2ko', abilities:'ability_ja2ko', moves:'move_ja2ko', natures:'nature_ja2ko'};
+function normKoName(category, koName) {
+  if (typeof CHAMPIONS_LOC_MAP !== 'undefined') {
+    const field = LOC_MAP_FIELD[category];
+    const fixed = field && CHAMPIONS_LOC_MAP[field]?.[koName];
+    if (fixed) return fixed;
+  }
+  return koName;
+}
+function term(category, koName) {
+  if (!koName) return koName;
+  koName = normKoName(category, koName);
+  if (LANG === 'ko' || !I18N) return koName;
+  const m = I18N[category]?.[koName];
+  return (m && m[LANG]) || koName;
+}
+function termDesc(category, koName, koDesc) {
+  if (LANG === 'ko' || !koName || !I18N) return koDesc;
+  koName = normKoName(category, koName);
+  const m = I18N[category]?.[koName];
+  if (!m) return koDesc;
+  const d = LANG === 'en' ? m.descEn : LANG === 'ja' ? m.descJa : null;
+  return d || koDesc;
+}
+
+/* 검색어가 한국어 원문 또는 영/일 번역명과 일치하는지 확인 (언어 모드와 무관하게 항상 다 검사) */
+function matchPokemonQuery(pk, q) {
+  if (!q) return true;
+  if (pk.name.includes(q)) return true;
+  if (!I18N) return false;
+  const ql = q.toLowerCase();
+  const p = I18N.pokemon[String(pk.no)];
+  if (p) {
+    if (p.en && p.en.toLowerCase().includes(ql)) return true;
+    if (p.ja && p.ja.includes(q)) return true;
+  }
+  for (const formKo in I18N.forms) {
+    if (pk.name.includes(formKo)) {
+      const f = I18N.forms[formKo];
+      if (f.en && p?.en && (f.en + ' ' + p.en).toLowerCase().includes(ql)) return true;
+      if (f.ja && p?.ja && (f.ja + p.ja).includes(q)) return true;
+    }
+  }
+  return false;
+}
+function matchTermQuery(category, koName, q) {
+  if (!q) return true;
+  if (koName.includes(q)) return true;
+  if (!I18N) return false;
+  koName = normKoName(category, koName);
+  if (koName.includes(q)) return true;
+  const m = I18N[category]?.[koName];
+  if (!m) return false;
+  const ql = q.toLowerCase();
+  if (m.en && m.en.toLowerCase().includes(ql)) return true;
+  if (m.ja && m.ja.includes(q)) return true;
+  return false;
+}
+
+function t(key, vars) {
+  if (!I18N) return key;
+  const e = I18N.ui[key];
+  let s = (e && (e[LANG] || e.ko)) || key;
+  if (vars) for (const k in vars) s = s.replace(`{${k}}`, vars[k]);
+  return s;
+}
+
+const ITEM_CAT_I18N_MAP = {
+  'Z크리스털':'cat_z_crystal','구애도구':'cat_choice','노력치도구':'cat_ev_item','메가스톤':'cat_megastone',
+  '메모리':'cat_memory','보석':'cat_gem','스카프':'cat_scarf','열매':'cat_berry','전용도구':'cat_signature',
+  '지닌도구':'cat_held','지닌도구(역효과)':'cat_held_neg','타입강화':'cat_type_boost','플레이트':'cat_plate','훈련도구':'cat_training',
+};
+function itemCat(koCat) {
+  const key = ITEM_CAT_I18N_MAP[koCat];
+  return key ? t(key) : koCat;
+}
+</script>
 <script>
 const TYPE_COLORS = {
   '노말':'#9A9A7A','불꽃':'#F08030','물':'#6890F0','풀':'#78C850',
@@ -537,15 +652,16 @@ function buildBoxTtHtml(entry) {
   const def  = Math.floor(calcStat(pk.B, evs.B, false, natMult(nature,'B')));
   const spdf = Math.floor(calcStat(pk.D, evs.D, false, natMult(nature,'D')));
   const spd  = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')));
-  const tb   = t => `<span style="background:${TYPE_COLORS[t]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${t}</span>`;
+  const tb   = tp => `<span style="background:${TYPE_COLORS[tp]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${term('types', tp)}</span>`;
   const evStr = ['H','A','B','C','D','S'].filter(k=>evs[k]>0).map(k=>`${k}:${evs[k]}`).join(' ');
+  const dispPkName = pokeName(pk.name, pk.no);
   return `
-    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${entry.nickname || pk.name}${entry.nickname ? ` <span style="opacity:.6;font-size:9px;font-weight:400">(${pk.name})</span>` : ''}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
-    ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`도구 ${item.name} `:''}${entry.ability?`특성 ${entry.ability.name}`:''}</div>`:''}
-    ${nature?`<div>성격 ${nature.name}</div>`:''}
-    ${evStr?`<div>노력치 ${evStr}</div>`:''}
-    <div style="margin-top:4px;color:#d0c8f0">${moves.map(mv=>mv?`<div>● ${mv.name}</div>`:'').join('')}</div>
-    <div style="margin-top:5px;border-top:1px solid #403060;padding-top:4px">물리내구 ${Math.floor(hp*def/0.411).toLocaleString()} 특수내구 ${Math.floor(hp*spdf/0.411).toLocaleString()}<br>스피드 ${spd}</div>
+    <div style="font-size:11px;font-weight:700;margin-bottom:3px">${entry.nickname || dispPkName}${entry.nickname ? ` <span style="opacity:.6;font-size:9px;font-weight:400">(${dispPkName})</span>` : ''}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
+    ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`${t('item')} ${term('items', item.name)} `:''}${entry.ability?`${t('ability')} ${term('abilities', entry.ability.name)}`:''}</div>`:''}
+    ${nature?`<div>${t('nature')} ${term('natures', nature.name)}</div>`:''}
+    ${evStr?`<div>${t('evs')} ${evStr}</div>`:''}
+    <div style="margin-top:4px;color:#d0c8f0">${moves.map(mv=>mv?`<div>● ${term('moves', mv.name)}</div>`:'').join('')}</div>
+    <div style="margin-top:5px;border-top:1px solid #403060;padding-top:4px">${t('phys_dur')} ${Math.floor(hp*def/0.411).toLocaleString()} ${t('spec_dur')} ${Math.floor(hp*spdf/0.411).toLocaleString()}<br>${t('speed_short')} ${spd}</div>
   `;
 }
 function showBoxTt(anchorEl, html) {
@@ -592,8 +708,9 @@ function renderGrid(animate, dir) {
     const absIdx = start + i;
     if (entry && POKEMON_DATA[entry.pkIdx]) {
       const pk = POKEMON_DATA[entry.pkIdx];
-      html.push(`<div class="box-slot filled" data-idx="${absIdx}" title="${entry.nickname ? entry.nickname + ' (' + pk.name + ')' : pk.name}">
-        <img src="${spriteUrl(pk.name, pk.no)}" alt="${entry.nickname || pk.name}" loading="lazy">
+      const dispPkName = pokeName(pk.name, pk.no);
+      html.push(`<div class="box-slot filled" data-idx="${absIdx}" title="${entry.nickname ? entry.nickname + ' (' + dispPkName + ')' : dispPkName}">
+        <img src="${spriteUrl(pk.name, pk.no)}" alt="${entry.nickname || dispPkName}" loading="lazy">
       </div>`);
     } else {
       html.push(`<div class="box-slot empty" data-idx="${absIdx}"><span class="slot-plus">+</span></div>`);
@@ -625,8 +742,8 @@ function updateHeader() {
   const box = getBoxData();
   const total = box.filter(Boolean).length;
   const n = numBoxes();
-  document.getElementById('boxName').textContent = `박스 ${currentBox + 1}`;
-  document.getElementById('boxCount').textContent = total ? `전체 ${total}마리` : '';
+  document.getElementById('boxName').textContent = t('box_n', {n: currentBox + 1});
+  document.getElementById('boxCount').textContent = total ? t('total_creatures', {n: total}) : '';
   document.getElementById('prevBtn').disabled = false;
   document.getElementById('nextBtn').disabled = false;
 
@@ -650,12 +767,15 @@ function openDetail(absIdx) {
   const evs = entry.evs || {H:0,A:0,B:0,C:0,D:0,S:0};
   const moves = (entry.moves || []).map(mi => mi >= 0 && MOVE_DATA[mi] ? MOVE_DATA[mi] : null);
 
+  const NAT_LABELS_I18N = {A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
+  const dispPkName = pokeName(pk.name, pk.no);
   const natChips = nat ? [
-    nat.up ? `<span class="dc-chip nat-up">${nat.name} ${STAT_NAMES[nat.up]}↑</span>` : '',
-    nat.dn ? `<span class="dc-chip nat-dn">${STAT_NAMES[nat.dn]}↓</span>` : '',
-    !nat.up ? `<span class="dc-chip">${nat.name}</span>` : ''
+    nat.up ? `<span class="dc-chip nat-up">${term('natures', nat.name)} ${NAT_LABELS_I18N[nat.up]}↑</span>` : '',
+    nat.dn ? `<span class="dc-chip nat-dn">${NAT_LABELS_I18N[nat.dn]}↓</span>` : '',
+    !nat.up ? `<span class="dc-chip">${term('natures', nat.name)}</span>` : ''
   ].filter(Boolean).join('') : '';
 
+  const STAT_NAMES_I18N = {H:t('hp_lbl'),A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
   const statsHtml = STAT_KEYS.map(k => {
     const isHP = k === 'H';
     const nm   = natMult(nat, k);
@@ -663,7 +783,7 @@ function openDetail(absIdx) {
     const pct  = Math.min(100, Math.round(val / 3));
     const col  = statColor(val);
     return `<div class="stat-row">
-      <div class="stat-lbl">${STAT_NAMES[k]}</div>
+      <div class="stat-lbl">${STAT_NAMES_I18N[k]}</div>
       <div class="stat-base">${pk[k]}</div>
       <div class="stat-bar-wrap"><div class="stat-bar" style="width:${pct}%;background:${col}"></div></div>
       <div class="stat-val">${val}</div>
@@ -674,46 +794,46 @@ function openDetail(absIdx) {
     const mv = moves[i];
     if (!mv) return `<div class="dc-move empty">—</div>`;
     const bg = TYPE_COLORS[mv.type] || '#888';
-    return `<div class="dc-move" style="background:${bg}">${mv.name}</div>`;
+    return `<div class="dc-move" style="background:${bg}">${term('moves', mv.name)}</div>`;
   }).join('');
 
   const evList = STAT_KEYS.filter(k => evs[k] > 0)
-    .map(k => `<span class="dc-ev">${STAT_NAMES[k]} ${evs[k]}</span>`).join('');
+    .map(k => `<span class="dc-ev">${STAT_NAMES_I18N[k]} ${evs[k]}</span>`).join('');
 
-  const types = [pk.type1, pk.type2].filter(Boolean).map(t =>
-    `<span class="type-badge" style="background:${TYPE_COLORS[t]||'#888'}">${t}</span>`
+  const types = [pk.type1, pk.type2].filter(Boolean).map(tp =>
+    `<span class="type-badge" style="background:${TYPE_COLORS[tp]||'#888'}">${term('types', tp)}</span>`
   ).join('');
 
   document.getElementById('detailCard').innerHTML = `
     <div class="dc-topbar">
-      <button class="dc-add-btn" id="dcAddBtn">파티에 추가</button>
-      <button class="dc-del-btn" id="dcDelBtn">삭제</button>
-      <button class="dc-close" id="dcClose">닫기 ✕</button>
+      <button class="dc-add-btn" id="dcAddBtn">${t('add_to_party_btn')}</button>
+      <button class="dc-del-btn" id="dcDelBtn">${t('delete_btn')}</button>
+      <button class="dc-close" id="dcClose">${t('close')} ✕</button>
     </div>
     <div class="dc-poke-header">
       <div class="dc-sprite-wrap">
-        <img class="dc-sprite" src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}">
+        <img class="dc-sprite" src="${spriteUrl(pk.name, pk.no)}" alt="${dispPkName}">
       </div>
       <div class="dc-info">
-        <div class="dc-no">#${pk.no} · ${pk.name}${entry.gender ? ' ' + entry.gender : ''}</div>
-        <div class="dc-name">${entry.nickname || pk.name}</div>
+        <div class="dc-no">#${pk.no} · ${dispPkName}${entry.gender ? ' ' + entry.gender : ''}</div>
+        <div class="dc-name">${entry.nickname || dispPkName}</div>
         <div class="dc-nickname-row">
-          <input type="text" class="dc-nickname-inp" id="dcNicknameInp" placeholder="별명 입력..." maxlength="20" autocomplete="off" value="${(entry.nickname || '').replace(/"/g, '&quot;')}">
-          <button class="dc-save-nick-btn" id="dcSaveNickBtn">저장</button>
+          <input type="text" class="dc-nickname-inp" id="dcNicknameInp" placeholder="${t('nickname_input_placeholder')}" maxlength="20" autocomplete="off" value="${(entry.nickname || '').replace(/"/g, '&quot;')}">
+          <button class="dc-save-nick-btn" id="dcSaveNickBtn">${t('save_btn')}</button>
         </div>
         <div class="dc-types">${types}</div>
         <div class="dc-build-chips">
           ${natChips}
-          ${it ? `<span class="dc-chip">📦 ${it.name}</span>` : ''}
-          ${entry.ability ? `<span class="dc-chip">${entry.ability.name}</span>` : ''}
+          ${it ? `<span class="dc-chip">📦 ${term('items', it.name)}</span>` : ''}
+          ${entry.ability ? `<span class="dc-chip">${term('abilities', entry.ability.name)}</span>` : ''}
         </div>
       </div>
     </div>
-    <div class="dc-section-title">스탯</div>
+    <div class="dc-section-title">${t('stats_lbl')}</div>
     ${statsHtml}
-    <div class="dc-section-title">기술</div>
+    <div class="dc-section-title">${t('moves')}</div>
     <div class="dc-moves-grid">${movesHtml}</div>
-    ${evList ? `<div class="dc-section-title">노력치</div><div class="dc-evs">${evList}</div>` : ''}
+    ${evList ? `<div class="dc-section-title">${t('evs')}</div><div class="dc-evs">${evList}</div>` : ''}
   `;
 
   document.getElementById('dcClose').onclick = closeDetail;
@@ -721,7 +841,7 @@ function openDetail(absIdx) {
     const nick = document.getElementById('dcNicknameInp').value.trim();
     const b = getBoxData();
     if (b[absIdx] != null) { b[absIdx].nickname = nick || undefined; setBoxData(b); }
-    showToast(nick ? `별명 "${nick}" 저장됨` : '별명이 삭제되었습니다.');
+    showToast(nick ? t('nickname_saved_toast', {nick}) : t('nickname_deleted_toast'));
     renderGrid(false);
   };
   document.getElementById('dcNicknameInp').addEventListener('keydown', ev => {
@@ -732,13 +852,13 @@ function openDetail(absIdx) {
     window.location.href = 'index.html';
   };
   document.getElementById('dcDelBtn').onclick = () => {
-    if (!confirm(`${pk.name}을(를) 삭제하시겠습니까?`)) return;
+    if (!confirm(t('confirm_delete_pokemon', {name: dispPkName}))) return;
     const b = getBoxData();
     b[absIdx] = null;
     setBoxData(b);
     closeDetail();
     renderGrid(false);
-    showToast(`${pk.name}을(를) 삭제했습니다.`);
+    showToast(t('deleted_pokemon_toast', {name: dispPkName}));
   };
 
   document.getElementById('detailOverlay').classList.add('visible');
@@ -794,12 +914,12 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   const box = getBoxData();
   const start = currentBox * SLOTS_PER_BOX;
   const inBox = box.slice(start, start + SLOTS_PER_BOX).filter(e => e && POKEMON_DATA[e?.pkIdx]);
-  if (!inBox.length) { showToast('이 박스는 비어 있습니다.'); return; }
-  if (!confirm(`박스 ${currentBox + 1}의 포켓몬 ${inBox.length}마리를 삭제하시겠습니까?`)) return;
+  if (!inBox.length) { showToast(t('box_is_empty_toast')); return; }
+  if (!confirm(t('confirm_delete_box_pokemon', {box: currentBox + 1, n: inBox.length}))) return;
   for (let i = start; i < start + SLOTS_PER_BOX; i++) box[i] = null;
   setBoxData(box);
   renderGrid(false);
-  showToast(`박스 ${currentBox + 1}을 비웠습니다.`);
+  showToast(t('box_cleared_toast', {box: currentBox + 1}));
 });
 
 /* ── INIT ── */
@@ -826,8 +946,8 @@ let _addAbilList   = [];
 /* ── Poke Modal ── */
 function buildTypeFilterRow() {
   const types = Object.keys(TYPE_COLORS);
-  document.getElementById('typeFilterRow').innerHTML = types.map(t =>
-    `<button class="type-f-btn${addTypeFilter===t?' on':''}" data-t="${t}" style="background:${TYPE_COLORS[t]};--btn-col:${TYPE_COLORS[t]}">${t}</button>`
+  document.getElementById('typeFilterRow').innerHTML = types.map(tp =>
+    `<button class="type-f-btn${addTypeFilter===tp?' on':''}" data-t="${tp}" style="background:${TYPE_COLORS[tp]};--btn-col:${TYPE_COLORS[tp]}">${term('types', tp)}</button>`
   ).join('');
 }
 
@@ -848,13 +968,13 @@ function renderPokeGrid(q) {
   let list = POKEMON_DATA.map((p,i) => ({p,i}));
   if (addPokeFilter === 'ingame') list = list.filter(({p}) => p.champions);
   if (addTypeFilter) list = list.filter(({p}) => p.type1 === addTypeFilter || p.type2 === addTypeFilter);
-  if (q) list = list.filter(({p}) => p.name.includes(q));
+  if (q) list = list.filter(({p}) => matchPokemonQuery(p,q));
   document.getElementById('pokeGrid').innerHTML = list.map(({p:pk,i}) => `
     <div class="poke-card" data-idx="${i}">
-      <img src="${spriteUrl(pk.name, pk.no)}" alt="${pk.name}" loading="lazy">
+      <img src="${spriteUrl(pk.name, pk.no)}" alt="${pokeName(pk.name, pk.no)}" loading="lazy">
       <div class="pc-no">#${pk.no}</div>
-      <div class="pc-name">${pk.name}</div>
-      <div class="pc-types">${[pk.type1,pk.type2].filter(Boolean).map(t=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[t]||'#888'}">${t}</span>`).join('')}</div>
+      <div class="pc-name">${pokeName(pk.name, pk.no)}</div>
+      <div class="pc-types">${[pk.type1,pk.type2].filter(Boolean).map(tp=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[tp]||'#888'}">${term('types', tp)}</span>`).join('')}</div>
     </div>`).join('');
 }
 
@@ -900,18 +1020,21 @@ function closeBuilder() { document.getElementById('builderOverlay').classList.re
 function renderBuilder() {
   const pk = addPokemon;
   if (!pk) return;
-  const types = [pk.type1,pk.type2].filter(Boolean).map(t =>
-    `<span class="type-badge" style="background:${TYPE_COLORS[t]||'#888'};padding:2px 8px;border-radius:4px;font-size:10px;color:#fff;font-weight:700;">${t}</span>`
+  const dispPkName = pokeName(pk.name, pk.no);
+  const NAT_LABELS_I18N = {A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
+  const STAT_NAMES_I18N = {H:t('hp_lbl'),A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
+  const types = [pk.type1,pk.type2].filter(Boolean).map(tp =>
+    `<span class="type-badge" style="background:${TYPE_COLORS[tp]||'#888'};padding:2px 8px;border-radius:4px;font-size:10px;color:#fff;font-weight:700;">${term('types', tp)}</span>`
   ).join('');
   const natLabel = addNature
-    ? (addNature.up ? `${addNature.name} (${NAT_LABELS[addNature.up]}↑ ${NAT_LABELS[addNature.dn]}↓)` : addNature.name)
+    ? (addNature.up ? `${term('natures', addNature.name)} (${NAT_LABELS_I18N[addNature.up]}↑ ${NAT_LABELS_I18N[addNature.dn]}↓)` : term('natures', addNature.name))
     : null;
   const statRows = STAT_KEYS.map(k => {
     const isHP = k==='H', nm = addNature?.up===k ? 1.1 : addNature?.dn===k ? 0.9 : 1;
     const val = calcStat(pk[k], addEvs[k]||0, isHP, nm);
     const pct = Math.min(100, Math.round(val/3)), col = statColor(val);
     return `<div class="b-stat-row">
-      <div class="b-stat-lbl">${STAT_NAMES[k]}</div>
+      <div class="b-stat-lbl">${STAT_NAMES_I18N[k]}</div>
       <div class="b-stat-base">${pk[k]}</div>
       <div class="b-stat-bar-wrap"><div class="b-stat-bar" style="width:${pct}%;background:${col}"></div></div>
       <div class="b-stat-val">${val}</div>
@@ -922,46 +1045,46 @@ function renderBuilder() {
   const movesHtml = [0,1,2,3].map(i => {
     const mv = addMoves[i];
     return mv
-      ? `<div class="b-move-slot" data-mi="${i}" style="background:${TYPE_COLORS[mv.type]||'#888'};color:#fff">${mv.name}</div>`
-      : `<div class="b-move-slot empty" data-mi="${i}">— 기술 없음</div>`;
+      ? `<div class="b-move-slot" data-mi="${i}" style="background:${TYPE_COLORS[mv.type]||'#888'};color:#fff">${term('moves', mv.name)}</div>`
+      : `<div class="b-move-slot empty" data-mi="${i}">— ${t('no_move_set')}</div>`;
   }).join('');
-  const genderHtml = [['','무성'],['♂','♂'],['♀','♀']].map(([g,lbl]) =>
+  const genderHtml = [['',t('gender_none')],['♂','♂'],['♀','♀']].map(([g,lbl]) =>
     `<button class="b-gender-btn${addGender===(g||null)?' on':''}" data-gender="${g}">${lbl}</button>`
   ).join('');
 
   document.getElementById('builderCard').innerHTML = `
     <div class="b-topbar">
-      <button class="b-back-btn" id="builderBack">← 포켓몬 변경</button>
-      <button class="b-save-btn" id="builderSave">저장</button>
+      <button class="b-back-btn" id="builderBack">${t('change_pokemon_btn')}</button>
+      <button class="b-save-btn" id="builderSave">${t('save_btn')}</button>
       <button class="b-close-btn" id="builderClose">✕</button>
     </div>
     <div class="b-poke-row">
-      <div class="b-sprite-wrap"><img class="b-sprite" src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}"></div>
+      <div class="b-sprite-wrap"><img class="b-sprite" src="${spriteUrl(pk.name,pk.no)}" alt="${dispPkName}"></div>
       <div class="b-info">
-        <div class="b-poke-name">#${pk.no} ${pk.name}</div>
+        <div class="b-poke-name">#${pk.no} ${dispPkName}</div>
         <div class="b-types-row">${types}</div>
-        <div class="b-section">성별</div>
+        <div class="b-section">${t('gender_lbl')}</div>
         <div class="b-gender-row">${genderHtml}</div>
       </div>
     </div>
     <div class="b-cfg-row" id="bNatureRow">
-      <span class="b-cfg-lbl">성격</span>
-      <span class="b-cfg-name${natLabel?'':' ph'}">${natLabel||'성격 선택'}</span>
+      <span class="b-cfg-lbl">${t('nature')}</span>
+      <span class="b-cfg-name${natLabel?'':' ph'}">${natLabel||t('select_nature_title')}</span>
     </div>
     <div class="b-cfg-row" id="bAbilityRow">
-      <span class="b-cfg-lbl">특성</span>
-      <span class="b-cfg-name${addAbility?.name?'':' ph'}">${addAbility?.name||'특성 선택'}</span>
-      ${addAbility?.desc ? `<span class="b-cfg-desc">${addAbility.desc}</span>` : ''}
+      <span class="b-cfg-lbl">${t('ability')}</span>
+      <span class="b-cfg-name${addAbility?.name?'':' ph'}">${addAbility?.name?term('abilities', addAbility.name):t('select_ability_title')}</span>
+      ${addAbility?.desc ? `<span class="b-cfg-desc">${termDesc('abilities', addAbility.name, addAbility.desc)}</span>` : ''}
     </div>
     <div class="b-cfg-row" id="bItemRow">
-      <span class="b-cfg-lbl">도구</span>
+      <span class="b-cfg-lbl">${t('item')}</span>
       ${addItem?.sprite ? `<img src="${addItem.sprite}" style="width:18px;height:18px;object-fit:contain;flex-shrink:0">` : ''}
-      <span class="b-cfg-name${addItem?.name?'':' ph'}">${addItem?.name||'도구 선택'}</span>
+      <span class="b-cfg-name${addItem?.name?'':' ph'}">${addItem?.name?term('items', addItem.name):t('select_item_title')}</span>
     </div>
-    <div class="b-section">스탯 &amp; 노력치</div>
+    <div class="b-section">${t('stats_and_evs')}</div>
     ${statRows}
-    <div class="b-ev-total">노력치 합계 ${evTotal}/66</div>
-    <div class="b-section">기술</div>
+    <div class="b-ev-total">${t('ev_total_max', {n: evTotal})}</div>
+    <div class="b-section">${t('moves')}</div>
     <div class="b-moves-grid">${movesHtml}</div>
   `;
 
@@ -988,7 +1111,7 @@ function renderBuilder() {
       addEvs[k] = v;
       const total = Object.values(addEvs).reduce((a, b) => a + b, 0);
       const totalEl = document.querySelector('.b-ev-total');
-      if (totalEl) totalEl.textContent = `노력치 합계 ${total}/66`;
+      if (totalEl) totalEl.textContent = t('ev_total_max', {n: total});
     };
     inp.onblur = () => renderBuilder();
   });
@@ -1014,10 +1137,10 @@ function saveAddToBox() {
   while (box.length <= addSlotIdx) box.push(null);
   box[addSlotIdx] = entry;
   setBoxData(box);
-  const name = addPokemon.name;
+  const name = pokeName(addPokemon.name, addPokemon.no);
   closeBuilder(); addSlotIdx = -1;
   renderGrid(false);
-  showToast(`${name}을(를) 저장했습니다!`);
+  showToast(t('saved_pokemon_toast', {name}));
 }
 
 /* ── Move Modal ── */
@@ -1025,7 +1148,7 @@ function openMoveModal() {
   addMoveFilter = 'all';
   document.querySelectorAll('#moveFilterRow .f-btn').forEach(b => b.classList.toggle('on', b.dataset.mf === 'all'));
   document.getElementById('moveSearch').value = '';
-  document.getElementById('moveModalTitle').textContent = `기술 선택 (${addMoveEditIdx+1}번)`;
+  document.getElementById('moveModalTitle').textContent = t('select_move_title_n', {n: addMoveEditIdx+1});
   renderMoveList('');
   document.getElementById('moveModal').classList.add('open');
   setTimeout(() => document.getElementById('moveSearch').focus(), 50);
@@ -1040,20 +1163,21 @@ function renderMoveList(q) {
     if (ls) { const lsSet = new Set(ls); list = list.filter(({m}) => lsSet.has(m.name)); }
   }
   if (addMoveFilter !== 'all') list = list.filter(({m}) => m.category === addMoveFilter);
-  if (q) list = list.filter(({m}) => m.name.includes(q));
+  if (q) list = list.filter(({m}) => matchTermQuery('moves',m.name,q));
+  const CAT_I18N_M = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
   const clearRow = `<div class="move-item" data-idx="-1" style="background:#fff5f5">
     <span class="mi-type" style="background:#e53935">✕</span>
-    <span class="mi-name" style="color:#e53935">기술 해제</span>
+    <span class="mi-name" style="color:#e53935">${t('clear_move_btn')}</span>
     <span class="mi-cat"></span><span class="mi-pow"></span><span class="mi-acc"></span>
   </div>`;
   document.getElementById('moveList').innerHTML = clearRow + list.map(({m,i}) => `
     <div class="move-item" data-idx="${i}">
-      <span class="mi-type" style="background:${TYPE_COLORS[m.type]||'#888'}">${m.type}</span>
-      <span class="mi-name">${m.name}</span>
-      <span class="mi-cat">${m.category}</span>
+      <span class="mi-type" style="background:${TYPE_COLORS[m.type]||'#888'}">${term('types', m.type)}</span>
+      <span class="mi-name">${term('moves', m.name)}</span>
+      <span class="mi-cat">${CAT_I18N_M[m.category]||m.category}</span>
       <span class="mi-pow">${m.power??'—'}</span>
       <span class="mi-acc">${m.accuracy?m.accuracy+'%':'—'}</span>
-      <span class="mi-desc">${typeof MOVE_DESCS!=='undefined'?MOVE_DESCS?.[m.name]||'':''}</span>
+      <span class="mi-desc">${termDesc('moves', m.name, (typeof MOVE_DESCS!=='undefined'?MOVE_DESCS?.[m.name]:'')||'')}</span>
     </div>`).join('');
 }
 
@@ -1095,19 +1219,19 @@ function closeItemModal() { document.getElementById('itemModal').classList.remov
 
 function renderItemGrid(q) {
   let list = (ITEM_DATA||[]).map((it,i) => ({it,i}));
-  if (q) list = list.filter(({it}) => it.name.includes(q));
+  if (q) list = list.filter(({it}) => matchTermQuery('items',it.name,q));
   if (addItemFilter === '포챔스') list = list.filter(({it}) => POCHAMS_ITEM_NAMES?.has(it.name));
   else if (addItemFilter !== 'all') list = list.filter(({it}) => it.category === addItemFilter);
   const clearCard = `<div class="item-card" data-idx="-1" style="border-color:#e53935">
     <div class="item-no-img" style="font-size:20px">✕</div>
-    <div class="item-name" style="color:#e53935">도구 없음</div>
-    <div class="item-cat-badge">해제</div>
+    <div class="item-name" style="color:#e53935">${t('item_none')}</div>
+    <div class="item-cat-badge">${t('release')}</div>
   </div>`;
   document.getElementById('itemGrid').innerHTML = clearCard + list.map(({it,i}) => `
     <div class="item-card" data-idx="${i}">
-      ${it.sprite ? `<img src="${it.sprite}" alt="${it.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="item-no-img" style="display:none">🎒</div>` : '<div class="item-no-img">🎒</div>'}
-      <div class="item-name">${it.name}</div>
-      <div class="item-cat-badge">${it.category}</div>
+      ${it.sprite ? `<img src="${it.sprite}" alt="${term('items', it.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="item-no-img" style="display:none">🎒</div>` : '<div class="item-no-img">🎒</div>'}
+      <div class="item-name">${term('items', it.name)}</div>
+      <div class="item-cat-badge">${itemCat(it.category)}</div>
     </div>`).join('');
 }
 
@@ -1128,7 +1252,7 @@ document.getElementById('itemGrid').addEventListener('mouseover', e => {
   const it = ITEM_DATA[+card.dataset.idx];
   if (!it || !it.effect) return;
   const ep = document.getElementById('itemEffectPanel');
-  ep.innerHTML = `<strong>${it.name}</strong>　${it.effect}`;
+  ep.innerHTML = `<strong>${term('items', it.name)}</strong>　${termDesc('items', it.name, it.effect)}`;
   ep.classList.add('show');
 });
 document.getElementById('itemGrid').addEventListener('mouseout', e => {
@@ -1150,20 +1274,20 @@ function openAbilityModal() {
   const pk = addPokemon;
   if (!pk) return;
   const abd = ABILITY_DATA?.[pk.name];
-  document.getElementById('abilityModalTitle').textContent = `특성 선택 — ${pk.name}`;
+  document.getElementById('abilityModalTitle').textContent = `${t('select_ability_title')} — ${pokeName(pk.name, pk.no)}`;
   const list = document.getElementById('abilityList');
   if (!abd) {
     _addAbilList = [];
-    list.innerHTML = '<div style="color:#aaa;font-size:13px;padding:12px">특성 데이터 없음</div>';
+    list.innerHTML = `<div style="color:#aaa;font-size:13px;padding:12px">${t('no_ability_data')}</div>`;
   } else {
     _addAbilList = [...(abd.normal||[]).map(a=>({...a,tag:'일반'}))];
     if (abd.hidden?.name) _addAbilList.push({...abd.hidden, tag:'숨겨진 특성'});
     const cur = addAbility?.name||'';
     list.innerHTML = _addAbilList.map((a,i) => `
       <div class="ability-item${a.name===cur?' selected':''}" data-i="${i}">
-        <span class="ab-name">${a.name}</span>
-        <span class="ab-desc">${a.desc||''}</span>
-        <span class="ab-tag${a.tag==='숨겨진 특성'?' hidden-tag':''}">${a.tag}</span>
+        <span class="ab-name">${term('abilities', a.name)}</span>
+        <span class="ab-desc">${termDesc('abilities', a.name, a.desc||'')}</span>
+        <span class="ab-tag${a.tag==='숨겨진 특성'?' hidden-tag':''}">${a.tag==='일반'?t('ability_tag_normal'):t('ability_tag_hidden')}</span>
       </div>`).join('');
   }
   document.getElementById('abilityModal').classList.add('open');
@@ -1182,22 +1306,23 @@ document.getElementById('abilityModal').addEventListener('click', e => { if(e.ta
 /* ── Nature Modal ── */
 function buildNatureTable(curNature) {
   const rows = NAT_STATS, cols = NAT_STATS;
+  const NAT_LABELS_I18N = {A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
   const natGrid = {};
   rows.forEach(r => { natGrid[r] = {}; cols.forEach(c => natGrid[r][c] = null); });
   NATURES.forEach(n => { if (n.up && n.dn) natGrid[n.up][n.dn] = n; });
   const neutralByRow = {};
   NATURES.filter(n=>!n.up).forEach((n,i) => { neutralByRow[rows[i]] = n; });
 
-  let html = `<thead><tr><th></th>${cols.map(c=>`<th class="col-lbl">▼${NAT_LABELS[c]}</th>`).join('')}</tr></thead><tbody>`;
+  let html = `<thead><tr><th></th>${cols.map(c=>`<th class="col-lbl">▼${NAT_LABELS_I18N[c]}</th>`).join('')}</tr></thead><tbody>`;
   rows.forEach((r,ri) => {
-    html += `<tr><th class="row-lbl">▲${NAT_LABELS[r]}</th>`;
+    html += `<tr><th class="row-lbl">▲${NAT_LABELS_I18N[r]}</th>`;
     cols.forEach(c => {
       if (r===c) {
         const n = neutralByRow[r] || NATURES.filter(n=>!n.up)[ri];
-        html += `<td class="nat-neutral${curNature?.name===n?.name?' nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?.name||'-'}</td>`;
+        html += `<td class="nat-neutral${curNature?.name===n?.name?' nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?term('natures', n.name):'-'}</td>`;
       } else {
         const n = natGrid[r][c];
-        html += `<td class="${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?.name||'?'}</td>`;
+        html += `<td class="${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?term('natures', n.name):'?'}</td>`;
       }
     });
     html += '</tr>';
@@ -1245,44 +1370,101 @@ document.getElementById('natureModal').addEventListener('click', e => {
 <div class="set-overlay" id="setOverlay">
   <div class="set-box">
     <div class="set-head">
-      <span class="set-title">⚙ 설정</span>
+      <span class="set-title" id="setTitleLbl">⚙ 설정</span>
       <button class="set-x" id="setCloseBtn">✕</button>
     </div>
     <div class="set-section">
-      <div class="set-lbl">언어</div>
-      <select class="set-sel" disabled><option selected>한국어</option></select>
+      <div class="set-lbl" id="setLangLbl">언어</div>
+      <select class="set-sel" id="setLangSel">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">테마</div>
-      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+      <div class="set-lbl" id="setThemeLbl">테마</div>
+      <select class="set-sel" disabled><option selected id="setThemeOpt">메타몽 테마 (기본)</option></select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">데이터 관리</div>
+      <div class="set-lbl" id="setDataMgmtLbl">데이터 관리</div>
       <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
-      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+      <div class="set-desc" id="setClearDesc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
     </div>
     <div class="set-section">
-      <div class="set-lbl">문의 / 버그 리포트</div>
+      <div class="set-lbl" id="setContactLbl">문의 / 버그 리포트</div>
       <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
     </div>
   </div>
 </div>
+<script>
+/* i18n 핵심 함수(I18N/LANG/loadI18n/pokeName/term/t)는 파일 상단으로 이동됨 */
+function applyNavSettingsLabels() {
+  const navMap = { navParty: 'nav_party', navBox: 'nav_box', navMeta: 'nav_meta', navDex: 'nav_dex' };
+  for (const id in navMap) { const el = document.getElementById(id); if (el) el.textContent = t(navMap[id]); }
+  const navSettingsBtn = document.getElementById('navSettingsBtn');
+  if (navSettingsBtn) navSettingsBtn.title = t('settings_btn_title');
+  const setMap = {
+    setTitleLbl: 'settings_title', setLangLbl: 'lang_lbl', setThemeLbl: 'theme_lbl',
+    setThemeOpt: 'theme_default', setDataMgmtLbl: 'data_mgmt_lbl', setClearBtn: 'clear_btn',
+    setClearDesc: 'clear_desc', setContactLbl: 'contact_lbl',
+  };
+  for (const id in setMap) { const el = document.getElementById(id); if (el) el.textContent = t(setMap[id]); }
+  const staticMap = {
+    boxHomeLink: 'back_to_box_home', clearBtn: 'clear_all_btn', mobBoxAd: 'ad_label',
+    pokeModalTitle: 'select_pokemon_title', moveModalTitle: 'select_move_title',
+    itemModalTitle: 'select_item_title', abilityModalTitle: 'select_ability_title',
+    natureModalTitle: 'select_nature_title', natureTableHint: 'nature_table_hint',
+  };
+  for (const id in staticMap) { const el = document.getElementById(id); if (el) el.textContent = t(staticMap[id]); }
+  const pokeSearch = document.getElementById('pokeSearch');
+  if (pokeSearch) pokeSearch.placeholder = t('search_by_name_placeholder');
+  const moveSearch = document.getElementById('moveSearch');
+  if (moveSearch) moveSearch.placeholder = t('move_name_search_placeholder');
+  const itemSearch = document.getElementById('itemSearch');
+  if (itemSearch) itemSearch.placeholder = t('item_name_search_placeholder');
+  document.querySelectorAll('#pokeFilterRow .f-btn').forEach(b => {
+    b.textContent = b.dataset.f === 'all' ? t('all') : t('champions_legal');
+  });
+  document.querySelectorAll('#moveFilterRow .f-btn').forEach(b => {
+    const mf = b.dataset.mf;
+    b.textContent = mf === 'all' ? t('all') : mf === '물리' ? t('cat_physical') : mf === '특수' ? t('cat_special') : t('cat_status');
+  });
+  document.querySelectorAll('#itemFilterRow .f-btn').forEach(b => {
+    const f = b.dataset.if;
+    b.textContent = f === 'all' ? t('all') : f === '포챔스' ? t('champions_legal') : itemCat(f);
+  });
+  if (typeof buildTypeFilterRow === 'function') buildTypeFilterRow();
+  if (typeof renderGrid === 'function') renderGrid(false);
+  if (typeof renderBuilder === 'function' && typeof addPokemon !== 'undefined' && addPokemon) renderBuilder();
+}
+
+loadI18n().then(applyNavSettingsLabels);
+</script>
 <script>
 (function initSettingsModal() {
   const overlay = document.getElementById('setOverlay');
   const logo = document.querySelector('.nav-logo');
   const closeBtn = document.getElementById('setCloseBtn');
   const clearBtn = document.getElementById('setClearBtn');
+  const langSel = document.getElementById('setLangSel');
   if (!overlay || !logo) return;
-  logo.addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('navSettingsBtn')?.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
   clearBtn?.addEventListener('click', () => {
-    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    if (!confirm(t('confirm_clear_all_data'))) return;
     Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
-    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    alert(t('alert_data_cleared'));
     location.reload();
   });
+  if (langSel) {
+    langSel.value = localStorage.getItem('lang') || 'ko';
+    langSel.addEventListener('change', () => {
+      localStorage.setItem('lang', langSel.value);
+      LANG = langSel.value;
+      applyNavSettingsLabels();
+    });
+  }
 })();
 </script>
 </body>

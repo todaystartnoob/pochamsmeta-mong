@@ -45,6 +45,8 @@
     .nav-links{display:flex;gap:6px;}
     .nav-links a{text-decoration:none;color:#444;font-size:14px;padding:5px 14px;border-radius:6px;transition:background .2s,color .2s;}
     .nav-links a:hover{background:#ede0f5;color:var(--accent);}
+    .nav-settings-btn{background:none;border:none;font-size:17px;cursor:pointer;color:#777;padding:4px 9px;border-radius:6px;transition:background .15s,color .15s;margin-left:2px;line-height:1;}
+    .nav-settings-btn:hover{background:#ede0f5;color:#7b3fa0;}
     .nav-links a.active{background:#d4b8e8;color:#4a1d8a;font-weight:600;}
 
     /* PAGE LAYOUT */
@@ -279,7 +281,8 @@
     .set-section{margin-bottom:16px;}
     .set-section:last-child{margin-bottom:0;}
     .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
-    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:pointer;}
+    .set-sel:disabled{cursor:not-allowed;}
     .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
     .set-danger-btn:hover{background:#ffe5e5;}
     .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
@@ -292,10 +295,11 @@
 <nav class="navbar">
   <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
-    <a href="index.html">파티 구성</a>
-    <a href="pokemon-box.html">포켓몬 박스</a>
-    <a href="meta-usage.html" class="active">메타 사용률</a>
-    <a href="pokedex.html">포켓몬 도감</a>
+    <a href="index.html" id="navParty">파티 구성</a>
+    <a href="pokemon-box.html" id="navBox">포켓몬 박스</a>
+    <a href="meta-usage.html" class="active" id="navMeta">메타 사용률</a>
+    <a href="pokedex.html" id="navDex">포켓몬 도감</a>
+    <button class="nav-settings-btn" id="navSettingsBtn" title="Settings">⚙</button>
   </div>
 </nav>
 
@@ -309,19 +313,19 @@
         <button class="rule-btn active" data-rule="single">싱글</button>
         <button class="rule-btn" data-rule="double">더블</button>
       </div>
-      <span class="data-src">출처: champs.pokedb.tokyo</span>
+      <span class="data-src" id="dataSrcLabel">출처: champs.pokedb.tokyo</span>
     </div>
 
     <div class="mob-meta-tab-bar">
-      <button class="mob-meta-tab-btn active" data-tab="usage">포켓몬 순위</button>
-      <button class="mob-meta-tab-btn" data-tab="teams">순위권 파티</button>
+      <button class="mob-meta-tab-btn active" data-tab="usage" id="mobTabUsageBtn">포켓몬 순위</button>
+      <button class="mob-meta-tab-btn" data-tab="teams" id="mobTabTeamsBtn">순위권 파티</button>
     </div>
     <div id="contentRow">
       <div id="metaSlider">
         <div class="meta-panel" id="usagePanel">
           <div class="panel-header">
             <div class="panel-header-left">
-              <div class="panel-title">포켓몬 사용 순위</div>
+              <div class="panel-title" id="usagePanelTitle">포켓몬 사용 순위</div>
               <div class="panel-sub" id="usageSub">불러오는 중...</div>
             </div>
             <div class="usage-filter">
@@ -337,7 +341,7 @@
 
         <div class="meta-panel" id="teamsPanel">
           <div class="panel-header">
-            <div class="panel-title">포챔스 순위권 파티</div>
+            <div class="panel-title" id="teamsPanelTitle">포챔스 순위권 파티</div>
             <div class="panel-sub" id="teamsSub">불러오는 중...</div>
           </div>
           <div class="panel-body" id="teamsBody">
@@ -509,8 +513,115 @@ let mainData = null;
 let setsData = null;
 let selectedUsageIdx = -1;
 
+/* ── i18n (한/영/일) ── */
+let I18N = null;
+let LANG = localStorage.getItem('lang') || 'ko';
+
+async function loadI18n() {
+  try { I18N = await fetch('i18n_names.json').then(r => r.json()); }
+  catch (e) { console.error('i18n_names.json fetch 실패:', e); I18N = null; }
+}
+
+/* 한국어 완성 명칭(폼 포함) → 선택 언어. dexNo로 종 기본명을 찾고, forms 사전에 있는 폼 키워드만 치환 */
+function pokeName(koName, dexNo) {
+  if (LANG === 'ko' || !I18N || !koName) return koName;
+  const p = I18N.pokemon[String(dexNo)];
+  if (!p) return koName;
+  const base = p[LANG] || p.ko;
+  let result = koName.split(p.ko).join(base);
+  /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
+  const suffixMatch = result.match(/\(([^)]+)\)$/);
+  if (suffixMatch) {
+    const formKo = suffixMatch[1];
+    const src = I18N.forms[formKo] || I18N.types[formKo];
+    const formTrans = src && src[LANG];
+    if (formTrans) result = result.slice(0, suffixMatch.index) + '(' + formTrans + ')';
+  }
+  for (const formKo in I18N.forms) {
+    if (result.includes(formKo)) {
+      const f = (I18N.forms[formKo][LANG] || formKo) + ' ';
+      result = result.split(formKo).join(f);
+    }
+  }
+  return result.replace(/\s+/g, ' ').trim();
+}
+
+/* 기술/특성/도구/성격/타입: 한국어 문자열 → 선택 언어 (없으면 한국어 폴백) */
+const LOC_MAP_FIELD = {items:'item_ja2ko', abilities:'ability_ja2ko', moves:'move_ja2ko', natures:'nature_ja2ko'};
+function normKoName(category, koName) {
+  if (typeof CHAMPIONS_LOC_MAP !== 'undefined') {
+    const field = LOC_MAP_FIELD[category];
+    const fixed = field && CHAMPIONS_LOC_MAP[field]?.[koName];
+    if (fixed) return fixed;
+  }
+  return koName;
+}
+function term(category, koName) {
+  if (!koName) return koName;
+  koName = normKoName(category, koName);
+  if (LANG === 'ko' || !I18N) return koName;
+  const m = I18N[category]?.[koName];
+  return (m && m[LANG]) || koName;
+}
+function termDesc(category, koName, koDesc) {
+  if (LANG === 'ko' || !koName || !I18N) return koDesc;
+  koName = normKoName(category, koName);
+  const m = I18N[category]?.[koName];
+  if (!m) return koDesc;
+  const d = LANG === 'en' ? m.descEn : LANG === 'ja' ? m.descJa : null;
+  return d || koDesc;
+}
+
+/* UI 라벨 */
+function t(key, vars) {
+  if (!I18N) return key;
+  const e = I18N.ui[key];
+  let s = (e && (e[LANG] || e.ko)) || key;
+  if (vars) for (const k in vars) s = s.replace(`{${k}}`, vars[k]);
+  return s;
+}
+
+function applyUILabels() {
+  document.querySelectorAll('[data-rule="single"]').forEach(el => el.textContent = t('single'));
+  document.querySelectorAll('[data-rule="double"]').forEach(el => el.textContent = t('double'));
+  document.querySelectorAll('[data-view="normal"]').forEach(el => el.textContent = t('all'));
+  document.querySelectorAll('[data-view="mega"]').forEach(el => el.textContent = t('mega'));
+  const usageTitle = document.getElementById('usagePanelTitle');
+  if (usageTitle) usageTitle.textContent = t('pokemon_usage');
+  const teamsTitle = document.getElementById('teamsPanelTitle');
+  if (teamsTitle) teamsTitle.textContent = t('ranker_parties');
+  const srcLbl = document.getElementById('dataSrcLabel');
+  if (srcLbl) srcLbl.textContent = `${t('source')}: champs.pokedb.tokyo`;
+
+  const navMap = { navParty: 'nav_party', navBox: 'nav_box', navMeta: 'nav_meta', navDex: 'nav_dex' };
+  for (const id in navMap) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t(navMap[id]);
+  }
+  const navSettingsBtn = document.getElementById('navSettingsBtn');
+  if (navSettingsBtn) navSettingsBtn.title = t('settings_btn_title');
+  const mobTabUsageBtn = document.getElementById('mobTabUsageBtn');
+  if (mobTabUsageBtn) mobTabUsageBtn.textContent = t('mob_tab_usage');
+  const mobTabTeamsBtn = document.getElementById('mobTabTeamsBtn');
+  if (mobTabTeamsBtn) mobTabTeamsBtn.textContent = t('mob_tab_teams');
+
+  const setMap = {
+    setTitleLbl: 'settings_title', setLangLbl: 'lang_lbl', setThemeLbl: 'theme_lbl',
+    setThemeOpt: 'theme_default', setDataMgmtLbl: 'data_mgmt_lbl', setClearBtn: 'clear_btn',
+    setClearDesc: 'clear_desc', setContactLbl: 'contact_lbl',
+  };
+  for (const id in setMap) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t(setMap[id]);
+  }
+
+  if (typeof renderSeasonTabs === 'function' && seasons.length) renderSeasonTabs();
+}
+
 async function init() {
   setLoading();
+  await loadI18n();
+  applyUILabels();
   try {
     const idx = await ghFetch('data/index.json');
     const seen = new Map();
@@ -540,7 +651,7 @@ function renderSeasonTabs() {
   el.innerHTML = '';
   const sel = document.createElement('select');
   sel.className = 'season-select';
-  sel.innerHTML = seasons.map(s => `<option value="${s.number}"${s.number === curSeason ? ' selected' : ''}>시즌 ${s.number}</option>`).join('');
+  sel.innerHTML = seasons.map(s => `<option value="${s.number}"${s.number === curSeason ? ' selected' : ''}>${t('season')} ${s.number}</option>`).join('');
   sel.addEventListener('change', () => {
     const n = parseInt(sel.value);
     if (curSeason === n) return;
@@ -602,8 +713,8 @@ async function loadData() {
 }
 
 function setLoading() {
-  document.getElementById('usageBody').innerHTML = '<div class="panel-msg">불러오는 중...</div>';
-  document.getElementById('teamsBody').innerHTML = '<div class="panel-msg">불러오는 중...</div>';
+  document.getElementById('usageBody').innerHTML = `<div class="panel-msg">${t('loading')}</div>`;
+  document.getElementById('teamsBody').innerHTML = `<div class="panel-msg">${t('loading')}</div>`;
   document.getElementById('usageSub').textContent = '';
   document.getElementById('teamsSub').textContent = '';
 }
@@ -721,7 +832,7 @@ function renderUsage() {
   const pager = document.getElementById('usagePager');
 
   if (!mainData?.usage?.length) {
-    body.innerHTML = '<div class="panel-msg">데이터가 없습니다</div>';
+    body.innerHTML = `<div class="panel-msg">${t('no_data')}</div>`;
     sub.textContent = '';
     pager.innerHTML = '';
     return;
@@ -733,7 +844,7 @@ function renderUsage() {
     : buildFullUsageList(mainData.usage);
 
   const totalPages = Math.ceil(usage.length / PAGE_SIZE);
-  sub.textContent = isMega ? `메가진화 ${usage.length}종` : `총 ${usage.length}종`;
+  sub.textContent = isMega ? `${t('mega')} ${t('total_n', {n: usage.length})}` : t('total_n', {n: usage.length});
   body.innerHTML = '';
   body.scrollTop = 0;
 
@@ -753,10 +864,11 @@ function renderUsage() {
     else rankHtml = `<span class="${i < 10 ? 'rank-top' : ''}">${rankNum}</span>`;
 
     // 메가 탭: _megaName 우선, 일반 탭: usageDisplayName
-    const displayName = isMega ? (u._megaName || u.name) : usageDisplayName(u);
-    const bs = getBaseStats(displayName) || getBaseStats(u.name);
+    const koDisplayName = isMega ? (u._megaName || u.name) : usageDisplayName(u);
+    const displayName = pokeName(koDisplayName, no);
+    const bs = getBaseStats(koDisplayName) || getBaseStats(u.name);
     const typeBadges = bs
-      ? [bs.type1, bs.type2].filter(Boolean).map(t => `<span class="type-badge" style="background:${typeColor(t)}">${t}</span>`).join('')
+      ? [bs.type1, bs.type2].filter(Boolean).map(tp => `<span class="type-badge" style="background:${typeColor(tp)}">${term('types', tp)}</span>`).join('')
       : '';
 
     // 메가 탭: 스프라이트는 megaName으로, 일반 탭: usageSpriteUrl
@@ -766,8 +878,8 @@ function renderUsage() {
 
     // 메가 탭 하위 텍스트: "기반 사용률 X% × 채용률 Y%"
     const subLine = isMega
-      ? `<div class="usage-moves"><span style="font-size:10px;color:#999">${u._stoneName} ${u._stoneRate.toFixed(1)}%</span></div>`
-      : `<div class="usage-moves">${moves.map(m => `<span class="move-chip">${m}</span>`).join('')}</div>`;
+      ? `<div class="usage-moves"><span style="font-size:10px;color:#999">${term('items', u._stoneName)} ${u._stoneRate.toFixed(1)}%</span></div>`
+      : `<div class="usage-moves">${moves.map(m => `<span class="move-chip">${term('moves', m)}</span>`).join('')}</div>`;
 
     const row = document.createElement('div');
     row.className = 'usage-row' + (i === selectedUsageIdx ? ' selected' : '');
@@ -788,9 +900,9 @@ function renderUsage() {
 
   if (totalPages > 1) {
     pager.innerHTML = `
-      <button class="pager-btn" id="pgPrev" ${usagePage === 0 ? 'disabled' : ''}>◀ 이전</button>
+      <button class="pager-btn" id="pgPrev" ${usagePage === 0 ? 'disabled' : ''}>◀ ${t('prev')}</button>
       <span class="pager-info">${usagePage + 1} / ${totalPages}</span>
-      <button class="pager-btn" id="pgNext" ${usagePage >= totalPages - 1 ? 'disabled' : ''}>다음 ▶</button>`;
+      <button class="pager-btn" id="pgNext" ${usagePage >= totalPages - 1 ? 'disabled' : ''}>${t('next')} ▶</button>`;
     pager.querySelector('#pgPrev').addEventListener('click', () => { usagePage--; renderUsage(); });
     pager.querySelector('#pgNext').addEventListener('click', () => { usagePage++; renderUsage(); });
   } else {
@@ -807,8 +919,8 @@ function renderTeams() {
   if (!mainData?.teams?.length) {
     const isCrawl = !!mainData?.source?.includes?.('crawl');
     body.innerHTML = isCrawl
-      ? '<div class="panel-msg">랭커 파티는 시즌 시작 1주일 후 공개됩니다</div>'
-      : '<div class="panel-msg">데이터가 없습니다</div>';
+      ? `<div class="panel-msg">${t('teams_wait')}</div>`
+      : `<div class="panel-msg">${t('no_data')}</div>`;
     sub.textContent = '';
     pager.innerHTML = '';
     return;
@@ -826,23 +938,24 @@ function renderTeams() {
   const grid = document.createElement('div');
   grid.className = 'teams-grid';
 
-  pageItems.forEach(t => {
+  pageItems.forEach(tm => {
     const card = document.createElement('div');
     card.className = 'team-card';
 
-    const rankBadgeClass = t.rank === 1 ? 'r1' : t.rank === 2 ? 'r2' : t.rank === 3 ? 'r3' : '';
-    const rankLabel = t.rank === 1 ? '🥇 1위' : t.rank === 2 ? '🥈 2위' : t.rank === 3 ? '🥉 3위' : `#${t.rank}위`;
+    const rankBadgeClass = tm.rank === 1 ? 'r1' : tm.rank === 2 ? 'r2' : tm.rank === 3 ? 'r3' : '';
+    const rankLabel = tm.rank === 1 ? '🥇 1위' : tm.rank === 2 ? '🥈 2위' : tm.rank === 3 ? '🥉 3위' : `#${tm.rank}위`;
 
-    const spritesHtml = (t.team || []).slice(0, 6).map(pk => {
+    const spritesHtml = (tm.team || []).slice(0, 6).map(pk => {
       const tc = typeColor(pk.terastal);
-      const dispName = teamDisplayName(pk);
+      const koDispName = teamDisplayName(pk);
+      const dispName = pokeName(koDispName, idToNo(pk.id));
       const itemSprite = pk.item ? (typeof ITEM_DATA !== 'undefined' ? ITEM_DATA.find(it => it.name === pk.item)?.sprite : null) : null;
       return `<div class="team-sprite-wrap">
         <div class="team-sprite-img-box">
           <img src="${teamSpriteUrl(pk)}" alt="${dispName}" loading="lazy">
-          ${itemSprite ? `<img class="team-item-icon" src="${itemSprite}" alt="${pk.item}" title="${pk.item}" loading="lazy">` : ''}
+          ${itemSprite ? `<img class="team-item-icon" src="${itemSprite}" alt="${term('items', pk.item)}" title="${term('items', pk.item)}" loading="lazy">` : ''}
         </div>
-        ${pk.terastal ? `<span class="tera-badge" style="background:${tc}">${pk.terastal}</span>` : ''}
+        ${pk.terastal ? `<span class="tera-badge" style="background:${tc}">${term('types', pk.terastal)}</span>` : ''}
         <div class="team-poke-name">${dispName}</div>
       </div>`;
     }).join('');
@@ -850,7 +963,7 @@ function renderTeams() {
     card.innerHTML = `
       <div class="team-card-header">
         <span class="team-rank-badge ${rankBadgeClass}">${rankLabel}</span>
-        <span class="team-rating">★ ${(t.rating || 0).toLocaleString()}</span>
+        <span class="team-rating">★ ${(tm.rating || 0).toLocaleString()}</span>
       </div>
       <div class="team-sprites">${spritesHtml}</div>`;
 
@@ -861,9 +974,9 @@ function renderTeams() {
 
   if (totalPages > 1) {
     pager.innerHTML = `
-      <button class="pager-btn" id="tpPrev" ${teamsPage === 0 ? 'disabled' : ''}>◀ 이전</button>
+      <button class="pager-btn" id="tpPrev" ${teamsPage === 0 ? 'disabled' : ''}>◀ ${t('prev')}</button>
       <span class="pager-info">${teamsPage + 1} / ${totalPages}</span>
-      <button class="pager-btn" id="tpNext" ${teamsPage >= totalPages - 1 ? 'disabled' : ''}>다음 ▶</button>`;
+      <button class="pager-btn" id="tpNext" ${teamsPage >= totalPages - 1 ? 'disabled' : ''}>${t('next')} ▶</button>`;
     pager.querySelector('#tpPrev').addEventListener('click', () => { teamsPage--; renderTeams(); });
     pager.querySelector('#tpNext').addEventListener('click', () => { teamsPage++; renderTeams(); });
   } else {
@@ -877,12 +990,14 @@ function getBaseStats(name) {
   return POKEMON_DATA.find(p => p.name === name) || null;
 }
 
-function makeBarRows(arr) {
+function makeBarRows(arr, category) {
   if (!arr?.length) return '';
   return arr.map(item => {
     const pct = Math.min(100, item.rate ?? 0);
+    const koName = translateName(item.name);
+    const label = category ? term(category, koName) : koName;
     return `<div class="dc-bar-row">
-      <div class="dc-bar-label">${translateName(item.name)}</div>
+      <div class="dc-bar-label">${label}</div>
       <div class="dc-bar"><div class="dc-bar-fill" style="width:${pct.toFixed(1)}%"></div></div>
       <div class="dc-bar-pct">${(item.rate ?? 0).toFixed(1)}%</div>
     </div>`;
@@ -896,14 +1011,15 @@ function openDetail(idx, u) {
   const pk = setsData?.pokemon?.find(p => p.id === u.id);
   const no = idToNo(u.id);
   const content = document.getElementById('detailContent');
-  const dname = usageDisplayName(u);
-  const bs = getBaseStats(dname) || getBaseStats(u.name);
+  const koDname = usageDisplayName(u);
+  const dname = pokeName(koDname, no);
+  const bs = getBaseStats(koDname) || getBaseStats(u.name);
 
   // 종족값
   const statKeys = ['H','A','B','C','D','S'];
   const statsHtml = bs
     ? `<div class="dc-stats-wrap">
-        <div class="dc-stats-label">종족값</div>
+        <div class="dc-stats-label">${t('base_stats')}</div>
         <div class="dc-stats">${statKeys.map(k => `<div class="dc-stat-cell"><span class="dc-stat-k">${k}</span><span class="dc-stat-v">${bs[k] ?? '?'}</span></div>`).join('')}</div>
        </div>`
     : '';
@@ -914,42 +1030,42 @@ function openDetail(idx, u) {
       <div class="dc-sprite"><img src="${usageSpriteUrl(u, no)}" alt="${dname}"></div>
       <div class="dc-info">
         <div class="dc-name">${dname}</div>
-        <div class="dc-rate">${Number.isFinite(u.rate) ? `사용률 ${u.rate.toFixed(1)}% · ` : ''}${idx + 1}위</div>
+        <div class="dc-rate">${Number.isFinite(u.rate) ? `${t('usage_rate')} ${u.rate.toFixed(1)}% · ` : ''}${LANG === 'ko' ? `${idx + 1}위` : `#${idx + 1}`}</div>
         ${statsHtml}
       </div>
     </div>`;
 
   if (!pk) {
-    const lookupName = dname;
+    const lookupName = koDname;
     const abilityData = (typeof ABILITY_DATA !== 'undefined') && (ABILITY_DATA[lookupName] || ABILITY_DATA[u.name]);
     const learnset = (typeof LEARNSET_DATA !== 'undefined') && (LEARNSET_DATA[lookupName] || LEARNSET_DATA[u.name]);
 
     let abHtml = '';
     if (abilityData) {
       (abilityData.normal || []).forEach(a => {
-        abHtml += `<div class="dc-bar-row"><div style="font-size:13px;color:#2d1a45">${a.name}</div></div>`;
+        abHtml += `<div class="dc-bar-row"><div style="font-size:13px;color:#2d1a45">${term('abilities', a.name)}</div></div>`;
       });
       if (abilityData.hidden) {
-        abHtml += `<div class="dc-bar-row" style="margin-top:4px"><div style="font-size:12px;color:#9b59b6">${abilityData.hidden.name} <span style="font-size:10px;color:#bbb">(숨겨진)</span></div></div>`;
+        abHtml += `<div class="dc-bar-row" style="margin-top:4px"><div style="font-size:12px;color:#9b59b6">${term('abilities', abilityData.hidden.name)} <span style="font-size:10px;color:#bbb">(${t('hidden_ability')})</span></div></div>`;
       }
     } else {
-      abHtml = '<div style="color:#ccc;font-size:12px">데이터 없음</div>';
+      abHtml = `<div style="color:#ccc;font-size:12px">${t('no_data_short')}</div>`;
     }
 
     const moveChips = learnset?.length
-      ? learnset.map(m => `<span class="move-chip">${m}</span>`).join('')
-      : '<div style="color:#ccc;font-size:12px">데이터 없음</div>';
+      ? learnset.map(m => `<span class="move-chip">${term('moves', m)}</span>`).join('')
+      : `<div style="color:#ccc;font-size:12px">${t('no_data_short')}</div>`;
 
     content.innerHTML = `<div class="dc-wrap">
       <div class="dc-left">
         ${topHtml}
         <div class="dc-panels">
           <div class="dc-panel">
-            <div class="dc-panel-title">특성</div>
+            <div class="dc-panel-title">${t('ability')}</div>
             <div class="dc-panel-body">${abHtml}</div>
           </div>
           <div class="dc-panel" style="grid-column:1/-1;grid-row:2">
-            <div class="dc-panel-title">배울 수 있는 기술</div>
+            <div class="dc-panel-title">${t('learnable_moves')}</div>
             <div class="dc-panel-body" style="display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start">${moveChips}</div>
           </div>
         </div>
@@ -989,11 +1105,11 @@ function openDetail(idx, u) {
           <div class="ev-spread-bar"><div class="ev-spread-bar-fill" style="width:${pct}%"></div></div>
           <span class="ev-spread-pct">${(ev.rate ?? 0).toFixed(1)}%</span>
         </div>
-        <div class="ev-chips">${chips || '<span style="color:#ccc;font-size:10px">없음</span>'}</div>
+        <div class="ev-chips">${chips || `<span style="color:#ccc;font-size:10px">${t('none')}</span>`}</div>
       </div>`;
     }
   } else {
-    evHtml = '<div style="color:#ccc;font-size:12px">데이터 없음</div>';
+    evHtml = `<div style="color:#ccc;font-size:12px">${t('no_data_short')}</div>`;
   }
 
   content.innerHTML = `
@@ -1002,25 +1118,25 @@ function openDetail(idx, u) {
         ${topHtml}
         <div class="dc-panels">
           <div class="dc-panel">
-            <div class="dc-panel-title">주요 기술</div>
-            <div class="dc-panel-body">${makeBarRows(pk.moves)}</div>
+            <div class="dc-panel-title">${t('moves')}</div>
+            <div class="dc-panel-body">${makeBarRows(pk.moves, 'moves')}</div>
           </div>
           <div class="dc-panel">
-            <div class="dc-panel-title">도구</div>
-            <div class="dc-panel-body">${makeBarRows(pk.items)}</div>
+            <div class="dc-panel-title">${t('item')}</div>
+            <div class="dc-panel-body">${makeBarRows(pk.items, 'items')}</div>
           </div>
           <div class="dc-panel">
-            <div class="dc-panel-title">특성</div>
-            <div class="dc-panel-body">${makeBarRows(pk.abilities)}</div>
+            <div class="dc-panel-title">${t('ability')}</div>
+            <div class="dc-panel-body">${makeBarRows(pk.abilities, 'abilities')}</div>
           </div>
           <div class="dc-panel">
-            <div class="dc-panel-title">성격</div>
-            <div class="dc-panel-body">${makeBarRows(pk.natures)}</div>
+            <div class="dc-panel-title">${t('nature')}</div>
+            <div class="dc-panel-body">${makeBarRows(pk.natures, 'natures')}</div>
           </div>
         </div>
       </div>
       <div class="dc-right">
-        <div class="dc-right-title">노력치</div>
+        <div class="dc-right-title">${t('evs')}</div>
         ${evHtml}
       </div>
     </div>`;
@@ -1087,24 +1203,28 @@ init();
 <div class="set-overlay" id="setOverlay">
   <div class="set-box">
     <div class="set-head">
-      <span class="set-title">⚙ 설정</span>
+      <span class="set-title" id="setTitleLbl">⚙ 설정</span>
       <button class="set-x" id="setCloseBtn">✕</button>
     </div>
     <div class="set-section">
-      <div class="set-lbl">언어</div>
-      <select class="set-sel" disabled><option selected>한국어</option></select>
+      <div class="set-lbl" id="setLangLbl">언어</div>
+      <select class="set-sel" id="setLangSel">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">테마</div>
-      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+      <div class="set-lbl" id="setThemeLbl">테마</div>
+      <select class="set-sel" disabled><option selected id="setThemeOpt">메타몽 테마 (기본)</option></select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">데이터 관리</div>
+      <div class="set-lbl" id="setDataMgmtLbl">데이터 관리</div>
       <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
-      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+      <div class="set-desc" id="setClearDesc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
     </div>
     <div class="set-section">
-      <div class="set-lbl">문의 / 버그 리포트</div>
+      <div class="set-lbl" id="setContactLbl">문의 / 버그 리포트</div>
       <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
     </div>
   </div>
@@ -1115,16 +1235,29 @@ init();
   const logo = document.querySelector('.nav-logo');
   const closeBtn = document.getElementById('setCloseBtn');
   const clearBtn = document.getElementById('setClearBtn');
+  const langSel = document.getElementById('setLangSel');
   if (!overlay || !logo) return;
-  logo.addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('navSettingsBtn')?.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
   clearBtn?.addEventListener('click', () => {
-    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    if (!confirm(t('confirm_clear_all_data'))) return;
     Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
-    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    alert(t('alert_data_cleared'));
     location.reload();
   });
+  if (langSel) {
+    langSel.value = typeof LANG !== 'undefined' ? LANG : (localStorage.getItem('lang') || 'ko');
+    langSel.addEventListener('change', () => {
+      LANG = langSel.value;
+      localStorage.setItem('lang', LANG);
+      if (typeof applyUILabels === 'function') applyUILabels();
+      if (typeof renderUsage === 'function') renderUsage();
+      if (typeof renderTeams === 'function') renderTeams();
+      const detailOverlay = document.getElementById('detailOverlay');
+      if (detailOverlay?.classList.contains('open')) detailOverlay.classList.remove('open');
+    });
+  }
 })();
 </script>
 </body>

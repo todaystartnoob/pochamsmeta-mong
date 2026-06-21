@@ -36,6 +36,8 @@
       padding: 5px 14px; border-radius: 6px; transition: background .2s, color .2s;
     }
     .nav-links a:hover  { background: #ede0f5; color: #7b3fa0; }
+    .nav-settings-btn{background:none;border:none;font-size:17px;cursor:pointer;color:#777;padding:4px 9px;border-radius:6px;transition:background .15s,color .15s;margin-left:2px;line-height:1;}
+    .nav-settings-btn:hover{background:#ede0f5;color:#7b3fa0;}
     .nav-links a.active { background: #d4b8e8; color: #4a1d8a; font-weight: 600; }
 
     .page-layout {
@@ -178,7 +180,8 @@
     .set-section{margin-bottom:16px;}
     .set-section:last-child{margin-bottom:0;}
     .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
-    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:pointer;}
+    .set-sel:disabled{cursor:not-allowed;}
     .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
     .set-danger-btn:hover{background:#ffe5e5;}
     .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
@@ -191,14 +194,15 @@
 <nav class="navbar">
   <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
-    <a href="index.html">파티 구성</a>
-    <a href="pokemon-box.html" class="active">포켓몬 박스</a>
-    <a href="meta-usage.html">메타 사용률</a>
-    <a href="pokedex.html">포켓몬 도감</a>
+    <a href="index.html" id="navParty">파티 구성</a>
+    <a href="pokemon-box.html" class="active" id="navBox">포켓몬 박스</a>
+    <a href="meta-usage.html" id="navMeta">메타 사용률</a>
+    <a href="pokedex.html" id="navDex">포켓몬 도감</a>
+    <button class="nav-settings-btn" id="navSettingsBtn" title="Settings">⚙</button>
   </div>
 </nav>
 <div class="page-layout">
-  <div class="side-ad">광고</div>
+  <div class="side-ad" id="sideAd1">광고</div>
 
   <div class="hub-center">
     <div class="hub-cards">
@@ -206,40 +210,106 @@
       <a href="party-box.html" class="hub-card">
         <div class="hub-sprites" id="partySprites">
           <div class="hub-sprites-row back">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="메타그로스">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="망나뇽">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png" alt="마기라스">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="메타그로스" data-no="376" data-ko="메타그로스">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="망나뇽" data-no="149" data-ko="망나뇽">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png" alt="마기라스" data-no="248" data-ko="마기라스">
           </div>
           <div class="hub-sprites-row">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png" alt="루카리오">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png" alt="한카리아스">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png" alt="가라도스">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png" alt="루카리오" data-no="448" data-ko="루카리오">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png" alt="한카리아스" data-no="445" data-ko="한카리아스">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png" alt="가라도스" data-no="130" data-ko="가라도스">
           </div>
         </div>
-        <div class="hub-card-title">파티 박스</div>
-        <div class="hub-card-desc">저장된 파티 구성을<br>불러오고 관리합니다</div>
+        <div class="hub-card-title" id="partyBoxCardTitle">파티 박스</div>
+        <div class="hub-card-desc" id="partyBoxCardDesc">저장된 파티 구성을<br>불러오고 관리합니다</div>
         <div class="hub-card-count" id="partyCount">불러오는 중...</div>
       </a>
 
       <a href="pokemon-storage.html" class="hub-card">
         <div class="hub-sprites-single" id="pokeSprites">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="리자몽">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png" alt="갸라도스">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="메타그로스">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="리자몽" data-no="6" data-ko="리자몽">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png" alt="갸라도스" data-no="130" data-ko="갸라도스">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="메타그로스" data-no="376" data-ko="메타그로스">
         </div>
-        <div class="hub-card-title">포켓몬 박스</div>
-        <div class="hub-card-desc">저장된 개별 포켓몬을<br>파티에 추가합니다</div>
+        <div class="hub-card-title" id="pokemonBoxCardTitle">포켓몬 박스</div>
+        <div class="hub-card-desc" id="pokemonBoxCardDesc">저장된 개별 포켓몬을<br>파티에 추가합니다</div>
         <div class="hub-card-count" id="pokemonCount">불러오는 중...</div>
       </a>
 
     </div>
-    <div class="bottom-ad">광고</div>
+    <div class="bottom-ad" id="bottomAd">광고</div>
   </div>
 
-  <div class="side-ad">광고</div>
+  <div class="side-ad" id="sideAd2">광고</div>
 </div>
 
 <script src="pokemon-sprites.js"></script>
+<script>
+/* ── i18n (한/영/일) — 메인 스크립트보다 먼저 정의되어야 함 ── */
+let I18N = null;
+let LANG = localStorage.getItem('lang') || 'ko';
+
+async function loadI18n() {
+  try { I18N = await fetch('i18n_names.json').then(r => r.json()); }
+  catch (e) { console.error('i18n_names.json fetch 실패:', e); I18N = null; }
+}
+
+function pokeName(koName, dexNo) {
+  if (LANG === 'ko' || !I18N || !koName) return koName;
+  const p = I18N.pokemon[String(dexNo)];
+  if (!p) return koName;
+  const base = p[LANG] || p.ko;
+  let result = koName.split(p.ko).join(base);
+  /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
+  const suffixMatch = result.match(/\(([^)]+)\)$/);
+  if (suffixMatch) {
+    const formKo = suffixMatch[1];
+    const src = I18N.forms[formKo] || I18N.types[formKo];
+    const formTrans = src && src[LANG];
+    if (formTrans) result = result.slice(0, suffixMatch.index) + '(' + formTrans + ')';
+  }
+  for (const formKo in I18N.forms) {
+    if (result.includes(formKo)) {
+      const f = (I18N.forms[formKo][LANG] || formKo) + ' ';
+      result = result.split(formKo).join(f);
+    }
+  }
+  return result.replace(/\s+/g, ' ').trim();
+}
+
+const LOC_MAP_FIELD = {items:'item_ja2ko', abilities:'ability_ja2ko', moves:'move_ja2ko', natures:'nature_ja2ko'};
+function normKoName(category, koName) {
+  if (typeof CHAMPIONS_LOC_MAP !== 'undefined') {
+    const field = LOC_MAP_FIELD[category];
+    const fixed = field && CHAMPIONS_LOC_MAP[field]?.[koName];
+    if (fixed) return fixed;
+  }
+  return koName;
+}
+function term(category, koName) {
+  if (!koName) return koName;
+  koName = normKoName(category, koName);
+  if (LANG === 'ko' || !I18N) return koName;
+  const m = I18N[category]?.[koName];
+  return (m && m[LANG]) || koName;
+}
+function termDesc(category, koName, koDesc) {
+  if (LANG === 'ko' || !koName || !I18N) return koDesc;
+  koName = normKoName(category, koName);
+  const m = I18N[category]?.[koName];
+  if (!m) return koDesc;
+  const d = LANG === 'en' ? m.descEn : LANG === 'ja' ? m.descJa : null;
+  return d || koDesc;
+}
+
+function t(key, vars) {
+  if (!I18N) return key;
+  const e = I18N.ui[key];
+  let s = (e && (e[LANG] || e.ko)) || key;
+  if (vars) for (const k in vars) s = s.replace(`{${k}}`, vars[k]);
+  return s;
+}
+</script>
 <script>
 const partySaves = JSON.parse(localStorage.getItem('pochams_party_saves') || '[]');
 const pokemonBox = JSON.parse(localStorage.getItem('pochams_box') || '[]');
@@ -247,19 +317,22 @@ const pokemonBox = JSON.parse(localStorage.getItem('pochams_box') || '[]');
 const partyEl = document.getElementById('partyCount');
 const pokeEl  = document.getElementById('pokemonCount');
 
-if (partySaves.length === 0) {
-  partyEl.textContent = '저장된 파티 없음';
-  partyEl.classList.add('empty');
-} else {
-  partyEl.textContent = `${partySaves.length}개 저장됨`;
-}
+function renderHubCounts() {
+  if (partySaves.length === 0) {
+    partyEl.textContent = t('no_saved_parties');
+    partyEl.classList.add('empty');
+  } else {
+    partyEl.textContent = t('saves_count', {n: partySaves.length});
+  }
 
-if (pokemonBox.length === 0) {
-  pokeEl.textContent = '저장된 포켓몬 없음';
-  pokeEl.classList.add('empty');
-} else {
-  pokeEl.textContent = `${pokemonBox.length}마리 저장됨`;
+  if (pokemonBox.length === 0) {
+    pokeEl.textContent = t('no_saved_pokemon');
+    pokeEl.classList.add('empty');
+  } else {
+    pokeEl.textContent = t('saved_creatures_count', {n: pokemonBox.length});
+  }
 }
+renderHubCounts();
 
 /* 포켓몬 박스 카드: 실제 저장된 포켓몬 스프라이트로 교체 */
 if (pokemonBox.length >= 3 && typeof POKEMON_SPRITES !== 'undefined') {
@@ -272,44 +345,87 @@ if (pokemonBox.length >= 3 && typeof POKEMON_SPRITES !== 'undefined') {
 <div class="set-overlay" id="setOverlay">
   <div class="set-box">
     <div class="set-head">
-      <span class="set-title">⚙ 설정</span>
+      <span class="set-title" id="setTitleLbl">⚙ 설정</span>
       <button class="set-x" id="setCloseBtn">✕</button>
     </div>
     <div class="set-section">
-      <div class="set-lbl">언어</div>
-      <select class="set-sel" disabled><option selected>한국어</option></select>
+      <div class="set-lbl" id="setLangLbl">언어</div>
+      <select class="set-sel" id="setLangSel">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">테마</div>
-      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+      <div class="set-lbl" id="setThemeLbl">테마</div>
+      <select class="set-sel" disabled><option selected id="setThemeOpt">메타몽 테마 (기본)</option></select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">데이터 관리</div>
+      <div class="set-lbl" id="setDataMgmtLbl">데이터 관리</div>
       <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
-      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+      <div class="set-desc" id="setClearDesc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
     </div>
     <div class="set-section">
-      <div class="set-lbl">문의 / 버그 리포트</div>
+      <div class="set-lbl" id="setContactLbl">문의 / 버그 리포트</div>
       <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
     </div>
   </div>
 </div>
+<script>
+/* i18n 핵심 함수(I18N/LANG/loadI18n/pokeName/term/t)는 파일 상단으로 이동됨 */
+function applyNavSettingsLabels() {
+  const navMap = { navParty: 'nav_party', navBox: 'nav_box', navMeta: 'nav_meta', navDex: 'nav_dex' };
+  for (const id in navMap) { const el = document.getElementById(id); if (el) el.textContent = t(navMap[id]); }
+  const navSettingsBtn = document.getElementById('navSettingsBtn');
+  if (navSettingsBtn) navSettingsBtn.title = t('settings_btn_title');
+  const setMap = {
+    setTitleLbl: 'settings_title', setLangLbl: 'lang_lbl', setThemeLbl: 'theme_lbl',
+    setThemeOpt: 'theme_default', setDataMgmtLbl: 'data_mgmt_lbl', setClearBtn: 'clear_btn',
+    setClearDesc: 'clear_desc', setContactLbl: 'contact_lbl',
+  };
+  for (const id in setMap) { const el = document.getElementById(id); if (el) el.textContent = t(setMap[id]); }
+  const staticMap = {
+    sideAd1: 'ad_label', sideAd2: 'ad_label', bottomAd: 'ad_label',
+    partyBoxCardTitle: 'party_box_title', pokemonBoxCardTitle: 'nav_box',
+  };
+  for (const id in staticMap) { const el = document.getElementById(id); if (el) el.textContent = t(staticMap[id]); }
+  const partyBoxCardDesc = document.getElementById('partyBoxCardDesc');
+  if (partyBoxCardDesc) partyBoxCardDesc.innerHTML = t('party_box_desc');
+  const pokemonBoxCardDesc = document.getElementById('pokemonBoxCardDesc');
+  if (pokemonBoxCardDesc) pokemonBoxCardDesc.innerHTML = t('pokemon_box_desc');
+  document.querySelectorAll('img[data-no]').forEach(img => {
+    img.alt = pokeName(img.dataset.ko, img.dataset.no);
+  });
+  if (typeof renderHubCounts === 'function') renderHubCounts();
+}
+
+loadI18n().then(applyNavSettingsLabels);
+</script>
 <script>
 (function initSettingsModal() {
   const overlay = document.getElementById('setOverlay');
   const logo = document.querySelector('.nav-logo');
   const closeBtn = document.getElementById('setCloseBtn');
   const clearBtn = document.getElementById('setClearBtn');
+  const langSel = document.getElementById('setLangSel');
   if (!overlay || !logo) return;
-  logo.addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('navSettingsBtn')?.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
   clearBtn?.addEventListener('click', () => {
-    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    if (!confirm(t('confirm_clear_all_data'))) return;
     Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
-    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    alert(t('alert_data_cleared'));
     location.reload();
   });
+  if (langSel) {
+    langSel.value = localStorage.getItem('lang') || 'ko';
+    langSel.addEventListener('change', () => {
+      localStorage.setItem('lang', langSel.value);
+      LANG = langSel.value;
+      applyNavSettingsLabels();
+    });
+  }
 })();
 </script>
 </body>

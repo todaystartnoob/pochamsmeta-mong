@@ -40,6 +40,8 @@
     .nav-links{display:flex;gap:6px;}
     .nav-links a{text-decoration:none;color:#444;font-size:14px;padding:5px 14px;border-radius:6px;transition:background .2s,color .2s;}
     .nav-links a:hover{background:#ede0f5;color:var(--accent);}
+    .nav-settings-btn{background:none;border:none;font-size:17px;cursor:pointer;color:#777;padding:4px 9px;border-radius:6px;transition:background .15s,color .15s;margin-left:2px;line-height:1;}
+    .nav-settings-btn:hover{background:#ede0f5;color:#7b3fa0;}
     .nav-links a.active{background:#d4b8e8;color:#4a1d8a;font-weight:600;}
     .nav-ana-toggle{display:none;background:var(--accent);color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;}
 
@@ -76,7 +78,7 @@
     .rec-panel.collapsed .rec-toggle-chevron{transform:rotate(180deg);}
     .rec-title{font-size:12px;font-weight:700;color:#7060a0;padding:0 14px 6px;border-bottom:1px solid #e0d0f0;letter-spacing:.4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;user-select:none;}
     .rec-title:hover .rec-toggle-chevron{color:#7040a0;}
-    .rec-list{display:flex;flex-direction:row;gap:7px;overflow-x:auto;overflow-y:hidden;flex:1;align-items:stretch;padding:2px 14px 4px;justify-content:safe center;}
+    .rec-list{display:flex;flex-direction:row;gap:7px;overflow-x:auto;overflow-y:visible;flex:1;align-items:stretch;padding:2px 14px 4px;justify-content:safe center;}
     .rec-list::-webkit-scrollbar{height:4px;}
     .rec-list::-webkit-scrollbar-thumb{background:rgba(123,63,160,.25);border-radius:2px;}
     .rec-card{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px 5px;border-radius:14px;background:rgba(255,255,255,.7);cursor:pointer;flex-shrink:0;width:72px;transition:background .14s,transform .14s;border:2px solid transparent;}
@@ -238,7 +240,7 @@
     .speed-cmp-btn:hover{background:#5a2d7a;}
 
     /* Config rows */
-    .cfg-row{display:flex;align-items:center;background:var(--row-bg);border-radius:7px;padding:9px 13px;margin-bottom:6px;gap:8px;cursor:pointer;transition:background .15s,box-shadow .15s;}
+    .cfg-row{display:flex;align-items:center;background:var(--row-bg);border-radius:7px;padding:9px 13px;margin-bottom:6px;gap:8px;cursor:pointer;transition:background .15s,box-shadow .15s;position:relative;}
     .cfg-row:hover{background:#cfc0e0;box-shadow:0 2px 8px rgba(0,0,0,.12);}
     .cfg-lbl{font-size:13px;font-weight:700;color:#555;min-width:24px;flex-shrink:0;}
     .cfg-content{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;overflow:hidden;}
@@ -246,6 +248,14 @@
     .cfg-desc{font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .cfg-name.ph{color:#aaa;font-weight:400;}
     .item-sprite-sm{width:22px;height:22px;image-rendering:pixelated;flex-shrink:0;}
+    .cfg-tooltip{
+      display:none;position:absolute;bottom:calc(100% + 6px);left:13px;
+      background:rgba(30,24,50,.97);color:#e8e0f8;font-size:11px;line-height:1.5;
+      padding:7px 11px;border-radius:7px;white-space:normal;max-width:280px;min-width:160px;
+      box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none;z-index:50;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .cfg-row:hover .cfg-tooltip{display:block;}
 
     /* Move rows */
     .move-row{display:flex;align-items:center;border-radius:7px;padding:9px 13px;margin-bottom:6px;gap:8px;cursor:pointer;transition:filter .15s;position:relative;}
@@ -263,6 +273,7 @@
       border:1px solid rgba(255,255,255,.08);
     }
     .move-row:hover .move-tooltip{display:block;}
+    .move-tooltip-stats{display:flex;gap:9px;margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.12);font-weight:600;color:#c8b8e8;}
 
     .dmg-calc-btn{display:block;width:100%;margin-top:7px;background:var(--accent);color:#fff;border:none;padding:7px;border-radius:8px;font-size:12px;cursor:pointer;text-align:center;transition:background .18s;}
     .dmg-calc-btn:hover{background:#5a2d7a;}
@@ -831,7 +842,8 @@
     .set-section{margin-bottom:16px;}
     .set-section:last-child{margin-bottom:0;}
     .set-lbl{font-size:11px;font-weight:700;color:#9070b0;letter-spacing:.4px;margin-bottom:6px;}
-    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:not-allowed;}
+    .set-sel{width:100%;padding:7px 10px;border:1.5px solid #e0d0f0;border-radius:7px;font-size:13px;font-family:inherit;background:#f8f4fc;color:#555;cursor:pointer;}
+    .set-sel:disabled{cursor:not-allowed;}
     .set-danger-btn{width:100%;padding:8px;border:1.5px solid #f0b0b0;border-radius:7px;background:#fff5f5;color:#c44;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
     .set-danger-btn:hover{background:#ffe5e5;}
     .set-desc{font-size:10.5px;color:#999;margin-top:5px;line-height:1.5;}
@@ -845,10 +857,11 @@
 <nav class="navbar">
   <div class="nav-logo"><img src="pochamsMetamongLogo.png" alt="포챔스메타몽"></div>
   <div class="nav-links">
-    <a href="index.html" class="active">파티 구성</a>
-    <a href="pokemon-box.html">포켓몬 박스</a>
-    <a href="meta-usage.html">메타 사용률</a>
-    <a href="pokedex.html">포켓몬 도감</a>
+    <a href="index.html" class="active" id="navParty">파티 구성</a>
+    <a href="pokemon-box.html" id="navBox">포켓몬 박스</a>
+    <a href="meta-usage.html" id="navMeta">메타 사용률</a>
+    <a href="pokedex.html" id="navDex">포켓몬 도감</a>
+    <button class="nav-settings-btn" id="navSettingsBtn" title="Settings">⚙</button>
   </div>
   <button class="nav-ana-toggle" id="anaToggle">분석 ▶</button>
 </nav>
@@ -890,11 +903,11 @@
       <div class="sc-cols" id="scCols">
         <div class="sc-page sc-sample-page">
           <div class="speed-rank-col">
-            <div class="sr-title">스피드 샘플</div>
+            <div class="sr-title" id="srTitleMob">스피드 샘플</div>
             <div class="sr-header">
               <span class="sr-hd-name"></span>
-              <span class="sr-hd-ev">노력치</span>
-              <span class="sr-hd-spd">실수치</span>
+              <span class="sr-hd-ev" id="srHdEv1">노력치</span>
+              <span class="sr-hd-spd" id="srHdSpd1">실수치</span>
             </div>
             <div id="mobSpeedRankList"></div>
           </div>
@@ -905,11 +918,11 @@
   </div>
   <aside class="analysis-sidebar" id="analysisSidebar">
     <div class="speed-rank-col">
-      <div class="sr-title">스피드 샘플</div>
+      <div class="sr-title" id="srTitleMain">스피드 샘플</div>
       <div class="sr-header">
         <span class="sr-hd-name"></span>
-        <span class="sr-hd-ev">노력치</span>
-        <span class="sr-hd-spd">실수치</span>
+        <span class="sr-hd-ev" id="srHdEv2">노력치</span>
+        <span class="sr-hd-spd" id="srHdSpd2">실수치</span>
       </div>
       <div id="speedRankList"></div>
     </div>
@@ -925,7 +938,7 @@
 <div id="slotTooltip" class="slot-tooltip"></div>
 <div class="rec-panel" id="recPanel">
   <div class="rec-title" id="recToggleBtn">
-    추천 포켓몬
+    <span id="recTitleText">추천 포켓몬</span>
     <span class="rec-toggle-chevron">▲</span>
   </div>
   <div class="rec-list" id="recPokemonList"></div>
@@ -937,13 +950,13 @@
 <div class="modal-overlay" id="pokeModal">
   <div class="modal-box">
     <div class="modal-head">
-      <span class="modal-title">포켓몬 선택</span>
+      <span class="modal-title" id="pokeModalTitle">포켓몬 선택</span>
       <button class="modal-x" id="closePokeModal">✕</button>
     </div>
     <input type="text" class="modal-search" id="pokeSearch" placeholder="이름으로 검색..." autocomplete="off">
     <div class="filter-row" id="pokeFilterRow">
-      <button class="f-btn on" data-f="all">전체</button>
-      <button class="f-btn" data-f="ingame">포챔스</button>
+      <button class="f-btn on" data-f="all" id="pokeFilterAllBtn">전체</button>
+      <button class="f-btn" data-f="ingame" id="pokeFilterIngameBtn">포챔스</button>
     </div>
     <div class="filter-row" id="typeFilterRow" style="gap:3px;"></div>
     <div class="poke-grid" id="pokeGrid"></div>
@@ -954,15 +967,15 @@
 <div class="modal-overlay" id="moveModal">
   <div class="modal-box">
     <div class="modal-head">
-      <span class="modal-title">기술 선택</span>
+      <span class="modal-title" id="moveModalTitleStatic">기술 선택</span>
       <button class="modal-x" id="closeMoveModal">✕</button>
     </div>
     <input type="text" class="modal-search" id="moveSearch" placeholder="기술명 검색..." autocomplete="off">
     <div class="filter-row" id="moveFilterRow">
-      <button class="f-btn on" data-mf="all">전체</button>
-      <button class="f-btn" data-mf="물리">물리</button>
-      <button class="f-btn" data-mf="특수">특수</button>
-      <button class="f-btn" data-mf="변화">변화</button>
+      <button class="f-btn on" data-mf="all" id="moveFilterAllBtn">전체</button>
+      <button class="f-btn" data-mf="물리" id="moveFilterPhysBtn">물리</button>
+      <button class="f-btn" data-mf="특수" id="moveFilterSpecBtn">특수</button>
+      <button class="f-btn" data-mf="변화" id="moveFilterStatusBtn">변화</button>
       <button class="f-btn" id="moveStabBtn" style="margin-left:auto;">자속 기술</button>
     </div>
     <div class="move-list-wrap">
@@ -975,7 +988,7 @@
 <div class="modal-overlay" id="itemModal">
   <div class="modal-box">
     <div class="modal-head">
-      <span class="modal-title">도구 선택</span>
+      <span class="modal-title" id="itemModalTitle">도구 선택</span>
       <button class="modal-x" id="closeItemModal">✕</button>
     </div>
     <input type="text" autocomplete="off" class="modal-search" id="itemSearch" placeholder="도구명 검색..." autocomplete="off">
@@ -1011,10 +1024,10 @@
 <div class="modal-overlay" id="natureModal">
   <div class="modal-box" style="max-width:540px;">
     <div class="modal-head">
-      <span class="modal-title">성격 선택</span>
+      <span class="modal-title" id="natureModalTitle">성격 선택</span>
       <button class="modal-x" id="closeNatureModal">✕</button>
     </div>
-    <div style="font-size:11px;color:#888;margin:-4px 0 4px">빨간 행 = 올라가는 능력치 / 파란 열 = 내려가는 능력치</div>
+    <div style="font-size:11px;color:#888;margin:-4px 0 4px" id="natureTableHint">빨간 행 = 올라가는 능력치 / 파란 열 = 내려가는 능력치</div>
     <div style="overflow-x:auto;">
       <table class="nature-table" id="natureTable"></table>
     </div>
@@ -1025,7 +1038,7 @@
 <div class="modal-overlay" id="boxModal">
   <div class="modal-box" style="max-width:640px;">
     <div class="modal-head">
-      <span class="modal-title">포켓몬 박스</span>
+      <span class="modal-title" id="boxModalTitle">포켓몬 박스</span>
       <button class="modal-x" id="closeBoxModal">✕</button>
     </div>
     <div id="boxGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;overflow-y:auto;max-height:420px;padding:2px;"></div>
@@ -1040,6 +1053,123 @@
 <script src="learnset-data.js"></script>
 <script src="pochams-items.js"></script>
 <script src="champions_loc_map.js"></script>
+<script>
+/* ── i18n (한/영/일) — 메인 스크립트보다 먼저 정의되어야 함 ── */
+let I18N = null;
+let LANG = localStorage.getItem('lang') || 'ko';
+
+async function loadI18n() {
+  try { I18N = await fetch('i18n_names.json').then(r => r.json()); }
+  catch (e) { console.error('i18n_names.json fetch 실패:', e); I18N = null; }
+}
+
+function pokeName(koName, dexNo) {
+  if (LANG === 'ko' || !I18N || !koName) return koName;
+  const p = I18N.pokemon[String(dexNo)];
+  if (!p) return koName;
+  const base = p[LANG] || p.ko;
+  let result = koName.split(p.ko).join(base);
+  /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
+  const suffixMatch = result.match(/\(([^)]+)\)$/);
+  if (suffixMatch) {
+    const formKo = suffixMatch[1];
+    const src = I18N.forms[formKo] || I18N.types[formKo];
+    const formTrans = src && src[LANG];
+    if (formTrans) result = result.slice(0, suffixMatch.index) + '(' + formTrans + ')';
+  }
+  for (const formKo in I18N.forms) {
+    if (result.includes(formKo)) {
+      const f = (I18N.forms[formKo][LANG] || formKo) + ' ';
+      result = result.split(formKo).join(f);
+    }
+  }
+  return result.replace(/\s+/g, ' ').trim();
+}
+
+const LOC_MAP_FIELD = {items:'item_ja2ko', abilities:'ability_ja2ko', moves:'move_ja2ko', natures:'nature_ja2ko'};
+function normKoName(category, koName) {
+  if (typeof CHAMPIONS_LOC_MAP !== 'undefined') {
+    const field = LOC_MAP_FIELD[category];
+    const fixed = field && CHAMPIONS_LOC_MAP[field]?.[koName];
+    if (fixed) return fixed;
+  }
+  return koName;
+}
+function term(category, koName) {
+  if (!koName) return koName;
+  koName = normKoName(category, koName);
+  if (LANG === 'ko' || !I18N) return koName;
+  const m = I18N[category]?.[koName];
+  return (m && m[LANG]) || koName;
+}
+function termDesc(category, koName, koDesc) {
+  if (LANG === 'ko' || !koName || !I18N) return koDesc;
+  koName = normKoName(category, koName);
+  const m = I18N[category]?.[koName];
+  if (!m) return koDesc;
+  const d = LANG === 'en' ? m.descEn : LANG === 'ja' ? m.descJa : null;
+  return d || koDesc;
+}
+
+/* 검색어가 한국어 원문 또는 영/일 번역명과 일치하는지 확인 (언어 모드와 무관하게 항상 다 검사) */
+function matchPokemonQuery(pk, q) {
+  if (!q) return true;
+  if (pk.name.includes(q)) return true;
+  if (!I18N) return false;
+  const ql = q.toLowerCase();
+  const p = I18N.pokemon[String(pk.no)];
+  if (p) {
+    if (p.en && p.en.toLowerCase().includes(ql)) return true;
+    if (p.ja && p.ja.includes(q)) return true;
+  }
+  for (const formKo in I18N.forms) {
+    if (pk.name.includes(formKo)) {
+      const f = I18N.forms[formKo];
+      if (f.en && p?.en && (f.en + ' ' + p.en).toLowerCase().includes(ql)) return true;
+      if (f.ja && p?.ja && (f.ja + p.ja).includes(q)) return true;
+    }
+  }
+  return false;
+}
+function matchTermQuery(category, koName, q) {
+  if (!q) return true;
+  if (koName.includes(q)) return true;
+  if (!I18N) return false;
+  koName = normKoName(category, koName);
+  if (koName.includes(q)) return true;
+  const m = I18N[category]?.[koName];
+  if (!m) return false;
+  const ql = q.toLowerCase();
+  if (m.en && m.en.toLowerCase().includes(ql)) return true;
+  if (m.ja && m.ja.includes(q)) return true;
+  return false;
+}
+
+function t(key, vars) {
+  if (!I18N) return key;
+  const e = I18N.ui[key];
+  let s = (e && (e[LANG] || e.ko)) || key;
+  if (vars) for (const k in vars) s = s.replace(`{${k}}`, vars[k]);
+  return s;
+}
+
+const ITEM_CAT_I18N_MAP = {
+  'Z크리스털':'cat_z_crystal','구애도구':'cat_choice','노력치도구':'cat_ev_item','메가스톤':'cat_megastone',
+  '메모리':'cat_memory','보석':'cat_gem','스카프':'cat_scarf','열매':'cat_berry','전용도구':'cat_signature',
+  '지닌도구':'cat_held','지닌도구(역효과)':'cat_held_neg','타입강화':'cat_type_boost','플레이트':'cat_plate','훈련도구':'cat_training',
+};
+function itemCat(koCat) {
+  const key = ITEM_CAT_I18N_MAP[koCat];
+  return key ? t(key) : koCat;
+}
+
+const STATUS_I18N_MAP = {'독':'status_poison','마비':'status_paralysis','얼음':'status_freeze','화상':'status_burn','잠듦':'status_sleep'};
+const WEATHER_I18N_MAP = {'쾌청':'weather_sunny','비바라기':'weather_rain','모래바람':'weather_sand','설경':'weather_snow'};
+const FIELD_I18N_MAP = {'일렉트릭필드':'field_electric','그래스필드':'field_grassy','미스트필드':'field_misty','사이코필드':'field_psychic'};
+function statusI18n(ko) { const k = STATUS_I18N_MAP[ko]; return k ? t(k) : ko; }
+function weatherI18n(ko) { const k = WEATHER_I18N_MAP[ko]; return k ? t(k) : ko; }
+function fieldI18n(ko) { const k = FIELD_I18N_MAP[ko]; return k ? t(k) : ko; }
+</script>
 <script>
 /* ════════════════════════════
    CONSTANTS
@@ -1649,11 +1779,11 @@ function getAbilityPowerMult(ability, mv, effType=null, ctx={}) {
 }
 
 function getStatGrade(value, breaks) {
-  if (value < breaks[0]) return {label:'매우낮음', cls:'sg-very-low'};
-  if (value < breaks[1]) return {label:'낮음',     cls:'sg-low'};
-  if (value < breaks[2]) return {label:'준수함',   cls:'sg-mid'};
-  if (value < breaks[3]) return {label:'높음',     cls:'sg-high'};
-  return                        {label:'매우높음', cls:'sg-very-high'};
+  if (value < breaks[0]) return {label:t('grade_very_low'), cls:'sg-very-low'};
+  if (value < breaks[1]) return {label:t('grade_low'),     cls:'sg-low'};
+  if (value < breaks[2]) return {label:t('grade_mid'),   cls:'sg-mid'};
+  if (value < breaks[3]) return {label:t('grade_high'),     cls:'sg-high'};
+  return                        {label:t('grade_very_high'), cls:'sg-very-high'};
 }
 
 function calcDecisivePower(pk, evs, mv, nature, item, ability) {
@@ -1906,29 +2036,31 @@ function buildMySlotTooltip(mem) {
   const dur = calcDurability(pk, evs, nature, mem.item);
   const evParts = ['H','A','B','C','D','S'].filter(s => evs[s]).map(s => `${s}:${evs[s]}`);
   const typeBadges = [pk.type1, pk.type2].filter(Boolean)
-    .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
+    .map(tp => `<span class="tt-type" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`).join('');
   let movesHTML = '';
   for (const mv of moves) {
     const pow = mv.category !== '변화' ? calcDecisivePower(pk, evs, mv, nature, mem.item, mem.ability) : 0;
     const col = mv.category==='물리'?'#e8a060':mv.category==='특수'?'#60a8e8':'#808098';
-    movesHTML += `<div class="tt-move"><span class="tt-cat" style="color:${col}">●</span><span class="tt-mname">${mv.name}</span>${pow>0?`<span class="tt-pow">${pow.toLocaleString()}</span>`:''}</div>`;
+    movesHTML += `<div class="tt-move"><span class="tt-cat" style="color:${col}">●</span><span class="tt-mname">${term('moves', mv.name)}</span>${pow>0?`<span class="tt-pow">${pow.toLocaleString()}</span>`:''}</div>`;
   }
-  const displayName = mem.nickname ? `${mem.nickname} <span style="opacity:.6;font-size:10px;font-weight:400">(${pk.name})</span>` : pk.name;
+  const dispPkName = pokeName(pk.name, pk.no);
+  const displayName = mem.nickname ? `${mem.nickname} <span style="opacity:.6;font-size:10px;font-weight:400">(${dispPkName})</span>` : dispPkName;
   return `<div class="tt-header"><span class="tt-pkname">${displayName}</span>${typeBadges}</div>` +
-    `<div class="tt-row">${mem.item?`<span><span class="tt-lbl">도구</span> ${mem.item.name}</span>`:''}${mem.ability?`<span><span class="tt-lbl">특성</span> ${mem.ability.name}</span>`:''}</div>` +
-    `<div class="tt-row">${nature?`<span class="tt-lbl">성격</span> ${nature.name}`:''}</div>` +
-    (evParts.length ? `<div class="tt-ev"><span class="tt-lbl">노력치</span> ${evParts.join(' ')}</div>` : '') +
+    `<div class="tt-row">${mem.item?`<span><span class="tt-lbl">${t('item')}</span> ${term('items', mem.item.name)}</span>`:''}${mem.ability?`<span><span class="tt-lbl">${t('ability')}</span> ${term('abilities', mem.ability.name)}</span>`:''}</div>` +
+    `<div class="tt-row">${nature?`<span class="tt-lbl">${t('nature')}</span> ${term('natures', nature.name)}`:''}</div>` +
+    (evParts.length ? `<div class="tt-ev"><span class="tt-lbl">${t('evs')}</span> ${evParts.join(' ')}</div>` : '') +
     (movesHTML ? `<hr class="tt-divider">${movesHTML}` : '') +
-    `<div class="tt-bottom"><span>물리내구 <b>${dur.phys.toLocaleString()}</b></span><span>특수내구 <b>${dur.spec.toLocaleString()}</b></span><span>스피드 <b>${speedStat}</b></span></div>`;
+    `<div class="tt-bottom"><span>${t('phys_dur')} <b>${dur.phys.toLocaleString()}</b></span><span>${t('spec_dur')} <b>${dur.spec.toLocaleString()}</b></span><span>${t('speed_short')} <b>${speedStat}</b></span></div>`;
 }
 
 function buildEnemySlotTooltip(pk) {
   if (!pk) return '';
+  const dispPkName = pokeName(pk.name, pk.no);
   const typeBadges = [pk.type1, pk.type2].filter(Boolean)
-    .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
+    .map(tp => `<span class="tt-type" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`).join('');
   const minSpd = calcStat(pk.S, 0, false, 0.9);
   const maxSpd = calcStat(pk.S, 32, false, 1.1);
-  const spdLine = `<div class="tt-spd-range"><span class="tt-lbl">스피드</span> 최저 <b>${minSpd}</b> ~ 최속 <b>${maxSpd}</b></div>`;
+  const spdLine = `<div class="tt-spd-range"><span class="tt-lbl">${t('speed_short')}</span> ${t('min_speed')} <b>${minSpd}</b> ~ ${t('max_speed')} <b>${maxSpd}</b></div>`;
   /* 메가폼이면 base form 이름으로 메타 조회 */
   let lookupName = pk.name;
   if (pk.name.startsWith('메가') && pk.name !== '메가니움') {
@@ -1937,21 +2069,21 @@ function buildEnemySlotTooltip(pk) {
   }
   const ms = getMetaSet(lookupName);
   if (ms) {
-    const natName = ms.natures?.[0]?.name || '—';
-    const itemName = ms.items?.[0]?.name || '없음';
+    const natName = ms.natures?.[0]?.name ? term('natures', ms.natures[0].name) : '—';
+    const itemName = ms.items?.[0]?.name ? term('items', ms.items[0].name) : t('none');
     const ev = ms.ev_spreads?.[0]?.evs || {};
-    const evStr = ['H','A','B','C','D','S'].filter(s => ev[s]).map(s => `${s}:${ev[s]}`).join(' ') || '미투자';
-    const mvTags = (ms.moves || []).slice(0, 4).map(m => `<span class="tt-movename">${m.name}</span>`).join('');
-    return `<div class="tt-header"><span class="tt-pkname">${pk.name}</span>${typeBadges}</div>` +
-      `<div class="tt-meta-label">주요 샘플</div>` +
-      `<div class="tt-sample-row"><span class="tt-lbl">성격</span> ${natName} &nbsp;<span class="tt-lbl">도구</span> ${itemName}</div>` +
-      `<div class="tt-sample-row"><span class="tt-lbl">노력치</span> ${evStr}</div>` +
+    const evStr = ['H','A','B','C','D','S'].filter(s => ev[s]).map(s => `${s}:${ev[s]}`).join(' ') || t('no_investment');
+    const mvTags = (ms.moves || []).slice(0, 4).map(m => `<span class="tt-movename">${term('moves', m.name)}</span>`).join('');
+    return `<div class="tt-header"><span class="tt-pkname">${dispPkName}</span>${typeBadges}</div>` +
+      `<div class="tt-meta-label">${t('top_sample')}</div>` +
+      `<div class="tt-sample-row"><span class="tt-lbl">${t('nature')}</span> ${natName} &nbsp;<span class="tt-lbl">${t('item')}</span> ${itemName}</div>` +
+      `<div class="tt-sample-row"><span class="tt-lbl">${t('evs')}</span> ${evStr}</div>` +
       `<div class="tt-moves-enemy">${mvTags}</div>` + spdLine;
   } else {
     const bst = pk.H + pk.A + pk.B + pk.C + pk.D + pk.S;
     const sStr = `H:${pk.H} A:${pk.A} B:${pk.B} C:${pk.C} D:${pk.D} S:${pk.S}`;
-    return `<div class="tt-header"><span class="tt-pkname">${pk.name}</span>${typeBadges}</div>` +
-      `<div class="tt-base-stats">${sStr} <span class="tt-bst">(합계 ${bst})</span></div>` + spdLine;
+    return `<div class="tt-header"><span class="tt-pkname">${dispPkName}</span>${typeBadges}</div>` +
+      `<div class="tt-base-stats">${sStr} <span class="tt-bst">(${t('total_short')} ${bst})</span></div>` + spdLine;
   }
 }
 
@@ -1991,8 +2123,8 @@ function renderSlots() {
     const bigBtns = document.createElement('div');
     bigBtns.className = 'big-mode-btns';
     bigBtns.innerHTML = `
-      <button class="big-act-btn load" id="bigLoadBtn">📂 파티 불러오기</button>
-      <button class="big-act-btn clear" id="bigClearBtn">비우기</button>`;
+      <button class="big-act-btn load" id="bigLoadBtn">📂 ${t('party_load_btn')}</button>
+      <button class="big-act-btn clear" id="bigClearBtn">${t('clear_short')}</button>`;
     bigBtns.querySelector('#bigClearBtn').addEventListener('click', () => {
       for (let i = 0; i < PARTY_SIZE; i++) party[i] = newSlot();
       saveParty(); renderSlots();
@@ -2002,8 +2134,8 @@ function renderSlots() {
     const btns = document.createElement('div');
     btns.className = 'party-action-btns';
     btns.innerHTML = `
-      <button class="party-act-btn save" id="partySaveBtn"><span style="font-size:16px;line-height:1">💾</span>파티 저장</button>
-      <button class="party-act-btn load" id="partyLoadBtn"><span style="font-size:16px;line-height:1">📂</span>파티 불러오기</button>`;
+      <button class="party-act-btn save" id="partySaveBtn"><span style="font-size:16px;line-height:1">💾</span>${t('party_save_btn')}</button>
+      <button class="party-act-btn load" id="partyLoadBtn"><span style="font-size:16px;line-height:1">📂</span>${t('party_load_btn')}</button>`;
     sb.appendChild(btns);
   }
 
@@ -2102,22 +2234,22 @@ function renderDetail(idx) {
   const avgDur = (dur.phys+dur.spec)/2;
   const maxPow = Math.max(physPow, specPow);
   const damagingMvCnt = physMvs.length + specMvs.length;
-  const speedTag = speedStat>=161?'고스핏':speedStat>=136?'중스핏':'저스핏';
-  const durTag   = avgDur>=55000?'고내구':avgDur>=42500?'중내구':'저내구';
+  const speedTag = speedStat>=161?t('speed_high'):speedStat>=136?t('speed_mid'):t('speed_low');
+  const durTag   = avgDur>=55000?t('dur_high'):avgDur>=42500?t('dur_mid'):t('dur_low');
   let roleTag;
-  if (physPow===0&&specPow===0)                           roleTag='지원형';
-  else if (statMvs.length>damagingMvCnt&&maxPow<28000)   roleTag='지원형';
-  else if (physPow>0&&specPow===0)    roleTag='물리 어태커';
-  else if (specPow>0&&physPow===0)    roleTag='특수 어태커';
-  else if (physPow>=specPow*1.25)     roleTag='물리 어태커';
-  else if (specPow>=physPow*1.25)     roleTag='특수 어태커';
-  else                                roleTag='쌍두형';
-  if      (avgDur>=75000&&maxPow<38000) roleTag='탱커';
-  else if (avgDur>=55000&&maxPow<28000) roleTag='탱커';
+  if (physPow===0&&specPow===0)                           roleTag=t('role_support');
+  else if (statMvs.length>damagingMvCnt&&maxPow<28000)   roleTag=t('role_support');
+  else if (physPow>0&&specPow===0)    roleTag=t('role_phys_attacker');
+  else if (specPow>0&&physPow===0)    roleTag=t('role_spec_attacker');
+  else if (physPow>=specPow*1.25)     roleTag=t('role_phys_attacker');
+  else if (specPow>=physPow*1.25)     roleTag=t('role_spec_attacker');
+  else                                roleTag=t('role_mixed');
+  if      (avgDur>=75000&&maxPow<38000) roleTag=t('role_tank');
+  else if (avgDur>=55000&&maxPow<28000) roleTag=t('role_tank');
   const archetype = `${speedTag} ${durTag} ${roleTag}`;
 
   const typeBadges = [pk.type1, pk.type2].filter(Boolean)
-    .map(t => `<span class="type-mini-badge" style="background:${TYPE_COLORS[t]}">${t}</span>`)
+    .map(tp => `<span class="type-mini-badge" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`)
     .join('');
 
   const statRows = stats.map(s => {
@@ -2137,14 +2269,19 @@ function renderDetail(idx) {
     </div>`;
   }).join('');
 
-  const itemName    = mem.item?.name||'';
-  const itemEffect  = mem.item?.effect||'';
+  const NAT_LABELS_I18N = {A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
+  const CAT_I18N = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
+  const itemNameKo  = mem.item?.name||'';
+  const itemName    = term('items', itemNameKo);
+  const itemEffect  = termDesc('items', itemNameKo, mem.item?.effect||'');
   const itemSprite  = mem.item?.sprite||'';
-  const abilityName = mem.ability?.name||'';
-  const abilityDesc = mem.ability?.desc||'';
-  const natureName  = nature?.name||'';
+  const abilityNameKo = mem.ability?.name||'';
+  const abilityName = term('abilities', abilityNameKo);
+  const abilityDesc = termDesc('abilities', abilityNameKo, mem.ability?.desc||'');
+  const natureNameKo = nature?.name||'';
+  const natureName  = term('natures', natureNameKo);
   const natEffect   = nature
-    ? (nature.up ? `${NAT_LABELS[nature.up]} ↑  ${NAT_LABELS[nature.dn]} ↓` : '보정 없음')
+    ? (nature.up ? `${NAT_LABELS_I18N[nature.up]} ↑  ${NAT_LABELS_I18N[nature.dn]} ↓` : t('nature_no_boost'))
     : '';
 
   const movesHtml = [0,1,2,3].map(mi => {
@@ -2153,34 +2290,37 @@ function renderDetail(idx) {
     const tc  = mv ? (TYPE_COLORS[effMvType]||'#888') : '#888';
     const bg  = mv ? tc : 'var(--move-bg)';
     const dp   = mv ? calcDecisivePower(pk, evs, mv, nature, mem.item, mem.ability) : 0;
-    const desc = mv ? (MOVE_DESCS?.[mv.name]||'') : '';
+    const desc = mv ? termDesc('moves', mv.name, MOVE_DESCS?.[mv.name]||'') : '';
+    const powerDisplay = mv ? (mv.power ?? t('variable_power')) : '';
+    const accDisplay = mv ? (mv.accuracy ? mv.accuracy+'%' : '—') : '';
     return `
     <div class="move-row" data-slot="${idx}" data-mi="${mi}" style="background:${bg}">
-      ${mv ? `<img class="move-type-img" src="type_images/${TYPE_IMG[effMvType]||'normal'}.png" alt="${effMvType}">` : '<span style="width:32px;flex-shrink:0"></span>'}
-      <span class="move-name-txt">${mv?mv.name:''}</span>
-      <span class="move-meta-txt">${mv?mv.category+' / PP:'+mv.pp:''}</span>
-      <span class="move-power-txt">결정력 : ${dp||'-'}</span>
-      ${desc ? `<div class="move-tooltip">${desc}</div>` : ''}
+      ${mv ? `<img class="move-type-img" src="type_images/${TYPE_IMG[effMvType]||'normal'}.png" alt="${term('types', effMvType)}">` : '<span style="width:32px;flex-shrink:0"></span>'}
+      <span class="move-name-txt">${mv?term('moves', mv.name):''}</span>
+      <span class="move-meta-txt">${mv?(CAT_I18N[mv.category]||mv.category)+' / '+t('power_lbl')+':'+powerDisplay:''}</span>
+      <span class="move-power-txt">${t('decisive_power')} : ${dp||'-'}</span>
+      ${mv ? `<div class="move-tooltip">${desc}<div class="move-tooltip-stats"><span>${t('power_lbl')}:${powerDisplay}</span><span>${t('accuracy_lbl')}:${accDisplay}</span><span>PP:${mv.pp}</span></div></div>` : ''}
     </div>`;
   }).join('');
 
   const badge = (t, suffix='') => `<span class="type-badge" style="background:${TYPE_COLORS[t]}">${t}${suffix}</span>`;
 
+  const pkDisplayName = pokeName(pk.name, pk.no);
   document.getElementById('detailCard').innerHTML = `
     <div class="card-topbar">
       <span style="font-size:11px;color:#888;font-weight:600;">Lv.50</span>
       <div style="display:flex;gap:5px;margin-left:auto;">
-        <button class="btn-box-action" data-slot="${idx}" data-action="boxLoad" title="박스에서 불러오기">📦 불러오기</button>
-        <button class="btn-box-action" data-slot="${idx}" data-action="boxSave" title="현재 포켓몬을 박스에 저장">💾 박스 저장</button>
-        <button class="detail-close" id="detailCloseBtn">✕ 닫기</button>
+        <button class="btn-box-action" data-slot="${idx}" data-action="boxLoad" title="${t('box_load')}">📦 ${t('box_load_btn')}</button>
+        <button class="btn-box-action" data-slot="${idx}" data-action="boxSave" title="${t('box_save_tooltip')}">💾 ${t('box_save_btn')}</button>
+        <button class="detail-close" id="detailCloseBtn">✕ ${t('close')}</button>
       </div>
     </div>
 
     <div class="poke-header">
       <div class="poke-img-col" data-slot="${idx}" data-action="changePoke">
-        <img src="${spriteUrl(pk.name,pk.no)}" class="poke-main-img" alt="${pk.name}">
+        <img src="${spriteUrl(pk.name,pk.no)}" class="poke-main-img" alt="${pkDisplayName}">
         <div class="poke-name-row">
-          <span class="poke-name" title="${pk.name}">${mem.nickname || pk.name}</span>
+          <span class="poke-name" title="${pkDisplayName}">${mem.nickname || pkDisplayName}</span>
         </div>
         <div class="poke-type-row">${typeBadges}</div>
       </div>
@@ -2188,38 +2328,40 @@ function renderDetail(idx) {
       <div class="stats-col">
         ${statRows}
         <div class="ev-total-row">
-          <input type="text" class="poke-nickname-inp" id="pokeNicknameInp" placeholder="별명..." maxlength="20" autocomplete="off" value="${(mem.nickname||'').replace(/"/g,'&quot;')}">
+          <input type="text" class="poke-nickname-inp" id="pokeNicknameInp" placeholder="${t('nickname_placeholder')}" maxlength="20" autocomplete="off" value="${(mem.nickname||'').replace(/"/g,'&quot;')}">
           <div style="display:flex;gap:3px;flex-shrink:0;">
-            <button class="det-gender-tab${!mem.gender?' on':''}" data-gender-slot="${idx}" data-gender="">무성</button>
+            <button class="det-gender-tab${!mem.gender?' on':''}" data-gender-slot="${idx}" data-gender="">${t('gender_none')}</button>
             <button class="det-gender-tab male${mem.gender==='♂'?' on':''}" data-gender-slot="${idx}" data-gender="♂">♂</button>
             <button class="det-gender-tab female${mem.gender==='♀'?' on':''}" data-gender-slot="${idx}" data-gender="♀">♀</button>
           </div>
-          <span style="flex-shrink:0;">노력치 합계 <span id="evTotalDisp">${evTotal}</span>/66</span>
+          <span style="flex-shrink:0;">${t('ev_total')} <span id="evTotalDisp">${evTotal}</span>/66</span>
         </div>
       </div>
     </div>
 
     <div class="cfg-row" data-slot="${idx}" data-action="changeItem">
-      <span class="cfg-lbl">도구</span>
+      <span class="cfg-lbl">${t('item')}</span>
       ${itemSprite ? `<img class="item-sprite-sm" src="${itemSprite}" alt="${itemName}">` : ''}
       <div class="cfg-content">
-        <span class="cfg-name ${itemName?'':'ph'}">${itemName||'도구 없음'}</span>
+        <span class="cfg-name ${itemName?'':'ph'}">${itemName||t('item_none')}</span>
         ${itemEffect ? `<span class="cfg-desc">${itemEffect}</span>` : ''}
       </div>
+      ${itemEffect ? `<div class="cfg-tooltip">${itemEffect}</div>` : ''}
     </div>
 
     <div class="cfg-row" data-slot="${idx}" data-action="changeAbility">
-      <span class="cfg-lbl">특성</span>
+      <span class="cfg-lbl">${t('ability')}</span>
       <div class="cfg-content">
-        <span class="cfg-name ${abilityName?'':'ph'}">${abilityName||'특성 없음'}</span>
+        <span class="cfg-name ${abilityName?'':'ph'}">${abilityName||t('ability_none')}</span>
         ${abilityDesc ? `<span class="cfg-desc">${abilityDesc}</span>` : ''}
       </div>
+      ${abilityDesc ? `<div class="cfg-tooltip">${abilityDesc}</div>` : ''}
     </div>
 
     <div class="cfg-row" data-slot="${idx}" data-action="changeNature">
-      <span class="cfg-lbl">성격</span>
+      <span class="cfg-lbl">${t('nature')}</span>
       <div class="cfg-content">
-        <span class="cfg-name ${natureName?'':'ph'}">${natureName||'성격 없음'}</span>
+        <span class="cfg-name ${natureName?'':'ph'}">${natureName||t('nature_none')}</span>
         ${natEffect ? `<span class="cfg-desc">${natEffect}</span>` : ''}
       </div>
     </div>
@@ -2229,25 +2371,25 @@ function renderDetail(idx) {
     <div class="ev-dur-bar">
       <div class="sg-archetype">${archetype}</div>
       <div class="sg-grid">
-        <div class="sg-item"><span class="sg-lbl">물리화력</span><span class="sg-val ${physPowG?.cls||'sg-na'}">${physPowG?.label||'—'}</span></div>
-        <div class="sg-item"><span class="sg-lbl">물리내구</span><span class="sg-val ${physDurG.cls}">${physDurG.label}</span></div>
-        <div class="sg-item"><span class="sg-lbl">스피드</span><span class="sg-val ${speedG.cls}">${speedG.label}</span></div>
-        <div class="sg-item"><span class="sg-lbl">특수화력</span><span class="sg-val ${specPowG?.cls||'sg-na'}">${specPowG?.label||'—'}</span></div>
-        <div class="sg-item"><span class="sg-lbl">특수내구</span><span class="sg-val ${specDurG.cls}">${specDurG.label}</span></div>
+        <div class="sg-item"><span class="sg-lbl">${t('phys_power')}</span><span class="sg-val ${physPowG?.cls||'sg-na'}">${physPowG?.label||'—'}</span></div>
+        <div class="sg-item"><span class="sg-lbl">${t('phys_dur')}</span><span class="sg-val ${physDurG.cls}">${physDurG.label}</span></div>
+        <div class="sg-item"><span class="sg-lbl">${t('speed_short')}</span><span class="sg-val ${speedG.cls}">${speedG.label}</span></div>
+        <div class="sg-item"><span class="sg-lbl">${t('spec_power')}</span><span class="sg-val ${specPowG?.cls||'sg-na'}">${specPowG?.label||'—'}</span></div>
+        <div class="sg-item"><span class="sg-lbl">${t('spec_dur')}</span><span class="sg-val ${specDurG.cls}">${specDurG.label}</span></div>
       </div>
       <div class="dur-row" id="durRow">
-        <div class="dur-item">물리내구 <span id="durPhys">${dur.phys.toLocaleString()}</span></div>
-        <div class="dur-item">특수내구 <span id="durSpec">${dur.spec.toLocaleString()}</span></div>
+        <div class="dur-item">${t('phys_dur')} <span id="durPhys">${dur.phys.toLocaleString()}</span></div>
+        <div class="dur-item">${t('spec_dur')} <span id="durSpec">${dur.spec.toLocaleString()}</span></div>
       </div>
     </div>
 
     <div class="detail-charts">
       <div class="analysis-box">
-        <h3>방어 상성</h3>
+        <h3>${t('def_matchup')}</h3>
         <div id="anaDefChart"></div>
       </div>
       <div class="analysis-box">
-        <h3>공격 상성</h3>
+        <h3>${t('atk_matchup')}</h3>
         <div id="anaAtkChart"></div>
       </div>
     </div>
@@ -2265,7 +2407,7 @@ function renderDetail(idx) {
       party[idx].nickname = nick || null;
       saveParty();
       const nameEl = document.querySelector('.poke-name');
-      if (nameEl) nameEl.textContent = nick || pk.name;
+      if (nameEl) nameEl.textContent = nick || pkDisplayName;
     };
     nickInp.addEventListener('blur', applyNick);
     nickInp.addEventListener('keydown', ev => { if (ev.key === 'Enter') nickInp.blur(); });
@@ -2435,7 +2577,7 @@ function updateAnalysis(idx) {
   if (!pk) return;
 
   const defEff = applyAbilityDefEff(defEffectiveness(pk.type1, pk.type2||null), party[idx].ability);
-  const badge  = (t, label) => `<span class="type-badge" style="background:${TYPE_COLORS[t]||'#888'}">${label||t}</span>`;
+  const badge  = (tp, label) => `<span class="type-badge" style="background:${TYPE_COLORS[tp]||'#888'}">${label||term('types', tp)}</span>`;
   const row    = (lbl, color, html) =>
     html ? `<div class="chart-row"><span class="chart-lbl" style="color:${color}">${lbl}</span><div class="chart-types">${html}</div></div>` : '';
 
@@ -2447,18 +2589,18 @@ function updateAnalysis(idx) {
   const x0  = ALL_TYPES.filter(t=>defEff[t]===0);
 
   document.getElementById('anaDefChart').innerHTML =
-    row('×4',  '#c62828', x4.map(t=>badge(t)).join('')) +
-    row('×2',  '#e65100', x2.map(t=>badge(t)).join('')) +
-    row('½',   '#2e7d32', x05.map(t=>badge(t)).join('')) +
-    row('¼',   '#1b5e20', x025.map(t=>badge(t)).join('')) +
-    row('무효', '#37474f', x0.map(t=>badge(t)).join('')) ||
-    '<span class="chart-empty">상성 없음</span>';
+    row('×4',  '#c62828', x4.map(tp=>badge(tp)).join('')) +
+    row('×2',  '#e65100', x2.map(tp=>badge(tp)).join('')) +
+    row('½',   '#2e7d32', x05.map(tp=>badge(tp)).join('')) +
+    row('¼',   '#1b5e20', x025.map(tp=>badge(tp)).join('')) +
+    row(t('immune'), '#37474f', x0.map(tp=>badge(tp)).join('')) ||
+    `<span class="chart-empty">${t('no_matchup')}</span>`;
 
   /* ── 공격 상성 ── */
   const powermoves = moves.filter(mv => mv?.power && mv.category!=='변화');
 
   if (!powermoves.length) {
-    document.getElementById('anaAtkChart').innerHTML = '<span class="chart-empty">기술 미설정</span>';
+    document.getElementById('anaAtkChart').innerHTML = `<span class="chart-empty">${t('no_moves_set')}</span>`;
     return;
   }
 
@@ -2480,8 +2622,8 @@ function updateAnalysis(idx) {
     row('×4↑',  '#c62828', a2.map(t=>badge(t)).join('')) +
     row('×2',   '#e65100', a2n.map(t=>badge(t)).join('')) +
     row('½↓',   '#2e7d32', a05.map(t=>badge(t)).join('')) +
-    row('무효',  '#37474f', a0.map(t=>badge(t)).join('')) ||
-    '<span class="chart-empty">없음</span>';
+    row(t('immune'),  '#37474f', a0.map(t2=>badge(t2)).join('')) ||
+    `<span class="chart-empty">${t('none')}</span>`;
 
 }
 
@@ -2489,7 +2631,7 @@ function buildTypeChartHTML(slots) {
   if (!slots.length) return '';
   const effs = slots.map(s => applyAbilityDefEff(defEffectiveness(s.pokemon.type1, s.pokemon.type2||null), s.ability));
   const headerHTML = slots.map(s =>
-    `<div class="ptc-th" title="${s.pokemon.name}"><img src="${spriteUrl(s.pokemon.name, s.pokemon.no)}" alt="${s.pokemon.name}"></div>`
+    `<div class="ptc-th" title="${pokeName(s.pokemon.name, s.pokemon.no)}"><img src="${spriteUrl(s.pokemon.name, s.pokemon.no)}" alt="${pokeName(s.pokemon.name, s.pokemon.no)}"></div>`
   ).join('');
   const rowsHTML = ALL_TYPES.map(atkType => {
     const cells = effs.map(eff => {
@@ -2503,7 +2645,7 @@ function buildTypeChartHTML(slots) {
       else                { cls = 'ptc-n1'; txt = ''; }
       return `<div class="ptc-cell ${cls}">${txt}</div>`;
     }).join('');
-    return `<div class="ptc-type-row"><div class="ptc-lbl" style="background:${TYPE_COLORS[atkType]}">${atkType}</div>${cells}</div>`;
+    return `<div class="ptc-type-row"><div class="ptc-lbl" style="background:${TYPE_COLORS[atkType]}">${term('types', atkType)}</div>${cells}</div>`;
   }).join('');
   return `<div class="ptc-wrap"><div class="ptc-header">${headerHTML}</div>${rowsHTML}</div>`;
 }
@@ -2520,11 +2662,11 @@ function buildTypeChartSummaryHTML(slots) {
     else if (r > w) strongTypes.push(t);
     else if (n >= half) neutralTypes.push(t);
   });
-  const tbadge = t => `<span class="pcs-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`;
+  const tbadge = tp => `<span class="pcs-tbadge" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`;
   return `<div class="pcs-wrap">
-    <div class="pcs-row"><span class="pcs-lbl pcs-weak">약점</span><div class="pcs-badges">${weakTypes.length ? weakTypes.map(tbadge).join('') : '<span class="pcs-none">없음</span>'}</div></div>
-    <div class="pcs-row"><span class="pcs-lbl pcs-neutral">1배</span><div class="pcs-badges">${neutralTypes.length ? neutralTypes.map(tbadge).join('') : '<span class="pcs-none">없음</span>'}</div></div>
-    <div class="pcs-row"><span class="pcs-lbl pcs-strong">강함</span><div class="pcs-badges">${strongTypes.length ? strongTypes.map(tbadge).join('') : '<span class="pcs-none">없음</span>'}</div></div>
+    <div class="pcs-row"><span class="pcs-lbl pcs-weak">${t('weak')}</span><div class="pcs-badges">${weakTypes.length ? weakTypes.map(tbadge).join('') : `<span class="pcs-none">${t('none')}</span>`}</div></div>
+    <div class="pcs-row"><span class="pcs-lbl pcs-neutral">${t('neutral_1x')}</span><div class="pcs-badges">${neutralTypes.length ? neutralTypes.map(tbadge).join('') : `<span class="pcs-none">${t('none')}</span>`}</div></div>
+    <div class="pcs-row"><span class="pcs-lbl pcs-strong">${t('strong')}</span><div class="pcs-badges">${strongTypes.length ? strongTypes.map(tbadge).join('') : `<span class="pcs-none">${t('none')}</span>`}</div></div>
   </div>`;
 }
 
@@ -2533,7 +2675,7 @@ function renderPartyTypeChart() {
   const anaEl = document.getElementById('anaPartyChart');
   if (anaEl) anaEl.innerHTML = buildTypeChartHTML(slots);
   const bigEl = document.getElementById('bigPartyChart');
-  if (bigEl) bigEl.innerHTML = `<div class="big-chart-title">파티 상성</div>` + buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
+  if (bigEl) bigEl.innerHTML = `<div class="big-chart-title">${t('party_matchup')}</div>` + buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
   const mobEl = document.getElementById('mobPartyChart');
   if (mobEl) mobEl.innerHTML = buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
 }
@@ -2547,12 +2689,12 @@ function renderBigEnemyChart() {
   if (mobEl) mobEl.innerHTML = buildTypeChartHTML(slots) + buildTypeChartSummaryHTML(slots);
 }
 
-function empty() { return '<span class="chart-empty">없음</span>'; }
+function empty() { return `<span class="chart-empty">${t('none')}</span>`; }
 
 /* ════════════════════════════
    결정력 / 대미지 계산기
 ════════════════════════════ */
-(function initPowerCalc() {
+window.initPowerCalc = function initPowerCalc() {
   const body = document.getElementById('powerCalcBody');
   if (!body) return;
 
@@ -2571,49 +2713,49 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     <div class="dc-cols">
       <!-- 공격 -->
       <div class="dc-col">
-        <div class="dc-col-title" style="display:flex;justify-content:space-between;align-items:center;"><span>⚔ 공격</span><button id="dcClearAtk" style="font-size:9px;padding:2px 7px;border:1px solid #c9a0e8;border-radius:4px;background:#fff;color:#9070b0;cursor:pointer;font-family:inherit;">비우기</button></div>
+        <div class="dc-col-title" style="display:flex;justify-content:space-between;align-items:center;"><span>${t('attack_section')}</span><button id="dcClearAtk" style="font-size:9px;padding:2px 7px;border:1px solid #c9a0e8;border-radius:4px;background:#fff;color:#9070b0;cursor:pointer;font-family:inherit;">${t('clear_short')}</button></div>
         <div class="dc-block">
-          <div class="dc-block-title">포켓몬</div>
+          <div class="dc-block-title">${t('pokemon_lbl')}</div>
           <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:4px;justify-content:center;">
-            <div class="dc-big-slot" id="dcBigSlot" title="클릭하여 검색">
+            <div class="dc-big-slot" id="dcBigSlot" title="${t('click_to_search')}">
               <img id="dcBigSlotImg" style="display:none;width:82px;height:82px;image-rendering:pixelated;object-fit:contain;">
               <span class="dc-big-slot-plus" id="dcBigSlotPlus">+</span>
             </div>
             <div class="dc-party-pills" id="dcPills"></div>
           </div>
-          <div class="dc-drop"><input class="dc-input" id="dcPokeQ" placeholder="이름 검색..." autocomplete="off"><div class="dc-drop-list" id="dcPokeList"></div></div>
-          <div class="dc-env-row" style="margin-top:4px;"><span class="dc-env-lbl">성별</span>
-            <button class="dc-toggle-btn on" data-ag="">무성</button>
+          <div class="dc-drop"><input class="dc-input" id="dcPokeQ" placeholder="${t('name_search_placeholder')}" autocomplete="off"><div class="dc-drop-list" id="dcPokeList"></div></div>
+          <div class="dc-env-row" style="margin-top:4px;"><span class="dc-env-lbl">${t('gender_lbl')}</span>
+            <button class="dc-toggle-btn on" data-ag="">${t('gender_none')}</button>
             <button class="dc-toggle-btn" data-ag="♂">♂</button>
             <button class="dc-toggle-btn" data-ag="♀">♀</button>
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">기술</div>
-          <div class="dc-drop"><input class="dc-input" id="dcMoveQ" placeholder="기술 검색..." autocomplete="off"><div class="dc-drop-list" id="dcMoveList"></div></div>
+          <div class="dc-block-title">${t('moves')}</div>
+          <div class="dc-drop"><input class="dc-input" id="dcMoveQ" placeholder="${t('search_move_placeholder')}" autocomplete="off"><div class="dc-drop-list" id="dcMoveList"></div></div>
           <div id="dcPartyMoves" style="display:none;margin-top:5px;flex-direction:column;gap:3px;"></div>
           <div id="dcMoveInfo" style="font-size:10px;color:#9070b0;margin-top:4px;min-height:14px;"></div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">공격 스탯</div>
+          <div class="dc-block-title">${t('atk_stat')}</div>
           <div class="dc-stat-grid">
-            <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcBase">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcActual">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">랭크</span>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('base_stats')}</span><span class="dc-stat-val" id="dcBase">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('evs')}</span><input class="dc-ev-inp" id="dcEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('actual_value')}</span><span class="dc-stat-val" id="dcActual">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('rank_lbl2')}</span>
               <div class="dc-rank-row"><button class="dc-rank-btn" id="dcRkDn">−</button><span class="dc-rank-val" id="dcRkVal">0</span><button class="dc-rank-btn" id="dcRkUp">+</button></div>
             </div>
           </div>
-          <div class="dc-nat-row" id="dcAtkNatRow"><span class="dc-nat-lbl">성격</span>
+          <div class="dc-nat-row" id="dcAtkNatRow"><span class="dc-nat-lbl">${t('nature')}</span>
             <button class="dc-nat-btn" data-m="0.9">×0.9</button><button class="dc-nat-btn on" data-m="1.0">×1.0</button><button class="dc-nat-btn" data-m="1.1">×1.1</button>
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">도구 / 특성</div>
-          <div class="dc-drop"><input class="dc-input" id="dcItemQ" placeholder="도구 검색..." autocomplete="off"><div class="dc-drop-list" id="dcItemList"></div></div>
-          <select class="dc-sel" id="dcAbilSel" style="margin-top:4px;width:100%;"><option value="">특성 없음</option></select>
+          <div class="dc-block-title">${t('item_ability_slash')}</div>
+          <div class="dc-drop"><input class="dc-input" id="dcItemQ" placeholder="${t('item_search_placeholder')}" autocomplete="off"><div class="dc-drop-list" id="dcItemList"></div></div>
+          <select class="dc-sel" id="dcAbilSel" style="margin-top:4px;width:100%;"><option value="">${t('ability_none')}</option></select>
           <div class="dc-env-row" id="dcOLRow" style="display:none;margin-top:4px;">
-            <span class="dc-env-lbl">단계</span>
+            <span class="dc-env-lbl">${t('stage_lbl')}</span>
             <button class="dc-toggle-btn on" data-ol="0">0</button>
             <button class="dc-toggle-btn" data-ol="1">1</button>
             <button class="dc-toggle-btn" data-ol="2">2</button>
@@ -2623,147 +2765,147 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">공격 상황</div>
+          <div class="dc-block-title">${t('atk_situation')}</div>
           <div class="dc-toggle-row">
-            <button class="dc-toggle-btn" id="dcCrit">급소</button>
-            <button class="dc-toggle-btn" id="dcCharge">충전</button>
-            <button class="dc-toggle-btn" id="dcHH">도우미</button>
-            <button class="dc-toggle-btn" id="dcBatt">배터리</button>
-            <button class="dc-toggle-btn" id="dcPS">파워스폿</button>
+            <button class="dc-toggle-btn" id="dcCrit">${t('crit')}</button>
+            <button class="dc-toggle-btn" id="dcCharge">${t('charge')}</button>
+            <button class="dc-toggle-btn" id="dcHH">${t('helper')}</button>
+            <button class="dc-toggle-btn" id="dcBatt">${t('battery')}</button>
+            <button class="dc-toggle-btn" id="dcPS">${t('power_spot')}</button>
           </div>
-          <div class="dc-env-row" style="margin-top:5px;"><span class="dc-env-lbl">상태이상</span>
-            <button class="dc-toggle-btn" data-st="독">독</button>
-            <button class="dc-toggle-btn" data-st="마비">마비</button>
-            <button class="dc-toggle-btn" data-st="얼음">얼음</button>
-            <button class="dc-toggle-btn" data-st="화상">화상</button>
-            <button class="dc-toggle-btn" data-st="잠듦">잠듦</button>
+          <div class="dc-env-row" style="margin-top:5px;"><span class="dc-env-lbl">${t('status_condition')}</span>
+            <button class="dc-toggle-btn" data-st="독">${t('status_poison')}</button>
+            <button class="dc-toggle-btn" data-st="마비">${t('status_paralysis')}</button>
+            <button class="dc-toggle-btn" data-st="얼음">${t('status_freeze')}</button>
+            <button class="dc-toggle-btn" data-st="화상">${t('status_burn')}</button>
+            <button class="dc-toggle-btn" data-st="잠듦">${t('status_sleep')}</button>
           </div>
           <div class="dc-hp-row">
-            <span class="dc-env-lbl" style="min-width:24px;">체력</span>
+            <span class="dc-env-lbl" style="min-width:24px;">${t('hp_lbl')}</span>
             <input type="range" class="dc-hp-slider" id="dcAtkHPSlider" min="1" max="100" value="100">
             <span class="dc-hp-pct" id="dcAtkHPPct">100%</span>
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">날씨 / 필드 / 오라</div>
-          <div class="dc-env-row"><span class="dc-env-lbl">날씨</span>
+          <div class="dc-block-title">${t('weather_field_aura')}</div>
+          <div class="dc-env-row"><span class="dc-env-lbl">${t('weather_lbl')}</span>
             <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:3px;">
-              <button class="dc-toggle-btn" data-w="맑음">쾌청</button>
-              <button class="dc-toggle-btn" data-w="비">비바리기</button>
-              <button class="dc-toggle-btn" data-w="모래">모래바람</button>
-              <button class="dc-toggle-btn" data-w="눈">설경</button>
+              <button class="dc-toggle-btn" data-w="맑음">${t('weather_sunny')}</button>
+              <button class="dc-toggle-btn" data-w="비">${t('weather_rain')}</button>
+              <button class="dc-toggle-btn" data-w="모래">${t('weather_sand')}</button>
+              <button class="dc-toggle-btn" data-w="눈">${t('weather_snow')}</button>
             </div>
           </div>
-          <div class="dc-env-row"><span class="dc-env-lbl">필드</span>
+          <div class="dc-env-row"><span class="dc-env-lbl">${t('field_lbl')}</span>
             <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:3px;">
-              <button class="dc-toggle-btn" data-f="그래스">그래스필드</button>
-              <button class="dc-toggle-btn" data-f="일렉">일렉트릭필드</button>
-              <button class="dc-toggle-btn" data-f="사이코">사이코필드</button>
-              <button class="dc-toggle-btn" data-f="미스트">미스트필드</button>
+              <button class="dc-toggle-btn" data-f="그래스">${t('field_grassy')}</button>
+              <button class="dc-toggle-btn" data-f="일렉">${t('field_electric')}</button>
+              <button class="dc-toggle-btn" data-f="사이코">${t('field_psychic')}</button>
+              <button class="dc-toggle-btn" data-f="미스트">${t('field_misty')}</button>
             </div>
           </div>
-          <div class="dc-env-row"><span class="dc-env-lbl">오라</span>
+          <div class="dc-env-row"><span class="dc-env-lbl">${t('aura_lbl')}</span>
             <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:3px;">
-              <button class="dc-toggle-btn" data-a="페어리">페어리오라</button>
-              <button class="dc-toggle-btn" data-a="다크">다크오라</button>
-              <button class="dc-toggle-btn" id="dcAuraBreak">오라브레이크</button>
+              <button class="dc-toggle-btn" data-a="페어리">${t('fairy_aura')}</button>
+              <button class="dc-toggle-btn" data-a="다크">${t('dark_aura')}</button>
+              <button class="dc-toggle-btn" id="dcAuraBreak">${t('aura_break')}</button>
             </div>
           </div>
-          <div class="dc-env-row" style="align-items:flex-start;"><span class="dc-env-lbl" style="padding-top:3px;">재앙</span>
+          <div class="dc-env-row" style="align-items:flex-start;"><span class="dc-env-lbl" style="padding-top:3px;">${t('ruin_ability')}</span>
             <div style="flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:3px;">
-              <button class="dc-toggle-btn" id="dcRuinAtk" title="재앙의목간: 공격↓25%">재앙의목간(A↓)</button>
-              <button class="dc-toggle-btn" id="dcRuinSpAtk" title="재앙의그릇: 특공↓25%">재앙의그릇(C↓)</button>
-              <button class="dc-toggle-btn" id="dcRuinDef" title="재앙의검: 방어↓25%">재앙의검(B↓)</button>
-              <button class="dc-toggle-btn" id="dcRuinSpDef" title="재앙의구슬: 특방↓25%">재앙의구슬(D↓)</button>
+              <button class="dc-toggle-btn" id="dcRuinAtk" title="${t('ruin_tablet_title')}">${t('ruin_tablet_btn')}</button>
+              <button class="dc-toggle-btn" id="dcRuinSpAtk" title="${t('ruin_vessel_title')}">${t('ruin_vessel_btn')}</button>
+              <button class="dc-toggle-btn" id="dcRuinDef" title="${t('ruin_sword_title')}">${t('ruin_sword_btn')}</button>
+              <button class="dc-toggle-btn" id="dcRuinSpDef" title="${t('ruin_bead_title')}">${t('ruin_bead_btn')}</button>
             </div>
           </div>
         </div>
       </div>
       <!-- 수비 -->
       <div class="dc-col">
-        <div class="dc-col-title" style="display:flex;justify-content:space-between;align-items:center;"><span>🛡 수비</span><button id="dcClearDef" style="font-size:9px;padding:2px 7px;border:1px solid #c9a0e8;border-radius:4px;background:#fff;color:#9070b0;cursor:pointer;font-family:inherit;">비우기</button></div>
+        <div class="dc-col-title" style="display:flex;justify-content:space-between;align-items:center;"><span>${t('defense_section')}</span><button id="dcClearDef" style="font-size:9px;padding:2px 7px;border:1px solid #c9a0e8;border-radius:4px;background:#fff;color:#9070b0;cursor:pointer;font-family:inherit;">${t('clear_short')}</button></div>
         <div class="dc-block">
-          <div class="dc-block-title">포켓몬</div>
+          <div class="dc-block-title">${t('pokemon_lbl')}</div>
           <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:4px;justify-content:center;">
-            <div class="dc-big-slot" id="dcDefBigSlot" title="클릭하여 검색">
+            <div class="dc-big-slot" id="dcDefBigSlot" title="${t('click_to_search')}">
               <img id="dcDefBigSlotImg" style="display:none;width:82px;height:82px;image-rendering:pixelated;object-fit:contain;">
               <span class="dc-big-slot-plus" id="dcDefBigSlotPlus">+</span>
             </div>
             <div class="dc-party-pills" id="dcDefPills"></div>
           </div>
-          <div class="dc-drop"><input class="dc-input" id="dcDefPokeQ" placeholder="이름 검색..." autocomplete="off"><div class="dc-drop-list" id="dcDefPokeList"></div></div>
-          <div class="dc-env-row" style="margin-top:4px;"><span class="dc-env-lbl">성별</span>
-            <button class="dc-toggle-btn on" data-dg="">무성</button>
+          <div class="dc-drop"><input class="dc-input" id="dcDefPokeQ" placeholder="${t('name_search_placeholder')}" autocomplete="off"><div class="dc-drop-list" id="dcDefPokeList"></div></div>
+          <div class="dc-env-row" style="margin-top:4px;"><span class="dc-env-lbl">${t('gender_lbl')}</span>
+            <button class="dc-toggle-btn on" data-dg="">${t('gender_none')}</button>
             <button class="dc-toggle-btn" data-dg="♂">♂</button>
             <button class="dc-toggle-btn" data-dg="♀">♀</button>
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">HP 스탯</div>
+          <div class="dc-block-title">${t('hp_stat_section')}</div>
           <div class="dc-stat-grid">
-            <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcDefHBase">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefHPEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
-            <div class="dc-stat-box" style="grid-column:span 2"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcDefHActual">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('base_stats')}</span><span class="dc-stat-val" id="dcDefHBase">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('evs')}</span><input class="dc-ev-inp" id="dcDefHPEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
+            <div class="dc-stat-box" style="grid-column:span 2"><span class="dc-stat-lbl">${t('actual_value')}</span><span class="dc-stat-val" id="dcDefHActual">—</span></div>
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">방어 스탯</div>
+          <div class="dc-block-title">${t('def_stat')}</div>
           <div class="dc-stat-grid">
-            <div class="dc-stat-box"><span class="dc-stat-lbl">종족값</span><span class="dc-stat-val" id="dcDefDBase">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">노력치</span><input class="dc-ev-inp" id="dcDefEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">실수값</span><span class="dc-stat-val" id="dcDefActual">—</span></div>
-            <div class="dc-stat-box"><span class="dc-stat-lbl">랭크</span>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('base_stats')}</span><span class="dc-stat-val" id="dcDefDBase">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('evs')}</span><input class="dc-ev-inp" id="dcDefEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('actual_value')}</span><span class="dc-stat-val" id="dcDefActual">—</span></div>
+            <div class="dc-stat-box"><span class="dc-stat-lbl">${t('rank_lbl2')}</span>
               <div class="dc-rank-row"><button class="dc-rank-btn" id="dcDefRkDn">−</button><span class="dc-rank-val" id="dcDefRkVal">0</span><button class="dc-rank-btn" id="dcDefRkUp">+</button></div>
             </div>
           </div>
-          <div class="dc-nat-row" id="dcDefNatRow"><span class="dc-nat-lbl">성격</span>
+          <div class="dc-nat-row" id="dcDefNatRow"><span class="dc-nat-lbl">${t('nature')}</span>
             <button class="dc-nat-btn" data-m="0.9">×0.9</button><button class="dc-nat-btn on" data-m="1.0">×1.0</button><button class="dc-nat-btn" data-m="1.1">×1.1</button>
           </div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">도구 / 특성</div>
-          <div class="dc-drop"><input class="dc-input" id="dcDefItemQ" placeholder="도구 검색..." autocomplete="off"><div class="dc-drop-list" id="dcDefItemList"></div></div>
-          <select class="dc-sel" id="dcDefAbilSel" style="margin-top:4px;width:100%;"><option value="">특성 없음</option></select>
+          <div class="dc-block-title">${t('item_ability_slash')}</div>
+          <div class="dc-drop"><input class="dc-input" id="dcDefItemQ" placeholder="${t('item_search_placeholder')}" autocomplete="off"><div class="dc-drop-list" id="dcDefItemList"></div></div>
+          <select class="dc-sel" id="dcDefAbilSel" style="margin-top:4px;width:100%;"><option value="">${t('ability_none')}</option></select>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">방어 상황</div>
+          <div class="dc-block-title">${t('def_situation')}</div>
           <div class="dc-toggle-row">
-            <button class="dc-toggle-btn" id="dcReflect">리플렉터</button>
-            <button class="dc-toggle-btn" id="dcLightScr">빛의장막</button>
-            <button class="dc-toggle-btn" id="dcAuVeil">오로라베일</button>
-            <button class="dc-toggle-btn" id="dcFG">프렌드가드</button>
+            <button class="dc-toggle-btn" id="dcReflect">${t('reflect')}</button>
+            <button class="dc-toggle-btn" id="dcLightScr">${t('light_screen')}</button>
+            <button class="dc-toggle-btn" id="dcAuVeil">${t('aurora_veil')}</button>
+            <button class="dc-toggle-btn" id="dcFG">${t('friend_guard')}</button>
           </div>
-          <div class="dc-env-row" style="margin-top:5px;"><span class="dc-env-lbl">상태이상</span>
-            <button class="dc-toggle-btn" data-dst="독">독</button>
-            <button class="dc-toggle-btn" data-dst="맹독">맹독</button>
-            <button class="dc-toggle-btn" data-dst="마비">마비</button>
-            <button class="dc-toggle-btn" data-dst="화상">화상</button>
-            <button class="dc-toggle-btn" data-dst="잠듦">잠듦</button>
+          <div class="dc-env-row" style="margin-top:5px;"><span class="dc-env-lbl">${t('status_condition')}</span>
+            <button class="dc-toggle-btn" data-dst="독">${t('status_poison')}</button>
+            <button class="dc-toggle-btn" data-dst="맹독">${t('toxic')}</button>
+            <button class="dc-toggle-btn" data-dst="마비">${t('status_paralysis')}</button>
+            <button class="dc-toggle-btn" data-dst="화상">${t('status_burn')}</button>
+            <button class="dc-toggle-btn" data-dst="잠듦">${t('status_sleep')}</button>
           </div>
           <div class="dc-hp-row">
-            <span class="dc-env-lbl" style="min-width:24px;">체력</span>
+            <span class="dc-env-lbl" style="min-width:24px;">${t('hp_lbl')}</span>
             <input type="range" class="dc-hp-slider" id="dcDefHPSlider" min="1" max="100" value="100">
             <span class="dc-hp-pct" id="dcDefHPPct">100%</span>
           </div>
         </div>
         <div class="dc-block" id="dcDurBlock">
-          <div class="dc-block-title">내구력</div>
+          <div class="dc-block-title">${t('durability')}</div>
           <div class="dc-val-row">
-            <div class="dc-val-box"><div class="dc-val-lbl">물리내구</div><div class="dc-val-num" id="dcPhysDur">—</div></div>
-            <div class="dc-val-box"><div class="dc-val-lbl">특수내구</div><div class="dc-val-num" id="dcSpecDur">—</div></div>
+            <div class="dc-val-box"><div class="dc-val-lbl">${t('phys_dur')}</div><div class="dc-val-num" id="dcPhysDur">—</div></div>
+            <div class="dc-val-box"><div class="dc-val-lbl">${t('spec_dur')}</div><div class="dc-val-num" id="dcSpecDur">—</div></div>
           </div>
         </div>
       </div>
     </div>
     <!-- 결과 -->
     <div class="dc-dmg-box">
-      <div class="dc-dmg-range" id="dcDmgRange"><span class="dc-dmg-empty">포켓몬과 기술을 선택하세요</span></div>
+      <div class="dc-dmg-range" id="dcDmgRange"><span class="dc-dmg-empty">${t('pokemon_and_move_select')}</span></div>
       <div class="dc-dmg-rolls" id="dcDmgRolls"></div>
       <div class="dc-dmg-hits" id="dcDmgHits"></div>
       <div class="dc-val-row" style="margin-top:4px;">
-        <div class="dc-val-box"><div class="dc-val-lbl">결정력</div><div class="dc-val-num" id="dcDecPower">—</div></div>
-        <div class="dc-val-box"><div class="dc-val-lbl">물리내구</div><div class="dc-val-num" id="dcDefPhysDur">—</div></div>
-        <div class="dc-val-box"><div class="dc-val-lbl">특수내구</div><div class="dc-val-num" id="dcDefSpecDur">—</div></div>
+        <div class="dc-val-box"><div class="dc-val-lbl">${t('decisive_power2')}</div><div class="dc-val-num" id="dcDecPower">—</div></div>
+        <div class="dc-val-box"><div class="dc-val-lbl">${t('phys_dur')}</div><div class="dc-val-num" id="dcDefPhysDur">—</div></div>
+        <div class="dc-val-box"><div class="dc-val-lbl">${t('spec_dur')}</div><div class="dc-val-num" id="dcDefSpecDur">—</div></div>
       </div>
     </div>
   </div>`;
@@ -2771,12 +2913,12 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   /* ── 아이템 세팅 헬퍼 ── */
   function setAtkItem(it) {
     atk.item = it || null;
-    document.getElementById('dcItemQ').value = it ? it.name : '';
+    document.getElementById('dcItemQ').value = it ? term('items', it.name) : '';
     calcDamage();
   }
   function setDefItem(it) {
     def.item = it || null;
-    document.getElementById('dcDefItemQ').value = it ? it.name : '';
+    document.getElementById('dcDefItemQ').value = it ? term('items', it.name) : '';
     calcDamage();
   }
 
@@ -2856,7 +2998,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
 
     /* 공격 측 입력 없으면 조기 종료 */
     if (!atkPk || !mv || mv.category==='변화') {
-      rangeEl.innerHTML = '<span class="dc-dmg-empty">포켓몬과 기술을 선택하세요</span>';
+      rangeEl.innerHTML = `<span class="dc-dmg-empty">${t('pokemon_and_move_select')}</span>`;
       rollsEl.textContent = ''; hitsEl.textContent = '';
       const dp=document.getElementById('dcDecPower'); if(dp) dp.textContent='—'; return;
     }
@@ -2896,7 +3038,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const powerCtx = { hpPct:aHP, defHpPct:dHP, defS:defPk?.S||1, defWeight:defPk?.weight||null, status:aStatus, field:effField, defStatus:def.status||'' };
     const effPow  = getMoveEffectivePower(atkPk, mv, aAbil, effWeather, powerCtx);
     if (!effPow) {
-      rangeEl.innerHTML = '<span class="dc-dmg-empty">상대 포켓몬을 선택하세요</span>';
+      rangeEl.innerHTML = `<span class="dc-dmg-empty">${t('opp_select_poke')}</span>`;
       rollsEl.textContent = ''; hitsEl.textContent = '';
       const dp=document.getElementById('dcDecPower'); if(dp) dp.textContent='—'; return;
     }
@@ -2960,7 +3102,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
 
     /* 수비 포켓몬 없으면 데미지 계산 생략 */
     if (!defPk) {
-      rangeEl.innerHTML = '<span class="dc-dmg-empty">수비 포켓몬을 선택하세요</span>';
+      rangeEl.innerHTML = `<span class="dc-dmg-empty">${t('def_select_poke')}</span>`;
       rollsEl.textContent=''; hitsEl.textContent=''; return;
     }
 
@@ -2980,7 +3122,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const D = Math.floor(Math.floor(defRk * defItM * defAbM) * dWeatherM * ruinDefM);
 
     if (A<=0||D<=0) {
-      rangeEl.innerHTML='<span class="dc-dmg-empty">스탯 오류</span>';
+      rangeEl.innerHTML=`<span class="dc-dmg-empty">${t('stat_error')}</span>`;
       rollsEl.textContent='';hitsEl.textContent='';return;
     }
 
@@ -2991,7 +3133,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     if (mv.name === '카타스트로피') {
       const fixedDmg = Math.floor(defCurHP / 2);
       const pct = (fixedDmg / defHAct * 100).toFixed(1);
-      rangeEl.innerHTML = `${fixedDmg} <span class="dc-dmg-pct">(${pct}%) 현재HP의½</span>`;
+      rangeEl.innerHTML = `${fixedDmg} <span class="dc-dmg-pct">(${pct}%) ${t('half_current_hp')}</span>`;
       rollsEl.textContent=''; hitsEl.textContent='';
       if(dp) dp.textContent='—'; return;
     }
@@ -2999,7 +3141,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     if (['적당히손봐주기','칼등치기'].includes(mv.name)) {
       const fixedDmg = defCurHP - 1;
       const pct = (fixedDmg / defHAct * 100).toFixed(1);
-      rangeEl.innerHTML = `${fixedDmg} <span class="dc-dmg-pct">(${pct}%) HP 1 남김</span>`;
+      rangeEl.innerHTML = `${fixedDmg} <span class="dc-dmg-pct">(${pct}%) ${t('leave_hp_1')}</span>`;
       rollsEl.textContent=''; hitsEl.textContent='';
       if(dp) dp.textContent='—'; return;
     }
@@ -3007,24 +3149,25 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     /* 타입 상성 */
     const dAbil = def.ability;
     /* 특성 무효 */
-    if (dAbil?.name==='부유'&&effType==='땅') { rangeEl.textContent='효과 없음 (부유)';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if (dAbil?.name==='흙먹기'&&effType==='땅') { rangeEl.textContent='효과 없음 (흙먹기)';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if ((dAbil?.name==='저수'||dAbil?.name==='마중물')&&effType==='물') { rangeEl.textContent='효과 없음';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if (dAbil?.name==='수포'&&effType==='물') { rangeEl.textContent='효과 없음 (수포)';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if ((dAbil?.name==='전기엔진'||dAbil?.name==='피뢰침'||dAbil?.name==='축전')&&effType==='전기') { rangeEl.textContent='효과 없음';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if (dAbil?.name==='초식'&&effType==='풀') { rangeEl.textContent='효과 없음 (초식)';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if (dAbil?.name==='방탄'&&BALL_MOVES.has(mv.name)) { rangeEl.textContent='효과 없음 (방탄)';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if (dAbil?.name==='방음'&&SOUND_MOVES.has(mv.name)) { rangeEl.textContent='효과 없음 (방음)';rollsEl.textContent='';hitsEl.textContent='';return; }
-    if (dAbil?.name==='바람타기'&&WIND_MOVES.has(mv.name)) { rangeEl.textContent='효과 없음 (바람타기)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    const noEffect = (abilNameKo) => `${t('no_effect')}${abilNameKo ? ` (${term('abilities', abilNameKo)})` : ''}`;
+    if (dAbil?.name==='부유'&&effType==='땅') { rangeEl.textContent=noEffect('부유');rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='흙먹기'&&effType==='땅') { rangeEl.textContent=noEffect('흙먹기');rollsEl.textContent='';hitsEl.textContent='';return; }
+    if ((dAbil?.name==='저수'||dAbil?.name==='마중물')&&effType==='물') { rangeEl.textContent=noEffect();rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='수포'&&effType==='물') { rangeEl.textContent=noEffect('수포');rollsEl.textContent='';hitsEl.textContent='';return; }
+    if ((dAbil?.name==='전기엔진'||dAbil?.name==='피뢰침'||dAbil?.name==='축전')&&effType==='전기') { rangeEl.textContent=noEffect();rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='초식'&&effType==='풀') { rangeEl.textContent=noEffect('초식');rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='방탄'&&BALL_MOVES.has(mv.name)) { rangeEl.textContent=noEffect('방탄');rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='방음'&&SOUND_MOVES.has(mv.name)) { rangeEl.textContent=noEffect('방음');rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='바람타기'&&WIND_MOVES.has(mv.name)) { rangeEl.textContent=noEffect('바람타기');rollsEl.textContent='';hitsEl.textContent='';return; }
 
     const e1 = ATK_CHART[effType]?.[defPk.type1] ?? 1;
     const e2 = defPk.type2 ? (ATK_CHART[effType]?.[defPk.type2] ?? 1) : 1;
     let typeEff = e1 * e2;
     /* 불가사의부적: 효과 최고 이외 무효 */
-    if (dAbil?.name==='불가사의부적'&&typeEff<2) { rangeEl.textContent='효과 없음 (불가사의부적)';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (dAbil?.name==='불가사의부적'&&typeEff<2) { rangeEl.textContent=noEffect('불가사의부적');rollsEl.textContent='';hitsEl.textContent='';return; }
     /* 색안경: 불효과 → 통상 배율로 */
     if (aAbil?.name==='색안경'&&typeEff>0&&typeEff<1) typeEff=Math.min(typeEff*2,1);
-    if (typeEff===0) { rangeEl.textContent='효과 없음';rollsEl.textContent='';hitsEl.textContent='';return; }
+    if (typeEff===0) { rangeEl.textContent=noEffect();rollsEl.textContent='';hitsEl.textContent='';return; }
 
     /* 장막 (급소면 무시) */
     let screenM=1;
@@ -3088,12 +3231,12 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     hitsEl.className='dc-dmg-hits';
     if (maxD>=defCurHP) {
       const cnt=rolls.filter(r=>r*hits>=defCurHP).length;
-      if (cnt===16) { hitsEl.textContent='확정 1타';hitsEl.className='dc-dmg-hits ohko'; }
-      else hitsEl.textContent=`${(cnt/16*100).toFixed(1)}% 난수 1타`;
+      if (cnt===16) { hitsEl.textContent=t('ohko_label');hitsEl.className='dc-dmg-hits ohko'; }
+      else hitsEl.textContent=t('random_ohko_label', {pct: (cnt/16*100).toFixed(1)});
     } else if (minHits===maxHits) {
-      hitsEl.textContent=`확정 ${minHits}타`;
+      hitsEl.textContent=t('guaranteed_hits', {n: minHits});
     } else {
-      hitsEl.textContent=`난수 ${minHits}~${maxHits}타`;
+      hitsEl.textContent=t('random_hits_range', {min: minHits, max: maxHits});
     }
   }
 
@@ -3102,8 +3245,8 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const el = document.getElementById('dcPills');
     if (!el) return;
     el.innerHTML = party.map((s,i) => !s.pokemon ? '' :
-      `<button class="dc-pill${atk.pokemon?.name===s.pokemon.name?' dc-sel':''}" data-pi="${i}" title="${s.pokemon.name}">
-        <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${s.pokemon.name}">
+      `<button class="dc-pill${atk.pokemon?.name===s.pokemon.name?' dc-sel':''}" data-pi="${i}" title="${pokeName(s.pokemon.name,s.pokemon.no)}">
+        <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${pokeName(s.pokemon.name,s.pokemon.no)}">
       </button>`
     ).join('');
     el.querySelectorAll('.dc-pill').forEach(btn => btn.addEventListener('click', () => {
@@ -3111,7 +3254,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
       const s = party[idx];
       if (!s?.pokemon) return;
       atk.pokemon = s.pokemon;
-      document.getElementById('dcPokeQ').value = s.pokemon.name;
+      document.getElementById('dcPokeQ').value = pokeName(s.pokemon.name, s.pokemon.no);
       document.getElementById('dcPokeList').classList.remove('open');
       fillAbilSel(s.pokemon, 'dcAbilSel');
       updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
@@ -3137,8 +3280,8 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     const el = document.getElementById('dcDefPills');
     if (!el) return;
     el.innerHTML = party.map((s,i) => !s.pokemon ? '' :
-      `<button class="dc-pill${def.pokemon?.name===s.pokemon.name?' dc-sel':''}" data-pi="${i}" title="${s.pokemon.name}">
-        <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${s.pokemon.name}">
+      `<button class="dc-pill${def.pokemon?.name===s.pokemon.name?' dc-sel':''}" data-pi="${i}" title="${pokeName(s.pokemon.name,s.pokemon.no)}">
+        <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${pokeName(s.pokemon.name,s.pokemon.no)}">
       </button>`
     ).join('');
     el.querySelectorAll('.dc-pill').forEach(btn => btn.addEventListener('click', () => {
@@ -3146,7 +3289,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
       const s = party[idx];
       if (!s?.pokemon) return;
       def.pokemon = s.pokemon;
-      document.getElementById('dcDefPokeQ').value = s.pokemon.name;
+      document.getElementById('dcDefPokeQ').value = pokeName(s.pokemon.name, s.pokemon.no);
       document.getElementById('dcDefPokeList').classList.remove('open');
       fillAbilSel(s.pokemon, 'dcDefAbilSel');
       updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus', s.pokemon);
@@ -3192,16 +3335,17 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     if (!valid.length) { el.style.display = 'none'; el.innerHTML = ''; return; }
     /* 기술 미선택 상태(검색창 비어있음)이면 바로 보이게 */
     el.style.display = document.getElementById('dcMoveQ')?.value ? 'none' : 'flex';
+    const CAT_I18N_PM = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
     el.innerHTML = valid.map(mv => {
       const tc = TYPE_COLORS[mv.type] || '#888';
       const isStatus = mv.category === '변화';
       return `<button class="dc-pmove-btn${atk.move?.name===mv.name?' on':''}" data-mv="${mv.name}"
         style="display:flex;align-items:center;gap:5px;padding:3px 7px;border-radius:6px;
           border:1px solid rgba(0,0,0,.12);background:#f4f0fc;cursor:pointer;text-align:left;
-          opacity:${isStatus?.55:1};" title="${mv.name}">
-        <span class="dc-type-tag" style="background:${tc};font-size:9px;padding:1px 4px;">${mv.type}</span>
-        <span style="font-size:11px;font-weight:600;flex:1;">${mv.name}</span>
-        <span style="font-size:9px;color:#9070b0;">${mv.category}${mv.power?' '+mv.power:''}</span>
+          opacity:${isStatus?.55:1};" title="${term('moves', mv.name)}">
+        <span class="dc-type-tag" style="background:${tc};font-size:9px;padding:1px 4px;">${term('types', mv.type)}</span>
+        <span style="font-size:11px;font-weight:600;flex:1;">${term('moves', mv.name)}</span>
+        <span style="font-size:9px;color:#9070b0;">${CAT_I18N_PM[mv.category]||mv.category}${mv.power?' '+mv.power:''}</span>
       </button>`;
     }).join('');
     el.querySelectorAll('.dc-pmove-btn').forEach(btn => {
@@ -3219,7 +3363,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   /* ── 포켓몬 세팅 (공격) ── */
   function setAtkPokemon(pk) {
     atk.pokemon = pk;
-    document.getElementById('dcPokeQ').value = pk.name;
+    document.getElementById('dcPokeQ').value = pokeName(pk.name, pk.no);
     document.getElementById('dcPokeList').classList.remove('open');
     fillAbilSel(pk, 'dcAbilSel');
     updateAtkPillSel();
@@ -3230,7 +3374,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   /* ── 포켓몬 세팅 (수비) ── */
   function setDefPokemon(pk) {
     def.pokemon = pk;
-    document.getElementById('dcDefPokeQ').value = pk.name;
+    document.getElementById('dcDefPokeQ').value = pokeName(pk.name, pk.no);
     document.getElementById('dcDefPokeList').classList.remove('open');
     fillAbilSel(pk, 'dcDefAbilSel');
     updateDefPillSel();
@@ -3242,26 +3386,27 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   function fillAbilSel(pk, selId) {
     const sel = document.getElementById(selId);
     if (!sel || !pk) return;
-    sel.innerHTML = '<option value="">특성 없음</option>';
+    sel.innerHTML = `<option value="">${t('ability_none')}</option>`;
     const abd = ABILITY_DATA?.[pk.name];
     const norm = Array.isArray(abd?.normal) ? abd.normal : [];
     const hidn = !abd?.hidden ? [] : Array.isArray(abd.hidden) ? abd.hidden : [abd.hidden];
     norm.forEach(ab => {
-      const o = document.createElement('option'); o.value=ab.name; o.textContent=ab.name; sel.appendChild(o);
+      const o = document.createElement('option'); o.value=ab.name; o.textContent=term('abilities', ab.name); sel.appendChild(o);
     });
     hidn.forEach(ab => {
-      const o = document.createElement('option'); o.value=ab.name; o.textContent=ab.name+' (숨겨진)'; sel.appendChild(o);
+      const o = document.createElement('option'); o.value=ab.name; o.textContent=term('abilities', ab.name)+t('hidden_suffix'); sel.appendChild(o);
     });
   }
 
   /* ── 기술 세팅 ── */
   function setMove(mv) {
     atk.move = mv;
-    document.getElementById('dcMoveQ').value = mv.name;
+    document.getElementById('dcMoveQ').value = term('moves', mv.name);
     document.getElementById('dcMoveList').classList.remove('open');
     const tc = TYPE_COLORS[mv.type]||'#888';
+    const CAT_I18N_MI = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
     document.getElementById('dcMoveInfo').innerHTML =
-      `<span class="dc-type-tag" style="background:${tc}">${mv.type}</span> ${mv.category} | 위력 ${mv.power??'가변'}`;
+      `<span class="dc-type-tag" style="background:${tc}">${term('types', mv.type)}</span> ${CAT_I18N_MI[mv.category]||mv.category} | ${t('power_lbl')} ${mv.power??t('variable_power')}`;
     const pmEl = document.getElementById('dcPartyMoves');
     if (pmEl) { pmEl.style.display = 'none'; pmEl.querySelectorAll('.dc-pmove-btn').forEach(b => b.classList.toggle('on', b.dataset.mv===mv.name)); }
     if (atk.pokemon && selectedSlot >= 0) window.dcSyncFromSlot(selectedSlot);
@@ -3307,16 +3452,16 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   });
 
   makeSearch('dcPokeQ','dcPokeList',
-    q => POKEMON_DATA.filter(p=>p.name.includes(q)).map(p=>({
-      html:`<div class="dc-drop-item">${p.name}</div>`, data:p })),
+    q => POKEMON_DATA.filter(p=>matchPokemonQuery(p,q)).map(p=>({
+      html:`<div class="dc-drop-item">${pokeName(p.name,p.no)}</div>`, data:p })),
     p => setAtkPokemon(p));
 
   makeSearch('dcMoveQ','dcMoveList',
-    q => (MOVE_DATA||[]).filter(m=>m.name.includes(q)&&m.category!=='변화'&&!(m.accuracy===null&&m.pp===1)).map(m=>({
+    q => (MOVE_DATA||[]).filter(m=>matchTermQuery('moves',m.name,q)&&m.category!=='변화'&&!(m.accuracy===null&&m.pp===1)).map(m=>({
       html:`<div class="dc-drop-item">
-        <span class="dc-type-tag" style="background:${TYPE_COLORS[m.type]||'#888'}">${m.type}</span>
-        <span style="flex:1">${m.name}</span>
-        <span style="color:#aaa;font-size:10px">${m.power??'가변'}</span></div>`, data:m })),
+        <span class="dc-type-tag" style="background:${TYPE_COLORS[m.type]||'#888'}">${term('types', m.type)}</span>
+        <span style="flex:1">${term('moves', m.name)}</span>
+        <span style="color:#aaa;font-size:10px">${m.power??t('variable_power')}</span></div>`, data:m })),
     m => setMove(m));
 
   /* 기술 입력창: 빈 상태 클릭 → 파티 기술 표시, 타이핑 → 숨김 */
@@ -3332,18 +3477,18 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
   });
 
   makeSearch('dcDefPokeQ','dcDefPokeList',
-    q => POKEMON_DATA.filter(p=>p.name.includes(q)).map(p=>({
-      html:`<div class="dc-drop-item">${p.name}</div>`, data:p })),
+    q => POKEMON_DATA.filter(p=>matchPokemonQuery(p,q)).map(p=>({
+      html:`<div class="dc-drop-item">${pokeName(p.name,p.no)}</div>`, data:p })),
     p => setDefPokemon(p));
 
   makeSearch('dcItemQ','dcItemList',
-    q => (ITEM_DATA||[]).filter(it=>it.name.includes(q)).map(it=>({
-      html:`<div class="dc-drop-item">${it.name}</div>`, data:it })),
+    q => (ITEM_DATA||[]).filter(it=>matchTermQuery('items',it.name,q)).map(it=>({
+      html:`<div class="dc-drop-item">${term('items', it.name)}</div>`, data:it })),
     it => setAtkItem(it));
 
   makeSearch('dcDefItemQ','dcDefItemList',
-    q => (ITEM_DATA||[]).filter(it=>it.name.includes(q)).map(it=>({
-      html:`<div class="dc-drop-item">${it.name}</div>`, data:it })),
+    q => (ITEM_DATA||[]).filter(it=>matchTermQuery('items',it.name,q)).map(it=>({
+      html:`<div class="dc-drop-item">${term('items', it.name)}</div>`, data:it })),
     it => setDefItem(it));
 
   /* 도구 인풋 비우면 아이템 해제 */
@@ -3566,7 +3711,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     document.getElementById('dcMoveQ').value=''; document.getElementById('dcMoveInfo').innerHTML='';
     document.getElementById('dcEV').value=0; document.getElementById('dcRkVal').textContent=0;
     document.getElementById('dcItemQ').value='';
-    document.getElementById('dcAbilSel').innerHTML='<option value="">특성 없음</option>';
+    document.getElementById('dcAbilSel').innerHTML=`<option value="">${t('ability_none')}</option>`;
     document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn').forEach((b,i)=>b.classList.toggle('on',i===1));
     document.querySelectorAll('.dc-toggle-btn[data-ag]').forEach((b,i)=>b.classList.toggle('on',i===0));
     document.querySelectorAll('.dc-toggle-btn[data-st]').forEach(b=>b.classList.remove('on'));
@@ -3588,7 +3733,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
     document.getElementById('dcDefHPEV').value=0; document.getElementById('dcDefEV').value=0;
     document.getElementById('dcDefRkVal').textContent=0;
     document.getElementById('dcDefItemQ').value='';
-    document.getElementById('dcDefAbilSel').innerHTML='<option value="">특성 없음</option>';
+    document.getElementById('dcDefAbilSel').innerHTML=`<option value="">${t('ability_none')}</option>`;
     document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach((b,i)=>b.classList.toggle('on',i===1));
     document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach((b,i)=>b.classList.toggle('on',i===0));
     ['dcReflect','dcLightScr','dcAuVeil','dcFG'].forEach(id=>document.getElementById(id)?.classList.remove('on'));
@@ -3637,16 +3782,17 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
             atk.pokemon = pk;
             fillAbilSel(pk,'dcAbilSel');
             updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus',pk);
-            document.getElementById('dcPokeQ').value = pk.name;
+            document.getElementById('dcPokeQ').value = pokeName(pk.name, pk.no);
           }
         }
         if (a.mvName != null) {
           const mv = (MOVE_DATA||[]).find(m=>m.name===a.mvName);
           if (mv) {
             atk.move = mv;
-            document.getElementById('dcMoveQ').value = mv.name;
+            document.getElementById('dcMoveQ').value = term('moves', mv.name);
             const tc = TYPE_COLORS[mv.type]||'#888';
-            document.getElementById('dcMoveInfo').innerHTML = `<span class="dc-type-tag" style="background:${tc}">${mv.type}</span> ${mv.category} | 위력 ${mv.power??'가변'}`;
+            const CAT_I18N_LD = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
+            document.getElementById('dcMoveInfo').innerHTML = `<span class="dc-type-tag" style="background:${tc}">${term('types', mv.type)}</span> ${CAT_I18N_LD[mv.category]||mv.category} | ${t('power_lbl')} ${mv.power??t('variable_power')}`;
           }
         }
         if (a.ev != null) { atk.ev = a.ev; document.getElementById('dcEV').value = a.ev; }
@@ -3655,7 +3801,7 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
           document.getElementById('dcAtkNatRow').querySelectorAll('.dc-nat-btn').forEach(b=>b.classList.toggle('on',+b.dataset.m===a.natM));
         }
         if (a.rank != null) { atk.rank = a.rank; document.getElementById('dcRkVal').textContent = a.rank; }
-        if (a.itemName != null) { atk.item={name:a.itemName}; document.getElementById('dcItemQ').value=a.itemName; }
+        if (a.itemName != null) { atk.item={name:a.itemName}; document.getElementById('dcItemQ').value=term('items', a.itemName); }
         if (a.abilityName != null) {
           atk.ability={name:a.abilityName};
           const sel=document.getElementById('dcAbilSel'); if(sel) sel.value=a.abilityName;
@@ -3677,14 +3823,14 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
             def.pokemon = pk;
             fillAbilSel(pk,'dcDefAbilSel');
             updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus',pk);
-            document.getElementById('dcDefPokeQ').value = pk.name;
+            document.getElementById('dcDefPokeQ').value = pokeName(pk.name, pk.no);
           }
         }
         if (d.hpEV != null) { def.hpEV=d.hpEV; document.getElementById('dcDefHPEV').value=d.hpEV; }
         if (d.defEV != null) { def.defEV=d.defEV; document.getElementById('dcDefEV').value=d.defEV; }
         if (d.natM != null) { def.natM=d.natM; document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn').forEach(b=>b.classList.toggle('on',+b.dataset.m===d.natM)); }
         if (d.rank != null) { def.rank=d.rank; document.getElementById('dcDefRkVal').textContent=d.rank; }
-        if (d.itemName != null) { def.item={name:d.itemName}; document.getElementById('dcDefItemQ').value=d.itemName; }
+        if (d.itemName != null) { def.item={name:d.itemName}; document.getElementById('dcDefItemQ').value=term('items', d.itemName); }
         if (d.abilityName != null) { def.ability={name:d.abilityName}; const sel=document.getElementById('dcDefAbilSel'); if(sel) sel.value=d.abilityName; }
         if (d.gender != null) { def.gender=d.gender; document.querySelectorAll('.dc-toggle-btn[data-dg]').forEach(b=>b.classList.toggle('on',b.dataset.dg===d.gender)); }
         if (d.status != null) { def.status=d.status; document.querySelectorAll('.dc-toggle-btn[data-dst]').forEach(b=>b.classList.toggle('on',b.dataset.dst===d.status&&d.status!=='')); }
@@ -3760,7 +3906,8 @@ function empty() { return '<span class="chart-empty">없음</span>'; }
 
     if (changed) calcDamage();
   };
-})();
+};
+window.initPowerCalc();
 
 /* ════════════════════════════
    추천 포켓몬 패널
@@ -3852,10 +3999,10 @@ function scoreCandidate(pk, pa) {
   const spdNatM = natName ? natMult(NATURES?.find(n => n.name === natName), 'S') : 1;
   const spd = calcStat(pk.S, evS, false, spdNatM);
   let speedScore = 0, speedTag = '';
-  if (spd >= 161)      { speedScore = 15; speedTag = '고스핏'; }
-  else if (spd >= 136) { speedScore = 12; speedTag = '중고속'; }
-  else if (spd >= 106) { speedScore = 8;  speedTag = '중속'; }
-  else                 { speedScore = 3;  speedTag = '저속'; }
+  if (spd >= 161)      { speedScore = 15; speedTag = t('speed_high'); }
+  else if (spd >= 136) { speedScore = 12; speedTag = t('rec_speed_midhigh'); }
+  else if (spd >= 106) { speedScore = 8;  speedTag = t('rec_speed_mid'); }
+  else                 { speedScore = 3;  speedTag = t('rec_speed_low'); }
 
   /* ── 조합 근거 (max 80) ── */
   const topMoves = (ms?.moves || []).slice(0, 4);
@@ -3866,23 +4013,23 @@ function scoreCandidate(pk, pa) {
   const isTanky = (zeroDur.phys + zeroDur.spec) / 2 >= 40000 && candPhys === 0 && candSpec === 0;
 
   let comboScore = 0, comboReason = '';
-  if (isTanky && pa.tankCount === 0 && pa.total >= 2)              { comboScore = 70; comboReason = '탱커 부재 보완'; }
-  else if (candSpec > candPhys && pa.physCount >= pa.specCount + 2) { comboScore = 60; comboReason = '특수딜 보강'; }
-  else if (candPhys > candSpec && pa.specCount >= pa.physCount + 2) { comboScore = 60; comboReason = '물리딜 보강'; }
-  else if (candSpec > candPhys && pa.specCount === 0)               { comboScore = 55; comboReason = '특수딜 추가'; }
-  else if (candPhys > candSpec && pa.physCount === 0)               { comboScore = 55; comboReason = '물리딜 추가'; }
+  if (isTanky && pa.tankCount === 0 && pa.total >= 2)              { comboScore = 70; comboReason = t('combo_tank_fill'); }
+  else if (candSpec > candPhys && pa.physCount >= pa.specCount + 2) { comboScore = 60; comboReason = t('combo_spec_boost'); }
+  else if (candPhys > candSpec && pa.specCount >= pa.physCount + 2) { comboScore = 60; comboReason = t('combo_phys_boost'); }
+  else if (candSpec > candPhys && pa.specCount === 0)               { comboScore = 55; comboReason = t('combo_spec_add'); }
+  else if (candPhys > candSpec && pa.physCount === 0)               { comboScore = 55; comboReason = t('combo_phys_add'); }
 
   let newCov = 0;
   topMvData.forEach(mv => {
     if (!mv.type || mv.category === '변화') return;
     ALL_TYPES.forEach(defT => { if (!pa.offCovered[defT] && defEffectiveness(defT, null)[mv.type] >= 2) newCov++; });
   });
-  if (newCov >= 3)      { comboScore = Math.min(80, comboScore + 20); if (!comboReason) comboReason = '타입 커버리지 확장'; }
+  if (newCov >= 3)      { comboScore = Math.min(80, comboScore + 20); if (!comboReason) comboReason = t('combo_type_cov'); }
   else if (newCov >= 1) { comboScore = Math.min(80, comboScore + 8); }
 
   const tags = [];
-  if (typeScore >= 10) tags.push('타입 보완');
-  if (speedTag !== '저속') tags.push(speedTag);
+  if (typeScore >= 10) tags.push(t('type_complement'));
+  if (speedTag !== t('rec_speed_low')) tags.push(speedTag);
   if (comboReason && !tags.includes(comboReason)) tags.push(comboReason);
 
   return { pk, basePk, isMega, rank, ms, spd, usageScore, typeScore, speedScore, comboScore,
@@ -3936,7 +4083,7 @@ function renderRecommended() {
     const pk = POKEMON_DATA.find(p => p.name === pkName);
     if (!pk) return;
     const emptySlot = party.findIndex(s => !s.pokemon);
-    if (emptySlot < 0) { showToast?.('빈 슬롯이 없습니다'); return; }
+    if (emptySlot < 0) { showToast?.(t('no_empty_slot')); return; }
     party[emptySlot].pokemon = pk;
     party[emptySlot].ability = ABILITY_DATA?.[pk.name]?.normal?.[0] || null;
     party[emptySlot].evs = {H:0,A:0,B:0,C:0,D:0,S:0};
@@ -3953,50 +4100,79 @@ function renderRecommended() {
   el.innerHTML = top.map(r => {
     const { pk, rank, ms, spd, usageScore, typeScore, speedScore, comboScore, totalScore, comboReason, tags, topMoves } = r;
     const typeBadges = [pk.type1, pk.type2].filter(Boolean)
-      .map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('');
-    const tagChips = tags.slice(0, 3).map(t => `<span class="rcv-chip rcv-tag">${t}</span>`).join('');
+      .map(tp => `<span class="tt-type" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`).join('');
+    const tagChips = tags.slice(0, 3).map(tg => `<span class="rcv-chip rcv-tag">${tg}</span>`).join('');
     const rawItemName = ms?.items?.[0]?.name || '—';
-    const itemName = (CHAMPIONS_LOC_MAP?.item_ja2ko?.[rawItemName]) || rawItemName;
-    const topMove = topMoves[0] || '—';
+    const itemNameKo = (CHAMPIONS_LOC_MAP?.item_ja2ko?.[rawItemName]) || rawItemName;
+    const itemName = itemNameKo === '—' ? '—' : term('items', itemNameKo);
+    const topMoveKo = topMoves[0] || '—';
+    const topMove = topMoveKo === '—' ? '—' : term('moves', topMoveKo);
     const rawAbility = ms?.abilities?.[0]?.name || '—';
-    const abilityName = (CHAMPIONS_LOC_MAP?.ability_ja2ko?.[rawAbility]) || rawAbility;
+    const abilityNameKo = (CHAMPIONS_LOC_MAP?.ability_ja2ko?.[rawAbility]) || rawAbility;
+    const abilityName = abilityNameKo === '—' ? '—' : term('abilities', abilityNameKo);
     /* 추천 아이템이 메가스톤이면 카드 전체를 해당 메가폼 기준으로 표시 (이름·타입·스피드) */
-    const megaNameForItem = itemName !== '—' ? Object.entries(MEGA_STONE_MAP||{}).find(([mn,sn])=>sn===itemName)?.[0] : null;
+    const megaNameForItem = itemNameKo !== '—' ? Object.entries(MEGA_STONE_MAP||{}).find(([mn,sn])=>sn===itemNameKo)?.[0] : null;
     const megaPk = megaNameForItem ? POKEMON_DATA.find(p=>p.name===megaNameForItem) : null;
     const displayPk = megaPk || pk;
     const sprPk = displayPk;
+    const displayPkName = pokeName(displayPk.name, displayPk.no);
     const dispTypeBadges = megaPk
-      ? [megaPk.type1, megaPk.type2].filter(Boolean).map(t => `<span class="tt-type" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')
+      ? [megaPk.type1, megaPk.type2].filter(Boolean).map(tp => `<span class="tt-type" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`).join('')
       : typeBadges;
     const dispSpeed = megaPk ? calcStat(megaPk.S, ms?.ev_spreads?.[0]?.evs?.S || 0, false, ms?.natures?.[0]?.name ? natMult(NATURES?.find(n=>n.name===ms.natures[0].name), 'S') : 1) : spd;
     return `<div class="rcv-card">
       <div class="rcv-head">
-        <span class="rcv-name">${displayPk.name}</span>${dispTypeBadges}
-        <span class="rcv-chip rcv-rank">사용순위 ${rank <= 50 ? rank : '—'}</span>
-        <span class="rcv-chip rcv-score">추천 점수 ${totalScore}</span>${tagChips}
+        <span class="rcv-name">${displayPkName}</span>${dispTypeBadges}
+        <span class="rcv-chip rcv-rank">${t('usage_rank_lbl')} ${rank <= 50 ? rank : '—'}</span>
+        <span class="rcv-chip rcv-score">${t('rec_score')} ${totalScore}</span>${tagChips}
       </div>
       <div class="rcv-body">
-        <img src="${spriteUrl(sprPk.name, sprPk.no)}" class="rcv-sprite" alt="${sprPk.name}">
+        <img src="${spriteUrl(sprPk.name, sprPk.no)}" class="rcv-sprite" alt="${displayPkName}">
         <div class="rcv-stats-grid">
-          <div class="rcv-stat"><div class="rcv-stat-lbl">추천 도구</div><div class="rcv-stat-val">${itemName}</div></div>
-          <div class="rcv-stat"><div class="rcv-stat-lbl">추천 기술</div><div class="rcv-stat-val">${topMove}</div></div>
-          <div class="rcv-stat"><div class="rcv-stat-lbl">추천 특성</div><div class="rcv-stat-val">${abilityName}</div></div>
-          <div class="rcv-stat"><div class="rcv-stat-lbl">스피드</div><div class="rcv-stat-val rcv-spd">${dispSpeed}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">${t('rec_item')}</div><div class="rcv-stat-val">${itemName}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">${t('rec_move')}</div><div class="rcv-stat-val">${topMove}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">${t('rec_ability')}</div><div class="rcv-stat-val">${abilityName}</div></div>
+          <div class="rcv-stat"><div class="rcv-stat-lbl">${t('speed_short')}</div><div class="rcv-stat-val rcv-spd">${dispSpeed}</div></div>
         </div>
       </div>
-      ${comboReason ? `<div class="rcv-reason">조합 근거 <span>${comboReason}</span></div>` : ''}
+      ${comboReason ? `<div class="rcv-reason">${t('combo_basis')} <span>${comboReason}</span></div>` : ''}
       <div class="rcv-bottom">
-        <span class="rcv-sc">사용순위 ${usageScore}</span>
-        <span class="rcv-sc">타입 ${typeScore}</span>
-        <span class="rcv-sc">스피드 ${speedScore}</span>
-        <span class="rcv-sc">조합 근거 ${comboScore}</span>
-        <button class="rcv-add-btn" data-pkname="${displayPk.name}">빈 슬롯에 추가</button>
+        <span class="rcv-sc">${t('usage_rank_lbl')} ${usageScore}</span>
+        <span class="rcv-sc">${t('type_lbl')} ${typeScore}</span>
+        <span class="rcv-sc">${t('speed_short')} ${speedScore}</span>
+        <span class="rcv-sc">${t('combo_basis')} ${comboScore}</span>
+        <button class="rcv-add-btn" data-pkname="${displayPk.name}">${t('add_to_empty_slot')}</button>
       </div>
     </div>`;
   }).join('');
 
   el.querySelectorAll('.rcv-add-btn').forEach(btn => {
     btn.addEventListener('click', e => { e.stopPropagation(); addPokemon(btn.dataset.pkname); });
+  });
+  resizeRecPanel();
+}
+
+/* 영/일 모드에서 칩이 줄바꿈되어 카드가 길어지는 경우 패널 높이를 내용에 맞게 자동 조절 */
+function resizeRecPanel() {
+  const panel = document.getElementById('recPanel');
+  const list = document.getElementById('recPokemonList');
+  if (!panel || !list) return;
+  if (panel.classList.contains('collapsed')) { panel.style.flexBasis = ''; return; }
+  requestAnimationFrame(() => {
+    const titleEl = panel.querySelector('.rec-title');
+    const titleH = titleEl ? titleEl.offsetHeight : 0;
+    /* align-items:stretch가 카드를 현재 패널 높이로 강제하면 scrollHeight가 줄어든 높이를 그대로 반환하므로,
+       측정 중에만 stretch를 풀어 각 카드가 자기 내용만큼 자연스럽게 늘어난 상태에서 높이를 잰다 */
+    list.style.alignItems = 'flex-start';
+    const cards = [...list.querySelectorAll('.rcv-card')];
+    const maxCardH = cards.reduce((max, c) => Math.max(max, c.scrollHeight), 0);
+    list.style.alignItems = '';
+    const listCs = getComputedStyle(list);
+    const panelCs = getComputedStyle(panel);
+    const listPad = parseFloat(listCs.paddingTop) + parseFloat(listCs.paddingBottom);
+    const panelPad = parseFloat(panelCs.paddingTop) + parseFloat(panelCs.paddingBottom);
+    const needed = titleH + maxCardH + listPad + panelPad + 4;
+    panel.style.flexBasis = Math.max(230, needed) + 'px';
   });
 }
 
@@ -4019,16 +4195,19 @@ function renderPokeGrid(q) {
   let list = POKEMON_DATA.map((p,i)=>({p,i}));
   if (pokeFilter==='ingame') list = list.filter(({p})=>p.inGame);
   if (typeFilter) list = list.filter(({p})=>p.type1===typeFilter||p.type2===typeFilter);
-  if (q) list = list.filter(({p})=>p.name.includes(q));
-  document.getElementById('pokeGrid').innerHTML = list.map(({p:pk,i}) => `
+  if (q) list = list.filter(({p})=>matchPokemonQuery(p,q));
+  document.getElementById('pokeGrid').innerHTML = list.map(({p:pk,i}) => {
+    const dispName = pokeName(pk.name, pk.no);
+    return `
     <div class="poke-card" data-idx="${i}">
-      <img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}" loading="lazy">
+      <img src="${spriteUrl(pk.name,pk.no)}" alt="${dispName}" loading="lazy">
       <div class="pc-no">#${pk.no}</div>
-      <div class="pc-name">${pk.name}</div>
+      <div class="pc-name">${dispName}</div>
       <div class="pc-types">
-        ${[pk.type1,pk.type2].filter(Boolean).map(t=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')}
+        ${[pk.type1,pk.type2].filter(Boolean).map(tp=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`).join('')}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 document.getElementById('pokeGrid').addEventListener('click', e => {
@@ -4103,7 +4282,7 @@ function openMoveModal(slotIdx, mi) {
   modalSlot=slotIdx; editMoveIdx=mi;
   moveStabFilter = false;
   const stabBtn = document.getElementById('moveStabBtn');
-  if (stabBtn) { stabBtn.classList.remove('on'); stabBtn.textContent = '자속 기술'; }
+  if (stabBtn) { stabBtn.classList.remove('on'); stabBtn.textContent = t('stab_move'); }
   document.getElementById('moveModal').classList.add('open');
   document.getElementById('moveSearch').value='';
   renderMoveList('');
@@ -4129,16 +4308,17 @@ function renderMoveList(q) {
     const pk = party[modalSlot].pokemon;
     list = list.filter(({m}) => m.type === pk.type1 || m.type === pk.type2);
   }
-  if (q) list = list.filter(({m})=>m.name.includes(q));
+  if (q) list = list.filter(({m})=>matchTermQuery('moves',m.name,q));
   if (moveFilter!=='all') list = list.filter(({m})=>m.category===moveFilter);
+  const CAT_I18N_M = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
   document.getElementById('moveList').innerHTML = list.map(({m:mv,i})=>`
     <div class="move-item" data-idx="${i}">
-      <span class="mi-type" style="background:${TYPE_COLORS[mv.type]||'#888'}">${mv.type}</span>
-      <span class="mi-name">${mv.name}</span>
-      <span class="mi-cat">${mv.category}</span>
+      <span class="mi-type" style="background:${TYPE_COLORS[mv.type]||'#888'}">${term('types', mv.type)}</span>
+      <span class="mi-name">${term('moves', mv.name)}</span>
+      <span class="mi-cat">${CAT_I18N_M[mv.category]||mv.category}</span>
       <span class="mi-pow">${mv.power??'-'}</span>
       <span class="mi-acc">${mv.accuracy?mv.accuracy+'%':'-'}</span>
-      <span class="mi-desc">${MOVE_DESCS?.[mv.name]||''}</span>
+      <span class="mi-desc">${termDesc('moves', mv.name, MOVE_DESCS?.[mv.name]||'')}</span>
     </div>`).join('');
 }
 
@@ -4165,8 +4345,8 @@ document.getElementById('moveFilterRow').addEventListener('click', e=>{
     btn.classList.toggle('on', moveStabFilter);
     const pk = party[modalSlot]?.pokemon;
     btn.textContent = moveStabFilter && pk
-      ? `${pk.type1}${pk.type2?'/'+pk.type2:''} 자속`
-      : '자속 기술';
+      ? `${term('types', pk.type1)}${pk.type2?'/'+term('types', pk.type2):''} ${t('stab')}`
+      : t('stab_move');
     renderMoveList(document.getElementById('moveSearch').value);
     return;
   }
@@ -4190,16 +4370,19 @@ function closeItemModal() { document.getElementById('itemModal').classList.remov
 
 function renderItemGrid(q) {
   let list = (ITEM_DATA||[]).map((it,i)=>({it,i}));
-  if (q) list = list.filter(({it})=>it.name.includes(q));
+  if (q) list = list.filter(({it})=>matchTermQuery('items',it.name,q));
   if (itemFilter==='포챔스') list = list.filter(({it})=>POCHAMS_ITEM_NAMES?.has(it.name));
   else if (itemFilter!=='all') list = list.filter(({it})=>it.category===itemFilter);
-  const clearCard = `<div class="item-card" data-idx="-1" style="border-color:#e53935"><div class="item-no-img" style="font-size:20px">✕</div><div class="item-name" style="color:#e53935">도구 없음</div><div class="item-cat-badge">해제</div></div>`;
-  document.getElementById('itemGrid').innerHTML = clearCard + list.map(({it,i})=>`
+  const clearCard = `<div class="item-card" data-idx="-1" style="border-color:#e53935"><div class="item-no-img" style="font-size:20px">✕</div><div class="item-name" style="color:#e53935">${t('item_none')}</div><div class="item-cat-badge">${t('release')}</div></div>`;
+  document.getElementById('itemGrid').innerHTML = clearCard + list.map(({it,i})=>{
+    const dispName = term('items', it.name);
+    return `
     <div class="item-card" data-idx="${i}">
-      ${it.sprite ? `<img src="${it.sprite}" alt="${it.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="item-no-img" style="display:none">🎒</div>` : '<div class="item-no-img">🎒</div>'}
-      <div class="item-name">${it.name}</div>
-      <div class="item-cat-badge">${it.category}</div>
-    </div>`).join('');
+      ${it.sprite ? `<img src="${it.sprite}" alt="${dispName}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="item-no-img" style="display:none">🎒</div>` : '<div class="item-no-img">🎒</div>'}
+      <div class="item-name">${dispName}</div>
+      <div class="item-cat-badge">${itemCat(it.category)}</div>
+    </div>`;
+  }).join('');
 }
 
 document.getElementById('itemGrid').addEventListener('click', e=>{
@@ -4214,7 +4397,7 @@ document.getElementById('itemGrid').addEventListener('click', e=>{
   const it = ITEM_DATA[idx];
   if (!it) return;
   const ep = document.getElementById('itemEffectPanel');
-  ep.innerHTML = `<strong>${it.name}</strong>　${it.effect}`;
+  ep.innerHTML = `<strong>${term('items', it.name)}</strong>　${termDesc('items', it.name, it.effect)}`;
   ep.classList.add('show');
   if (card.classList.contains('selected')) {
     party[modalSlot].item = it;
@@ -4247,7 +4430,7 @@ function openAbilityModal(slotIdx) {
   const pk = party[slotIdx].pokemon;
   if (!pk) return;
   const abd = ABILITY_DATA?.[pk.name];
-  document.getElementById('abilityModalTitle').textContent = `특성 선택 — ${pk.name}`;
+  document.getElementById('abilityModalTitle').textContent = `${t('select_ability_title')} — ${pokeName(pk.name, pk.no)}`;
   document.getElementById('abilityModal').classList.add('open');
 
   const cur = party[slotIdx].ability?.name||'';
@@ -4255,7 +4438,7 @@ function openAbilityModal(slotIdx) {
 
   if (!abd) {
     _curAbilList = [];
-    list.innerHTML = '<div style="color:#aaa;font-size:13px;padding:12px">특성 데이터 없음</div>';
+    list.innerHTML = `<div style="color:#aaa;font-size:13px;padding:12px">${t('no_ability_data')}</div>`;
     return;
   }
 
@@ -4264,9 +4447,9 @@ function openAbilityModal(slotIdx) {
 
   list.innerHTML = _curAbilList.map((a,i)=>`
     <div class="ability-item ${a.name===cur?'selected':''}" data-i="${i}">
-      <span class="ab-name">${a.name}</span>
-      <span class="ab-desc">${a.desc||''}</span>
-      <span class="ab-tag ${a.tag==='숨겨진 특성'?'hidden-tag':''}">${a.tag}</span>
+      <span class="ab-name">${term('abilities', a.name)}</span>
+      <span class="ab-desc">${termDesc('abilities', a.name, a.desc||'')}</span>
+      <span class="ab-tag ${a.tag==='숨겨진 특성'?'hidden-tag':''}">${a.tag==='숨겨진 특성'?t('ability_tag_hidden'):t('ability_tag_normal')}</span>
     </div>`).join('');
 }
 function closeAbilityModal() { document.getElementById('abilityModal').classList.remove('open'); }
@@ -4298,16 +4481,17 @@ function buildNatureTable(curNature) {
   const neutralByRow = {};
   NATURES.filter(n=>!n.up).forEach((n,i) => { neutralByRow[rows[i]] = n; });
 
-  let html = `<thead><tr><th></th>${cols.map(c=>`<th class="col-lbl">▼${NAT_LABELS[c]}</th>`).join('')}</tr></thead><tbody>`;
+  const NAT_LABELS_I18N2 = {A:t('stat_atk'),B:t('stat_def'),C:t('stat_spatk'),D:t('stat_spdef'),S:t('stat_speed')};
+  let html = `<thead><tr><th></th>${cols.map(c=>`<th class="col-lbl">▼${NAT_LABELS_I18N2[c]}</th>`).join('')}</tr></thead><tbody>`;
   rows.forEach((r,ri) => {
-    html += `<tr><th class="row-lbl">▲${NAT_LABELS[r]}</th>`;
+    html += `<tr><th class="row-lbl">▲${NAT_LABELS_I18N2[r]}</th>`;
     cols.forEach(c => {
       if (r===c) {
         const n = neutralByRow[r]||NATURES.filter(n=>!n.up)[ri];
-        html += `<td class="nat-neutral ${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?.name||'-'}</td>`;
+        html += `<td class="nat-neutral ${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?term('natures', n.name):'-'}</td>`;
       } else {
         const n = natGrid[r][c];
-        html += `<td class="${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?.name||'?'}</td>`;
+        html += `<td class="${curNature?.name===n?.name?'nat-selected':''}" data-nidx="${NATURES.indexOf(n)}">${n?term('natures', n.name):'?'}</td>`;
       }
     });
     html += '</tr>';
@@ -4409,8 +4593,8 @@ function saveToBox(slotIdx) {
     const firstFree = box.findIndex(e => e == null || !POKEMON_DATA[e?.pkIdx]);
     if (firstFree >= 0) box[firstFree] = entry; else box.push(entry);
     localStorage.setItem('pochams_box', JSON.stringify(box));
-    showToast(`${mem.pokemon.name}을(를) 박스에 저장했습니다!`);
-  } catch(e) { showToast('저장 실패'); }
+    showToast(t('toast_saved_to_box', {name: pokeName(mem.pokemon.name, mem.pokemon.no)}));
+  } catch(e) { showToast(t('toast_save_fail')); }
 }
 
 function openBoxModal(slotIdx) {
@@ -4427,24 +4611,25 @@ function renderBoxGrid() {
   try { box = JSON.parse(localStorage.getItem('pochams_box')||'[]'); } catch(e) {}
   const filled = box.map((e, i) => ({e, i})).filter(({e}) => e && POKEMON_DATA[e?.pkIdx]);
   if (!filled.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:32px;font-size:13px;line-height:1.8">박스가 비어 있습니다<br><span style="font-size:11px">💾 박스 저장 버튼으로 포켓몬을 박스에 저장하거나<br>포켓몬 박스 페이지에서 박스를 채워주세요</span></div>';
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:32px;font-size:13px;line-height:1.8">${t('box_empty')}<br><span style="font-size:11px">${t('box_empty_hint')}</span></div>`;
     return;
   }
   grid.innerHTML = filled.map(({e:entry, i:bi}) => {
     const pk = POKEMON_DATA[entry.pkIdx];
+    const dispName = pokeName(pk.name, pk.no);
     const nature = (entry.natIdx >= 0) ? NATURES[entry.natIdx] : null;
     const it = (entry.itIdx >= 0) ? ITEM_DATA[entry.itIdx] : null;
     return `
     <div class="poke-card" data-entry-bi="${bi}" style="position:relative;padding-bottom:6px;">
-      <img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}" loading="lazy">
+      <img src="${spriteUrl(pk.name,pk.no)}" alt="${dispName}" loading="lazy">
       <div class="pc-no">#${pk.no}</div>
-      <div class="pc-name">${entry.nickname || pk.name}</div>
-      <div class="pc-types">${[pk.type1,pk.type2].filter(Boolean).map(t=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[t]}">${t}</span>`).join('')}</div>
-      ${nature?`<div style="font-size:9px;color:#888;margin-top:1px">${nature.name}</div>`:''}
-      ${it?`<div style="font-size:9px;color:#7b3fa0">${it.name}</div>`:''}
+      <div class="pc-name">${entry.nickname || dispName}</div>
+      <div class="pc-types">${[pk.type1,pk.type2].filter(Boolean).map(tp=>`<span class="pc-tbadge" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`).join('')}</div>
+      ${nature?`<div style="font-size:9px;color:#888;margin-top:1px">${term('natures', nature.name)}</div>`:''}
+      ${it?`<div style="font-size:9px;color:#7b3fa0">${term('items', it.name)}</div>`:''}
       <div style="display:flex;gap:3px;margin-top:4px;width:100%;justify-content:center;">
-        <button class="btn-box-action" data-bi="${bi}" data-boxact="load" style="font-size:9px;padding:2px 5px;">불러오기</button>
-        <button class="btn-box-action" data-bi="${bi}" data-boxact="del" style="font-size:9px;padding:2px 5px;background:#fde0e0;color:#c00;">삭제</button>
+        <button class="btn-box-action" data-bi="${bi}" data-boxact="load" style="font-size:9px;padding:2px 5px;">${t('box_load_btn')}</button>
+        <button class="btn-box-action" data-bi="${bi}" data-boxact="del" style="font-size:9px;padding:2px 5px;background:#fde0e0;color:#c00;">${t('delete_btn')}</button>
       </div>
     </div>`;
   }).join('');
@@ -4463,12 +4648,12 @@ document.getElementById('boxGrid').addEventListener('click', e => {
     renderBoxGrid();
   } else if (act === 'load') {
     const entry = box[bi];
-    if (!entry) { showToast('박스 데이터 오류'); return; }
+    if (!entry) { showToast(t('toast_box_data_err')); return; }
     const gridEl = document.getElementById('boxGrid');
     const targetSlot = gridEl.dataset.targetSlot !== undefined ? +gridEl.dataset.targetSlot
                      : modalSlot >= 0 ? modalSlot : 0;
     const pk = POKEMON_DATA[entry.pkIdx];
-    if (!pk) { showToast('포켓몬 데이터 오류 (pkIdx=' + entry.pkIdx + ')'); return; }
+    if (!pk) { showToast(t('toast_poke_data_err', {idx: entry.pkIdx})); return; }
     applySlotData(entry, targetSlot);
     saveParty();
     document.getElementById('boxModal').classList.remove('open');
@@ -4477,7 +4662,7 @@ document.getElementById('boxGrid').addEventListener('click', e => {
     renderSlots();
     renderDetail(targetSlot);
     showPanel();
-    showToast(`${pk.name}을(를) 파티 ${targetSlot+1}번 슬롯에 불러왔습니다!`);
+    showToast(t('toast_loaded_to_slot', {name: pokeName(pk.name, pk.no), n: targetSlot+1}));
   }
 });
 document.getElementById('closeBoxModal').addEventListener('click', () => {
@@ -4499,16 +4684,17 @@ function buildBoxTooltipHtml(entry) {
   const def  = Math.floor(calcStat(pk.B, evs.B, false, natMult(nature,'B')) * getItemStatMult(item,pk,'B'));
   const spdf = Math.floor(calcStat(pk.D, evs.D, false, natMult(nature,'D')) * getItemStatMult(item,pk,'D'));
   const spd  = Math.floor(calcStat(pk.S, evs.S, false, natMult(nature,'S')) * getItemStatMult(item,pk,'S'));
-  const tb   = t => `<span style="background:${TYPE_COLORS[t]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${t}</span>`;
+  const tb   = tp => `<span style="background:${TYPE_COLORS[tp]||'#888'};color:#fff;border-radius:4px;padding:0 5px;font-size:9px;font-weight:700;margin-left:3px">${term('types', tp)}</span>`;
   const evStr = ['H','A','B','C','D','S'].filter(k=>evs[k]>0).map(k=>`${k}:${evs[k]}`).join(' ');
-  const nickLine = entry.nickname ? `${entry.nickname} <span style="opacity:.6;font-size:9px;font-weight:400">(${pk.name})</span>` : pk.name;
+  const dispPkName = pokeName(pk.name, pk.no);
+  const nickLine = entry.nickname ? `${entry.nickname} <span style="opacity:.6;font-size:9px;font-weight:400">(${dispPkName})</span>` : dispPkName;
   return `
     <div style="font-size:11px;font-weight:700;margin-bottom:3px">${nickLine}${tb(pk.type1)}${pk.type2?tb(pk.type2):''}</div>
-    ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`도구 ${item.name} `:''}${entry.ability?`특성 ${entry.ability.name}`:''}</div>`:''}
-    ${nature?`<div>성격 ${nature.name}</div>`:''}
-    ${evStr?`<div>노력치 ${evStr}</div>`:''}
-    <div style="margin-top:4px;color:#d0c8f0">${moves.map(mv=>mv?`<div>● ${mv.name}</div>`:'').join('')}</div>
-    <div style="margin-top:5px;border-top:1px solid #403060;padding-top:4px">물리내구 ${Math.floor(hp*def/0.411).toLocaleString()} 특수내구 ${Math.floor(hp*spdf/0.411).toLocaleString()}<br>스피드 ${spd}</div>
+    ${(item||entry.ability)?`<div style="color:#b0a0d0;margin-bottom:2px">${item?`${t('item')} ${term('items', item.name)} `:''}${entry.ability?`${t('ability')} ${term('abilities', entry.ability.name)}`:''}</div>`:''}
+    ${nature?`<div>${t('nature')} ${term('natures', nature.name)}</div>`:''}
+    ${evStr?`<div>${t('evs')} ${evStr}</div>`:''}
+    <div style="margin-top:4px;color:#d0c8f0">${moves.map(mv=>mv?`<div>● ${term('moves', mv.name)}</div>`:'').join('')}</div>
+    <div style="margin-top:5px;border-top:1px solid #403060;padding-top:4px">${t('phys_dur')} ${Math.floor(hp*def/0.411).toLocaleString()} ${t('spec_dur')} ${Math.floor(hp*spdf/0.411).toLocaleString()}<br>${t('speed_short')} ${spd}</div>
   `;
 }
 (function(){
@@ -4706,7 +4892,7 @@ function renderEnemySlots() {
   const enemyBtns = document.createElement('div');
   enemyBtns.className = 'big-mode-btns';
   enemyBtns.innerHTML = `
-    <button class="big-act-btn clear" id="enemyClearBtn">비우기</button>`;
+    <button class="big-act-btn clear" id="enemyClearBtn">${t('clear_short')}</button>`;
   enemyBtns.querySelector('#enemyClearBtn').addEventListener('click', () => {
     for (let i = 0; i < 6; i++) enemyParty[i] = { pokemon: null };
     saveEnemyParty(); renderEnemySlots();
@@ -4815,7 +5001,7 @@ function renderSpeedRankList() {
   }
 
   const isMegaName = n => n.startsWith('메가') && n !== '메가니움';
-  const megaBadge = `<span class="sr-mega">메가</span>`;
+  const megaBadge = `<span class="sr-mega">${term('forms', '메가')}</span>`;
 
   const rows = [];
   let myInserted = false;
@@ -4838,9 +5024,10 @@ function renderSpeedRankList() {
 
   const rowHTML = r => {
     const mega = isMegaName(r.name);
-    const displayName = mega ? r.name.replace(/^메가/, '') : r.name;
+    const baseDisplayName = mega ? r.name.replace(/^메가/, '') : r.name;
+    const displayName = pokeName(baseDisplayName, r.no);
     const rankSpan = `<span class="sr-rank">${r.rank}</span>`;
-    const sprite = `<img src="${spriteUrl(r.name, r.no)}" class="sr-sprite" alt="${r.name}">`;
+    const sprite = `<img src="${spriteUrl(r.name, r.no)}" class="sr-sprite" alt="${displayName}">`;
     const evTxt = `<span class="sr-ev">S:${r.evS}</span>`;
     const namePart = `<div class="sr-name-wrap"><span class="sr-name">${displayName}</span>${mega ? megaBadge : ''}</div>`;
     const spdPart = `<span class="sr-spd">${r.speed}</span>`;
@@ -4882,53 +5069,54 @@ function renderSpeedCalc() {
   const showUnburden = sc.abilityName === '곡예';
 
   const pillsHtml = party.map((s,i) => !s.pokemon ? '' :
-    `<button class="dc-pill${sc.slotIdx===i?' dc-sel':''}" data-pi="${i}" title="${s.pokemon.name}">
-      <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${s.pokemon.name}">
+    `<button class="dc-pill${sc.slotIdx===i?' dc-sel':''}" data-pi="${i}" title="${pokeName(s.pokemon.name,s.pokemon.no)}">
+      <img src="${spriteUrl(s.pokemon.name,s.pokemon.no)}" alt="${pokeName(s.pokemon.name,s.pokemon.no)}">
     </button>`
   ).join('');
 
+  const pkDispName = pk ? pokeName(pk.name, pk.no) : '';
   const bigSlotHtml = pk
-    ? `<img src="${spriteUrl(pk.name,pk.no)}" alt="${pk.name}">`
+    ? `<img src="${spriteUrl(pk.name,pk.no)}" alt="${pkDispName}">`
     : `<span class="sc-big-slot-plus">+</span>`;
 
   el.innerHTML = `<div class="sc-body">
   <div class="dc-block">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
-      <div class="dc-block-title" style="margin-bottom:0;">포켓몬</div>
-      <button id="scClearBtn" style="border:1.5px solid #d4c0e8;border-radius:5px;background:#fff;color:#b090c8;font-size:9px;font-weight:600;padding:2px 7px;cursor:pointer;font-family:inherit;">비우기</button>
+      <div class="dc-block-title" style="margin-bottom:0;">${t('pokemon_lbl')}</div>
+      <button id="scClearBtn" style="border:1.5px solid #d4c0e8;border-radius:5px;background:#fff;color:#b090c8;font-size:9px;font-weight:600;padding:2px 7px;cursor:pointer;font-family:inherit;">${t('clear_short')}</button>
     </div>
     <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:6px;justify-content:center;">
       <div class="sc-big-slot">${bigSlotHtml}</div>
       <div class="dc-party-pills" id="scPills">${pillsHtml}</div>
     </div>
     ${pk
-      ? `<div class="sc-pk-info"><span class="sc-pk-name">${pk.name}</span><span class="sc-pk-stats">S${pk.S} | H${pk.H} A${pk.A} B${pk.B} C${pk.C} D${pk.D}</span></div>`
-      : `<div class="sc-pk-empty">파티에서 포켓몬을 선택하세요</div>`}
+      ? `<div class="sc-pk-info"><span class="sc-pk-name">${pkDispName}</span><span class="sc-pk-stats">S${pk.S} | H${pk.H} A${pk.A} B${pk.B} C${pk.C} D${pk.D}</span></div>`
+      : `<div class="sc-pk-empty">${t('select_from_party')}</div>`}
   </div>
 
   <div class="dc-block">
-    <div class="dc-block-title">스피드 수치</div>
+    <div class="dc-block-title">${t('speed_value')}</div>
     <div class="dc-stat-grid">
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">종족값</span>
+        <span class="dc-stat-lbl">${t('base_stats')}</span>
         <span class="dc-stat-val">${pk ? pk.S : '—'}</span>
       </div>
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">노력치</span>
+        <span class="dc-stat-lbl">${t('evs')}</span>
         <input class="dc-ev-inp" id="scEV" type="number" min="0" max="32" value="${sc.ev}" autocomplete="off">
       </div>
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">개체값</span>
+        <span class="dc-stat-lbl">${t('iv_lbl')}</span>
         <input class="dc-ev-inp" id="scIV" type="number" min="0" max="31" value="${sc.iv}" autocomplete="off">
       </div>
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">실수값</span>
+        <span class="dc-stat-lbl">${t('actual_value')}</span>
         <span class="dc-stat-val">${pk ? base : '—'}</span>
       </div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">랭크</span>
+        <span class="dc-stat-lbl">${t('rank_lbl2')}</span>
         <div class="dc-rank-row">
           <button class="dc-rank-btn" id="scRankMinus">−</button>
           <span class="dc-rank-val" id="scRankVal">${sc.rank > 0 ? '+'+sc.rank : sc.rank}</span>
@@ -4936,16 +5124,16 @@ function renderSpeedCalc() {
         </div>
       </div>
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">레벨</span>
+        <span class="dc-stat-lbl">${t('level_lbl')}</span>
         <span class="dc-stat-val">50</span>
       </div>
       <div class="dc-stat-box">
-        <span class="dc-stat-lbl">속력</span>
+        <span class="dc-stat-lbl">${t('speed_short')}</span>
         <span style="font-size:22px;font-weight:700;color:#9c27b0;line-height:1.1;">${pk ? speed : '—'}</span>
       </div>
     </div>
     <div class="dc-nat-row" id="scNatRow">
-      <span class="dc-nat-lbl">성격</span>
+      <span class="dc-nat-lbl">${t('nature')}</span>
       <button class="dc-nat-btn${sc.natM===0.9?' on':''}" data-m="0.9">×0.9</button>
       <button class="dc-nat-btn${sc.natM===1.0?' on':''}" data-m="1.0">×1.0</button>
       <button class="dc-nat-btn${sc.natM===1.1?' on':''}" data-m="1.1">×1.1</button>
@@ -4953,52 +5141,52 @@ function renderSpeedCalc() {
   </div>
 
   <div class="dc-block">
-    <div class="dc-block-title">환경</div>
+    <div class="dc-block-title">${t('environment')}</div>
     <div class="dc-env-row" style="margin-bottom:6px;flex-wrap:nowrap;overflow-x:auto;">
-      <span class="dc-env-lbl">상태이상</span>
-      ${['독','마비','얼음','화상','잠듦'].map(s=>`<button class="dc-toggle-btn${sc.status===s?' on':''}" data-st="${s}">${s}</button>`).join('')}
+      <span class="dc-env-lbl">${t('status_condition')}</span>
+      ${['독','마비','얼음','화상','잠듦'].map(s=>`<button class="dc-toggle-btn${sc.status===s?' on':''}" data-st="${s}">${statusI18n(s)}</button>`).join('')}
     </div>
     <div style="display:flex;gap:6px;">
-      <button id="scStickyWeb" class="sc-tog${sc.stickyWeb?' sc-tog-on':''}" style="flex:1;">끈적끈적네트</button>
-      <button id="scTailwind"  class="sc-tog${sc.tailwind?' sc-tog-on':''}" style="flex:1;">순풍</button>
+      <button id="scStickyWeb" class="sc-tog${sc.stickyWeb?' sc-tog-on':''}" style="flex:1;">${t('sticky_web')}</button>
+      <button id="scTailwind"  class="sc-tog${sc.tailwind?' sc-tog-on':''}" style="flex:1;">${t('tailwind')}</button>
     </div>
   </div>
 
   <div class="dc-block">
-    <div class="dc-block-title">도구 · 특성 · 날씨 · 필드</div>
+    <div class="dc-block-title">${t('item_ability_weather_field')}</div>
     <div style="margin-bottom:6px;">
-      <div class="dc-stat-lbl" style="margin-bottom:3px;">도구</div>
+      <div class="dc-stat-lbl" style="margin-bottom:3px;">${t('item')}</div>
       <div class="dc-drop" id="scItemDrop">
-        <input class="dc-input" id="scItemQ" placeholder="도구 검색..." autocomplete="off" value="${sc.itemName}"${sc.itemName?' style="padding-right:28px;"':''}>
+        <input class="dc-input" id="scItemQ" placeholder="${t('item_search_placeholder')}" autocomplete="off" value="${term('items', sc.itemName)}"${sc.itemName?' style="padding-right:28px;"':''}>
         ${sc.itemName?`<button id="scItemClear" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:#bbb;font-size:14px;line-height:1;padding:0;">✕</button>`:''}
         <div class="dc-drop-list" id="scItemList"></div>
       </div>
     </div>
     <div style="margin-bottom:6px;">
-      <div class="dc-stat-lbl" style="margin-bottom:3px;">특성</div>
+      <div class="dc-stat-lbl" style="margin-bottom:3px;">${t('ability')}</div>
       <div class="dc-drop" id="scAbilDrop">
-        <input class="dc-input" id="scAbilQ" placeholder="특성 검색..." autocomplete="off" value="${sc.abilityName}"${sc.abilityName?' style="padding-right:28px;"':''}>
+        <input class="dc-input" id="scAbilQ" placeholder="${t('ability_search_placeholder')}" autocomplete="off" value="${term('abilities', sc.abilityName)}"${sc.abilityName?' style="padding-right:28px;"':''}>
         ${sc.abilityName?`<button id="scAbilClear" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:#bbb;font-size:14px;line-height:1;padding:0;">✕</button>`:''}
         <div class="dc-drop-list" id="scAbilList"></div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;${showUnburden?'margin-bottom:6px;':''}">
       <div>
-        <div class="dc-stat-lbl" style="margin-bottom:3px;">날씨</div>
+        <div class="dc-stat-lbl" style="margin-bottom:3px;">${t('weather_lbl')}</div>
         <select class="dc-input" id="scWeather" style="font-size:11px;padding:4px 6px;">
-          <option value="">선택</option>
-          ${_SC_WEATHERS.map(w=>`<option value="${w}"${sc.weather===w?' selected':''}>${w}</option>`).join('')}
+          <option value="">${t('select_placeholder')}</option>
+          ${_SC_WEATHERS.map(w=>`<option value="${w}"${sc.weather===w?' selected':''}>${weatherI18n(w)}</option>`).join('')}
         </select>
       </div>
       <div>
-        <div class="dc-stat-lbl" style="margin-bottom:3px;">필드</div>
+        <div class="dc-stat-lbl" style="margin-bottom:3px;">${t('field_lbl')}</div>
         <select class="dc-input" id="scField" style="font-size:11px;padding:4px 6px;">
-          <option value="">선택</option>
-          ${_SC_FIELDS.map(f=>`<option value="${f}"${sc.field===f?' selected':''}>${f}</option>`).join('')}
+          <option value="">${t('select_placeholder')}</option>
+          ${_SC_FIELDS.map(f=>`<option value="${f}"${sc.field===f?' selected':''}>${fieldI18n(f)}</option>`).join('')}
         </select>
       </div>
     </div>
-    ${showUnburden?`<button id="scUnburden" class="sc-tog sc-tog-full${sc.unburden?' sc-tog-on':''}">도구 소진 (곡예 발동)</button>`:''}
+    ${showUnburden?`<button id="scUnburden" class="sc-tog sc-tog-full${sc.unburden?' sc-tog-on':''}">${t('unburden_btn')}</button>`:''}
   </div>
 </div>`;
 
@@ -5142,8 +5330,8 @@ document.getElementById('detailCard').addEventListener('input', evChangeHandler)
 /* type filter buttons */
 (function() {
   const row = document.getElementById('typeFilterRow');
-  row.innerHTML = ALL_TYPES.map(t =>
-    `<button class="tf-btn" data-type="${t}" style="background:${TYPE_COLORS[t]};color:#fff;border:2px solid transparent;padding:3px 8px;border-radius:20px;font-size:11px;cursor:pointer;opacity:.55;font-family:inherit;transition:all .15s;">${t}</button>`
+  row.innerHTML = ALL_TYPES.map(tp =>
+    `<button class="tf-btn" data-type="${tp}" style="background:${TYPE_COLORS[tp]};color:#fff;border:2px solid transparent;padding:3px 8px;border-radius:20px;font-size:11px;cursor:pointer;opacity:.55;font-family:inherit;transition:all .15s;">${term('types', tp)}</button>`
   ).join('');
   row.addEventListener('click', e => {
     const btn = e.target.closest('.tf-btn');
@@ -5273,6 +5461,7 @@ document.getElementById('recToggleBtn').addEventListener('click', () => {
   const panel = document.getElementById('recPanel');
   panel.classList.toggle('collapsed');
   localStorage.setItem('pochams_rec_collapsed', panel.classList.contains('collapsed') ? '1' : '0');
+  resizeRecPanel();
 });
 if (localStorage.getItem('pochams_rec_collapsed') === '1') {
   document.getElementById('recPanel').classList.add('collapsed');
@@ -5331,7 +5520,7 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
     const cols = document.querySelector('#powerCalcBody .dc-cols');
     if (cols) cols.classList.toggle('show-dur', s === 'dur');
     const title = document.querySelector('#powerCalcPanel .calc-panel-title');
-    if (title) title.textContent = s === 'dur' ? '내구력 계산기' : '결정력 계산기';
+    if (title) title.textContent = s === 'dur' ? t('dur_calc_title') : t('power_calc_title');
   }
   let cx = 0, cy = 0;
   const calcPanelEl = document.getElementById('powerCalcPanel');
@@ -5356,7 +5545,7 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
     const cols = document.getElementById('scCols');
     if (cols) cols.classList.toggle('show-sample', s === 'sample');
     const title = document.querySelector('#speedCalcPanel .calc-panel-title');
-    if (title) title.textContent = s === 'sample' ? '스피드 샘플' : '스피드 계산기';
+    if (title) title.textContent = s === 'sample' ? t('speed_sample_title') : t('speed_calc_title');
   }
   let sx = 0, sy = 0;
   const speedPanelEl = document.getElementById('speedCalcPanel');
@@ -5389,7 +5578,7 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
     </svg>
-    <span>스피드</span>
+    <span id="mobTabSpeedTxt">스피드</span>
   </button>
   <button class="mob-tab-btn active" data-panel="detail">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -5398,7 +5587,7 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
       <line x1="8" y1="12" x2="16" y2="12"/>
       <line x1="8" y1="16" x2="12" y2="16"/>
     </svg>
-    <span>상세보기</span>
+    <span id="mobTabDetailTxt">상세보기</span>
   </button>
   <button class="mob-tab-btn" data-panel="calc">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -5407,51 +5596,127 @@ if (localStorage.getItem('pochams_rec_collapsed') === '1') {
       <line x1="8" y1="12" x2="11" y2="12"/><line x1="13" y1="12" x2="16" y2="12"/>
       <line x1="8" y1="17" x2="11" y2="17"/><line x1="13" y1="17" x2="16" y2="17"/>
     </svg>
-    <span>계산기</span>
+    <span id="mobTabCalcTxt">계산기</span>
   </button>
 </div>
 <!-- SETTINGS MODAL -->
 <div class="set-overlay" id="setOverlay">
   <div class="set-box">
     <div class="set-head">
-      <span class="set-title">⚙ 설정</span>
+      <span class="set-title" id="setTitleLbl">⚙ 설정</span>
       <button class="set-x" id="setCloseBtn">✕</button>
     </div>
     <div class="set-section">
-      <div class="set-lbl">언어</div>
-      <select class="set-sel" disabled><option selected>한국어</option></select>
+      <div class="set-lbl" id="setLangLbl">언어</div>
+      <select class="set-sel" id="setLangSel">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">테마</div>
-      <select class="set-sel" disabled><option selected>메타몽 테마 (기본)</option></select>
+      <div class="set-lbl" id="setThemeLbl">테마</div>
+      <select class="set-sel" disabled><option selected id="setThemeOpt">메타몽 테마 (기본)</option></select>
     </div>
     <div class="set-section">
-      <div class="set-lbl">데이터 관리</div>
+      <div class="set-lbl" id="setDataMgmtLbl">데이터 관리</div>
       <button class="set-danger-btn" id="setClearBtn">저장된 데이터 전체 삭제</button>
-      <div class="set-desc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+      <div class="set-desc" id="setClearDesc">파티·박스·계산기 설정 등 이 기기에 저장된 모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</div>
     </div>
     <div class="set-section">
-      <div class="set-lbl">문의 / 버그 리포트</div>
+      <div class="set-lbl" id="setContactLbl">문의 / 버그 리포트</div>
       <a class="set-email" href="mailto:pochamsmetamog@gmail.com">pochamsmetamog@gmail.com</a>
     </div>
   </div>
 </div>
+<script>
+/* i18n 핵심 함수(I18N/LANG/loadI18n/pokeName/term/t/itemCat)는 파일 상단으로 이동됨 */
+function applyNavSettingsLabels() {
+  const navMap = { navParty: 'nav_party', navBox: 'nav_box', navMeta: 'nav_meta', navDex: 'nav_dex' };
+  for (const id in navMap) { const el = document.getElementById(id); if (el) el.textContent = t(navMap[id]); }
+  const navSettingsBtn = document.getElementById('navSettingsBtn');
+  if (navSettingsBtn) navSettingsBtn.title = t('settings_btn_title');
+  const setMap = {
+    setTitleLbl: 'settings_title', setLangLbl: 'lang_lbl', setThemeLbl: 'theme_lbl',
+    setThemeOpt: 'theme_default', setDataMgmtLbl: 'data_mgmt_lbl', setClearBtn: 'clear_btn',
+    setClearDesc: 'clear_desc', setContactLbl: 'contact_lbl',
+  };
+  for (const id in setMap) { const el = document.getElementById(id); if (el) el.textContent = t(setMap[id]); }
+
+  const powerTitle = document.querySelector('#powerCalcPanel .calc-panel-title');
+  if (powerTitle) powerTitle.textContent = (typeof dcSide !== 'undefined' && dcSide === 'dur') ? t('dur_calc_title') : t('power_calc_title');
+  const speedTitle = document.querySelector('#speedCalcPanel .calc-panel-title');
+  if (speedTitle) speedTitle.textContent = (typeof scSide !== 'undefined' && scSide === 'sample') ? t('speed_sample_title') : t('speed_calc_title');
+  ['srTitleMob','srTitleMain'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = t('speed_sample_title'); });
+  ['srHdEv1','srHdEv2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = t('evs'); });
+  ['srHdSpd1','srHdSpd2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = t('actual_value2'); });
+  const recTitleText = document.getElementById('recTitleText');
+  if (recTitleText) recTitleText.textContent = t('recommended_pokemon_title');
+  const mobTabMap = { mobTabSpeedTxt: 'mob_tab_speed', mobTabDetailTxt: 'mob_tab_detail', mobTabCalcTxt: 'mob_tab_calc' };
+  for (const id in mobTabMap) { const el = document.getElementById(id); if (el) el.textContent = t(mobTabMap[id]); }
+
+  const staticModalMap = {
+    pokeModalTitle: 'select_pokemon_title', moveModalTitleStatic: 'select_move_title',
+    itemModalTitle: 'select_item_title', natureModalTitle: 'select_nature_title',
+    natureTableHint: 'nature_table_hint', boxModalTitle: 'nav_box',
+    pokeFilterAllBtn: 'all', pokeFilterIngameBtn: 'champions_legal',
+    moveFilterAllBtn: 'all', moveFilterPhysBtn: 'cat_physical',
+    moveFilterSpecBtn: 'cat_special', moveFilterStatusBtn: 'cat_status',
+  };
+  for (const id in staticModalMap) { const el = document.getElementById(id); if (el) el.textContent = t(staticModalMap[id]); }
+  const pokeSearchInp = document.getElementById('pokeSearch');
+  if (pokeSearchInp) pokeSearchInp.placeholder = t('search_by_name_placeholder');
+  const moveSearchInp = document.getElementById('moveSearch');
+  if (moveSearchInp) moveSearchInp.placeholder = t('move_name_search_placeholder');
+  const itemSearchInp = document.getElementById('itemSearch');
+  if (itemSearchInp) itemSearchInp.placeholder = t('item_name_search_placeholder');
+  document.querySelectorAll('#itemFilterRow .f-btn[data-if]').forEach(b => {
+    const f = b.dataset.if;
+    b.textContent = f === 'all' ? t('all') : f === '포챔스' ? t('champions_legal') : itemCat(f);
+  });
+  document.querySelectorAll('#typeFilterRow .tf-btn[data-type]').forEach(b => {
+    b.textContent = term('types', b.dataset.type);
+  });
+
+  /* 메인 콘텐츠도 함께 재렌더링 (언어 전환 시 즉시 반영) */
+  if (typeof renderSlots === 'function') renderSlots();
+  if (typeof renderEnemySlots === 'function') renderEnemySlots();
+  if (typeof renderRecommended === 'function') renderRecommended();
+  if (typeof renderPartyTypeChart === 'function') renderPartyTypeChart();
+  if (typeof renderBigEnemyChart === 'function') renderBigEnemyChart();
+  if (typeof renderSpeedRankList === 'function') renderSpeedRankList();
+  if (typeof renderSpeedCalc === 'function') renderSpeedCalc();
+  if (typeof selectedSlot !== 'undefined' && selectedSlot >= 0 && typeof renderDetail === 'function') renderDetail(selectedSlot);
+  if (typeof window.initPowerCalc === 'function') window.initPowerCalc();
+}
+
+loadI18n().then(applyNavSettingsLabels);
+</script>
 <script>
 (function initSettingsModal() {
   const overlay = document.getElementById('setOverlay');
   const logo = document.querySelector('.nav-logo');
   const closeBtn = document.getElementById('setCloseBtn');
   const clearBtn = document.getElementById('setClearBtn');
+  const langSel = document.getElementById('setLangSel');
   if (!overlay || !logo) return;
-  logo.addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('navSettingsBtn')?.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn?.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
   clearBtn?.addEventListener('click', () => {
-    if (!confirm('저장된 모든 데이터를 삭제하시겠습니까?\n파티, 박스, 계산기 설정이 전부 초기화됩니다.')) return;
+    if (!confirm(t('confirm_clear_all_data'))) return;
     Object.keys(localStorage).filter(k => k.startsWith('pochams_')).forEach(k => localStorage.removeItem(k));
-    alert('삭제되었습니다. 페이지를 새로고침합니다.');
+    alert(t('alert_data_cleared'));
     location.reload();
   });
+  if (langSel) {
+    langSel.value = localStorage.getItem('lang') || 'ko';
+    langSel.addEventListener('change', () => {
+      localStorage.setItem('lang', langSel.value);
+      LANG = langSel.value;
+      applyNavSettingsLabels();
+    });
+  }
 })();
 </script>
 </body>
