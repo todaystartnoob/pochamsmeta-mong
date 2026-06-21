@@ -2654,13 +2654,12 @@ function buildTypeChartSummaryHTML(slots) {
   if (!slots.length) return '';
   const effs = slots.map(s => applyAbilityDefEff(defEffectiveness(s.pokemon.type1, s.pokemon.type2||null), s.ability));
   const weakTypes = [], strongTypes = [], neutralTypes = [];
-  const half = Math.ceil(effs.length / 2);
   ALL_TYPES.forEach(t => {
     let w = 0, r = 0, n = 0;
     effs.forEach(eff => { const m = eff[t]; if (m > 1) w++; else if (m < 1) r++; else n++; });
     if (w > r) weakTypes.push(t);
     else if (r > w) strongTypes.push(t);
-    else if (n >= half) neutralTypes.push(t);
+    else neutralTypes.push(t);
   });
   const tbadge = tp => `<span class="pcs-tbadge" style="background:${TYPE_COLORS[tp]}">${term('types', tp)}</span>`;
   return `<div class="pcs-wrap">

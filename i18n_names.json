@@ -1168,12 +1168,6 @@
    "descEn": "Any Pokémon that hears this song faints in three turns, unless it switches out of battle.",
    "descJa": "この歌を聞いたポケモンは3ターン経つと瀕死になる。交代すると効果がなくなる。"
   },
-  "얼다바람": {
-   "en": "Icy Wind",
-   "ja": "こごえるかぜ",
-   "descEn": "The user blows freezing cold air at the target to attack. This also lowers the target's Speed stat.",
-   "descJa": "冷たい冷気を相手に吹きかけて攻撃する。相手のスピードを下げる。"
-  },
   "판별": {
    "en": "Detect",
    "ja": "みきり",
@@ -1504,12 +1498,6 @@
    "descEn": "The user summons its allies to join in the attack. The more allies there are, the greater the number of hits.",
    "descJa": "味方全員が攻撃する。仲間のポケモンが多いほど技の攻撃回数が増える。"
   },
-  "속이다": {
-   "en": "Fake Out",
-   "ja": "ねこだまし",
-   "descEn": "This attack move enables the user to move first and makes the target flinch. This works only the first turn the user is in battle.",
-   "descJa": "先制攻撃で相手をひるませる。バトルに出てすぐに使わないと成功しない。"
-  },
   "소란피기": {
    "en": "Uproar",
    "ja": "さわぐ",
@@ -1809,12 +1797,6 @@
    "ja": "ニードルアーム",
    "descEn": "This move can no longer be used. It cannot be relearned, but forgetting it is recommended.",
    "descJa": "現在は使用できない技です。再び覚えることはできませんが、技を忘れることをおすすめします。"
-  },
-  "태만함": {
-   "en": "Slack Off",
-   "ja": "なまける",
-   "descEn": "The user lazes around and rests, restoring its own HP by up to half of its max HP.",
-   "descJa": "怠けながら休む。自分のHPを最大HPの半分だけ回復する。"
   },
   "하이퍼보이스": {
    "en": "Hyper Voice",
@@ -5377,6 +5359,24 @@
    "descJa": "貝殻の剣で攻撃する。貝殻の破片はまきびしとなって相手の足元に散らばる。",
    "en": "Ceaseless Edge",
    "ja": "とどめばり"
+  },
+  "게으름피우기": {
+   "en": "Slack Off",
+   "ja": "なまける",
+   "descEn": "The user lazes around and rests, restoring its own HP by up to half of its max HP.",
+   "descJa": "怠けながら休む。自分のHPを最大HPの半分だけ回復する。"
+  },
+  "속이기": {
+   "en": "Fake Out",
+   "ja": "ねこだまし",
+   "descEn": "This attack move enables the user to move first and makes the target flinch. This works only the first turn the user is in battle.",
+   "descJa": "先制攻撃で相手をひるませる。バトルに出てすぐに使わないと成功しない。"
+  },
+  "얼어붙은바람": {
+   "en": "Icy Wind",
+   "ja": "こごえるかぜ",
+   "descEn": "The user blows freezing cold air at the target to attack. This also lowers the target's Speed stat.",
+   "descJa": "冷たい冷気を相手に吹きかけて攻撃する。相手のスピードを下げる。"
   }
  },
  "abilities": {

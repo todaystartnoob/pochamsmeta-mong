@@ -1725,7 +1725,7 @@ const META_SETS_DATA = {
             "rate": 85.2
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 83.2
           },
           {
@@ -2477,7 +2477,7 @@ const META_SETS_DATA = {
             "rate": 38.2
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 27.1
           },
           {
@@ -2951,7 +2951,7 @@ const META_SETS_DATA = {
             "rate": 94.5
           },
           {
-            "name": "태만함",
+            "name": "게으름피우기",
             "rate": 51.5
           },
           {
@@ -5885,7 +5885,7 @@ const META_SETS_DATA = {
             "rate": 75.5
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 71.4
           },
           {
@@ -7615,7 +7615,7 @@ const META_SETS_DATA = {
             "rate": 50.6
           },
           {
-            "name": "태만함",
+            "name": "게으름피우기",
             "rate": 36.8
           },
           {
@@ -8601,7 +8601,7 @@ const META_SETS_DATA = {
             "rate": 97
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 50.2
           },
           {
@@ -9089,7 +9089,7 @@ const META_SETS_DATA = {
             "rate": 99.5
           },
           {
-            "name": "태만함",
+            "name": "게으름피우기",
             "rate": 93.7
           },
           {
@@ -9360,7 +9360,7 @@ const META_SETS_DATA = {
             "rate": 10.4
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 9
           },
           {
@@ -9823,7 +9823,7 @@ const META_SETS_DATA = {
             "rate": 67.4
           },
           {
-            "name": "태만함",
+            "name": "게으름피우기",
             "rate": 66
           },
           {
@@ -10089,7 +10089,7 @@ const META_SETS_DATA = {
             "rate": 11.5
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 4.3
           },
           {
@@ -12283,7 +12283,7 @@ const META_SETS_DATA = {
             "rate": 2.3
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 1.4
           },
           {
@@ -13014,7 +13014,7 @@ const META_SETS_DATA = {
             "rate": 98.4
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 92
           },
           {
@@ -15000,7 +15000,7 @@ const META_SETS_DATA = {
             "rate": 60
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 50.1
           },
           {
@@ -15752,7 +15752,7 @@ const META_SETS_DATA = {
             "rate": 5
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 4
           },
           {
@@ -15967,7 +15967,7 @@ const META_SETS_DATA = {
         "id": "0727-00",
         "moves": [
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 99.1
           },
           {
@@ -19156,7 +19156,7 @@ const META_SETS_DATA = {
             "rate": 65.3
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 50.3
           },
           {
@@ -19409,7 +19409,7 @@ const META_SETS_DATA = {
             "rate": 51.7
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 46.1
           },
           {
@@ -19894,7 +19894,7 @@ const META_SETS_DATA = {
             "rate": 84.9
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 50.8
           },
           {
@@ -20145,7 +20145,7 @@ const META_SETS_DATA = {
             "rate": 44.5
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 35.2
           },
           {
@@ -20863,7 +20863,7 @@ const META_SETS_DATA = {
         "id": "0115-00",
         "moves": [
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 95.5
           },
           {
@@ -21363,7 +21363,7 @@ const META_SETS_DATA = {
             "rate": 55.2
           },
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 49.4
           },
           {
@@ -21860,7 +21860,7 @@ const META_SETS_DATA = {
             "rate": 37
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 34
           },
           {
@@ -23323,7 +23323,7 @@ const META_SETS_DATA = {
         "id": "0428-00",
         "moves": [
           {
-            "name": "속이다",
+            "name": "속이기",
             "rate": 93
           },
           {
@@ -23593,7 +23593,7 @@ const META_SETS_DATA = {
             "rate": 25.1
           },
           {
-            "name": "얼다바람",
+            "name": "얼어붙은바람",
             "rate": 17
           },
           {
