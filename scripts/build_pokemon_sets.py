@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 
 TOP_N = None   # None=사용률 순위 '전부'(약209종). 100 등 숫자로 제한 가능
 SLEEP = 2.0    # 요청 간격(초). pokedb 배려용 — 더 천천히 하려면 키워
-UA = "ChampionsTool/1.0 (+https://github.com/todaystartnoob/pochamsmeta-mong)"
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 HERE = os.path.dirname(__file__)
 DATA_DIR = os.path.join(HERE, "..", "data")
 PAGE = "https://champs.pokedb.tokyo/pokemon/show/{id}?season={season}&rule={r}"

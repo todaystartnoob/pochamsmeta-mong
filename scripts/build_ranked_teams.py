@@ -25,7 +25,7 @@ RULES = ["single", "double"]
 RULE_CODE = {"single": 0, "double": 1}     # /pokemon/list 의 rule 파라미터
 MAX_SEASON = 30
 TOP_TEAMS = 50                              # 랭커 파티 상위 N개만 저장
-UA = "ChampionsTool/1.0 (+https://github.com/todaystartnoob/pochamsmeta-mong)"
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 MAP_PATH = os.path.join(os.path.dirname(__file__), "champions_loc_map.json")
 
