@@ -1065,6 +1065,8 @@ async function loadI18n() {
 
 function pokeName(koName, dexNo) {
   if (LANG === 'ko' || !I18N || !koName) return koName;
+  const full = I18N.pokemonFullNames && I18N.pokemonFullNames[koName];
+  if (full && full[LANG]) return full[LANG];
   const p = I18N.pokemon[String(dexNo)];
   if (!p) return koName;
   const base = p[LANG] || p.ko;

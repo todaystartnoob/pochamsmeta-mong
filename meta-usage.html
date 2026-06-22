@@ -529,6 +529,8 @@ async function loadI18n() {
 /* 한국어 완성 명칭(폼 포함) → 선택 언어. dexNo로 종 기본명을 찾고, forms 사전에 있는 폼 키워드만 치환 */
 function pokeName(koName, dexNo) {
   if (LANG === 'ko' || !I18N || !koName) return koName;
+  const full = I18N.pokemonFullNames && I18N.pokemonFullNames[koName];
+  if (full && full[LANG]) return full[LANG];
   const p = I18N.pokemon[String(dexNo)];
   if (!p) return koName;
   const base = p[LANG] || p.ko;

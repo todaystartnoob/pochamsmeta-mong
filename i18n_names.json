@@ -25143,5 +25143,83 @@
    "en": "-",
    "ja": "-"
   }
+ },
+ "pokemonFullNames": {
+  "메가리자몽X": {
+   "en": "Mega Charizard X",
+   "ja": "メガリザードンX"
+  },
+  "메가리자몽Y": {
+   "en": "Mega Charizard Y",
+   "ja": "メガリザードンY"
+  },
+  "메가라이츄X": {
+   "en": "Mega Raichu X",
+   "ja": "メガライチュウX"
+  },
+  "메가라이츄Y": {
+   "en": "Mega Raichu Y",
+   "ja": "メガライチュウY"
+  },
+  "메가뮤츠X": {
+   "en": "Mega Mewtwo X",
+   "ja": "メガミュウツーX"
+  },
+  "메가뮤츠Y": {
+   "en": "Mega Mewtwo Y",
+   "ja": "メガミュウツーY"
+  },
+  "메가앱솔Z": {
+   "en": "Mega Absol Z",
+   "ja": "メガアブソルZ"
+  },
+  "메가한카리아스Z": {
+   "en": "Mega Garchomp Z",
+   "ja": "メガガブリアスZ"
+  },
+  "메가루카리오Z": {
+   "en": "Mega Lucario Z",
+   "ja": "メガルカリオZ"
+  },
+  "스핀로토무": {
+   "en": "Rotom-Fan",
+   "ja": "スピンロトム"
+  },
+  "워시로토무": {
+   "en": "Rotom-Wash",
+   "ja": "ウォッシュロトム"
+  },
+  "커트로토무": {
+   "en": "Rotom-Mow",
+   "ja": "カットロトム"
+  },
+  "프로스트로토무": {
+   "en": "Rotom-Frost",
+   "ja": "フロストロトム"
+  },
+  "히트로토무": {
+   "en": "Rotom-Heat",
+   "ja": "ヒートロトム"
+  },
+  "블랙큐레무": {
+   "en": "Black Kyurem",
+   "ja": "ブラックキュレム"
+  },
+  "화이트큐레무": {
+   "en": "White Kyurem",
+   "ja": "ホワイトキュレム"
+  },
+  "지우개굴닌자": {
+   "en": "Ash-Greninja",
+   "ja": "サトシゲッコウガ"
+  },
+  "굴레를 벗어난 후파": {
+   "en": "Hoopa Unbound",
+   "ja": "けたぐれフーパ"
+  },
+  "울트라네크로즈마": {
+   "en": "Ultra Necrozma",
+   "ja": "ウルトラネクロズマ"
+  }
  }
 }
