@@ -504,7 +504,7 @@ loadI18n().then(applyNavSettingsLabels);
     location.reload();
   });
   if (langSel) {
-    langSel.value = localStorage.getItem('lang') || 'ko';
+    langSel.value = typeof LANG !== 'undefined' ? LANG : (localStorage.getItem('lang') || 'ko');
     langSel.addEventListener('change', () => {
       localStorage.setItem('lang', langSel.value);
       LANG = langSel.value;
