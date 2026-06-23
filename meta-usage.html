@@ -336,6 +336,34 @@
     <button class="nav-settings-btn" id="navSettingsBtn" title="Settings">⚙</button>
   </div>
 </nav>
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('lang');
+    var lang = saved || (function(){
+      var nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (nav.startsWith('ko')) return 'ko';
+      if (nav.startsWith('ja')) return 'ja';
+      if (nav.startsWith('en')) return 'en';
+      return 'en';
+    })();
+    if (lang !== 'ko') {
+      var navText = {
+        navParty: {en:'Party Builder', ja:'パーティ編成'},
+        navBox: {en:'Pok\u00e9mon Box', ja:'ポケモンボックス'},
+        navMeta: {en:'Usage Stats', ja:'使用率'},
+        navDex: {en:'Pok\u00e9dex', ja:'ポケモン図鑑'}
+      };
+      for (var id in navText) {
+        var el = document.getElementById(id);
+        if (el && navText[id][lang]) el.textContent = navText[id][lang];
+      }
+      var setBtn = document.getElementById('navSettingsBtn');
+      if (setBtn) setBtn.title = lang === 'ja' ? '\u8a2d\u5b9a' : 'Settings';
+    }
+  } catch(e) {}
+})();
+</script>
 
 <div id="pageWrap">
   <div class="ad-panel" id="leftAd"></div>
