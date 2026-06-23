@@ -902,9 +902,19 @@ const MEGA_STONE_MAP = {
   '메가망나뇽':'망나뇽나이트','메가우츠보트':'우츠보트나이트','메가플라엣테':'플라엣테나이트',
 };
 
-const STONE_TO_MEGA_MAP = Object.fromEntries(
-  Object.entries(MEGA_STONE_MAP).map(([mega, stone]) => [stone, mega])
-);
+const STONE_TO_MEGA_MAP = {};
+Object.entries(MEGA_STONE_MAP).forEach(([mega, stone]) => {
+  // 일반형/Z형처럼 같은 스톤 이름을 공유하는 경우(앱솔/한카리아스/루카리오 등),
+  // 챔피언스에서 실제로 사용 가능한(champions:true) 쪽을 우선 채택
+  const pkData = typeof POKEMON_DATA !== 'undefined' ? POKEMON_DATA.find(p => p.name === mega) : null;
+  const isUsable = !pkData || pkData.champions !== false;
+  const existing = STONE_TO_MEGA_MAP[stone];
+  if (!existing) {
+    if (isUsable) STONE_TO_MEGA_MAP[stone] = mega;
+  } else if (!isUsable) {
+    // 기존 항목이 이미 있으면(먼저 등록된 일반형) 사용 불가능한 후보는 무시
+  }
+});
 function megaNameFromStone(stoneName) {
   // 검증된 MEGA_STONE_MAP 역참조 우선 (스톤 이름이 종족명을 그대로 포함하지 않는 불규칙 축약 대응)
   if (STONE_TO_MEGA_MAP[stoneName]) return STONE_TO_MEGA_MAP[stoneName];
