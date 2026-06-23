@@ -1,7 +1,7 @@
 {
   "season_number": 2,
   "rule": "double",
-  "top_n": 54,
+  "top_n": 58,
   "pokemon": [
     {
       "id": "0983-00",
@@ -253,7 +253,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "대도각참",
-      "usage_rate": 51.72
+      "usage_rate": 48.39
     },
     {
       "id": "0903-00",
@@ -503,7 +503,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "포푸니크",
-      "usage_rate": 48.28
+      "usage_rate": 45.16
     },
     {
       "id": "0981-00",
@@ -752,7 +752,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "키키링",
-      "usage_rate": 37.93
+      "usage_rate": 38.71
     },
     {
       "id": "0902-00",
@@ -1004,7 +1004,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "대쓰여너",
-      "usage_rate": 27.59
+      "usage_rate": 25.81
     },
     {
       "id": "0445-00",
@@ -1256,7 +1256,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "한카리아스",
-      "usage_rate": 27.59
+      "usage_rate": 25.81
     },
     {
       "id": "0700-00",
@@ -1504,7 +1504,251 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "님피아",
-      "usage_rate": 27.59
+      "usage_rate": 25.81
+    },
+    {
+      "id": "1013-00",
+      "moves": [
+        {
+          "name": "휘적휘적포",
+          "rate": 98.3
+        },
+        {
+          "name": "분노가루",
+          "rate": 94.5
+        },
+        {
+          "name": "트릭룸",
+          "rate": 65.4
+        },
+        {
+          "name": "생명의물방울",
+          "rate": 57.3
+        },
+        {
+          "name": "방어",
+          "rate": 50.5
+        },
+        {
+          "name": "섀도볼",
+          "rate": 15.9
+        },
+        {
+          "name": "힘흡수",
+          "rate": 8.7
+        },
+        {
+          "name": "봉인",
+          "rate": 1.9
+        },
+        {
+          "name": "열탕",
+          "rate": 1.5
+        },
+        {
+          "name": "명상",
+          "rate": 1.0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "대접",
+          "rate": 98.9
+        },
+        {
+          "name": "내열",
+          "rate": 1.1
+        }
+      ],
+      "natures": [
+        {
+          "name": "대담",
+          "rate": 38.5
+        },
+        {
+          "name": "차분",
+          "rate": 24.8
+        },
+        {
+          "name": "무사태평",
+          "rate": 13.7
+        },
+        {
+          "name": "건방",
+          "rate": 9.5
+        },
+        {
+          "name": "조심",
+          "rate": 8.4
+        },
+        {
+          "name": "냉정",
+          "rate": 3.2
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 1.2
+        },
+        {
+          "name": "의젓",
+          "rate": 0.2
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 31.3
+        },
+        {
+          "name": "수불열매",
+          "rate": 27.0
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 12.9
+        },
+        {
+          "name": "마코열매",
+          "rate": 12.4
+        },
+        {
+          "name": "오카열매",
+          "rate": 4.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 3.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 2.0
+        },
+        {
+          "name": "기적의씨",
+          "rate": 1.6
+        },
+        {
+          "name": "바코열매",
+          "rate": 1.6
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 1.4
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 14,
+            "D": 20
+          },
+          "rate": 18.0
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 4,
+            "D": 30
+          },
+          "rate": 6.1
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "D": 32
+          },
+          "rate": 5.2
+        },
+        {
+          "label": "HBD",
+          "evs": {
+            "H": 32,
+            "B": 16,
+            "D": 18
+          },
+          "rate": 4.7
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 31,
+            "B": 7,
+            "D": 28
+          },
+          "rate": 4.3
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 7,
+            "D": 27
+          },
+          "rate": 4.0
+        },
+        {
+          "label": "HBD",
+          "evs": {
+            "H": 32,
+            "B": 24,
+            "D": 19
+          },
+          "rate": 3.9
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 2.6
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 31,
+            "B": 15,
+            "D": 20
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 1.5
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 10,
+            "D": 24
+          },
+          "rate": 1.5
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 1.3
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "그우린차",
+      "usage_rate": 25.81
     },
     {
       "id": "0142-00",
@@ -1758,136 +2002,384 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "프테라",
-      "usage_rate": 24.14
+      "usage_rate": 22.58
     },
     {
-      "id": "1013-00",
+      "id": "0009-00",
       "moves": [
         {
-          "name": "휘적휘적포",
-          "rate": 98.3
+          "name": "해수스파우팅",
+          "rate": 88.2
         },
         {
-          "name": "분노가루",
-          "rate": 94.5
+          "name": "악의파동",
+          "rate": 77.6
         },
         {
-          "name": "트릭룸",
-          "rate": 65.4
+          "name": "파동탄",
+          "rate": 59.6
         },
         {
-          "name": "생명의물방울",
-          "rate": 57.3
+          "name": "속이다",
+          "rate": 58.4
+        },
+        {
+          "name": "껍질깨기",
+          "rate": 37.8
         },
         {
           "name": "방어",
-          "rate": 50.5
+          "rate": 35.8
         },
         {
-          "name": "섀도볼",
-          "rate": 15.9
+          "name": "냉동빔",
+          "rate": 11.3
         },
         {
-          "name": "힘흡수",
-          "rate": 8.7
+          "name": "물의파동",
+          "rate": 9.2
         },
         {
-          "name": "봉인",
-          "rate": 1.9
+          "name": "용의파동",
+          "rate": 5.2
         },
         {
-          "name": "열탕",
-          "rate": 1.5
-        },
-        {
-          "name": "명상",
-          "rate": 1.0
+          "name": "탁류",
+          "rate": 3.9
         }
       ],
       "abilities": [
         {
-          "name": "대접",
-          "rate": 98.9
+          "name": "젖은접시",
+          "rate": 75.0
         },
         {
-          "name": "내열",
-          "rate": 1.1
+          "name": "급류",
+          "rate": 25.0
         }
       ],
       "natures": [
         {
-          "name": "대담",
-          "rate": 38.5
-        },
-        {
-          "name": "차분",
-          "rate": 24.8
-        },
-        {
-          "name": "무사태평",
-          "rate": 13.7
-        },
-        {
-          "name": "건방",
-          "rate": 9.5
-        },
-        {
           "name": "조심",
-          "rate": 8.4
+          "rate": 66.2
         },
         {
           "name": "냉정",
-          "rate": 3.2
+          "rate": 26.5
         },
         {
           "name": "겁쟁이",
+          "rate": 3.6
+        },
+        {
+          "name": "대담",
+          "rate": 0.9
+        },
+        {
+          "name": "차분",
+          "rate": 0.8
+        },
+        {
+          "name": "건방",
+          "rate": 0.5
+        },
+        {
+          "name": "무사태평",
+          "rate": 0.3
+        },
+        {
+          "name": "장난꾸러기",
+          "rate": 0.3
+        }
+      ],
+      "items": [
+        {
+          "name": "거북왕나이트",
+          "rate": 93.0
+        },
+        {
+          "name": "하양허브",
+          "rate": 2.0
+        },
+        {
+          "name": "신비의물방울",
           "rate": 1.2
         },
         {
-          "name": "의젓",
+          "name": "먹다남은음식",
+          "rate": 1.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 1.0
+        },
+        {
+          "name": "구애스카프",
+          "rate": 0.5
+        },
+        {
+          "name": "린드열매",
           "rate": 0.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.2
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.1
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 22.7
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 20.2
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 5.5
+        },
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "S": 2
+          },
+          "rate": 2.5
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 5,
+            "C": 32,
+            "S": 29
+          },
+          "rate": 2.5
+        },
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 31,
+            "C": 32,
+            "S": 3
+          },
+          "rate": 2.1
+        },
+        {
+          "label": "CS + hb",
+          "evs": {
+            "H": 1,
+            "B": 1,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "HC + bd",
+          "evs": {
+            "H": 32,
+            "B": 1,
+            "C": 32,
+            "D": 1
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 31,
+            "B": 8,
+            "C": 32
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "CS + bd",
+          "evs": {
+            "B": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "CS + hd",
+          "evs": {
+            "H": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 1.4
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "거북왕",
+      "usage_rate": 22.58
+    },
+    {
+      "id": "0727-00",
+      "moves": [
+        {
+          "name": "속이다",
+          "rate": 98.8
+        },
+        {
+          "name": "막말내뱉기",
+          "rate": 92.3
+        },
+        {
+          "name": "플레어드라이브",
+          "rate": 83.2
+        },
+        {
+          "name": "지옥찌르기",
+          "rate": 44.4
+        },
+        {
+          "name": "DD래리어트",
+          "rate": 37.0
+        },
+        {
+          "name": "방어",
+          "rate": 19.9
+        },
+        {
+          "name": "도깨비불",
+          "rate": 4.1
+        },
+        {
+          "name": "도발",
+          "rate": 4.0
+        },
+        {
+          "name": "인파이트",
+          "rate": 3.3
+        },
+        {
+          "name": "바크아웃",
+          "rate": 2.8
+        }
+      ],
+      "abilities": [
+        {
+          "name": "위협",
+          "rate": 99.6
+        },
+        {
+          "name": "맹화",
+          "rate": 0.4
+        }
+      ],
+      "natures": [
+        {
+          "name": "신중",
+          "rate": 36.5
+        },
+        {
+          "name": "고집",
+          "rate": 20.8
+        },
+        {
+          "name": "장난꾸러기",
+          "rate": 19.6
+        },
+        {
+          "name": "건방",
+          "rate": 8.7
+        },
+        {
+          "name": "용감",
+          "rate": 5.9
+        },
+        {
+          "name": "무사태평",
+          "rate": 4.6
+        },
+        {
+          "name": "명랑",
+          "rate": 2.3
+        },
+        {
+          "name": "차분",
+          "rate": 0.4
         }
       ],
       "items": [
         {
           "name": "자뭉열매",
-          "rate": 31.3
+          "rate": 47.1
         },
         {
-          "name": "수불열매",
-          "rate": 27.0
+          "name": "로플열매",
+          "rate": 19.4
+        },
+        {
+          "name": "꼬시개열매",
+          "rate": 14.0
         },
         {
           "name": "먹다남은음식",
-          "rate": 12.9
+          "rate": 6.1
         },
         {
-          "name": "마코열매",
-          "rate": 12.4
-        },
-        {
-          "name": "오카열매",
+          "name": "슈캐열매",
           "rate": 4.0
         },
         {
-          "name": "기합의띠",
-          "rate": 3.1
+          "name": "목탄",
+          "rate": 2.9
         },
         {
-          "name": "반짝가루",
-          "rate": 2.0
-        },
-        {
-          "name": "기적의씨",
-          "rate": 1.6
-        },
-        {
-          "name": "바코열매",
-          "rate": 1.6
-        },
-        {
-          "name": "멘탈허브",
+          "name": "하양허브",
           "rate": 1.4
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.3
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.8
+        },
+        {
+          "name": "검은안경",
+          "rate": 0.7
         }
       ],
       "ev_spreads": [
@@ -1898,25 +2390,7 @@
             "B": 14,
             "D": 20
           },
-          "rate": 18.0
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 4,
-            "D": 30
-          },
-          "rate": 6.1
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "D": 32
-          },
-          "rate": 5.2
+          "rate": 7.1
         },
         {
           "label": "HBD",
@@ -1925,34 +2399,55 @@
             "B": 16,
             "D": 18
           },
-          "rate": 4.7
+          "rate": 5.2
         },
         {
-          "label": "HD + b",
+          "label": "H + abds",
+          "evs": {
+            "H": 32,
+            "A": 8,
+            "B": 9,
+            "D": 11,
+            "S": 6
+          },
+          "rate": 2.6
+        },
+        {
+          "label": "HA + s",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "S": 2
+          },
+          "rate": 2.4
+        },
+        {
+          "label": "HA + b",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "B": 2
+          },
+          "rate": 2.3
+        },
+        {
+          "label": "HA + d",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "D": 2
+          },
+          "rate": 2.2
+        },
+        {
+          "label": "HD + bs",
           "evs": {
             "H": 31,
             "B": 7,
-            "D": 28
+            "D": 20,
+            "S": 8
           },
-          "rate": 4.3
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 7,
-            "D": 27
-          },
-          "rate": 4.0
-        },
-        {
-          "label": "HBD",
-          "evs": {
-            "H": 32,
-            "B": 24,
-            "D": 19
-          },
-          "rate": 3.9
+          "rate": 2.1
         },
         {
           "label": "HB + d",
@@ -1961,7 +2456,7 @@
             "B": 32,
             "D": 2
           },
-          "rate": 2.6
+          "rate": 2.1
         },
         {
           "label": "HD + b",
@@ -1973,36 +2468,37 @@
           "rate": 1.9
         },
         {
-          "label": "HC + d",
+          "label": "HB + d",
           "evs": {
             "H": 32,
-            "C": 32,
-            "D": 2
+            "B": 20,
+            "D": 14
           },
-          "rate": 1.5
+          "rate": 1.7
         },
         {
           "label": "HD + b",
           "evs": {
             "H": 32,
-            "B": 10,
-            "D": 24
-          },
-          "rate": 1.5
-        },
-        {
-          "label": "HC + b",
-          "evs": {
-            "H": 32,
             "B": 2,
-            "C": 32
+            "D": 32
           },
           "rate": 1.3
+        },
+        {
+          "label": "HDS + b",
+          "evs": {
+            "H": 32,
+            "B": 8,
+            "D": 19,
+            "S": 16
+          },
+          "rate": 1.1
         }
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "그우린차",
-      "usage_rate": 24.14
+      "name": "어흥염",
+      "usage_rate": 22.58
     },
     {
       "id": "0478-00",
@@ -2253,503 +2749,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "눈여아",
-      "usage_rate": 20.69
-    },
-    {
-      "id": "0727-00",
-      "moves": [
-        {
-          "name": "속이다",
-          "rate": 98.8
-        },
-        {
-          "name": "막말내뱉기",
-          "rate": 92.3
-        },
-        {
-          "name": "플레어드라이브",
-          "rate": 83.2
-        },
-        {
-          "name": "지옥찌르기",
-          "rate": 44.4
-        },
-        {
-          "name": "DD래리어트",
-          "rate": 37.0
-        },
-        {
-          "name": "방어",
-          "rate": 19.9
-        },
-        {
-          "name": "도깨비불",
-          "rate": 4.1
-        },
-        {
-          "name": "도발",
-          "rate": 4.0
-        },
-        {
-          "name": "인파이트",
-          "rate": 3.3
-        },
-        {
-          "name": "바크아웃",
-          "rate": 2.8
-        }
-      ],
-      "abilities": [
-        {
-          "name": "위협",
-          "rate": 99.6
-        },
-        {
-          "name": "맹화",
-          "rate": 0.4
-        }
-      ],
-      "natures": [
-        {
-          "name": "신중",
-          "rate": 36.5
-        },
-        {
-          "name": "고집",
-          "rate": 20.8
-        },
-        {
-          "name": "장난꾸러기",
-          "rate": 19.6
-        },
-        {
-          "name": "건방",
-          "rate": 8.7
-        },
-        {
-          "name": "용감",
-          "rate": 5.9
-        },
-        {
-          "name": "무사태평",
-          "rate": 4.6
-        },
-        {
-          "name": "명랑",
-          "rate": 2.3
-        },
-        {
-          "name": "차분",
-          "rate": 0.4
-        }
-      ],
-      "items": [
-        {
-          "name": "자뭉열매",
-          "rate": 47.1
-        },
-        {
-          "name": "로플열매",
-          "rate": 19.4
-        },
-        {
-          "name": "꼬시개열매",
-          "rate": 14.0
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 6.1
-        },
-        {
-          "name": "슈캐열매",
-          "rate": 4.0
-        },
-        {
-          "name": "목탄",
-          "rate": 2.9
-        },
-        {
-          "name": "하양허브",
-          "rate": 1.4
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 1.3
-        },
-        {
-          "name": "리샘열매",
-          "rate": 0.8
-        },
-        {
-          "name": "검은안경",
-          "rate": 0.7
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 14,
-            "D": 20
-          },
-          "rate": 7.1
-        },
-        {
-          "label": "HBD",
-          "evs": {
-            "H": 32,
-            "B": 16,
-            "D": 18
-          },
-          "rate": 5.2
-        },
-        {
-          "label": "H + abds",
-          "evs": {
-            "H": 32,
-            "A": 8,
-            "B": 9,
-            "D": 11,
-            "S": 6
-          },
-          "rate": 2.6
-        },
-        {
-          "label": "HA + s",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "S": 2
-          },
-          "rate": 2.4
-        },
-        {
-          "label": "HA + b",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "B": 2
-          },
-          "rate": 2.3
-        },
-        {
-          "label": "HA + d",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "D": 2
-          },
-          "rate": 2.2
-        },
-        {
-          "label": "HD + bs",
-          "evs": {
-            "H": 31,
-            "B": 7,
-            "D": 20,
-            "S": 8
-          },
-          "rate": 2.1
-        },
-        {
-          "label": "HB + d",
-          "evs": {
-            "H": 32,
-            "B": 32,
-            "D": 2
-          },
-          "rate": 2.1
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 31,
-            "B": 15,
-            "D": 20
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "HB + d",
-          "evs": {
-            "H": 32,
-            "B": 20,
-            "D": 14
-          },
-          "rate": 1.7
-        },
-        {
-          "label": "HD + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "D": 32
-          },
-          "rate": 1.3
-        },
-        {
-          "label": "HDS + b",
-          "evs": {
-            "H": 32,
-            "B": 8,
-            "D": 19,
-            "S": 16
-          },
-          "rate": 1.1
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "어흥염",
-      "usage_rate": 20.69
-    },
-    {
-      "id": "0009-00",
-      "moves": [
-        {
-          "name": "해수스파우팅",
-          "rate": 88.2
-        },
-        {
-          "name": "악의파동",
-          "rate": 77.6
-        },
-        {
-          "name": "파동탄",
-          "rate": 59.6
-        },
-        {
-          "name": "속이다",
-          "rate": 58.4
-        },
-        {
-          "name": "껍질깨기",
-          "rate": 37.8
-        },
-        {
-          "name": "방어",
-          "rate": 35.8
-        },
-        {
-          "name": "냉동빔",
-          "rate": 11.3
-        },
-        {
-          "name": "물의파동",
-          "rate": 9.2
-        },
-        {
-          "name": "용의파동",
-          "rate": 5.2
-        },
-        {
-          "name": "탁류",
-          "rate": 3.9
-        }
-      ],
-      "abilities": [
-        {
-          "name": "젖은접시",
-          "rate": 75.0
-        },
-        {
-          "name": "급류",
-          "rate": 25.0
-        }
-      ],
-      "natures": [
-        {
-          "name": "조심",
-          "rate": 66.2
-        },
-        {
-          "name": "냉정",
-          "rate": 26.5
-        },
-        {
-          "name": "겁쟁이",
-          "rate": 3.6
-        },
-        {
-          "name": "대담",
-          "rate": 0.9
-        },
-        {
-          "name": "차분",
-          "rate": 0.8
-        },
-        {
-          "name": "건방",
-          "rate": 0.5
-        },
-        {
-          "name": "무사태평",
-          "rate": 0.3
-        },
-        {
-          "name": "장난꾸러기",
-          "rate": 0.3
-        }
-      ],
-      "items": [
-        {
-          "name": "거북왕나이트",
-          "rate": 93.0
-        },
-        {
-          "name": "하양허브",
-          "rate": 2.0
-        },
-        {
-          "name": "신비의물방울",
-          "rate": 1.2
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 1.1
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 1.0
-        },
-        {
-          "name": "구애스카프",
-          "rate": 0.5
-        },
-        {
-          "name": "린드열매",
-          "rate": 0.2
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 0.2
-        },
-        {
-          "name": "반짝가루",
-          "rate": 0.1
-        },
-        {
-          "name": "멘탈허브",
-          "rate": 0.1
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "HC + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "C": 32
-          },
-          "rate": 22.7
-        },
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 20.2
-        },
-        {
-          "label": "HC + d",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "D": 2
-          },
-          "rate": 5.5
-        },
-        {
-          "label": "HC + s",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "S": 2
-          },
-          "rate": 2.5
-        },
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 5,
-            "C": 32,
-            "S": 29
-          },
-          "rate": 2.5
-        },
-        {
-          "label": "HC + s",
-          "evs": {
-            "H": 31,
-            "C": 32,
-            "S": 3
-          },
-          "rate": 2.1
-        },
-        {
-          "label": "CS + hb",
-          "evs": {
-            "H": 1,
-            "B": 1,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "HC + bd",
-          "evs": {
-            "H": 32,
-            "B": 1,
-            "C": 32,
-            "D": 1
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "HC + b",
-          "evs": {
-            "H": 31,
-            "B": 8,
-            "C": 32
-          },
-          "rate": 1.8
-        },
-        {
-          "label": "CS + bd",
-          "evs": {
-            "B": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 1.8
-        },
-        {
-          "label": "CS + hd",
-          "evs": {
-            "H": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 1.4
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "거북왕",
-      "usage_rate": 17.24
+      "usage_rate": 19.35
     },
     {
       "id": "0428-00",
@@ -3000,7 +3000,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "이어롭",
-      "usage_rate": 17.24
+      "usage_rate": 19.35
     },
     {
       "id": "0670-05",
@@ -3250,7 +3250,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "플라엣테",
-      "usage_rate": 13.79
+      "usage_rate": 12.9
     },
     {
       "id": "0006-00",
@@ -3503,7 +3503,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "리자몽",
-      "usage_rate": 13.79
+      "usage_rate": 12.9
     },
     {
       "id": "1018-00",
@@ -3754,7 +3754,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "브리두라스",
-      "usage_rate": 13.79
+      "usage_rate": 12.9
     },
     {
       "id": "0324-00",
@@ -4003,7 +4003,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "코터스",
-      "usage_rate": 13.79
+      "usage_rate": 12.9
     },
     {
       "id": "0952-00",
@@ -4252,7 +4252,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "스코빌런",
-      "usage_rate": 10.34
+      "usage_rate": 9.68
     },
     {
       "id": "0547-00",
@@ -4504,7 +4504,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "엘풍",
-      "usage_rate": 10.34
+      "usage_rate": 9.68
     },
     {
       "id": "0248-00",
@@ -4753,7 +4753,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "마기라스",
-      "usage_rate": 10.34
+      "usage_rate": 9.68
     },
     {
       "id": "0530-00",
@@ -5003,7 +5003,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "몰드류",
-      "usage_rate": 10.34
+      "usage_rate": 9.68
     },
     {
       "id": "0823-00",
@@ -5262,7 +5262,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "아머까오",
-      "usage_rate": 10.34
+      "usage_rate": 9.68
     },
     {
       "id": "0763-00",
@@ -5515,7 +5515,255 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "달코퀸",
-      "usage_rate": 10.34
+      "usage_rate": 9.68
+    },
+    {
+      "id": "0094-00",
+      "moves": [
+        {
+          "name": "섀도볼",
+          "rate": 91.4
+        },
+        {
+          "name": "방어",
+          "rate": 81.7
+        },
+        {
+          "name": "멸망의노래",
+          "rate": 54.6
+        },
+        {
+          "name": "오물폭탄",
+          "rate": 52.0
+        },
+        {
+          "name": "사슬묶기",
+          "rate": 40.9
+        },
+        {
+          "name": "얼다바람",
+          "rate": 10.0
+        },
+        {
+          "name": "사이코키네시스",
+          "rate": 7.9
+        },
+        {
+          "name": "오물웨이브",
+          "rate": 7.4
+        },
+        {
+          "name": "기합구슬",
+          "rate": 6.8
+        },
+        {
+          "name": "길동무",
+          "rate": 6.4
+        }
+      ],
+      "abilities": [
+        {
+          "name": "저주받은바디",
+          "rate": 100.0
+        }
+      ],
+      "natures": [
+        {
+          "name": "겁쟁이",
+          "rate": 72.5
+        },
+        {
+          "name": "조심",
+          "rate": 20.6
+        },
+        {
+          "name": "냉정",
+          "rate": 3.0
+        },
+        {
+          "name": "대담",
+          "rate": 1.8
+        },
+        {
+          "name": "차분",
+          "rate": 1.2
+        },
+        {
+          "name": "성급",
+          "rate": 0.2
+        },
+        {
+          "name": "명랑",
+          "rate": 0.2
+        },
+        {
+          "name": "의젓",
+          "rate": 0.1
+        }
+      ],
+      "items": [
+        {
+          "name": "팬텀나이트",
+          "rate": 81.0
+        },
+        {
+          "name": "기합의띠",
+          "rate": 14.3
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.8
+        },
+        {
+          "name": "저주의부적",
+          "rate": 0.4
+        },
+        {
+          "name": "독바늘",
+          "rate": 0.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.3
+        },
+        {
+          "name": "마코열매",
+          "rate": 0.2
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.2
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.2
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.1
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 27.3
+        },
+        {
+          "label": "HS + bcd",
+          "evs": {
+            "H": 32,
+            "B": 9,
+            "C": 1,
+            "D": 1,
+            "S": 23
+          },
+          "rate": 11.3
+        },
+        {
+          "label": "HD + bcs",
+          "evs": {
+            "H": 30,
+            "B": 1,
+            "C": 1,
+            "D": 28,
+            "S": 6
+          },
+          "rate": 4.2
+        },
+        {
+          "label": "HS + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 3.2
+        },
+        {
+          "label": "HS + b",
+          "evs": {
+            "H": 30,
+            "B": 12,
+            "S": 24
+          },
+          "rate": 3.2
+        },
+        {
+          "label": "HB + cds",
+          "evs": {
+            "H": 30,
+            "B": 18,
+            "C": 2,
+            "D": 11,
+            "S": 5
+          },
+          "rate": 2.6
+        },
+        {
+          "label": "HS + c",
+          "evs": {
+            "H": 32,
+            "C": 2,
+            "S": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "CS + d",
+          "evs": {
+            "C": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "HB + cs",
+          "evs": {
+            "H": 30,
+            "B": 21,
+            "C": 5,
+            "S": 10
+          },
+          "rate": 1.3
+        },
+        {
+          "label": "HC + bs",
+          "evs": {
+            "H": 30,
+            "B": 1,
+            "C": 32,
+            "S": 3
+          },
+          "rate": 1.3
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "팬텀",
+      "usage_rate": 9.68
     },
     {
       "id": "0784-00",
@@ -5770,7 +6018,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "짜랑고우거",
-      "usage_rate": 6.9
+      "usage_rate": 6.45
     },
     {
       "id": "0279-00",
@@ -6025,7 +6273,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "패리퍼",
-      "usage_rate": 6.9
+      "usage_rate": 6.45
     },
     {
       "id": "0666-18",
@@ -6274,7 +6522,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "비비용",
-      "usage_rate": 6.9
+      "usage_rate": 6.45
     },
     {
       "id": "0149-00",
@@ -6520,7 +6768,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "망나뇽",
-      "usage_rate": 6.9
+      "usage_rate": 6.45
     },
     {
       "id": "0745-02",
@@ -6763,7 +7011,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "루가루암",
-      "usage_rate": 6.9
+      "usage_rate": 6.45
     },
     {
       "id": "0003-00",
@@ -7011,1991 +7259,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "이상해꽃",
-      "usage_rate": 6.9
-    },
-    {
-      "id": "0094-00",
-      "moves": [
-        {
-          "name": "섀도볼",
-          "rate": 91.4
-        },
-        {
-          "name": "방어",
-          "rate": 81.7
-        },
-        {
-          "name": "멸망의노래",
-          "rate": 54.6
-        },
-        {
-          "name": "오물폭탄",
-          "rate": 52.0
-        },
-        {
-          "name": "사슬묶기",
-          "rate": 40.9
-        },
-        {
-          "name": "얼다바람",
-          "rate": 10.0
-        },
-        {
-          "name": "사이코키네시스",
-          "rate": 7.9
-        },
-        {
-          "name": "오물웨이브",
-          "rate": 7.4
-        },
-        {
-          "name": "기합구슬",
-          "rate": 6.8
-        },
-        {
-          "name": "길동무",
-          "rate": 6.4
-        }
-      ],
-      "abilities": [
-        {
-          "name": "저주받은바디",
-          "rate": 100.0
-        }
-      ],
-      "natures": [
-        {
-          "name": "겁쟁이",
-          "rate": 72.5
-        },
-        {
-          "name": "조심",
-          "rate": 20.6
-        },
-        {
-          "name": "냉정",
-          "rate": 3.0
-        },
-        {
-          "name": "대담",
-          "rate": 1.8
-        },
-        {
-          "name": "차분",
-          "rate": 1.2
-        },
-        {
-          "name": "성급",
-          "rate": 0.2
-        },
-        {
-          "name": "명랑",
-          "rate": 0.2
-        },
-        {
-          "name": "의젓",
-          "rate": 0.1
-        }
-      ],
-      "items": [
-        {
-          "name": "팬텀나이트",
-          "rate": 81.0
-        },
-        {
-          "name": "기합의띠",
-          "rate": 14.3
-        },
-        {
-          "name": "구애스카프",
-          "rate": 1.8
-        },
-        {
-          "name": "저주의부적",
-          "rate": 0.4
-        },
-        {
-          "name": "독바늘",
-          "rate": 0.3
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 0.3
-        },
-        {
-          "name": "마코열매",
-          "rate": 0.2
-        },
-        {
-          "name": "반짝가루",
-          "rate": 0.2
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 0.2
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 0.1
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 27.3
-        },
-        {
-          "label": "HS + bcd",
-          "evs": {
-            "H": 32,
-            "B": 9,
-            "C": 1,
-            "D": 1,
-            "S": 23
-          },
-          "rate": 11.3
-        },
-        {
-          "label": "HD + bcs",
-          "evs": {
-            "H": 30,
-            "B": 1,
-            "C": 1,
-            "D": 28,
-            "S": 6
-          },
-          "rate": 4.2
-        },
-        {
-          "label": "HS + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 3.2
-        },
-        {
-          "label": "HS + b",
-          "evs": {
-            "H": 30,
-            "B": 12,
-            "S": 24
-          },
-          "rate": 3.2
-        },
-        {
-          "label": "HB + cds",
-          "evs": {
-            "H": 30,
-            "B": 18,
-            "C": 2,
-            "D": 11,
-            "S": 5
-          },
-          "rate": 2.6
-        },
-        {
-          "label": "HS + c",
-          "evs": {
-            "H": 32,
-            "C": 2,
-            "S": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "HC + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "C": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "CS + d",
-          "evs": {
-            "C": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "HB + cs",
-          "evs": {
-            "H": 30,
-            "B": 21,
-            "C": 5,
-            "S": 10
-          },
-          "rate": 1.3
-        },
-        {
-          "label": "HC + bs",
-          "evs": {
-            "H": 30,
-            "B": 1,
-            "C": 32,
-            "S": 3
-          },
-          "rate": 1.3
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "팬텀",
-      "usage_rate": 6.9
-    },
-    {
-      "id": "0323-00",
-      "moves": [
-        {
-          "name": "대지의힘",
-          "rate": 94.3
-        },
-        {
-          "name": "방어",
-          "rate": 87.4
-        },
-        {
-          "name": "열풍",
-          "rate": 78.8
-        },
-        {
-          "name": "원시의힘",
-          "rate": 65.3
-        },
-        {
-          "name": "분화",
-          "rate": 38.9
-        },
-        {
-          "name": "스톤샤워",
-          "rate": 5.5
-        },
-        {
-          "name": "화염방사",
-          "rate": 4.8
-        },
-        {
-          "name": "러스터캐논",
-          "rate": 4.2
-        },
-        {
-          "name": "지진",
-          "rate": 3.8
-        },
-        {
-          "name": "분함의발구르기",
-          "rate": 3.0
-        }
-      ],
-      "abilities": [
-        {
-          "name": "하드록",
-          "rate": 91.4
-        },
-        {
-          "name": "분노의경혈",
-          "rate": 5.8
-        },
-        {
-          "name": "마그마의무장",
-          "rate": 2.8
-        }
-      ],
-      "natures": [
-        {
-          "name": "냉정",
-          "rate": 82.9
-        },
-        {
-          "name": "조심",
-          "rate": 11.3
-        },
-        {
-          "name": "명랑",
-          "rate": 3.0
-        },
-        {
-          "name": "차분",
-          "rate": 0.5
-        },
-        {
-          "name": "건방",
-          "rate": 0.4
-        },
-        {
-          "name": "무사태평",
-          "rate": 0.4
-        },
-        {
-          "name": "용감",
-          "rate": 0.4
-        },
-        {
-          "name": "대담",
-          "rate": 0.2
-        }
-      ],
-      "items": [
-        {
-          "name": "폭타나이트",
-          "rate": 94.1
-        },
-        {
-          "name": "구애스카프",
-          "rate": 3.0
-        },
-        {
-          "name": "목탄",
-          "rate": 0.8
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 0.3
-        },
-        {
-          "name": "꼬시개열매",
-          "rate": 0.3
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 0.2
-        },
-        {
-          "name": "기합의띠",
-          "rate": 0.2
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 0.2
-        },
-        {
-          "name": "부드러운모래",
-          "rate": 0.1
-        },
-        {
-          "name": "조개껍질방울",
-          "rate": 0.0
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "HC + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "C": 32
-          },
-          "rate": 59.4
-        },
-        {
-          "label": "HC + d",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "D": 2
-          },
-          "rate": 10.6
-        },
-        {
-          "label": "HC + bd",
-          "evs": {
-            "H": 32,
-            "B": 1,
-            "C": 32,
-            "D": 1
-          },
-          "rate": 3.6
-        },
-        {
-          "label": "HC + s",
-          "evs": {
-            "H": 29,
-            "C": 32,
-            "S": 5
-          },
-          "rate": 3.2
-        },
-        {
-          "label": "AS + b",
-          "evs": {
-            "A": 32,
-            "B": 6,
-            "S": 28
-          },
-          "rate": 2.9
-        },
-        {
-          "label": "HC",
-          "evs": {
-            "H": 32,
-            "C": 32
-          },
-          "rate": 1.8
-        },
-        {
-          "label": "HC + b",
-          "evs": {
-            "H": 30,
-            "B": 4,
-            "C": 32
-          },
-          "rate": 1.0
-        },
-        {
-          "label": "HC + s",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "S": 2
-          },
-          "rate": 0.7
-        },
-        {
-          "label": "CD + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "D": 32
-          },
-          "rate": 0.7
-        },
-        {
-          "label": "CD + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "D": 32
-          },
-          "rate": 0.7
-        },
-        {
-          "label": "BC + h",
-          "evs": {
-            "H": 2,
-            "B": 32,
-            "C": 32
-          },
-          "rate": 0.6
-        },
-        {
-          "label": "HC + bd",
-          "evs": {
-            "H": 19,
-            "B": 10,
-            "C": 32,
-            "D": 5
-          },
-          "rate": 0.6
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "폭타",
-      "usage_rate": 6.9
-    },
-    {
-      "id": "0902-01",
-      "moves": [
-        {
-          "name": "탁류",
-          "rate": 54.0
-        },
-        {
-          "name": "섀도볼",
-          "rate": 51.2
-        },
-        {
-          "name": "아쿠아제트",
-          "rate": 48.6
-        },
-        {
-          "name": "성묘",
-          "rate": 44.2
-        },
-        {
-          "name": "방어",
-          "rate": 38.0
-        },
-        {
-          "name": "퀵턴",
-          "rate": 30.3
-        },
-        {
-          "name": "웨이브태클",
-          "rate": 29.5
-        },
-        {
-          "name": "냉동빔",
-          "rate": 28.6
-        },
-        {
-          "name": "파도타기",
-          "rate": 13.7
-        },
-        {
-          "name": "얼다바람",
-          "rate": 9.7
-        }
-      ],
-      "abilities": [
-        {
-          "name": "적응력",
-          "rate": 85.8
-        },
-        {
-          "name": "쓱쓱",
-          "rate": 13.8
-        },
-        {
-          "name": "틀깨기",
-          "rate": 0.4
-        }
-      ],
-      "natures": [
-        {
-          "name": "조심",
-          "rate": 46.2
-        },
-        {
-          "name": "고집",
-          "rate": 18.3
-        },
-        {
-          "name": "겁쟁이",
-          "rate": 14.4
-        },
-        {
-          "name": "명랑",
-          "rate": 13.8
-        },
-        {
-          "name": "성급",
-          "rate": 1.4
-        },
-        {
-          "name": "냉정",
-          "rate": 1.4
-        },
-        {
-          "name": "의젓",
-          "rate": 0.9
-        },
-        {
-          "name": "덜렁",
-          "rate": 0.7
-        }
-      ],
-      "items": [
-        {
-          "name": "구애스카프",
-          "rate": 53.8
-        },
-        {
-          "name": "신비의물방울",
-          "rate": 21.5
-        },
-        {
-          "name": "기합의띠",
-          "rate": 9.6
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 3.4
-        },
-        {
-          "name": "마코열매",
-          "rate": 2.3
-        },
-        {
-          "name": "저주의부적",
-          "rate": 2.0
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 1.9
-        },
-        {
-          "name": "수불열매",
-          "rate": 1.3
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 1.0
-        },
-        {
-          "name": "조개껍질방울",
-          "rate": 0.7
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 26.9
-        },
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 2,
-            "A": 32,
-            "S": 32
-          },
-          "rate": 16.1
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 10.2
-        },
-        {
-          "label": "AS + b",
-          "evs": {
-            "A": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 5.1
-        },
-        {
-          "label": "CS + d",
-          "evs": {
-            "C": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 2.7
-        },
-        {
-          "label": "CS + bd",
-          "evs": {
-            "B": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 2.4
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 14,
-            "C": 31,
-            "S": 21
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "AS + d",
-          "evs": {
-            "A": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 1.6
-        },
-        {
-          "label": "AS",
-          "evs": {
-            "A": 32,
-            "S": 32
-          },
-          "rate": 1.3
-        },
-        {
-          "label": "AS + bd",
-          "evs": {
-            "A": 32,
-            "B": 1,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 1.0
-        },
-        {
-          "label": "C + hbds",
-          "evs": {
-            "H": 2,
-            "B": 14,
-            "C": 32,
-            "D": 3,
-            "S": 15
-          },
-          "rate": 1.0
-        },
-        {
-          "label": "AS + bd",
-          "evs": {
-            "A": 32,
-            "B": 14,
-            "D": 2,
-            "S": 18
-          },
-          "rate": 0.9
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "대쓰여너",
-      "usage_rate": 3.45
-    },
-    {
-      "id": "0970-00",
-      "moves": [
-        {
-          "name": "파워젬",
-          "rate": 97.7
-        },
-        {
-          "name": "대지의힘",
-          "rate": 91.9
-        },
-        {
-          "name": "니들가드",
-          "rate": 90.7
-        },
-        {
-          "name": "오물폭탄",
-          "rate": 88.7
-        },
-        {
-          "name": "오물웨이브",
-          "rate": 7.2
-        },
-        {
-          "name": "에너지볼",
-          "rate": 7.0
-        },
-        {
-          "name": "킬러스핀",
-          "rate": 4.7
-        },
-        {
-          "name": "스텔스록",
-          "rate": 2.2
-        },
-        {
-          "name": "방어",
-          "rate": 1.8
-        },
-        {
-          "name": "베놈쇼크",
-          "rate": 1.7
-        }
-      ],
-      "abilities": [
-        {
-          "name": "どくげしょう",
-          "rate": 97.9
-        },
-        {
-          "name": "부식",
-          "rate": 2.1
-        }
-      ],
-      "natures": [
-        {
-          "name": "조심",
-          "rate": 61.7
-        },
-        {
-          "name": "겁쟁이",
-          "rate": 34.8
-        },
-        {
-          "name": "대담",
-          "rate": 0.9
-        },
-        {
-          "name": "차분",
-          "rate": 0.8
-        },
-        {
-          "name": "냉정",
-          "rate": 0.7
-        },
-        {
-          "name": "고집",
-          "rate": 0.2
-        },
-        {
-          "name": "건방",
-          "rate": 0.2
-        },
-        {
-          "name": "명랑",
-          "rate": 0.1
-        }
-      ],
-      "items": [
-        {
-          "name": "기합의띠",
-          "rate": 63.7
-        },
-        {
-          "name": "킬라플로르나이트",
-          "rate": 30.0
-        },
-        {
-          "name": "슈캐열매",
-          "rate": 1.9
-        },
-        {
-          "name": "구애스카프",
-          "rate": 1.0
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 0.9
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 0.6
-        },
-        {
-          "name": "독바늘",
-          "rate": 0.3
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 0.3
-        },
-        {
-          "name": "딱딱한돌",
-          "rate": 0.3
-        },
-        {
-          "name": "반짝가루",
-          "rate": 0.2
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 35.8
-        },
-        {
-          "label": "CS + hd",
-          "evs": {
-            "H": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 26.4
-        },
-        {
-          "label": "CS + hb",
-          "evs": {
-            "H": 1,
-            "B": 1,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 6.4
-        },
-        {
-          "label": "CS + d",
-          "evs": {
-            "C": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 3.8
-        },
-        {
-          "label": "CS + hbd",
-          "evs": {
-            "H": 15,
-            "B": 1,
-            "C": 28,
-            "D": 1,
-            "S": 21
-          },
-          "rate": 3.8
-        },
-        {
-          "label": "HCS + d",
-          "evs": {
-            "H": 27,
-            "C": 20,
-            "D": 1,
-            "S": 18
-          },
-          "rate": 2.1
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "CS",
-          "evs": {
-            "C": 32,
-            "S": 32
-          },
-          "rate": 1.2
-        },
-        {
-          "label": "CS + bd",
-          "evs": {
-            "B": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 0.8
-        },
-        {
-          "label": "HC + d",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "D": 2
-          },
-          "rate": 0.8
-        },
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 1,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 0.5
-        },
-        {
-          "label": "HC + s",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "S": 2
-          },
-          "rate": 0.5
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "킬라플로르",
-      "usage_rate": 3.45
-    },
-    {
-      "id": "0925-00",
-      "moves": [
-        {
-          "name": "날따름",
-          "rate": 92.1
-        },
-        {
-          "name": "방어",
-          "rate": 78.6
-        },
-        {
-          "name": "분노의앞니",
-          "rate": 61.2
-        },
-        {
-          "name": "페인트",
-          "rate": 32.1
-        },
-        {
-          "name": "앵콜",
-          "rate": 30.9
-        },
-        {
-          "name": "도우미",
-          "rate": 22.1
-        },
-        {
-          "name": "도발",
-          "rate": 22.0
-        },
-        {
-          "name": "찍찍베기",
-          "rate": 19.5
-        },
-        {
-          "name": "비바라기",
-          "rate": 6.4
-        },
-        {
-          "name": "집단구타",
-          "rate": 4.9
-        }
-      ],
-      "abilities": [
-        {
-          "name": "프렌드가드",
-          "rate": 88.2
-        },
-        {
-          "name": "테크니션",
-          "rate": 11.2
-        },
-        {
-          "name": "볼주머니",
-          "rate": 0.6
-        }
-      ],
-      "natures": [
-        {
-          "name": "명랑",
-          "rate": 44.6
-        },
-        {
-          "name": "장난꾸러기",
-          "rate": 21.4
-        },
-        {
-          "name": "겁쟁이",
-          "rate": 14.8
-        },
-        {
-          "name": "신중",
-          "rate": 6.0
-        },
-        {
-          "name": "대담",
-          "rate": 4.4
-        },
-        {
-          "name": "고집",
-          "rate": 4.3
-        },
-        {
-          "name": "차분",
-          "rate": 2.4
-        },
-        {
-          "name": "무사태평",
-          "rate": 0.6
-        }
-      ],
-      "items": [
-        {
-          "name": "로플열매",
-          "rate": 49.3
-        },
-        {
-          "name": "기합의띠",
-          "rate": 23.1
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 9.9
-        },
-        {
-          "name": "왕의징표석",
-          "rate": 5.9
-        },
-        {
-          "name": "실크스카프",
-          "rate": 3.8
-        },
-        {
-          "name": "멘탈허브",
-          "rate": 1.6
-        },
-        {
-          "name": "구애스카프",
-          "rate": 1.5
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 1.4
-        },
-        {
-          "name": "반짝가루",
-          "rate": 1.4
-        },
-        {
-          "name": "리샘열매",
-          "rate": 1.0
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "HS + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 12.7
-        },
-        {
-          "label": "HB + d",
-          "evs": {
-            "H": 32,
-            "B": 20,
-            "D": 14
-          },
-          "rate": 9.8
-        },
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 2,
-            "A": 32,
-            "S": 32
-          },
-          "rate": 6.6
-        },
-        {
-          "label": "HS + bd",
-          "evs": {
-            "H": 32,
-            "B": 1,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 5.3
-        },
-        {
-          "label": "HS + b",
-          "evs": {
-            "H": 30,
-            "B": 11,
-            "S": 25
-          },
-          "rate": 4.7
-        },
-        {
-          "label": "HS + d",
-          "evs": {
-            "H": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 2.9
-        },
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 10,
-            "A": 32,
-            "S": 24
-          },
-          "rate": 2.5
-        },
-        {
-          "label": "HB + d",
-          "evs": {
-            "H": 32,
-            "B": 32,
-            "D": 2
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "HB + ds",
-          "evs": {
-            "H": 32,
-            "B": 16,
-            "D": 5,
-            "S": 13
-          },
-          "rate": 1.8
-        },
-        {
-          "label": "AS + b",
-          "evs": {
-            "A": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 1.4
-        },
-        {
-          "label": "HS + b",
-          "evs": {
-            "H": 32,
-            "B": 10,
-            "S": 24
-          },
-          "rate": 1.3
-        },
-        {
-          "label": "AS + d",
-          "evs": {
-            "A": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 1.2
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "파밀리쥐",
-      "usage_rate": 3.45
-    },
-    {
-      "id": "0887-00",
-      "moves": [
-        {
-          "name": "드래곤애로",
-          "rate": 61.3
-        },
-        {
-          "name": "고스트다이브",
-          "rate": 50.3
-        },
-        {
-          "name": "방어",
-          "rate": 46.0
-        },
-        {
-          "name": "사이코팽",
-          "rate": 40.9
-        },
-        {
-          "name": "도깨비불",
-          "rate": 27.4
-        },
-        {
-          "name": "용성군",
-          "rate": 20.5
-        },
-        {
-          "name": "유턴",
-          "rate": 20.2
-        },
-        {
-          "name": "기습",
-          "rate": 18.8
-        },
-        {
-          "name": "섀도볼",
-          "rate": 16.7
-        },
-        {
-          "name": "빛의장막",
-          "rate": 13.0
-        }
-      ],
-      "abilities": [
-        {
-          "name": "클리어바디",
-          "rate": 65.7
-        },
-        {
-          "name": "틈새포착",
-          "rate": 19.0
-        },
-        {
-          "name": "저주받은바디",
-          "rate": 15.3
-        }
-      ],
-      "natures": [
-        {
-          "name": "명랑",
-          "rate": 43.2
-        },
-        {
-          "name": "고집",
-          "rate": 21.4
-        },
-        {
-          "name": "겁쟁이",
-          "rate": 15.2
-        },
-        {
-          "name": "천진난만",
-          "rate": 5.9
-        },
-        {
-          "name": "조심",
-          "rate": 5.5
-        },
-        {
-          "name": "성급",
-          "rate": 3.3
-        },
-        {
-          "name": "개구쟁이",
-          "rate": 1.2
-        },
-        {
-          "name": "외로움",
-          "rate": 1.1
-        }
-      ],
-      "items": [
-        {
-          "name": "기합의띠",
-          "rate": 36.4
-        },
-        {
-          "name": "용의이빨",
-          "rate": 16.7
-        },
-        {
-          "name": "마코열매",
-          "rate": 6.8
-        },
-        {
-          "name": "리샘열매",
-          "rate": 4.7
-        },
-        {
-          "name": "구애스카프",
-          "rate": 4.5
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 4.4
-        },
-        {
-          "name": "하양허브",
-          "rate": 4.3
-        },
-        {
-          "name": "저주의부적",
-          "rate": 3.2
-        },
-        {
-          "name": "왕의징표석",
-          "rate": 2.4
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 2.3
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 2,
-            "A": 32,
-            "S": 32
-          },
-          "rate": 33.1
-        },
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 11.8
-        },
-        {
-          "label": "AS + d",
-          "evs": {
-            "A": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 4.7
-        },
-        {
-          "label": "AS + b",
-          "evs": {
-            "A": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 4.7
-        },
-        {
-          "label": "CS + a",
-          "evs": {
-            "A": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 2.2
-        },
-        {
-          "label": "AS",
-          "evs": {
-            "A": 32,
-            "S": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "AS + bd",
-          "evs": {
-            "A": 32,
-            "B": 1,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "CS + d",
-          "evs": {
-            "C": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 1.3
-        },
-        {
-          "label": "HS + a",
-          "evs": {
-            "H": 32,
-            "A": 2,
-            "S": 32
-          },
-          "rate": 1.0
-        },
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 8,
-            "A": 32,
-            "S": 26
-          },
-          "rate": 1.0
-        },
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 1,
-            "A": 32,
-            "S": 32
-          },
-          "rate": 0.9
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 0.8
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "드래펄트",
-      "usage_rate": 3.45
-    },
-    {
-      "id": "0308-00",
-      "moves": [
-        {
-          "name": "속이다",
-          "rate": 66.4
-        },
-        {
-          "name": "인파이트",
-          "rate": 61.0
-        },
-        {
-          "name": "사이코커터",
-          "rate": 29.5
-        },
-        {
-          "name": "스톤샤워",
-          "rate": 28.9
-        },
-        {
-          "name": "사념의박치기",
-          "rate": 23.4
-        },
-        {
-          "name": "드레인펀치",
-          "rate": 23.1
-        },
-        {
-          "name": "독찌르기",
-          "rate": 21.2
-        },
-        {
-          "name": "불릿펀치",
-          "rate": 21.1
-        },
-        {
-          "name": "방어",
-          "rate": 17.7
-        },
-        {
-          "name": "냉동펀치",
-          "rate": 16.6
-        }
-      ],
-      "abilities": [
-        {
-          "name": "순수한힘",
-          "rate": 90.2
-        },
-        {
-          "name": "텔레파시",
-          "rate": 9.8
-        }
-      ],
-      "natures": [
-        {
-          "name": "고집",
-          "rate": 45.0
-        },
-        {
-          "name": "명랑",
-          "rate": 35.1
-        },
-        {
-          "name": "용감",
-          "rate": 9.5
-        },
-        {
-          "name": "장난꾸러기",
-          "rate": 2.0
-        },
-        {
-          "name": "신중",
-          "rate": 1.9
-        },
-        {
-          "name": "건방",
-          "rate": 1.2
-        },
-        {
-          "name": "무사태평",
-          "rate": 1.2
-        },
-        {
-          "name": "개구쟁이",
-          "rate": 0.8
-        }
-      ],
-      "items": [
-        {
-          "name": "요가램나이트",
-          "rate": 62.8
-        },
-        {
-          "name": "기합의띠",
-          "rate": 17.0
-        },
-        {
-          "name": "구애스카프",
-          "rate": 4.2
-        },
-        {
-          "name": "하양허브",
-          "rate": 3.0
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 2.3
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 1.7
-        },
-        {
-          "name": "검은띠",
-          "rate": 1.7
-        },
-        {
-          "name": "로셀열매",
-          "rate": 1.2
-        },
-        {
-          "name": "멘탈허브",
-          "rate": 1.1
-        },
-        {
-          "name": "반짝가루",
-          "rate": 0.9
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "AS + h",
-          "evs": {
-            "H": 2,
-            "A": 32,
-            "S": 32
-          },
-          "rate": 38.3
-        },
-        {
-          "label": "AS + b",
-          "evs": {
-            "A": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 4.3
-        },
-        {
-          "label": "HA + b",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "B": 2
-          },
-          "rate": 4.0
-        },
-        {
-          "label": "AS + d",
-          "evs": {
-            "A": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 3.7
-        },
-        {
-          "label": "HA + bd",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "B": 1,
-            "D": 1
-          },
-          "rate": 3.2
-        },
-        {
-          "label": "HA + d",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "D": 2
-          },
-          "rate": 3.0
-        },
-        {
-          "label": "AS + d",
-          "evs": {
-            "A": 30,
-            "D": 4,
-            "S": 32
-          },
-          "rate": 2.4
-        },
-        {
-          "label": "HA + s",
-          "evs": {
-            "H": 32,
-            "A": 32,
-            "S": 2
-          },
-          "rate": 2.3
-        },
-        {
-          "label": "AS",
-          "evs": {
-            "A": 32,
-            "S": 32
-          },
-          "rate": 2.2
-        },
-        {
-          "label": "AS + bd",
-          "evs": {
-            "A": 32,
-            "B": 1,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 2.0
-        },
-        {
-          "label": "HS + a",
-          "evs": {
-            "H": 32,
-            "A": 2,
-            "S": 32
-          },
-          "rate": 0.9
-        },
-        {
-          "label": "HS + b",
-          "evs": {
-            "H": 32,
-            "B": 2,
-            "S": 32
-          },
-          "rate": 0.7
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "요가램",
-      "usage_rate": 3.45
-    },
-    {
-      "id": "0571-01",
-      "moves": [
-        {
-          "name": "얼다바람",
-          "rate": 50.6
-        },
-        {
-          "name": "섀도볼",
-          "rate": 48.3
-        },
-        {
-          "name": "천추지한",
-          "rate": 45.0
-        },
-        {
-          "name": "하이퍼보이스",
-          "rate": 41.5
-        },
-        {
-          "name": "사이코키네시스",
-          "rate": 37.6
-        },
-        {
-          "name": "화염방사",
-          "rate": 26.7
-        },
-        {
-          "name": "도발",
-          "rate": 21.6
-        },
-        {
-          "name": "방어",
-          "rate": 21.0
-        },
-        {
-          "name": "바크아웃",
-          "rate": 13.3
-        },
-        {
-          "name": "오물폭탄",
-          "rate": 11.8
-        }
-      ],
-      "abilities": [
-        {
-          "name": "일루전",
-          "rate": 100.0
-        }
-      ],
-      "natures": [
-        {
-          "name": "겁쟁이",
-          "rate": 47.2
-        },
-        {
-          "name": "조심",
-          "rate": 46.9
-        },
-        {
-          "name": "성급",
-          "rate": 1.4
-        },
-        {
-          "name": "의젓",
-          "rate": 1.2
-        },
-        {
-          "name": "천진난만",
-          "rate": 0.8
-        },
-        {
-          "name": "차분",
-          "rate": 0.5
-        },
-        {
-          "name": "대담",
-          "rate": 0.4
-        },
-        {
-          "name": "명랑",
-          "rate": 0.4
-        }
-      ],
-      "items": [
-        {
-          "name": "구애스카프",
-          "rate": 38.8
-        },
-        {
-          "name": "기합의띠",
-          "rate": 32.5
-        },
-        {
-          "name": "실크스카프",
-          "rate": 5.9
-        },
-        {
-          "name": "마코열매",
-          "rate": 5.8
-        },
-        {
-          "name": "저주의부적",
-          "rate": 4.8
-        },
-        {
-          "name": "반짝가루",
-          "rate": 2.8
-        },
-        {
-          "name": "자뭉열매",
-          "rate": 2.5
-        },
-        {
-          "name": "선제공격손톱",
-          "rate": 1.2
-        },
-        {
-          "name": "왕의징표석",
-          "rate": 0.8
-        },
-        {
-          "name": "먹다남은음식",
-          "rate": 0.6
-        }
-      ],
-      "ev_spreads": [
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 52.2
-        },
-        {
-          "label": "CS + d",
-          "evs": {
-            "C": 32,
-            "D": 2,
-            "S": 32
-          },
-          "rate": 7.8
-        },
-        {
-          "label": "CS + hb",
-          "evs": {
-            "H": 1,
-            "B": 1,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 6.7
-        },
-        {
-          "label": "CS + b",
-          "evs": {
-            "B": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 6.1
-        },
-        {
-          "label": "CS",
-          "evs": {
-            "C": 32,
-            "S": 32
-          },
-          "rate": 2.5
-        },
-        {
-          "label": "CS + bd",
-          "evs": {
-            "B": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 2.1
-        },
-        {
-          "label": "CS + hd",
-          "evs": {
-            "H": 1,
-            "C": 32,
-            "D": 1,
-            "S": 32
-          },
-          "rate": 2.1
-        },
-        {
-          "label": "HC + bs",
-          "evs": {
-            "H": 32,
-            "B": 1,
-            "C": 32,
-            "S": 1
-          },
-          "rate": 1.9
-        },
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 9,
-            "C": 32,
-            "S": 25
-          },
-          "rate": 1.0
-        },
-        {
-          "label": "HC + s",
-          "evs": {
-            "H": 32,
-            "C": 32,
-            "S": 2
-          },
-          "rate": 0.9
-        },
-        {
-          "label": "CS + h",
-          "evs": {
-            "H": 1,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 0.8
-        },
-        {
-          "label": "CS + a",
-          "evs": {
-            "A": 2,
-            "C": 32,
-            "S": 32
-          },
-          "rate": 0.7
-        }
-      ],
-      "source": "champs.pokedb.tokyo (pokemon page)",
-      "name": "조로아크",
-      "usage_rate": 3.45
+      "usage_rate": 6.45
     },
     {
       "id": "0186-00",
@@ -9248,7 +7512,1743 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "왕구리",
-      "usage_rate": 3.45
+      "usage_rate": 6.45
+    },
+    {
+      "id": "0323-00",
+      "moves": [
+        {
+          "name": "대지의힘",
+          "rate": 94.3
+        },
+        {
+          "name": "방어",
+          "rate": 87.4
+        },
+        {
+          "name": "열풍",
+          "rate": 78.8
+        },
+        {
+          "name": "원시의힘",
+          "rate": 65.3
+        },
+        {
+          "name": "분화",
+          "rate": 38.9
+        },
+        {
+          "name": "스톤샤워",
+          "rate": 5.5
+        },
+        {
+          "name": "화염방사",
+          "rate": 4.8
+        },
+        {
+          "name": "러스터캐논",
+          "rate": 4.2
+        },
+        {
+          "name": "지진",
+          "rate": 3.8
+        },
+        {
+          "name": "분함의발구르기",
+          "rate": 3.0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "하드록",
+          "rate": 91.4
+        },
+        {
+          "name": "분노의경혈",
+          "rate": 5.8
+        },
+        {
+          "name": "마그마의무장",
+          "rate": 2.8
+        }
+      ],
+      "natures": [
+        {
+          "name": "냉정",
+          "rate": 82.9
+        },
+        {
+          "name": "조심",
+          "rate": 11.3
+        },
+        {
+          "name": "명랑",
+          "rate": 3.0
+        },
+        {
+          "name": "차분",
+          "rate": 0.5
+        },
+        {
+          "name": "건방",
+          "rate": 0.4
+        },
+        {
+          "name": "무사태평",
+          "rate": 0.4
+        },
+        {
+          "name": "용감",
+          "rate": 0.4
+        },
+        {
+          "name": "대담",
+          "rate": 0.2
+        }
+      ],
+      "items": [
+        {
+          "name": "폭타나이트",
+          "rate": 94.1
+        },
+        {
+          "name": "구애스카프",
+          "rate": 3.0
+        },
+        {
+          "name": "목탄",
+          "rate": 0.8
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "꼬시개열매",
+          "rate": 0.3
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.2
+        },
+        {
+          "name": "기합의띠",
+          "rate": 0.2
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.2
+        },
+        {
+          "name": "부드러운모래",
+          "rate": 0.1
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.0
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 59.4
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 10.6
+        },
+        {
+          "label": "HC + bd",
+          "evs": {
+            "H": 32,
+            "B": 1,
+            "C": 32,
+            "D": 1
+          },
+          "rate": 3.6
+        },
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 29,
+            "C": 32,
+            "S": 5
+          },
+          "rate": 3.2
+        },
+        {
+          "label": "AS + b",
+          "evs": {
+            "A": 32,
+            "B": 6,
+            "S": 28
+          },
+          "rate": 2.9
+        },
+        {
+          "label": "HC",
+          "evs": {
+            "H": 32,
+            "C": 32
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 30,
+            "B": 4,
+            "C": 32
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "S": 2
+          },
+          "rate": 0.7
+        },
+        {
+          "label": "CD + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "D": 32
+          },
+          "rate": 0.7
+        },
+        {
+          "label": "CD + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "D": 32
+          },
+          "rate": 0.7
+        },
+        {
+          "label": "BC + h",
+          "evs": {
+            "H": 2,
+            "B": 32,
+            "C": 32
+          },
+          "rate": 0.6
+        },
+        {
+          "label": "HC + bd",
+          "evs": {
+            "H": 19,
+            "B": 10,
+            "C": 32,
+            "D": 5
+          },
+          "rate": 0.6
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "폭타",
+      "usage_rate": 6.45
+    },
+    {
+      "id": "0902-01",
+      "moves": [
+        {
+          "name": "탁류",
+          "rate": 54.0
+        },
+        {
+          "name": "섀도볼",
+          "rate": 51.2
+        },
+        {
+          "name": "아쿠아제트",
+          "rate": 48.6
+        },
+        {
+          "name": "성묘",
+          "rate": 44.2
+        },
+        {
+          "name": "방어",
+          "rate": 38.0
+        },
+        {
+          "name": "퀵턴",
+          "rate": 30.3
+        },
+        {
+          "name": "웨이브태클",
+          "rate": 29.5
+        },
+        {
+          "name": "냉동빔",
+          "rate": 28.6
+        },
+        {
+          "name": "파도타기",
+          "rate": 13.7
+        },
+        {
+          "name": "얼다바람",
+          "rate": 9.7
+        }
+      ],
+      "abilities": [
+        {
+          "name": "적응력",
+          "rate": 85.8
+        },
+        {
+          "name": "쓱쓱",
+          "rate": 13.8
+        },
+        {
+          "name": "틀깨기",
+          "rate": 0.4
+        }
+      ],
+      "natures": [
+        {
+          "name": "조심",
+          "rate": 46.2
+        },
+        {
+          "name": "고집",
+          "rate": 18.3
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 14.4
+        },
+        {
+          "name": "명랑",
+          "rate": 13.8
+        },
+        {
+          "name": "성급",
+          "rate": 1.4
+        },
+        {
+          "name": "냉정",
+          "rate": 1.4
+        },
+        {
+          "name": "의젓",
+          "rate": 0.9
+        },
+        {
+          "name": "덜렁",
+          "rate": 0.7
+        }
+      ],
+      "items": [
+        {
+          "name": "구애스카프",
+          "rate": 53.8
+        },
+        {
+          "name": "신비의물방울",
+          "rate": 21.5
+        },
+        {
+          "name": "기합의띠",
+          "rate": 9.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 3.4
+        },
+        {
+          "name": "마코열매",
+          "rate": 2.3
+        },
+        {
+          "name": "저주의부적",
+          "rate": 2.0
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.9
+        },
+        {
+          "name": "수불열매",
+          "rate": 1.3
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 1.0
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.7
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 26.9
+        },
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "S": 32
+          },
+          "rate": 16.1
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 10.2
+        },
+        {
+          "label": "AS + b",
+          "evs": {
+            "A": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 5.1
+        },
+        {
+          "label": "CS + d",
+          "evs": {
+            "C": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 2.7
+        },
+        {
+          "label": "CS + bd",
+          "evs": {
+            "B": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 2.4
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 14,
+            "C": 31,
+            "S": 21
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "AS + d",
+          "evs": {
+            "A": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 1.6
+        },
+        {
+          "label": "AS",
+          "evs": {
+            "A": 32,
+            "S": 32
+          },
+          "rate": 1.3
+        },
+        {
+          "label": "AS + bd",
+          "evs": {
+            "A": 32,
+            "B": 1,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "C + hbds",
+          "evs": {
+            "H": 2,
+            "B": 14,
+            "C": 32,
+            "D": 3,
+            "S": 15
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "AS + bd",
+          "evs": {
+            "A": 32,
+            "B": 14,
+            "D": 2,
+            "S": 18
+          },
+          "rate": 0.9
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "대쓰여너",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0970-00",
+      "moves": [
+        {
+          "name": "파워젬",
+          "rate": 97.7
+        },
+        {
+          "name": "대지의힘",
+          "rate": 91.9
+        },
+        {
+          "name": "니들가드",
+          "rate": 90.7
+        },
+        {
+          "name": "오물폭탄",
+          "rate": 88.7
+        },
+        {
+          "name": "오물웨이브",
+          "rate": 7.2
+        },
+        {
+          "name": "에너지볼",
+          "rate": 7.0
+        },
+        {
+          "name": "킬러스핀",
+          "rate": 4.7
+        },
+        {
+          "name": "스텔스록",
+          "rate": 2.2
+        },
+        {
+          "name": "방어",
+          "rate": 1.8
+        },
+        {
+          "name": "베놈쇼크",
+          "rate": 1.7
+        }
+      ],
+      "abilities": [
+        {
+          "name": "どくげしょう",
+          "rate": 97.9
+        },
+        {
+          "name": "부식",
+          "rate": 2.1
+        }
+      ],
+      "natures": [
+        {
+          "name": "조심",
+          "rate": 61.7
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 34.8
+        },
+        {
+          "name": "대담",
+          "rate": 0.9
+        },
+        {
+          "name": "차분",
+          "rate": 0.8
+        },
+        {
+          "name": "냉정",
+          "rate": 0.7
+        },
+        {
+          "name": "고집",
+          "rate": 0.2
+        },
+        {
+          "name": "건방",
+          "rate": 0.2
+        },
+        {
+          "name": "명랑",
+          "rate": 0.1
+        }
+      ],
+      "items": [
+        {
+          "name": "기합의띠",
+          "rate": 63.7
+        },
+        {
+          "name": "킬라플로르나이트",
+          "rate": 30.0
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 1.9
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.0
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 0.9
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.6
+        },
+        {
+          "name": "독바늘",
+          "rate": 0.3
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 0.3
+        },
+        {
+          "name": "딱딱한돌",
+          "rate": 0.3
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.2
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 35.8
+        },
+        {
+          "label": "CS + hd",
+          "evs": {
+            "H": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 26.4
+        },
+        {
+          "label": "CS + hb",
+          "evs": {
+            "H": 1,
+            "B": 1,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 6.4
+        },
+        {
+          "label": "CS + d",
+          "evs": {
+            "C": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 3.8
+        },
+        {
+          "label": "CS + hbd",
+          "evs": {
+            "H": 15,
+            "B": 1,
+            "C": 28,
+            "D": 1,
+            "S": 21
+          },
+          "rate": 3.8
+        },
+        {
+          "label": "HCS + d",
+          "evs": {
+            "H": 27,
+            "C": 20,
+            "D": 1,
+            "S": 18
+          },
+          "rate": 2.1
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "CS",
+          "evs": {
+            "C": 32,
+            "S": 32
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "CS + bd",
+          "evs": {
+            "B": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 0.8
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 0.8
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 1,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 0.5
+        },
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "S": 2
+          },
+          "rate": 0.5
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "킬라플로르",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0925-00",
+      "moves": [
+        {
+          "name": "날따름",
+          "rate": 92.1
+        },
+        {
+          "name": "방어",
+          "rate": 78.6
+        },
+        {
+          "name": "분노의앞니",
+          "rate": 61.2
+        },
+        {
+          "name": "페인트",
+          "rate": 32.1
+        },
+        {
+          "name": "앵콜",
+          "rate": 30.9
+        },
+        {
+          "name": "도우미",
+          "rate": 22.1
+        },
+        {
+          "name": "도발",
+          "rate": 22.0
+        },
+        {
+          "name": "찍찍베기",
+          "rate": 19.5
+        },
+        {
+          "name": "비바라기",
+          "rate": 6.4
+        },
+        {
+          "name": "집단구타",
+          "rate": 4.9
+        }
+      ],
+      "abilities": [
+        {
+          "name": "프렌드가드",
+          "rate": 88.2
+        },
+        {
+          "name": "테크니션",
+          "rate": 11.2
+        },
+        {
+          "name": "볼주머니",
+          "rate": 0.6
+        }
+      ],
+      "natures": [
+        {
+          "name": "명랑",
+          "rate": 44.6
+        },
+        {
+          "name": "장난꾸러기",
+          "rate": 21.4
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 14.8
+        },
+        {
+          "name": "신중",
+          "rate": 6.0
+        },
+        {
+          "name": "대담",
+          "rate": 4.4
+        },
+        {
+          "name": "고집",
+          "rate": 4.3
+        },
+        {
+          "name": "차분",
+          "rate": 2.4
+        },
+        {
+          "name": "무사태평",
+          "rate": 0.6
+        }
+      ],
+      "items": [
+        {
+          "name": "로플열매",
+          "rate": 49.3
+        },
+        {
+          "name": "기합의띠",
+          "rate": 23.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 9.9
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 5.9
+        },
+        {
+          "name": "실크스카프",
+          "rate": 3.8
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 1.6
+        },
+        {
+          "name": "구애스카프",
+          "rate": 1.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 1.4
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.4
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.0
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HS + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 12.7
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 20,
+            "D": 14
+          },
+          "rate": 9.8
+        },
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "S": 32
+          },
+          "rate": 6.6
+        },
+        {
+          "label": "HS + bd",
+          "evs": {
+            "H": 32,
+            "B": 1,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 5.3
+        },
+        {
+          "label": "HS + b",
+          "evs": {
+            "H": 30,
+            "B": 11,
+            "S": 25
+          },
+          "rate": 4.7
+        },
+        {
+          "label": "HS + d",
+          "evs": {
+            "H": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 2.9
+        },
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 10,
+            "A": 32,
+            "S": 24
+          },
+          "rate": 2.5
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "HB + ds",
+          "evs": {
+            "H": 32,
+            "B": 16,
+            "D": 5,
+            "S": 13
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "AS + b",
+          "evs": {
+            "A": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 1.4
+        },
+        {
+          "label": "HS + b",
+          "evs": {
+            "H": 32,
+            "B": 10,
+            "S": 24
+          },
+          "rate": 1.3
+        },
+        {
+          "label": "AS + d",
+          "evs": {
+            "A": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 1.2
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "파밀리쥐",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0887-00",
+      "moves": [
+        {
+          "name": "드래곤애로",
+          "rate": 61.3
+        },
+        {
+          "name": "고스트다이브",
+          "rate": 50.3
+        },
+        {
+          "name": "방어",
+          "rate": 46.0
+        },
+        {
+          "name": "사이코팽",
+          "rate": 40.9
+        },
+        {
+          "name": "도깨비불",
+          "rate": 27.4
+        },
+        {
+          "name": "용성군",
+          "rate": 20.5
+        },
+        {
+          "name": "유턴",
+          "rate": 20.2
+        },
+        {
+          "name": "기습",
+          "rate": 18.8
+        },
+        {
+          "name": "섀도볼",
+          "rate": 16.7
+        },
+        {
+          "name": "빛의장막",
+          "rate": 13.0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "클리어바디",
+          "rate": 65.7
+        },
+        {
+          "name": "틈새포착",
+          "rate": 19.0
+        },
+        {
+          "name": "저주받은바디",
+          "rate": 15.3
+        }
+      ],
+      "natures": [
+        {
+          "name": "명랑",
+          "rate": 43.2
+        },
+        {
+          "name": "고집",
+          "rate": 21.4
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 15.2
+        },
+        {
+          "name": "천진난만",
+          "rate": 5.9
+        },
+        {
+          "name": "조심",
+          "rate": 5.5
+        },
+        {
+          "name": "성급",
+          "rate": 3.3
+        },
+        {
+          "name": "개구쟁이",
+          "rate": 1.2
+        },
+        {
+          "name": "외로움",
+          "rate": 1.1
+        }
+      ],
+      "items": [
+        {
+          "name": "기합의띠",
+          "rate": 36.4
+        },
+        {
+          "name": "용의이빨",
+          "rate": 16.7
+        },
+        {
+          "name": "마코열매",
+          "rate": 6.8
+        },
+        {
+          "name": "리샘열매",
+          "rate": 4.7
+        },
+        {
+          "name": "구애스카프",
+          "rate": 4.5
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 4.4
+        },
+        {
+          "name": "하양허브",
+          "rate": 4.3
+        },
+        {
+          "name": "저주의부적",
+          "rate": 3.2
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 2.4
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 2.3
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "S": 32
+          },
+          "rate": 33.1
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 11.8
+        },
+        {
+          "label": "AS + d",
+          "evs": {
+            "A": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 4.7
+        },
+        {
+          "label": "AS + b",
+          "evs": {
+            "A": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 4.7
+        },
+        {
+          "label": "CS + a",
+          "evs": {
+            "A": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 2.2
+        },
+        {
+          "label": "AS",
+          "evs": {
+            "A": 32,
+            "S": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "AS + bd",
+          "evs": {
+            "A": 32,
+            "B": 1,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "CS + d",
+          "evs": {
+            "C": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 1.3
+        },
+        {
+          "label": "HS + a",
+          "evs": {
+            "H": 32,
+            "A": 2,
+            "S": 32
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 8,
+            "A": 32,
+            "S": 26
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 1,
+            "A": 32,
+            "S": 32
+          },
+          "rate": 0.9
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 0.8
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "드래펄트",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0308-00",
+      "moves": [
+        {
+          "name": "속이다",
+          "rate": 66.4
+        },
+        {
+          "name": "인파이트",
+          "rate": 61.0
+        },
+        {
+          "name": "사이코커터",
+          "rate": 29.5
+        },
+        {
+          "name": "스톤샤워",
+          "rate": 28.9
+        },
+        {
+          "name": "사념의박치기",
+          "rate": 23.4
+        },
+        {
+          "name": "드레인펀치",
+          "rate": 23.1
+        },
+        {
+          "name": "독찌르기",
+          "rate": 21.2
+        },
+        {
+          "name": "불릿펀치",
+          "rate": 21.1
+        },
+        {
+          "name": "방어",
+          "rate": 17.7
+        },
+        {
+          "name": "냉동펀치",
+          "rate": 16.6
+        }
+      ],
+      "abilities": [
+        {
+          "name": "순수한힘",
+          "rate": 90.2
+        },
+        {
+          "name": "텔레파시",
+          "rate": 9.8
+        }
+      ],
+      "natures": [
+        {
+          "name": "고집",
+          "rate": 45.0
+        },
+        {
+          "name": "명랑",
+          "rate": 35.1
+        },
+        {
+          "name": "용감",
+          "rate": 9.5
+        },
+        {
+          "name": "장난꾸러기",
+          "rate": 2.0
+        },
+        {
+          "name": "신중",
+          "rate": 1.9
+        },
+        {
+          "name": "건방",
+          "rate": 1.2
+        },
+        {
+          "name": "무사태평",
+          "rate": 1.2
+        },
+        {
+          "name": "개구쟁이",
+          "rate": 0.8
+        }
+      ],
+      "items": [
+        {
+          "name": "요가램나이트",
+          "rate": 62.8
+        },
+        {
+          "name": "기합의띠",
+          "rate": 17.0
+        },
+        {
+          "name": "구애스카프",
+          "rate": 4.2
+        },
+        {
+          "name": "하양허브",
+          "rate": 3.0
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 2.3
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.7
+        },
+        {
+          "name": "검은띠",
+          "rate": 1.7
+        },
+        {
+          "name": "로셀열매",
+          "rate": 1.2
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 1.1
+        },
+        {
+          "name": "반짝가루",
+          "rate": 0.9
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "S": 32
+          },
+          "rate": 38.3
+        },
+        {
+          "label": "AS + b",
+          "evs": {
+            "A": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 4.3
+        },
+        {
+          "label": "HA + b",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "B": 2
+          },
+          "rate": 4.0
+        },
+        {
+          "label": "AS + d",
+          "evs": {
+            "A": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 3.7
+        },
+        {
+          "label": "HA + bd",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "B": 1,
+            "D": 1
+          },
+          "rate": 3.2
+        },
+        {
+          "label": "HA + d",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "D": 2
+          },
+          "rate": 3.0
+        },
+        {
+          "label": "AS + d",
+          "evs": {
+            "A": 30,
+            "D": 4,
+            "S": 32
+          },
+          "rate": 2.4
+        },
+        {
+          "label": "HA + s",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "S": 2
+          },
+          "rate": 2.3
+        },
+        {
+          "label": "AS",
+          "evs": {
+            "A": 32,
+            "S": 32
+          },
+          "rate": 2.2
+        },
+        {
+          "label": "AS + bd",
+          "evs": {
+            "A": 32,
+            "B": 1,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "HS + a",
+          "evs": {
+            "H": 32,
+            "A": 2,
+            "S": 32
+          },
+          "rate": 0.9
+        },
+        {
+          "label": "HS + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 0.7
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "요가램",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0571-01",
+      "moves": [
+        {
+          "name": "얼다바람",
+          "rate": 50.6
+        },
+        {
+          "name": "섀도볼",
+          "rate": 48.3
+        },
+        {
+          "name": "천추지한",
+          "rate": 45.0
+        },
+        {
+          "name": "하이퍼보이스",
+          "rate": 41.5
+        },
+        {
+          "name": "사이코키네시스",
+          "rate": 37.6
+        },
+        {
+          "name": "화염방사",
+          "rate": 26.7
+        },
+        {
+          "name": "도발",
+          "rate": 21.6
+        },
+        {
+          "name": "방어",
+          "rate": 21.0
+        },
+        {
+          "name": "바크아웃",
+          "rate": 13.3
+        },
+        {
+          "name": "오물폭탄",
+          "rate": 11.8
+        }
+      ],
+      "abilities": [
+        {
+          "name": "일루전",
+          "rate": 100.0
+        }
+      ],
+      "natures": [
+        {
+          "name": "겁쟁이",
+          "rate": 47.2
+        },
+        {
+          "name": "조심",
+          "rate": 46.9
+        },
+        {
+          "name": "성급",
+          "rate": 1.4
+        },
+        {
+          "name": "의젓",
+          "rate": 1.2
+        },
+        {
+          "name": "천진난만",
+          "rate": 0.8
+        },
+        {
+          "name": "차분",
+          "rate": 0.5
+        },
+        {
+          "name": "대담",
+          "rate": 0.4
+        },
+        {
+          "name": "명랑",
+          "rate": 0.4
+        }
+      ],
+      "items": [
+        {
+          "name": "구애스카프",
+          "rate": 38.8
+        },
+        {
+          "name": "기합의띠",
+          "rate": 32.5
+        },
+        {
+          "name": "실크스카프",
+          "rate": 5.9
+        },
+        {
+          "name": "마코열매",
+          "rate": 5.8
+        },
+        {
+          "name": "저주의부적",
+          "rate": 4.8
+        },
+        {
+          "name": "반짝가루",
+          "rate": 2.8
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 2.5
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.2
+        },
+        {
+          "name": "왕의징표석",
+          "rate": 0.8
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 0.6
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 52.2
+        },
+        {
+          "label": "CS + d",
+          "evs": {
+            "C": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 7.8
+        },
+        {
+          "label": "CS + hb",
+          "evs": {
+            "H": 1,
+            "B": 1,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 6.7
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 6.1
+        },
+        {
+          "label": "CS",
+          "evs": {
+            "C": 32,
+            "S": 32
+          },
+          "rate": 2.5
+        },
+        {
+          "label": "CS + bd",
+          "evs": {
+            "B": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 2.1
+        },
+        {
+          "label": "CS + hd",
+          "evs": {
+            "H": 1,
+            "C": 32,
+            "D": 1,
+            "S": 32
+          },
+          "rate": 2.1
+        },
+        {
+          "label": "HC + bs",
+          "evs": {
+            "H": 32,
+            "B": 1,
+            "C": 32,
+            "S": 1
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 9,
+            "C": 32,
+            "S": 25
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "S": 2
+          },
+          "rate": 0.9
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 1,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 0.8
+        },
+        {
+          "label": "CS + a",
+          "evs": {
+            "A": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 0.7
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "조로아크",
+      "usage_rate": 3.23
     },
     {
       "id": "0740-00",
@@ -9498,7 +9498,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "모단단게",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0655-00",
@@ -9747,7 +9747,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "마폭시",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0635-00",
@@ -9992,7 +9992,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "삼삼드래",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0623-00",
@@ -10243,7 +10243,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "골루그",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0936-00",
@@ -10488,7 +10488,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "카디나르마",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0579-00",
@@ -10736,7 +10736,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "란쿨루스",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0359-00",
@@ -10984,7 +10984,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "앱솔",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0115-00",
@@ -11234,7 +11234,502 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "캥카",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0068-00",
+      "moves": [
+        {
+          "name": "폭발펀치",
+          "rate": 73.4
+        },
+        {
+          "name": "스톤에지",
+          "rate": 59.9
+        },
+        {
+          "name": "불릿펀치",
+          "rate": 50.5
+        },
+        {
+          "name": "와이드가드",
+          "rate": 42.2
+        },
+        {
+          "name": "냉동펀치",
+          "rate": 34.2
+        },
+        {
+          "name": "탁쳐서떨구기",
+          "rate": 16.7
+        },
+        {
+          "name": "방어",
+          "rate": 15.7
+        },
+        {
+          "name": "스톤샤워",
+          "rate": 15.2
+        },
+        {
+          "name": "판별",
+          "rate": 12.1
+        },
+        {
+          "name": "크로스촙",
+          "rate": 8.4
+        }
+      ],
+      "abilities": [
+        {
+          "name": "노가드",
+          "rate": 83.9
+        },
+        {
+          "name": "근성",
+          "rate": 14.4
+        },
+        {
+          "name": "불굴의마음",
+          "rate": 1.7
+        }
+      ],
+      "natures": [
+        {
+          "name": "고집",
+          "rate": 60.4
+        },
+        {
+          "name": "용감",
+          "rate": 26.1
+        },
+        {
+          "name": "명랑",
+          "rate": 4.5
+        },
+        {
+          "name": "신중",
+          "rate": 3.2
+        },
+        {
+          "name": "장난꾸러기",
+          "rate": 2.0
+        },
+        {
+          "name": "건방",
+          "rate": 0.9
+        },
+        {
+          "name": "무사태평",
+          "rate": 0.8
+        },
+        {
+          "name": "개구쟁이",
+          "rate": 0.8
+        }
+      ],
+      "items": [
+        {
+          "name": "검은띠",
+          "rate": 15.1
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 14.5
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 13.5
+        },
+        {
+          "name": "초점렌즈",
+          "rate": 8.1
+        },
+        {
+          "name": "기합의띠",
+          "rate": 7.2
+        },
+        {
+          "name": "바코열매",
+          "rate": 6.2
+        },
+        {
+          "name": "리샘열매",
+          "rate": 6.1
+        },
+        {
+          "name": "하양허브",
+          "rate": 5.7
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 4.4
+        },
+        {
+          "name": "구애스카프",
+          "rate": 4.1
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HA + b",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "B": 2
+          },
+          "rate": 23.4
+        },
+        {
+          "label": "HA + s",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "S": 2
+          },
+          "rate": 16.0
+        },
+        {
+          "label": "HA + d",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "D": 2
+          },
+          "rate": 10.7
+        },
+        {
+          "label": "AS + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "S": 32
+          },
+          "rate": 4.8
+        },
+        {
+          "label": "HA + s",
+          "evs": {
+            "H": 32,
+            "A": 30,
+            "S": 4
+          },
+          "rate": 2.8
+        },
+        {
+          "label": "HA",
+          "evs": {
+            "H": 32,
+            "A": 32
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "AD + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "D": 32
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "HA + bd",
+          "evs": {
+            "H": 32,
+            "A": 32,
+            "B": 1,
+            "D": 1
+          },
+          "rate": 1.1
+        },
+        {
+          "label": "AS + b",
+          "evs": {
+            "A": 32,
+            "B": 2,
+            "S": 32
+          },
+          "rate": 1.1
+        },
+        {
+          "label": "AB + h",
+          "evs": {
+            "H": 2,
+            "A": 32,
+            "B": 32
+          },
+          "rate": 1.1
+        },
+        {
+          "label": "AS + d",
+          "evs": {
+            "A": 32,
+            "D": 2,
+            "S": 32
+          },
+          "rate": 1.0
+        },
+        {
+          "label": "AB + d",
+          "evs": {
+            "A": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 0.9
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "괴력몬",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0334-00",
+      "moves": [
+        {
+          "name": "방어",
+          "rate": 67.9
+        },
+        {
+          "name": "하이퍼보이스",
+          "rate": 48.4
+        },
+        {
+          "name": "순풍",
+          "rate": 46.4
+        },
+        {
+          "name": "날개쉬기",
+          "rate": 33.4
+        },
+        {
+          "name": "도깨비불",
+          "rate": 23.8
+        },
+        {
+          "name": "용의파동",
+          "rate": 17.3
+        },
+        {
+          "name": "코튼가드",
+          "rate": 16.7
+        },
+        {
+          "name": "브레이브버드",
+          "rate": 15.9
+        },
+        {
+          "name": "용성군",
+          "rate": 12.9
+        },
+        {
+          "name": "화염방사",
+          "rate": 9.6
+        }
+      ],
+      "abilities": [
+        {
+          "name": "날씨부정",
+          "rate": 92.4
+        },
+        {
+          "name": "자연회복",
+          "rate": 7.6
+        }
+      ],
+      "natures": [
+        {
+          "name": "조심",
+          "rate": 43.0
+        },
+        {
+          "name": "장난꾸러기",
+          "rate": 12.3
+        },
+        {
+          "name": "차분",
+          "rate": 11.0
+        },
+        {
+          "name": "대담",
+          "rate": 7.0
+        },
+        {
+          "name": "고집",
+          "rate": 6.7
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 5.5
+        },
+        {
+          "name": "신중",
+          "rate": 4.5
+        },
+        {
+          "name": "명랑",
+          "rate": 3.2
+        }
+      ],
+      "items": [
+        {
+          "name": "파비코리나이트",
+          "rate": 60.9
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 14.3
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 8.8
+        },
+        {
+          "name": "하반열매",
+          "rate": 3.7
+        },
+        {
+          "name": "반짝가루",
+          "rate": 2.5
+        },
+        {
+          "name": "플카열매",
+          "rate": 1.9
+        },
+        {
+          "name": "기합의띠",
+          "rate": 1.5
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.1
+        },
+        {
+          "name": "로셀열매",
+          "rate": 1.1
+        },
+        {
+          "name": "리샘열매",
+          "rate": 0.7
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HC + s",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "S": 2
+          },
+          "rate": 8.8
+        },
+        {
+          "label": "HA + bds",
+          "evs": {
+            "H": 32,
+            "A": 23,
+            "B": 1,
+            "D": 1,
+            "S": 9
+          },
+          "rate": 6.6
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "D": 32
+          },
+          "rate": 4.2
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 3.4
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 3.0
+        },
+        {
+          "label": "CS + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 2.9
+        },
+        {
+          "label": "CS + b",
+          "evs": {
+            "B": 2,
+            "C": 32,
+            "S": 32
+          },
+          "rate": 1.7
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 1.3
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 31,
+            "C": 30,
+            "D": 5
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "BD + h",
+          "evs": {
+            "H": 2,
+            "B": 32,
+            "D": 32
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "HS + ab",
+          "evs": {
+            "H": 32,
+            "A": 1,
+            "B": 1,
+            "S": 32
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 20,
+            "D": 14
+          },
+          "rate": 1.0
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "파비코리",
+      "usage_rate": 3.23
     },
     {
       "id": "0184-00",
@@ -11484,7 +11979,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "마릴리",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0937-00",
@@ -11729,7 +12224,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "파라블레이즈",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0157-00",
@@ -11974,7 +12469,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "블레이범",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0181-00",
@@ -12218,7 +12713,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "전룡",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0475-00",
@@ -12466,7 +12961,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "엘레이드",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0350-00",
@@ -12722,7 +13217,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "밀로틱",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0959-00",
@@ -12973,7 +13468,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "두드리짱",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0658-00",
@@ -13216,7 +13711,7 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "개굴닌자",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
     },
     {
       "id": "0660-00",
@@ -13468,7 +13963,500 @@
       ],
       "source": "champs.pokedb.tokyo (pokemon page)",
       "name": "파르토",
-      "usage_rate": 3.45
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0683-00",
+      "moves": [
+        {
+          "name": "트릭룸",
+          "rate": 92.6
+        },
+        {
+          "name": "문포스",
+          "rate": 67.0
+        },
+        {
+          "name": "치유파동",
+          "rate": 36.6
+        },
+        {
+          "name": "거짓울음",
+          "rate": 28.7
+        },
+        {
+          "name": "방어",
+          "rate": 24.6
+        },
+        {
+          "name": "쾌청",
+          "rate": 23.7
+        },
+        {
+          "name": "매지컬샤인",
+          "rate": 19.3
+        },
+        {
+          "name": "앵콜",
+          "rate": 18.5
+        },
+        {
+          "name": "사이드체인지",
+          "rate": 13.5
+        },
+        {
+          "name": "도우미",
+          "rate": 9.6
+        }
+      ],
+      "abilities": [
+        {
+          "name": "아로마베일",
+          "rate": 95.6
+        },
+        {
+          "name": "치유의마음",
+          "rate": 4.4
+        }
+      ],
+      "natures": [
+        {
+          "name": "무사태평",
+          "rate": 39.3
+        },
+        {
+          "name": "냉정",
+          "rate": 34.1
+        },
+        {
+          "name": "건방",
+          "rate": 11.3
+        },
+        {
+          "name": "대담",
+          "rate": 5.9
+        },
+        {
+          "name": "조심",
+          "rate": 5.1
+        },
+        {
+          "name": "차분",
+          "rate": 3.2
+        },
+        {
+          "name": "고집",
+          "rate": 0.6
+        },
+        {
+          "name": "의젓",
+          "rate": 0.2
+        }
+      ],
+      "items": [
+        {
+          "name": "바리비열매",
+          "rate": 28.6
+        },
+        {
+          "name": "자뭉열매",
+          "rate": 27.5
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 16.5
+        },
+        {
+          "name": "ようせいのハネ",
+          "rate": 7.3
+        },
+        {
+          "name": "으름열매",
+          "rate": 7.3
+        },
+        {
+          "name": "반짝가루",
+          "rate": 3.4
+        },
+        {
+          "name": "기합의띠",
+          "rate": 3.3
+        },
+        {
+          "name": "리샘열매",
+          "rate": 1.7
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 1.7
+        },
+        {
+          "name": "조개껍질방울",
+          "rate": 0.9
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 31,
+            "D": 3
+          },
+          "rate": 20.8
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 13.8
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 20,
+            "D": 14
+          },
+          "rate": 6.8
+        },
+        {
+          "label": "HBD",
+          "evs": {
+            "H": 32,
+            "B": 18,
+            "D": 16
+          },
+          "rate": 3.8
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 3.0
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 2.5
+        },
+        {
+          "label": "BD + h",
+          "evs": {
+            "H": 2,
+            "B": 32,
+            "D": 32
+          },
+          "rate": 2.2
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 28,
+            "D": 6
+          },
+          "rate": 2.1
+        },
+        {
+          "label": "BC + h",
+          "evs": {
+            "H": 2,
+            "B": 32,
+            "C": 32
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "HB + cd",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "C": 1,
+            "D": 1
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "BC + d",
+          "evs": {
+            "B": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 1.2
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 8,
+            "D": 26
+          },
+          "rate": 1.2
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "프레프티르",
+      "usage_rate": 3.23
+    },
+    {
+      "id": "0199-01",
+      "moves": [
+        {
+          "name": "트릭룸",
+          "rate": 85.3
+        },
+        {
+          "name": "치유파동",
+          "rate": 46.0
+        },
+        {
+          "name": "오물폭탄",
+          "rate": 43.9
+        },
+        {
+          "name": "사이코키네시스",
+          "rate": 40.1
+        },
+        {
+          "name": "애시드봄",
+          "rate": 32.6
+        },
+        {
+          "name": "썰렁개그",
+          "rate": 31.5
+        },
+        {
+          "name": "비바라기",
+          "rate": 21.1
+        },
+        {
+          "name": "방어",
+          "rate": 16.7
+        },
+        {
+          "name": "냉동빔",
+          "rate": 7.4
+        },
+        {
+          "name": "바크아웃",
+          "rate": 6.9
+        }
+      ],
+      "abilities": [
+        {
+          "name": "재생력",
+          "rate": 90.4
+        },
+        {
+          "name": "기묘한약",
+          "rate": 6.8
+        },
+        {
+          "name": "마이페이스",
+          "rate": 2.7
+        }
+      ],
+      "natures": [
+        {
+          "name": "무사태평",
+          "rate": 45.7
+        },
+        {
+          "name": "냉정",
+          "rate": 16.4
+        },
+        {
+          "name": "건방",
+          "rate": 13.1
+        },
+        {
+          "name": "조심",
+          "rate": 9.3
+        },
+        {
+          "name": "대담",
+          "rate": 7.4
+        },
+        {
+          "name": "차분",
+          "rate": 7.1
+        },
+        {
+          "name": "의젓",
+          "rate": 0.2
+        },
+        {
+          "name": "겁쟁이",
+          "rate": 0.2
+        }
+      ],
+      "items": [
+        {
+          "name": "자뭉열매",
+          "rate": 25.7
+        },
+        {
+          "name": "멘탈허브",
+          "rate": 22.8
+        },
+        {
+          "name": "마코열매",
+          "rate": 15.8
+        },
+        {
+          "name": "먹다남은음식",
+          "rate": 12.9
+        },
+        {
+          "name": "슈캐열매",
+          "rate": 6.8
+        },
+        {
+          "name": "수불열매",
+          "rate": 4.6
+        },
+        {
+          "name": "선제공격손톱",
+          "rate": 2.5
+        },
+        {
+          "name": "기합의띠",
+          "rate": 2.4
+        },
+        {
+          "name": "독바늘",
+          "rate": 1.4
+        },
+        {
+          "name": "반짝가루",
+          "rate": 1.3
+        }
+      ],
+      "ev_spreads": [
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 31,
+            "D": 3
+          },
+          "rate": 14.5
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 32,
+            "D": 2
+          },
+          "rate": 10.8
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 19,
+            "D": 15
+          },
+          "rate": 7.5
+        },
+        {
+          "label": "HC + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "C": 32
+          },
+          "rate": 5.3
+        },
+        {
+          "label": "HBD",
+          "evs": {
+            "H": 32,
+            "B": 17,
+            "D": 17
+          },
+          "rate": 3.7
+        },
+        {
+          "label": "HC + d",
+          "evs": {
+            "H": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 3.4
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 30,
+            "D": 4
+          },
+          "rate": 2.4
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 31,
+            "B": 30,
+            "D": 5
+          },
+          "rate": 2.0
+        },
+        {
+          "label": "CD + h",
+          "evs": {
+            "H": 2,
+            "C": 32,
+            "D": 32
+          },
+          "rate": 1.9
+        },
+        {
+          "label": "BC + d",
+          "evs": {
+            "B": 32,
+            "C": 32,
+            "D": 2
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "HD + b",
+          "evs": {
+            "H": 32,
+            "B": 2,
+            "D": 32
+          },
+          "rate": 1.8
+        },
+        {
+          "label": "HB + d",
+          "evs": {
+            "H": 32,
+            "B": 20,
+            "D": 14
+          },
+          "rate": 1.5
+        }
+      ],
+      "source": "champs.pokedb.tokyo (pokemon page)",
+      "name": "야도킹",
+      "usage_rate": 3.23
     }
   ],
   "source": "champs.pokedb.tokyo"
