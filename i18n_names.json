@@ -17564,12 +17564,6 @@
    "en": "Capsakidite",
    "ja": "カプサイジナイト"
   },
-  "스코빌런나이트": {
-   "en": "Scovillainite",
-   "ja": "スコヴィランナイト",
-   "descEn": "An item that allows Scovillain to Mega Evolve into Mega Scovillain.",
-   "descJa": "アジテリアに持たせるとバトル中にメガシンカできる不思議なメガストーンの一種。"
-  },
   "구르데나이트": {
    "en": "Rellorite",
    "ja": "シガロコナイト"
@@ -17961,6 +17955,12 @@
    "descJa": "フェアリータイプの技の威力が強くなる。",
    "en": "Fairy Feather",
    "ja": "フェアリのはね"
+  },
+  "스코빌라나이트": {
+   "en": "Scovillainite",
+   "ja": "スコヴィランナイト",
+   "descEn": "An item that allows Scovillain to Mega Evolve into Mega Scovillain.",
+   "descJa": "アジテリアに持たせるとバトル中にメガシンカできる不思議なメガストーンの一種。"
   }
  },
  "natures": {

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <script>
+  (function(){
+    try {
+      var saved = localStorage.getItem('pochams_theme');
+      var theme = saved !== null ? saved : ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'umbreon' : '');
+      if (theme) document.documentElement.setAttribute('data-theme', theme);
+    } catch(e) {}
+  })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -302,7 +311,13 @@ function pokeName(koName, dexNo) {
   const p = I18N.pokemon[String(dexNo)];
   if (!p) return koName;
   const base = p[LANG] || p.ko;
-  let result = koName.split(p.ko).join(base);
+  let workingName = koName;
+  let megaPrefix = '';
+  if (workingName.startsWith('메가') && workingName.slice(2).startsWith(p.ko)) {
+    megaPrefix = LANG === 'ja' ? 'メガ' : 'Mega ';
+    workingName = workingName.slice(2);
+  }
+  let result = megaPrefix + workingName.split(p.ko).join(base);
   /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
   const suffixMatch = result.match(/\(([^)]+)\)$/);
   if (suffixMatch) {
@@ -506,7 +521,7 @@ loadI18n().then(applyNavSettingsLabels);
       o.dataset.no = theme.no;
       themeSel.appendChild(o);
     });
-    themeSel.value = localStorage.getItem('pochams_theme') || '';
+    themeSel.value = document.documentElement.getAttribute('data-theme') || '';
     themeSel.addEventListener('change', () => {
       localStorage.setItem('pochams_theme', themeSel.value);
       applyTheme(themeSel.value);

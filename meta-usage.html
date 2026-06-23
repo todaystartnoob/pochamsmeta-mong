@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <script>
+  (function(){
+    try {
+      var saved = localStorage.getItem('pochams_theme');
+      var theme = saved !== null ? saved : ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'umbreon' : '');
+      if (theme) document.documentElement.setAttribute('data-theme', theme);
+    } catch(e) {}
+  })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -564,7 +573,13 @@ function pokeName(koName, dexNo) {
   const p = I18N.pokemon[String(dexNo)];
   if (!p) return koName;
   const base = p[LANG] || p.ko;
-  let result = koName.split(p.ko).join(base);
+  let workingName = koName;
+  let megaPrefix = '';
+  if (workingName.startsWith('메가') && workingName.slice(2).startsWith(p.ko)) {
+    megaPrefix = LANG === 'ja' ? 'メガ' : 'Mega ';
+    workingName = workingName.slice(2);
+  }
+  let result = megaPrefix + workingName.split(p.ko).join(base);
   /* 괄호 접미사 폼 (예: 아르세우스(강철), 디아루가(오리진폼)) */
   const suffixMatch = result.match(/\(([^)]+)\)$/);
   if (suffixMatch) {
@@ -822,7 +837,49 @@ function buildFullUsageList(baseUsage) {
   return [...baseUsage, ...extras];
 }
 
+const MEGA_STONE_MAP = {
+  '메가이상해꽃':'이상해꽃나이트','메가리자몽X':'리자몽나이트X','메가리자몽Y':'리자몽나이트Y',
+  '메가거북왕':'거북왕나이트','메가독침붕':'독침붕나이트','메가피죤투':'피죤투나이트',
+  '메가라이츄X':'라이츄나이트X','메가라이츄Y':'라이츄나이트Y','메가픽시':'픽시나이트',
+  '메가후딘':'후디나이트','메가야도란':'야도란나이트','메가팬텀':'팬텀나이트',
+  '메가캥카':'캥카나이트','메가아쿠스타':'아쿠스타나이트','메가쁘사이저':'쁘사이저나이트',
+  '메가갸라도스':'갸라도스나이트','메가프테라':'프테라나이트',
+  '메가뮤츠X':'뮤츠나이트X','메가뮤츠Y':'뮤츠나이트Y',
+  '메가메가니움':'메가니움나이트','메가장크로다일':'장크로다일나이트',
+  '메가전룡':'전룡나이트','메가강철톤':'강철톤나이트','메가핫삼':'핫삼나이트',
+  '메가헤라크로스':'헤라크로스나이트','메가무장조':'무장조나이트','메가헬가':'헬가나이트',
+  '메가마기라스':'마기라스나이트','메가나무킹':'나무킹나이트','메가번치코':'번치코나이트',
+  '메가대짱이':'대짱이나이트','메가가디안':'가디안나이트','메가깜까미':'깜까미나이트',
+  '메가입치트':'입치트나이트','메가보스로라':'보스로라나이트','메가요가램':'요가램나이트',
+  '메가썬더볼트':'썬더볼트나이트','메가샤크니아':'샤크니아나이트','메가폭타':'폭타나이트',
+  '메가파비코리':'파비코리나이트','메가다크펫':'다크펫나이트','메가치렁':'치렁나이트',
+  '메가앱솔':'앱솔나이트','메가앱솔Z':'앱솔나이트','메가얼음귀신':'얼음귀신나이트',
+  '메가보만다':'보만다나이트','메가메타그로스':'메타그로스나이트',
+  '메가라티아스':'라티아스나이트','메가라티오스':'라티오스나이트',
+  '메가찌르호크':'찌르호크나이트','메가이어롭':'이어롭나이트',
+  '메가한카리아스':'한카리아스나이트','메가한카리아스Z':'한카리아스나이트',
+  '메가루카리오':'루카리오나이트','메가루카리오Z':'루카리오나이트',
+  '메가눈설왕':'눈설왕나이트','메가엘레이드':'엘레이드나이트','메가눈여아':'눈여아나이트',
+  '메가히드런':'히드런나이트','메가다크라이':'다크라이나이트','메가염무왕':'염무왕나이트',
+  '메가몰드류':'몰드류나이트','메가다부니':'다부니나이트','메가펜드라':'펜드라나이트',
+  '메가곤율거니':'곤율거니나이트','메가저리더프':'저리더프나이트','메가샹델라':'샹델라나이트',
+  '메가골루그':'골루그나이트','메가브리가론':'브리가론나이트','메가마폭시':'마폭시나이트',
+  '메가개굴닌자':'개굴닌자나이트','메가화염레오':'화염레오나이트',
+  '메가냐오닉스':'냐오닉스나이트','메가칼라마네로':'칼라마네로나이트',
+  '메가거북손데스':'거북손데스나이트','메가드래캄':'드래캄나이트','메가루차불':'루차불나이트',
+  '메가지가르데':'지가르데나이트','메가디안시':'디안시나이트','메가모단단게':'모단단게나이트',
+  '메가갑주무사':'갑주무사나이트','메가할비롱':'할비롱나이트','메가마기아나':'마기아나나이트',
+  '메가제라오라':'제라오라나이트','메가대여르':'대여르나이트','메가스코빌런':'스코빌라나이트',
+  '메가킬라플로르':'킬라플로르나이트','메가싸리용':'싸리용나이트','메가드닐레이브':'드닐레이브나이트',
+  '메가망나뇽':'망나뇽나이트','메가우츠보트':'우츠보트나이트','메가플라엣테':'플라엣테나이트',
+};
+
+const STONE_TO_MEGA_MAP = Object.fromEntries(
+  Object.entries(MEGA_STONE_MAP).map(([mega, stone]) => [stone, mega])
+);
 function megaNameFromStone(stoneName) {
+  // 검증된 MEGA_STONE_MAP 역참조 우선 (스톤 이름이 종족명을 그대로 포함하지 않는 불규칙 축약 대응)
+  if (STONE_TO_MEGA_MAP[stoneName]) return STONE_TO_MEGA_MAP[stoneName];
   // "루카리오나이트" → "메가루카리오", "리자몽나이트X" → "메가리자몽X"
   const idx = stoneName.lastIndexOf('나이트');
   if (idx === -1) return null;
@@ -839,8 +896,9 @@ function buildMegaUsageList(baseUsage, setsData) {
     const pk = setsMap[u.id];
     if (!pk?.items?.length) return;
     pk.items.forEach(item => {
-      if (!item.name?.includes('나이트')) return;
-      const megaName = megaNameFromStone(item.name);
+      const koItemName = translateName(item.name);
+      if (!koItemName?.includes('나이트')) return;
+      const megaName = megaNameFromStone(koItemName);
       if (!megaName) return;
       const hasBaseRate = Number.isFinite(u.rate);
       const megaRate = hasBaseRate ? parseFloat((u.rate * item.rate / 100).toFixed(2)) : NaN;
@@ -852,7 +910,7 @@ function buildMegaUsageList(baseUsage, setsData) {
           id: u.id,
           name: u.name,
           _megaName: megaName,
-          _stoneName: item.name,
+          _stoneName: koItemName,
           _stoneRate: item.rate,
           rate: megaRate,
           _sortKey: sortKey,
@@ -878,7 +936,7 @@ function buildMegaUsageList(baseUsage, setsData) {
         id: p.no.toString().padStart(4, '0') + '-00',
         name: baseName,
         _megaName: p.name,
-        _stoneName: baseName + '나이트' + suffix,
+        _stoneName: MEGA_STONE_MAP[p.name] || (baseName + '나이트' + suffix),
         _stoneRate: 0,
         rate: 0,
         _sortKey: 0,
@@ -1074,7 +1132,7 @@ function openDetail(idx, u) {
   const pk = setsData?.pokemon?.find(p => p.id === u.id);
   const no = idToNo(u.id);
   const content = document.getElementById('detailContent');
-  const koDname = usageDisplayName(u);
+  const koDname = usageViewMode === 'mega' ? (u._megaName || u.name) : usageDisplayName(u);
   const dname = pokeName(koDname, no);
   const bs = getBaseStats(koDname) || getBaseStats(u.name);
 
@@ -1088,9 +1146,12 @@ function openDetail(idx, u) {
     : '';
 
   // 좌상단 헤더 (공통)
+  const detailSpriteUrl = usageViewMode === 'mega'
+    ? ((typeof POKEMON_SPRITES !== 'undefined' && POKEMON_SPRITES?.[u._megaName]) || usageSpriteUrl(u, no))
+    : usageSpriteUrl(u, no);
   const topHtml = `
     <div class="dc-top">
-      <div class="dc-sprite"><img src="${usageSpriteUrl(u, no)}" alt="${dname}"></div>
+      <div class="dc-sprite"><img src="${detailSpriteUrl}" alt="${dname}"></div>
       <div class="dc-info">
         <div class="dc-name">${dname}</div>
         <div class="dc-rate">${Number.isFinite(u.rate) ? `${t('usage_rate')} ${u.rate.toFixed(1)}% · ` : ''}${LANG === 'ko' ? `${idx + 1}위` : `#${idx + 1}`}</div>
@@ -1331,7 +1392,7 @@ init();
       o.dataset.no = theme.no;
       themeSel.appendChild(o);
     });
-    themeSel.value = localStorage.getItem('pochams_theme') || '';
+    themeSel.value = document.documentElement.getAttribute('data-theme') || '';
     themeSel.addEventListener('change', () => {
       localStorage.setItem('pochams_theme', themeSel.value);
       applyTheme(themeSel.value);
