@@ -206,7 +206,7 @@
     .f-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);}
     .f-btn[data-if="포챔스"]{background:#f3e8fd;color:#7b3fa0;border-color:#c9a0e8;}
     .f-btn[data-if="포챔스"].on{background:var(--accent);color:#fff;border-color:var(--accent);}
-    .poke-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;overflow-y:auto;max-height:400px;padding:2px;}
+    .poke-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));align-content:start;gap:6px;overflow-y:auto;height:400px;padding:2px;}
     .poke-card{display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:#f8f8f8;transition:all .14s;}
     .poke-card:hover{border-color:var(--accent);background:#f0e6fa;transform:scale(1.04);}
     .poke-card img{width:52px;height:52px;image-rendering:pixelated;}
@@ -214,7 +214,7 @@
     .pc-name{font-size:10px;color:#333;text-align:center;word-break:keep-all;line-height:1.3;}
     .pc-types{display:flex;gap:2px;margin-top:2px;}
     .pc-tbadge{padding:1px 4px;border-radius:3px;font-size:8px;color:#fff;font-weight:600;}
-    .move-list-wrap{overflow-y:auto;max-height:420px;}
+    .move-list-wrap{overflow-y:auto;height:420px;}
     .move-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:background .12s;}
     .move-item:hover{background:#f0e6fa;}
     .mi-type{padding:2px 7px;border-radius:4px;font-size:10px;color:#fff;font-weight:600;min-width:42px;text-align:center;}
@@ -223,7 +223,7 @@
     .mi-pow{font-size:11px;color:#555;min-width:32px;}
     .mi-acc{font-size:10px;color:#888;min-width:36px;}
     .mi-desc{font-size:10px;color:#aaa;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1;}
-    .item-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;overflow-y:auto;max-height:400px;padding:2px;}
+    .item-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));align-content:start;gap:6px;overflow-y:auto;height:400px;padding:2px;}
     .item-card{display:flex;flex-direction:column;align-items:center;padding:7px 4px 5px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:#f8f8f8;transition:all .14s;position:relative;}
     .item-card:hover{border-color:var(--accent);background:#f0e6fa;}
     .item-card img{width:32px;height:32px;image-rendering:pixelated;}
@@ -232,7 +232,7 @@
     .item-cat-badge{font-size:8px;color:#888;text-align:center;}
     .item-effect-panel{background:#f5eefa;border-radius:8px;padding:8px 10px;font-size:11px;color:#555;display:none;}
     .item-effect-panel.show{display:block;}
-    .ability-list{overflow-y:auto;max-height:350px;}
+    .ability-list{overflow-y:auto;height:350px;}
     .ability-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all .14s;margin-bottom:4px;background:#f9f9f9;}
     .ability-item:hover{border-color:var(--accent);background:#f0e6fa;}
     .ability-item.selected{border-color:var(--accent);background:#e8d5f8;}
@@ -525,9 +525,23 @@ function termDesc(category, koName, koDesc) {
 }
 
 /* 검색어가 한국어 원문 또는 영/일 번역명과 일치하는지 확인 (언어 모드와 무관하게 항상 다 검사) */
+
+const CHOSEONG_LIST = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+function getChoseong(str) {
+  let result = '';
+  for (const ch of str) {
+    const code = ch.charCodeAt(0) - 0xAC00;
+    if (code >= 0 && code <= 11171) result += CHOSEONG_LIST[Math.floor(code / 588)];
+    else result += ch;
+  }
+  return result;
+}
+function isChoseongOnly(q) { return /^[ㄱ-ㅎ]+$/.test(q); }
+
 function matchPokemonQuery(pk, q) {
   if (!q) return true;
   if (pk.name.includes(q)) return true;
+  if (isChoseongOnly(q) && getChoseong(pk.name).includes(q)) return true;
   if (!I18N) return false;
   const ql = q.toLowerCase();
   const p = I18N.pokemon[String(pk.no)];
@@ -547,6 +561,7 @@ function matchPokemonQuery(pk, q) {
 function matchTermQuery(category, koName, q) {
   if (!q) return true;
   if (koName.includes(q)) return true;
+  if (isChoseongOnly(q) && getChoseong(koName).includes(q)) return true;
   if (!I18N) return false;
   koName = normKoName(category, koName);
   if (koName.includes(q)) return true;
