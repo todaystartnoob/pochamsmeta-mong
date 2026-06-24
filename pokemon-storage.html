@@ -1097,6 +1097,13 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
 document.getElementById('closePokeModal').addEventListener('click', closePokeModal);
 document.getElementById('pokeModal').addEventListener('click', e => { if(e.target===document.getElementById('pokeModal')) closePokeModal(); });
 document.getElementById('pokeSearch').addEventListener('input', e => renderPokeGrid(e.target.value));
+document.getElementById('pokeSearch').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = e.target;
+  if (!inp.value.trim()) { inp.blur(); return; }
+  document.getElementById('pokeGrid').querySelector('.poke-card')?.click();
+});
 document.getElementById('pokeFilterRow').addEventListener('click', e => {
   const btn = e.target.closest('.f-btn');
   if (!btn) return;
@@ -1297,6 +1304,13 @@ document.getElementById('moveList').addEventListener('click', e => {
 document.getElementById('closeMoveModal').addEventListener('click', closeMoveModal);
 document.getElementById('moveModal').addEventListener('click', e => { if(e.target===document.getElementById('moveModal')) closeMoveModal(); });
 document.getElementById('moveSearch').addEventListener('input', e => renderMoveList(e.target.value));
+document.getElementById('moveSearch').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = e.target;
+  if (!inp.value.trim()) { inp.blur(); return; }
+  document.getElementById('moveList').querySelector('.move-item:not([data-idx="-1"])')?.click();
+});
 document.getElementById('moveFilterRow').addEventListener('click', e => {
   const btn = e.target.closest('.f-btn');
   if (!btn) return;
@@ -1361,6 +1375,13 @@ document.getElementById('itemGrid').addEventListener('mouseout', e => {
 document.getElementById('closeItemModal').addEventListener('click', closeItemModal);
 document.getElementById('itemModal').addEventListener('click', e => { if(e.target===document.getElementById('itemModal')) closeItemModal(); });
 document.getElementById('itemSearch').addEventListener('input', e => renderItemGrid(e.target.value));
+document.getElementById('itemSearch').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = e.target;
+  if (!inp.value.trim()) { inp.blur(); return; }
+  document.getElementById('itemGrid').querySelector('.item-card:not([data-idx="-1"])')?.click();
+});
 document.getElementById('itemFilterRow').addEventListener('click', e => {
   const btn = e.target.closest('.f-btn');
   if (!btn) return;

@@ -651,6 +651,13 @@ function t(key, vars) {
     dexQuery = e.target.value;
     renderGrid();
   });
+  document.getElementById('dexSearch').addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const inp = e.target;
+    if (!inp.value.trim()) { inp.blur(); return; }
+    document.getElementById('dexGrid').querySelector('.dex-card')?.click();
+  });
 
   document.getElementById('modeFilter').addEventListener('click', e => {
     const btn = e.target.closest('.f-btn');

@@ -3553,6 +3553,12 @@ window.initPowerCalc = function initPowerCalc() {
 
     inp.addEventListener('focus', () => showRows(inp.value.trim()));
     inp.addEventListener('input', () => showRows(inp.value.trim()));
+    inp.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      if (!inp.value.trim()) { lst.classList.remove('open'); drop.style.zIndex=''; inp.blur(); return; }
+      lst.querySelector('.dc-drop-item')?.click();
+    });
     document.addEventListener('click', e => {
       if (!e.target.closest('#'+inputId) && !e.target.closest('#'+listId)) {
         lst.classList.remove('open'); drop.style.zIndex='';
@@ -4387,6 +4393,13 @@ document.getElementById('pokeGrid').addEventListener('click', e => {
 document.getElementById('closePokeModal').addEventListener('click', closePokeModal);
 document.getElementById('pokeModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closePokeModal(); });
 document.getElementById('pokeSearch').addEventListener('input', e=>renderPokeGrid(e.target.value));
+document.getElementById('pokeSearch').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = e.target;
+  if (!inp.value.trim()) { inp.blur(); return; }
+  document.getElementById('pokeGrid').querySelector('.poke-card')?.click();
+});
 document.getElementById('pokeFilterRow').addEventListener('click', e=>{
   const btn = e.target.closest('.f-btn');
   if (!btn) return;
@@ -4457,6 +4470,13 @@ document.getElementById('moveList').addEventListener('click', e=>{
 document.getElementById('closeMoveModal').addEventListener('click', closeMoveModal);
 document.getElementById('moveModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeMoveModal(); });
 document.getElementById('moveSearch').addEventListener('input', e=>renderMoveList(e.target.value));
+document.getElementById('moveSearch').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = e.target;
+  if (!inp.value.trim()) { inp.blur(); return; }
+  document.getElementById('moveList').querySelector('.move-item:not([data-idx="-1"])')?.click();
+});
 document.getElementById('moveFilterRow').addEventListener('click', e=>{
   const btn=e.target.closest('.f-btn');
   if (!btn) return;
@@ -4537,6 +4557,13 @@ document.getElementById('itemGrid').addEventListener('click', e=>{
 document.getElementById('closeItemModal').addEventListener('click', closeItemModal);
 document.getElementById('itemModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeItemModal(); });
 document.getElementById('itemSearch').addEventListener('input', e=>{ renderItemGrid(e.target.value); });
+document.getElementById('itemSearch').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = e.target;
+  if (!inp.value.trim()) { inp.blur(); return; }
+  document.getElementById('itemGrid').querySelector('.item-card:not([data-idx="-1"])')?.click();
+});
 document.getElementById('itemFilterRow').addEventListener('click', e=>{
   const btn=e.target.closest('.f-btn');
   if (!btn) return;
@@ -5388,6 +5415,12 @@ function renderSpeedCalc() {
       if (sc.abilityName !== '곡예') sc.unburden = false;
       scSave(); renderSpeedCalc();
     });
+    itemQ.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      if (!itemQ.value.trim()) { itemList.classList.remove('open'); if (itemDrop) itemDrop.style.zIndex = ''; itemQ.blur(); return; }
+      itemList.querySelector('.dc-drop-item')?.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, cancelable:true}));
+    });
     itemQ.addEventListener('blur', () => setTimeout(() => {
       itemList.classList.remove('open');
       if (itemDrop) itemDrop.style.zIndex = '';
@@ -5419,6 +5452,12 @@ function renderSpeedCalc() {
       abilList.classList.remove('open');
       if (abilDrop) abilDrop.style.zIndex = '';
       scSave(); renderSpeedCalc();
+    });
+    abilQ.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      if (!abilQ.value.trim()) { abilList.classList.remove('open'); if (abilDrop) abilDrop.style.zIndex = ''; abilQ.blur(); return; }
+      abilList.querySelector('.dc-drop-item')?.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, cancelable:true}));
     });
     abilQ.addEventListener('blur', () => setTimeout(() => {
       abilList.classList.remove('open');

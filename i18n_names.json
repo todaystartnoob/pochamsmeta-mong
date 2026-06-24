@@ -25142,6 +25142,11 @@
    "ko": "-",
    "en": "-",
    "ja": "-"
+  },
+  "defense_matchup": {
+   "ko": "방어 상성",
+   "en": "Defensive Matchup",
+   "ja": "弱点・耐性"
   }
  },
  "pokemonFullNames": {
