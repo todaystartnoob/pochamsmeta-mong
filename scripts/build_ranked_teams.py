@@ -25,7 +25,8 @@ RULES = ["single", "double"]
 RULE_CODE = {"single": 0, "double": 1}     # /pokemon/list 의 rule 파라미터
 MAX_SEASON = 30
 TOP_TEAMS = 50                              # 랭커 파티 상위 N개만 저장
-UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")   # WAF 403 회피용 브라우저 UA
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 MAP_PATH = os.path.join(os.path.dirname(__file__), "champions_loc_map.json")
 
@@ -39,13 +40,30 @@ FORM   = M["form_ja2ko"]
 def _req(url):
     return urllib.request.Request(url, headers={"User-Agent": UA})
 
+def _open(url, retries=3):
+    last = None
+    for i in range(retries):
+        try:
+            with urllib.request.urlopen(_req(url), timeout=30) as r:
+                return r.read()
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                raise
+            last = e
+            if e.code in (403, 429, 500, 502, 503):
+                time.sleep(3 * (i + 1))   # 백오프 후 재시도
+                continue
+            raise
+        except Exception as e:
+            last = e
+            time.sleep(3 * (i + 1))
+    raise last
+
 def fetch_json(url):
-    with urllib.request.urlopen(_req(url), timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+    return json.loads(_open(url).decode("utf-8"))
 
 def fetch_text(url):
-    with urllib.request.urlopen(_req(url), timeout=30) as r:
-        return r.read().decode("utf-8", "replace")
+    return _open(url).decode("utf-8", "replace")
 
 def safe_dex(raw_id):
     if not raw_id:
@@ -239,44 +257,48 @@ def build(season, rule):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    # 이전 실행의 잔재(특히 가짜 미래 시즌 s4~) 정리: ranked 파일만 삭제.
-    # _sets.json은 종료 시즌 캐시로 재사용하므로 건드리지 않음(고아 _sets는 build_pokemon_sets가 정리).
-    for f in (glob.glob(os.path.join(OUT_DIR, "champions_s*_single.json")) +
-              glob.glob(os.path.join(OUT_DIR, "champions_s*_double.json"))):
-        os.remove(f)
-    wrote = []
-    stop_after = False   # 현재(크롤) 시즌을 만들었으면 그 이후는 만들지 않음
+    # 결과를 먼저 메모리에 모은다. 전부 실패(차단/네트워크)면 기존 데이터를 절대 건드리지 않고 종료.
+    results = {}   # filename -> data
     for season in range(1, MAX_SEASON + 1):
         found_any = False
         used_crawl = False
         for rule in RULES:
             res, kind = build(season, rule)
-            time.sleep(1)
+            time.sleep(2)   # 시즌/룰 사이 간격(배려)
             if res is None:
                 continue
             found_any = True
             if kind == "crawl":
                 used_crawl = True
-            path = os.path.join(OUT_DIR, f"champions_s{season}_{rule}.json")
-            with open(path, "w", encoding="utf-8") as f:
-                json.dump(res, f, ensure_ascii=False, indent=2)
-            wrote.append(os.path.basename(path))
-            print(f"  생성: {os.path.basename(path)} "
+            results[f"champions_s{season}_{rule}.json"] = res
+            print(f"  수집: champions_s{season}_{rule}.json "
                   f"(usage {len(res['usage'])}, teams {len(res['teams'])}, src={kind})")
-        # 종료 조건:
-        #  - 이 시즌이 '크롤'로 만들어졌다 = 진행중(최신) 시즌 = 여기서 멈춤
-        #    (그 다음 시즌부터는 pokedb가 최신으로 폴백해서 가짜 시즌이 생기므로)
-        #  - 아무 데이터도 없으면 멈춤
         if used_crawl:
-            print(f"  [stop] 진행중 시즌(s{season})까지 처리 완료 — 이후 시즌은 폴백이므로 중단")
+            print(f"  [stop] 진행중 시즌(s{season})까지 처리 완료 — 중단")
             break
         if not found_any and season > 1:
             break
+
+    # ★ 데이터 안전장치: 한 개도 못 받았으면(차단 등) 기존 파일을 그대로 두고 종료.
+    if not results:
+        print("[중단] 받아온 데이터가 0개 — pokedb 차단/네트워크 의심. 기존 데이터 보존, 변경 없음.")
+        return
+
+    # 성공분만 기록 + 이번에 안 만든 잉여(가짜) ranked 파일만 정리. _sets는 건드리지 않음.
+    for fn, data in results.items():
+        with open(os.path.join(OUT_DIR, fn), "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    for f in (glob.glob(os.path.join(OUT_DIR, "champions_s*_single.json")) +
+              glob.glob(os.path.join(OUT_DIR, "champions_s*_double.json"))):
+        if os.path.basename(f) not in results:
+            os.remove(f)
+            print(f"  [정리] 잉여 ranked 삭제: {os.path.basename(f)}")
+
     with open(os.path.join(OUT_DIR, "index.json"), "w", encoding="utf-8") as f:
-        json.dump({"files": wrote,
+        json.dump({"files": sorted(results.keys()),
                    "generated_at": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())},
                   f, ensure_ascii=False, indent=2)
-    print("완료:", wrote)
+    print("완료:", sorted(results.keys()))
 
 if __name__ == "__main__":
     main()
