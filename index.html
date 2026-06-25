@@ -2135,12 +2135,12 @@ function getMetaSet(pkNameOrNo) {
   let u;
   if (typeof pkNameOrNo === 'number') {
     /* 덱스 번호: FORM_IDX_TO_NAME 매핑 우선, 없으면 일반 덱스 탐색 */
-    u = usage.slice(0, 50).find(u => u.id && FORM_IDX_TO_NAME[u.id] && parseInt(u.id.split('-')[0]) === pkNameOrNo)
-      || usage.slice(0, 50).find(u => u.id && parseInt(u.id.split('-')[0]) === pkNameOrNo);
+    u = usage.find(u => u.id && FORM_IDX_TO_NAME[u.id] && parseInt(u.id.split('-')[0]) === pkNameOrNo)
+      || usage.find(u => u.id && parseInt(u.id.split('-')[0]) === pkNameOrNo);
   } else {
     /* 이름: FORM_IDX_TO_NAME 역매핑(이름→id) 먼저, 없으면 직접 이름 탐색 */
-    u = usage.slice(0, 50).find(u => u.id && FORM_IDX_TO_NAME[u.id] === pkNameOrNo)
-      || usage.slice(0, 50).find(u => u.name === pkNameOrNo);
+    u = usage.find(u => u.id && FORM_IDX_TO_NAME[u.id] === pkNameOrNo)
+      || usage.find(u => u.name === pkNameOrNo);
   }
   if (!u) return null;
   return sets.find(s => s.id === u.id) || null;
@@ -5094,7 +5094,7 @@ function buildSpeedSample() {
   const setsMap = {};
   (META_SETS_DATA[key]?.pokemon || []).forEach(p => { setsMap[p.id] = p; });
 
-  const baseEntries = usage.slice(0, 50).map(u => {
+  const baseEntries = usage.map(u => {
     const pk = resolveUsageForm(u);
     if (!pk) return null;
 
@@ -5114,7 +5114,7 @@ function buildSpeedSample() {
     return { name: pk.name, no: pk.no, speed, evS, natM, natName };
   }).filter(Boolean);
 
-  /* add mega forms for each top-50 Pokémon */
+  /* add mega forms for each ranked Pokémon */
   const megaEntries = [];
   const seenMegas = new Set();
   baseEntries.forEach(e => {
