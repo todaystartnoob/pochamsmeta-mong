@@ -3460,7 +3460,7 @@ window.initPowerCalc = function initPowerCalc() {
       const isStatus = mv.category === '변화';
       return `<button class="dc-pmove-btn${atk.move?.name===mv.name?' on':''}" data-mv="${mv.name}"
         style="display:flex;align-items:center;gap:5px;padding:3px 7px;border-radius:6px;
-          border:1px solid rgba(0,0,0,.12);background:var(--slot-bg);cursor:pointer;text-align:left;
+          border:1px solid rgba(0,0,0,.12);background:var(--slot-bg);color:var(--text-main);cursor:pointer;text-align:left;
           opacity:${isStatus?.55:1};" title="${term('moves', mv.name)}">
         <span class="dc-type-tag" style="background:${tc};font-size:9px;padding:1px 4px;">${term('types', mv.type)}</span>
         <span style="font-size:11px;font-weight:600;flex:1;">${term('moves', mv.name)}</span>

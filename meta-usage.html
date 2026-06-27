@@ -459,7 +459,16 @@
 </div>
 
 <script>
+/* 실시간 채용률 데이터에 일본어 원문 대신 옛 한글 이름이 그대로 박혀 들어오는 경우 대응
+   (게임 내 공식 명칭이 개정되었지만 원본 데이터가 갱신 전 이름을 쓰는 사례) */
+const STALE_KO_NAME_MAP = {
+  '속이다': '속이기',
+  '태만함': '게으름피우기',
+  '얼다바람': '얼어붙은바람',
+  '비검·천중파': '비검천중파',
+};
 function translateName(s) {
+  if (STALE_KO_NAME_MAP[s]) return STALE_KO_NAME_MAP[s];
   if (typeof CHAMPIONS_LOC_MAP === 'undefined') return s;
   const loc = CHAMPIONS_LOC_MAP;
   return loc.ability_ja2ko?.[s] ?? loc.item_ja2ko?.[s] ?? loc.move_ja2ko?.[s] ?? loc.nature_ja2ko?.[s] ?? s;
