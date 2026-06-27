@@ -922,7 +922,7 @@ function getMoves(id) {
   if (!setsData?.pokemon) return [];
   const pk = setsData.pokemon.find(p => p.id === id);
   if (!pk?.moves?.length) return [];
-  return pk.moves.slice(0, 2).map(m => m.name ?? String(m));
+  return pk.moves.slice(0, 2).map(m => translateName(m.name ?? String(m)));
 }
 
 const PAGE_SIZE = 10;
