@@ -1348,12 +1348,6 @@
    "descEn": "The user switches places with a party Pokémon in waiting and passes along any stat changes.",
    "descJa": "交代のポケモンと入れ替わる。能力変化は入れ替わったポケモンがそのまま受け継ぐ。"
   },
-  "앵콜": {
-   "en": "Encore",
-   "ja": "アンコール",
-   "descEn": "The target is forced to repeat the move it last used for three turns in a row.",
-   "descJa": "相手にアンコールさせた技を3回連続で使わせる。"
-  },
   "따라가때리기": {
    "en": "Pursuit",
    "ja": "おいうち",
@@ -5377,6 +5371,12 @@
    "ja": "こごえるかぜ",
    "descEn": "The user blows freezing cold air at the target to attack. This also lowers the target's Speed stat.",
    "descJa": "冷たい冷気を相手に吹きかけて攻撃する。相手のスピードを下げる。"
+  },
+  "앙코르": {
+   "en": "Encore",
+   "ja": "アンコール",
+   "descEn": "The target is forced to repeat the move it last used for three turns in a row.",
+   "descJa": "相手にアンコールさせた技を3回連続で使わせる。"
   }
  },
  "abilities": {

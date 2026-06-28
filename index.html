@@ -4512,6 +4512,8 @@ function renderItemGrid(q) {
   if (q) list = list.filter(({it})=>matchTermQuery('items',it.name,q));
   if (itemFilter==='포챔스') list = list.filter(({it})=>POCHAMS_ITEM_NAMES?.has(it.name));
   else if (itemFilter!=='all') list = list.filter(({it})=>it.category===itemFilter);
+  /* 같은 카테고리끼리 모아서 보이게 정렬 (나중에 추가된 항목이 끝에 외따로 떨어지는 것 방지) */
+  list = [...list].sort((a,b)=>a.it.category.localeCompare(b.it.category,'ko'));
   const clearCard = `<div class="item-card" data-idx="-1" style="border-color:#e53935"><div class="item-no-img" style="font-size:20px">✕</div><div class="item-name" style="color:#e53935">${t('item_none')}</div><div class="item-cat-badge">${t('release')}</div></div>`;
   document.getElementById('itemGrid').innerHTML = clearCard + list.map(({it,i})=>{
     const dispName = term('items', it.name);
