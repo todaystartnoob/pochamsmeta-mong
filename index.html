@@ -1730,7 +1730,7 @@ function getMoveEffectiveType(pk, mv, item, ability, weather='') {
 /* ── 기술 유효 위력 (폼/도구/특성 오버라이드 포함) ── */
 function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
   const n = mv.name;
-  const { hpPct=100, defHpPct=100, defS=1, defWeight=null, status='', field='', defStatus='' } = ctx;
+  const { hpPct=100, defHpPct=100, defS=1, defWeight=null, status='', field='', defStatus='', atkS=null, atkWeight=null } = ctx;
 
   if (OVERRIDE_POWER[n]) return OVERRIDE_POWER[n];
 
@@ -1763,13 +1763,13 @@ function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
   if (n === '객기' && status) return (mv.power || 70) * 2;
   /* 자이로볼: 상대 스피드가 높을수록 강함 (min 1, max 150) */
   if (n === '자이로볼') {
-    const atkS = pk?.S || 1;
-    return Math.min(150, Math.max(1, Math.floor(25 * Math.max(1, defS) / Math.max(1, atkS))));
+    const aS = atkS || pk?.S || 1;
+    return Math.min(150, Math.max(1, Math.floor(25 * Math.max(1, defS) / Math.max(1, aS))));
   }
   /* 일렉트릭볼: 자신/상대 스피드 비율 */
   if (n === '일렉트릭볼') {
-    const atkS = pk?.S || 1;
-    const r = Math.floor(atkS / Math.max(1, defS));
+    const aS = atkS || pk?.S || 1;
+    const r = Math.floor(aS / Math.max(1, defS));
     if (r >= 4) return 150;
     if (r >= 3) return 120;
     if (r >= 2) return 80;
@@ -1778,7 +1778,7 @@ function getMoveEffectivePower(pk, mv, ability, weather='', ctx={}) {
   }
   /* 헤비봄버 / 히트스탬프: 자신 몸무게 / 상대 몸무게 비율 */
   if (['헤비봄버','히트스탬프'].includes(n)) {
-    const atkW = pk?.weight || null;
+    const atkW = atkWeight || pk?.weight || null;
     if (!atkW || !defWeight) return null;
     const r = atkW / defWeight;
     if (r >= 5) return 120;
@@ -2820,7 +2820,7 @@ window.initPowerCalc = function initPowerCalc() {
   const atk = { pokemon:null, move:null, ev:0, natM:1.0, rank:0, item:null, ability:null,
     gender:'', status:'', hpPct:100,
     critical:false, charge:false, helpingHand:false, battery:false, powerSpot:false,
-    supremeCount:0 };
+    supremeCount:0, spdSelf:null, spdTarget:null, wtSelf:null, wtTarget:null };
   const def = { pokemon:null, hpEV:0, defEV:0, natM:1.0, rank:0, item:null, ability:null,
     gender:'', status:'', hpPct:100,
     reflect:false, lightScreen:false, auroraVeil:false, friendGuard:false };
@@ -2854,9 +2854,10 @@ window.initPowerCalc = function initPowerCalc() {
           <div class="dc-drop"><input class="dc-input" id="dcMoveQ" placeholder="${t('search_move_placeholder')}" autocomplete="off"><div class="dc-drop-list" id="dcMoveList"></div></div>
           <div id="dcPartyMoves" style="display:none;margin-top:5px;flex-direction:column;gap:3px;"></div>
           <div id="dcMoveInfo" style="font-size:10px;color:var(--label-muted);margin-top:4px;min-height:14px;"></div>
+          <div id="dcSpecialPowerBox"></div>
         </div>
         <div class="dc-block">
-          <div class="dc-block-title">${t('atk_stat')}</div>
+          <div class="dc-block-title" id="dcAtkStatTitle">${t('atk_stat')}</div>
           <div class="dc-stat-grid">
             <div class="dc-stat-box"><span class="dc-stat-lbl">${t('base_stats')}</span><span class="dc-stat-val" id="dcBase">—</span></div>
             <div class="dc-stat-box"><span class="dc-stat-lbl">${t('evs')}</span><input class="dc-ev-inp" id="dcEV" type="number" min="0" max="32" value="0" autocomplete="off"></div>
@@ -3048,11 +3049,13 @@ window.initPowerCalc = function initPowerCalc() {
   function updateAtkDisplay() {
     const {pokemon:pk, move:mv, ev, natM, rank} = atk;
     if (!pk) return;
-    const isPhys = !mv || mv.category === '물리';
-    const base = pk[isPhys?'A':'C'] || 0;
+    const statKey = mv?.name==='바디프레스' ? 'B' : (!mv || mv.category === '물리') ? 'A' : 'C';
+    const base = pk[statKey] || 0;
     const actual = Math.floor(calcStat(base, ev, false, natM));
     document.getElementById('dcBase').textContent = base;
     document.getElementById('dcActual').textContent = actual;
+    const titleEl = document.getElementById('dcAtkStatTitle');
+    if (titleEl) titleEl.textContent = statKey==='B' ? t('def_stat') : t('atk_stat');
   }
 
   function updateDefDisplay() {
@@ -3094,8 +3097,8 @@ window.initPowerCalc = function initPowerCalc() {
       const _isPhysMove = atk.move?.category === '물리';
       const defBNatM = (!_hasMove || _isPhysMove) ? dNatM : 1.0;
       const defDNatM = (!_hasMove || !_isPhysMove) ? dNatM : 1.0;
-      const defB  = Math.floor(calcStat(defPk.B, defEV, false, defBNatM));
-      const defD  = Math.floor(calcStat(defPk.D, defEV, false, defDNatM));
+      const defB  = Math.floor(Math.floor(calcStat(defPk.B, defEV, false, defBNatM)) * rankMult(dRank));
+      const defD  = Math.floor(Math.floor(calcStat(defPk.D, defEV, false, defDNatM)) * rankMult(dRank));
       const durBItM = getItemStatMult(def.item, defPk, 'B');
       const durDItM = getItemStatMult(def.item, defPk, 'D');
       const durBAbM = getAbilityStatMult(def.ability, 'B', {weather:_effW});
@@ -3136,7 +3139,7 @@ window.initPowerCalc = function initPowerCalc() {
     const isBodyPress = mv.name === '바디프레스';
     const atkStatKey = isBodyPress ? 'B' : (isPhys ? 'A' : 'C');
     const atkBase = atkPk[atkStatKey] || 0;
-    const atkAct  = Math.floor(calcStat(atkBase, isBodyPress ? (def.defEV||0) : ev, false, aNatM));
+    const atkAct  = Math.floor(calcStat(atkBase, ev, false, aNatM));
     const atkRk   = Math.floor(atkAct * rankMult(aRank));
     const atkItM  = getItemStatMult(aItem, atkPk, atkStatKey);
     const atkAbM  = getAbilityStatMult(aAbil, atkStatKey, ctx);
@@ -3154,7 +3157,10 @@ window.initPowerCalc = function initPowerCalc() {
 
     /* 유효 기술 타입/위력 — defPk 없이도 계산 가능 */
     const effType = getMoveEffectiveType(atkPk, mv, aItem, aAbil, effWeather);
-    const powerCtx = { hpPct:aHP, defHpPct:dHP, defS:defPk?.S||1, defWeight:defPk?.weight||null, status:aStatus, field:effField, defStatus:def.status||'' };
+    const powerCtx = { hpPct:aHP, defHpPct:dHP,
+      defS: atk.spdTarget ?? defPk?.S ?? 1, atkS: atk.spdSelf ?? atkPk?.S ?? 1,
+      defWeight: atk.wtTarget ?? defPk?.weight ?? null, atkWeight: atk.wtSelf ?? atkPk?.weight ?? null,
+      status:aStatus, field:effField, defStatus:def.status||'' };
     const effPow  = getMoveEffectivePower(atkPk, mv, aAbil, effWeather, powerCtx);
     if (!effPow) {
       rangeEl.innerHTML = `<span class="dc-dmg-empty">${t('opp_select_poke')}</span>`;
@@ -3373,6 +3379,7 @@ window.initPowerCalc = function initPowerCalc() {
       const s = party[idx];
       if (!s?.pokemon) return;
       atk.pokemon = s.pokemon;
+      atk.spdSelf = null; atk.wtSelf = null;
       document.getElementById('dcPokeQ').value = pokeName(s.pokemon.name, s.pokemon.no);
       document.getElementById('dcPokeList').classList.remove('open');
       fillAbilSel(s.pokemon, 'dcAbilSel');
@@ -3383,6 +3390,7 @@ window.initPowerCalc = function initPowerCalc() {
       atk.move = null;
       document.getElementById('dcMoveQ').value = '';
       document.getElementById('dcMoveInfo').innerHTML = '';
+      renderSpecialPowerBox();
       atk.item = s.item; atk.ability = s.ability;
       atk.ev = s.evs?.[atk.move?.category==='물리'?'A':'C'] || 0;
       document.getElementById('dcEV').value = atk.ev;
@@ -3408,6 +3416,7 @@ window.initPowerCalc = function initPowerCalc() {
       const s = party[idx];
       if (!s?.pokemon) return;
       def.pokemon = s.pokemon;
+      atk.spdTarget = null; atk.wtTarget = null;
       document.getElementById('dcDefPokeQ').value = pokeName(s.pokemon.name, s.pokemon.no);
       document.getElementById('dcDefPokeList').classList.remove('open');
       fillAbilSel(s.pokemon, 'dcDefAbilSel');
@@ -3425,6 +3434,7 @@ window.initPowerCalc = function initPowerCalc() {
       def.natM = s.nature ? natMult(s.nature, defStatK) : 1.0;
       document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn')
         .forEach(b => b.classList.toggle('on', +b.dataset.m === def.natM));
+      renderSpecialPowerBox();
       calcDamage();
     }));
   }
@@ -3482,22 +3492,26 @@ window.initPowerCalc = function initPowerCalc() {
   /* ── 포켓몬 세팅 (공격) ── */
   function setAtkPokemon(pk) {
     atk.pokemon = pk;
+    atk.spdSelf = null; atk.wtSelf = null;
     document.getElementById('dcPokeQ').value = pokeName(pk.name, pk.no);
     document.getElementById('dcPokeList').classList.remove('open');
     fillAbilSel(pk, 'dcAbilSel');
     updateAtkPillSel();
     updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', pk);
+    renderSpecialPowerBox();
     calcDamage();
   }
 
   /* ── 포켓몬 세팅 (수비) ── */
   function setDefPokemon(pk) {
     def.pokemon = pk;
+    atk.spdTarget = null; atk.wtTarget = null;
     document.getElementById('dcDefPokeQ').value = pokeName(pk.name, pk.no);
     document.getElementById('dcDefPokeList').classList.remove('open');
     fillAbilSel(pk, 'dcDefAbilSel');
     updateDefPillSel();
     updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus', pk);
+    renderSpecialPowerBox();
     calcDamage();
   }
 
@@ -3517,6 +3531,52 @@ window.initPowerCalc = function initPowerCalc() {
     });
   }
 
+  /* ── 특수 위력 기술(스피드/몸무게 비교): 수동 조정 입력칸 ── */
+  const SPEED_RATIO_MOVES = new Set(['자이로볼','일렉트릭볼']);
+  const WEIGHT_RATIO_MOVES = new Set(['헤비봄버','히트스탬프']);
+  const DEF_WEIGHT_ONLY_MOVES = new Set(['풀묶기','안다리걸기']);
+  function defaultRealStat(base) { return Math.floor(calcStat(base||0, 0, false, 1.0)); }
+  function renderSpecialPowerBox() {
+    const box = document.getElementById('dcSpecialPowerBox');
+    if (!box) return;
+    const mv = atk.move;
+    const n = mv?.name;
+    if (mv && SPEED_RATIO_MOVES.has(n)) {
+      if (atk.spdSelf == null) atk.spdSelf = defaultRealStat(atk.pokemon?.S);
+      if (atk.spdTarget == null) atk.spdTarget = defaultRealStat(def.pokemon?.S);
+      box.innerHTML = `
+        <div class="dc-block" style="margin-top:6px;padding:6px 8px;background:var(--slot-bg);border-radius:7px;">
+          <div class="dc-block-title" style="margin-bottom:5px;">${t('special_power_speed')}</div>
+          <div style="display:flex;gap:8px;">
+            <div style="flex:1;"><div class="dc-stat-lbl" style="margin-bottom:2px;">${t('special_self_speed')}</div>
+              <input type="number" class="dc-ev-inp" id="dcSpdSelf" style="width:100%;" value="${atk.spdSelf}"></div>
+            <div style="flex:1;"><div class="dc-stat-lbl" style="margin-bottom:2px;">${t('special_target_speed')}</div>
+              <input type="number" class="dc-ev-inp" id="dcSpdTarget" style="width:100%;" value="${atk.spdTarget}"></div>
+          </div>
+        </div>`;
+      document.getElementById('dcSpdSelf').addEventListener('input', e => { atk.spdSelf = +e.target.value || 1; calcDamage(); });
+      document.getElementById('dcSpdTarget').addEventListener('input', e => { atk.spdTarget = +e.target.value || 1; calcDamage(); });
+    } else if (mv && (WEIGHT_RATIO_MOVES.has(n) || DEF_WEIGHT_ONLY_MOVES.has(n))) {
+      if (atk.wtSelf == null) atk.wtSelf = atk.pokemon?.weight ?? null;
+      if (atk.wtTarget == null) atk.wtTarget = def.pokemon?.weight ?? null;
+      const showSelf = WEIGHT_RATIO_MOVES.has(n);
+      box.innerHTML = `
+        <div class="dc-block" style="margin-top:6px;padding:6px 8px;background:var(--slot-bg);border-radius:7px;">
+          <div class="dc-block-title" style="margin-bottom:5px;">${t('special_power_weight')}</div>
+          <div style="display:flex;gap:8px;">
+            ${showSelf ? `<div style="flex:1;"><div class="dc-stat-lbl" style="margin-bottom:2px;">${t('special_self_weight')}</div>
+              <input type="number" step="0.1" class="dc-ev-inp" id="dcWtSelf" style="width:100%;" value="${atk.wtSelf ?? ''}"></div>` : ''}
+            <div style="flex:1;"><div class="dc-stat-lbl" style="margin-bottom:2px;">${t('special_target_weight')}</div>
+              <input type="number" step="0.1" class="dc-ev-inp" id="dcWtTarget" style="width:100%;" value="${atk.wtTarget ?? ''}"></div>
+          </div>
+        </div>`;
+      if (showSelf) document.getElementById('dcWtSelf').addEventListener('input', e => { atk.wtSelf = +e.target.value || null; calcDamage(); });
+      document.getElementById('dcWtTarget').addEventListener('input', e => { atk.wtTarget = +e.target.value || null; calcDamage(); });
+    } else {
+      box.innerHTML = '';
+    }
+  }
+
   /* ── 기술 세팅 ── */
   function setMove(mv) {
     atk.move = mv;
@@ -3526,6 +3586,7 @@ window.initPowerCalc = function initPowerCalc() {
     const CAT_I18N_MI = {'물리':t('cat_physical'),'특수':t('cat_special'),'변화':t('cat_status')};
     document.getElementById('dcMoveInfo').innerHTML =
       `<span class="dc-type-tag" style="background:${tc}">${term('types', mv.type)}</span> ${CAT_I18N_MI[mv.category]||mv.category} | ${t('power_lbl')} ${mv.power??t('variable_power')}`;
+    renderSpecialPowerBox();
     const pmEl = document.getElementById('dcPartyMoves');
     if (pmEl) { pmEl.style.display = 'none'; pmEl.querySelectorAll('.dc-pmove-btn').forEach(b => b.classList.toggle('on', b.dataset.mv===mv.name)); }
     if (atk.pokemon && selectedSlot >= 0) window.dcSyncFromSlot(selectedSlot);
@@ -3832,8 +3893,10 @@ window.initPowerCalc = function initPowerCalc() {
     atk.pokemon=null; atk.move=null; atk.ev=0; atk.natM=1.0; atk.rank=0;
     atk.item=null; atk.ability=null; atk.gender=''; atk.status=''; atk.hpPct=100;
     atk.critical=false; atk.charge=false; atk.helpingHand=false; atk.battery=false; atk.powerSpot=false; atk.supremeCount=0;
+    atk.spdSelf=null; atk.spdTarget=null; atk.wtSelf=null; atk.wtTarget=null;
     document.getElementById('dcPokeQ').value='';
     document.getElementById('dcMoveQ').value=''; document.getElementById('dcMoveInfo').innerHTML='';
+    document.getElementById('dcSpecialPowerBox').innerHTML='';
     document.getElementById('dcEV').value=0; document.getElementById('dcRkVal').textContent=0;
     document.getElementById('dcItemQ').value='';
     document.getElementById('dcAbilSel').innerHTML=`<option value="">${t('ability_none')}</option>`;
@@ -3854,6 +3917,7 @@ window.initPowerCalc = function initPowerCalc() {
     def.pokemon=null; def.hpEV=0; def.defEV=0; def.natM=1.0; def.rank=0;
     def.item=null; def.ability=null; def.gender=''; def.status=''; def.hpPct=100;
     def.reflect=false; def.lightScreen=false; def.auroraVeil=false; def.friendGuard=false;
+    atk.spdTarget=null; atk.wtTarget=null;
     document.getElementById('dcDefPokeQ').value='';
     document.getElementById('dcDefHPEV').value=0; document.getElementById('dcDefEV').value=0;
     document.getElementById('dcDefRkVal').textContent=0;
@@ -3866,7 +3930,7 @@ window.initPowerCalc = function initPowerCalc() {
     const slD=document.getElementById('dcDefHPSlider'); if(slD){slD.value=100;updateSliderBg(slD);}
     const pcD=document.getElementById('dcDefHPPct'); if(pcD) pcD.textContent='100%';
     updateBigSlot('dcDefBigSlot','dcDefBigSlotImg','dcDefBigSlotPlus',null);
-    updateDefPillSel(); calcDamage();
+    updateDefPillSel(); renderSpecialPowerBox(); calcDamage();
   });
 
   /* ── LocalStorage 저장/복원 ── */
@@ -3880,6 +3944,7 @@ window.initPowerCalc = function initPowerCalc() {
           gender:atk.gender, status:atk.status, hpPct:atk.hpPct,
           critical:atk.critical, charge:atk.charge, helpingHand:atk.helpingHand,
           battery:atk.battery, powerSpot:atk.powerSpot, supremeCount:atk.supremeCount,
+          spdSelf:atk.spdSelf, spdTarget:atk.spdTarget, wtSelf:atk.wtSelf, wtTarget:atk.wtTarget,
         },
         def: {
           pkName:def.pokemon?.name||null, pkNo:def.pokemon?.no||null,
@@ -3938,6 +4003,10 @@ window.initPowerCalc = function initPowerCalc() {
         const atkBoolMap={critical:'dcCrit',charge:'dcCharge',helpingHand:'dcHH',battery:'dcBatt',powerSpot:'dcPS'};
         Object.entries(atkBoolMap).forEach(([k,id])=>{if(a[k]!=null){atk[k]=a[k];document.getElementById(id)?.classList.toggle('on',a[k]);}});
         if (a.supremeCount != null) { atk.supremeCount=a.supremeCount; document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach(b=>b.classList.toggle('on',+b.dataset.ol===a.supremeCount)); }
+        if (a.spdSelf != null) atk.spdSelf = a.spdSelf;
+        if (a.spdTarget != null) atk.spdTarget = a.spdTarget;
+        if (a.wtSelf != null) atk.wtSelf = a.wtSelf;
+        if (a.wtTarget != null) atk.wtTarget = a.wtTarget;
       }
 
       if (s.def) {
@@ -3974,6 +4043,7 @@ window.initPowerCalc = function initPowerCalc() {
         Object.entries(ruinMap).forEach(([k,id])=>{if(env[k]) document.getElementById(id)?.classList.add('on');});
       }
 
+      renderSpecialPowerBox();
       calcDamage();
     } catch(e) {}
   }
@@ -3984,7 +4054,6 @@ window.initPowerCalc = function initPowerCalc() {
   window.dcSyncFromSlot = function(idx) {
     const s = party[idx];
     if (!s?.pokemon) return;
-    let changed = false;
 
     /* 공격 측 동기화 */
     if (atk.pokemon && atk.pokemon.name === s.pokemon.name) {
@@ -4008,7 +4077,6 @@ window.initPowerCalc = function initPowerCalc() {
       if (olRow) { const isOL = s.ability?.name==='총대장'; olRow.style.display=isOL?'flex':'none'; if(!isOL){atk.supremeCount=0;document.querySelectorAll('.dc-toggle-btn[data-ol]').forEach((b,i)=>b.classList.toggle('on',i===0));} }
       updateBigSlot('dcBigSlot','dcBigSlotImg','dcBigSlotPlus', s.pokemon);
       renderPartyMoveButtons(s.moves);
-      changed = true;
     }
 
     /* 수비 측 동기화 */
@@ -4026,10 +4094,9 @@ window.initPowerCalc = function initPowerCalc() {
       def.natM = s.nature ? natMult(s.nature, defStatK) : 1.0;
       document.getElementById('dcDefNatRow').querySelectorAll('.dc-nat-btn')
         .forEach(b => b.classList.toggle('on', +b.dataset.m === def.natM));
-      changed = true;
     }
 
-    if (changed) calcDamage();
+    calcDamage();
   };
 };
 window.initPowerCalc();
