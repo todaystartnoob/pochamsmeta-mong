@@ -1694,6 +1694,7 @@ function getAbilityStatMult(ability, statKey, ctx={}) {
 }
 function getAbilityMoveType(ability, mv) {
   if (!ability || !mv) return mv?.type;
+  if (mv.category === '변화') return mv.type;
   const skin = _SKIN_TYPES[ability.name];
   if (skin && mv.type==='노말') return skin;
   if (ability.name==='촉촉보이스' && SOUND_MOVES.has(mv.name)) return '물';
@@ -1857,6 +1858,7 @@ function getAbilityPowerMult(ability, mv, effType=null, ctx={}) {
   if (n==='바위나르기' && type==='바위') return 1.5;
   if (n==='수포'       && type==='물') return 2;
   if ((n==='강철술사'||n==='강철정신') && type==='강철') return 1.5;
+  if (n==='불꽃의갈기' && type==='불꽃') return 1.5;
   /* ── 핀치 특성 (HP ≤33%) ── */
   if (n==='맹화' && type==='불꽃' && lowHP) return 1.5;
   if (n==='급류' && type==='물'   && lowHP) return 1.5;
