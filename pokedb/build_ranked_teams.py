@@ -258,7 +258,8 @@ def build(season, rule):
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     # 결과를 먼저 메모리에 모은다. 전부 실패(차단/네트워크)면 기존 데이터를 절대 건드리지 않고 종료.
-    results = {}   # filename -> data
+    results = {}          # filename -> data (이번에 성공한 것만)
+    crawl_season = None   # 진행중(크롤) 시즌 번호. 여기까지 왔으면 정상 완주로 간주.
     for season in range(1, MAX_SEASON + 1):
         found_any = False
         used_crawl = False
@@ -274,31 +275,46 @@ def main():
             print(f"  수집: champions_s{season}_{rule}.json "
                   f"(usage {len(res['usage'])}, teams {len(res['teams'])}, src={kind})")
         if used_crawl:
+            crawl_season = season
             print(f"  [stop] 진행중 시즌(s{season})까지 처리 완료 — 중단")
             break
         if not found_any and season > 1:
             break
 
-    # ★ 데이터 안전장치: 한 개도 못 받았으면(차단 등) 기존 파일을 그대로 두고 종료.
+    # ★ 안전장치1: 한 개도 못 받았으면(차단/네트워크) 기존 파일 그대로 두고 종료.
     if not results:
-        print("[중단] 받아온 데이터가 0개 — pokedb 차단/네트워크 의심. 기존 데이터 보존, 변경 없음.")
+        print("[중단] 받아온 데이터가 0개 — 기존 데이터 보존, 변경 없음.")
         return
 
-    # 성공분만 기록 + 이번에 안 만든 잉여(가짜) ranked 파일만 정리. _sets는 건드리지 않음.
+    # 성공한 시즌만 덮어쓴다. 실패한 시즌의 기존 파일은 건드리지 않음(이전 데이터 유지).
     for fn, data in results.items():
         with open(os.path.join(OUT_DIR, fn), "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-    for f in (glob.glob(os.path.join(OUT_DIR, "champions_s*_single.json")) +
-              glob.glob(os.path.join(OUT_DIR, "champions_s*_double.json"))):
-        if os.path.basename(f) not in results:
-            os.remove(f)
-            print(f"  [정리] 잉여 ranked 삭제: {os.path.basename(f)}")
 
+    # ★ 안전장치2: 삭제는 '미래(가짜) 시즌'만. 그것도 현재 시즌을 확인(완주)했을 때만.
+    #   부분 실패(중간에 끊김)면 crawl_season=None → 아무것도 안 지움.
+    if crawl_season is not None:
+        for f in (glob.glob(os.path.join(OUT_DIR, "champions_s*_single.json")) +
+                  glob.glob(os.path.join(OUT_DIR, "champions_s*_double.json"))):
+            m = re.match(r"champions_s(\d+)_", os.path.basename(f))
+            if m and int(m.group(1)) > crawl_season:
+                os.remove(f)
+                print(f"  [정리] 미래(가짜) 시즌 삭제: {os.path.basename(f)}")
+
+    # ★ 안전장치3: index.json 은 '실제 존재하는 ranked 파일 전체'로 작성.
+    #   (부분 실행이 목록을 줄여 시즌이 사라지는 것 방지)
+    def _key(n):
+        mm = re.match(r"champions_s(\d+)_", n)
+        return (int(mm.group(1)), 0 if "_single" in n else 1)
+    present = sorted((os.path.basename(f) for f in
+                      (glob.glob(os.path.join(OUT_DIR, "champions_s*_single.json")) +
+                       glob.glob(os.path.join(OUT_DIR, "champions_s*_double.json")))),
+                     key=_key)
     with open(os.path.join(OUT_DIR, "index.json"), "w", encoding="utf-8") as f:
-        json.dump({"files": sorted(results.keys()),
+        json.dump({"files": present,
                    "generated_at": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())},
                   f, ensure_ascii=False, indent=2)
-    print("완료:", sorted(results.keys()))
+    print("완료(index):", present)
 
 if __name__ == "__main__":
     main()
