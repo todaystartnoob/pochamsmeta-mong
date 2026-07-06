@@ -1,6 +1,11 @@
 {
   "files": [
-    "champions_s1_single.json"
+    "champions_s1_single.json",
+    "champions_s1_double.json",
+    "champions_s2_single.json",
+    "champions_s2_double.json",
+    "champions_s3_single.json",
+    "champions_s3_double.json"
   ],
-  "generated_at": "2026-07-06 01:09:15 UTC"
+  "generated_at": "2026-07-06 01:14:01 UTC"
 }
