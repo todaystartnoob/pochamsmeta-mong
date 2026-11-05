@@ -13,7 +13,9 @@
     "champions_s6_double.json",
     "champions_s6_single.json",
     "champions_s7_double.json",
-    "champions_s7_single.json"
+    "champions_s7_single.json",
+    "champions_s8_double.json",
+    "champions_s8_single.json"
   ],
-  "generated_at": "2026-11-03 22:39:18 UTC"
+  "generated_at": "2026-11-04 22:58:10 UTC"
 }
