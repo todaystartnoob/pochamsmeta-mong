@@ -2,548 +2,548 @@
   "season": "M-6",
   "season_number": 6,
   "rule": "single",
-  "updated_at": "2026-11-07 23:13:32",
-  "team_count": 232,
+  "updated_at": "2026-11-26 23:02:35",
+  "team_count": 234,
   "usage": [
     {
       "id": "0445-00",
       "name": "한카리아스",
-      "count": 101,
-      "rate": 43.53
+      "count": 102,
+      "rate": 43.59
     },
     {
       "id": "0730-00",
       "name": "누리레느",
-      "count": 93,
-      "rate": 40.09
+      "count": 94,
+      "rate": 40.17
     },
     {
       "id": "0450-00",
       "name": "하마돈",
       "count": 63,
-      "rate": 27.16
+      "rate": 26.92
     },
     {
       "id": "1018-00",
       "name": "브리두라스",
-      "count": 58,
-      "rate": 25.0
+      "count": 59,
+      "rate": 25.21
     },
     {
       "id": "0778-00",
       "name": "따라큐",
-      "count": 55,
-      "rate": 23.71
+      "count": 56,
+      "rate": 23.93
+    },
+    {
+      "id": "0373-00",
+      "name": "보만다",
+      "count": 42,
+      "rate": 17.95
     },
     {
       "id": "1000-00",
       "name": "타부자고",
       "count": 40,
-      "rate": 17.24
-    },
-    {
-      "id": "0373-00",
-      "name": "보만다",
-      "count": 40,
-      "rate": 17.24
+      "rate": 17.09
     },
     {
       "id": "0448-00",
       "name": "루카리오",
       "count": 38,
-      "rate": 16.38
+      "rate": 16.24
     },
     {
       "id": "0006-00",
       "name": "리자몽",
       "count": 37,
-      "rate": 15.95
+      "rate": 15.81
     },
     {
       "id": "0902-00",
       "name": "대쓰여너",
       "count": 35,
-      "rate": 15.09
+      "rate": 14.96
     },
     {
       "id": "0823-00",
       "name": "아머까오",
       "count": 35,
-      "rate": 15.09
+      "rate": 14.96
     },
     {
       "id": "0149-00",
       "name": "망나뇽",
       "count": 33,
-      "rate": 14.22
+      "rate": 14.1
     },
     {
       "id": "0876-00",
       "name": "에써르",
       "count": 31,
-      "rate": 13.36
+      "rate": 13.25
+    },
+    {
+      "id": "0768-00",
+      "name": "갑주무사",
+      "count": 31,
+      "rate": 13.25
     },
     {
       "id": "0376-00",
       "name": "메타그로스",
       "count": 31,
-      "rate": 13.36
-    },
-    {
-      "id": "0768-00",
-      "name": "갑주무사",
-      "count": 30,
-      "rate": 12.93
+      "rate": 13.25
     },
     {
       "id": "0670-05",
       "name": "플라엣테",
       "count": 30,
-      "rate": 12.93
+      "rate": 12.82
     },
     {
       "id": "0094-00",
       "name": "팬텀",
       "count": 28,
-      "rate": 12.07
+      "rate": 11.97
     },
     {
       "id": "0998-00",
       "name": "드닐레이브",
       "count": 28,
-      "rate": 12.07
+      "rate": 11.97
     },
     {
       "id": "0658-00",
       "name": "개굴닌자",
       "count": 24,
-      "rate": 10.34
+      "rate": 10.26
     },
     {
       "id": "0130-00",
       "name": "갸라도스",
       "count": 21,
-      "rate": 9.05
+      "rate": 8.97
     },
     {
       "id": "0009-00",
       "name": "거북왕",
       "count": 21,
-      "rate": 9.05
+      "rate": 8.97
     },
     {
       "id": "0815-00",
       "name": "에이스번",
       "count": 20,
-      "rate": 8.62
+      "rate": 8.55
     },
     {
       "id": "0681-00",
       "name": "킬가르도",
       "count": 19,
-      "rate": 8.19
+      "rate": 8.12
     },
     {
       "id": "0970-00",
       "name": "킬라플로르",
       "count": 18,
-      "rate": 7.76
+      "rate": 7.69
     },
     {
       "id": "0908-00",
       "name": "마스카나",
       "count": 18,
-      "rate": 7.76
+      "rate": 7.69
     },
     {
       "id": "0923-00",
       "name": "빠르모트",
       "count": 17,
-      "rate": 7.33
+      "rate": 7.26
+    },
+    {
+      "id": "0212-00",
+      "name": "핫삼",
+      "count": 16,
+      "rate": 6.84
+    },
+    {
+      "id": "0260-00",
+      "name": "대짱이",
+      "count": 16,
+      "rate": 6.84
     },
     {
       "id": "0026-00",
       "name": "라이츄",
       "count": 16,
-      "rate": 6.9
+      "rate": 6.84
     },
     {
       "id": "0584-00",
       "name": "배바닐라",
       "count": 16,
-      "rate": 6.9
-    },
-    {
-      "id": "0212-00",
-      "name": "핫삼",
-      "count": 15,
-      "rate": 6.47
-    },
-    {
-      "id": "0260-00",
-      "name": "대짱이",
-      "count": 15,
-      "rate": 6.47
+      "rate": 6.84
     },
     {
       "id": "0479-01",
       "name": "로토무",
-      "count": 14,
-      "rate": 6.03
+      "count": 15,
+      "rate": 6.41
+    },
+    {
+      "id": "0655-00",
+      "name": "마폭시",
+      "count": 15,
+      "rate": 6.41
     },
     {
       "id": "0812-00",
       "name": "고릴타",
       "count": 14,
-      "rate": 6.03
+      "rate": 5.98
     },
     {
       "id": "0197-00",
       "name": "블래키",
       "count": 14,
-      "rate": 6.03
-    },
-    {
-      "id": "0655-00",
-      "name": "마폭시",
-      "count": 14,
-      "rate": 6.03
+      "rate": 5.98
     },
     {
       "id": "0983-00",
       "name": "대도각참",
       "count": 14,
-      "rate": 6.03
+      "rate": 5.98
     },
     {
       "id": "0503-01",
       "name": "대검귀",
       "count": 13,
-      "rate": 5.6
+      "rate": 5.56
     },
     {
       "id": "0038-01",
       "name": "나인테일",
       "count": 12,
-      "rate": 5.17
+      "rate": 5.13
     },
     {
       "id": "0748-00",
       "name": "더시마사리",
       "count": 11,
-      "rate": 4.74
+      "rate": 4.7
     },
     {
       "id": "0395-00",
       "name": "엠페르트",
-      "count": 10,
-      "rate": 4.31
+      "count": 11,
+      "rate": 4.7
     },
     {
       "id": "0903-00",
       "name": "포푸니크",
       "count": 9,
-      "rate": 3.88
+      "rate": 3.85
     },
     {
       "id": "0637-00",
       "name": "불카모스",
       "count": 9,
-      "rate": 3.88
+      "rate": 3.85
     },
     {
       "id": "0154-00",
       "name": "메가니움",
       "count": 9,
-      "rate": 3.88
+      "rate": 3.85
     },
     {
       "id": "0706-01",
       "name": "미끄래곤",
       "count": 9,
-      "rate": 3.88
+      "rate": 3.85
     },
     {
       "id": "0036-00",
       "name": "픽시",
       "count": 9,
-      "rate": 3.88
+      "rate": 3.85
     },
     {
       "id": "0479-02",
       "name": "로토무",
       "count": 8,
-      "rate": 3.45
+      "rate": 3.42
     },
     {
       "id": "0635-00",
       "name": "삼삼드래",
       "count": 7,
-      "rate": 3.02
+      "rate": 2.99
     },
     {
       "id": "0257-00",
       "name": "번치코",
       "count": 7,
-      "rate": 3.02
+      "rate": 2.99
     },
     {
       "id": "0428-00",
       "name": "이어롭",
       "count": 7,
-      "rate": 3.02
+      "rate": 2.99
     },
     {
       "id": "0303-00",
       "name": "입치트",
       "count": 6,
-      "rate": 2.59
+      "rate": 2.56
     },
     {
       "id": "0143-00",
       "name": "잠만보",
       "count": 6,
-      "rate": 2.59
+      "rate": 2.56
     },
     {
       "id": "0354-00",
       "name": "다크펫",
       "count": 6,
-      "rate": 2.59
+      "rate": 2.56
     },
     {
       "id": "0473-00",
       "name": "맘모꾸리",
       "count": 6,
-      "rate": 2.59
+      "rate": 2.56
     },
     {
       "id": "0939-00",
       "name": "찌리배리",
       "count": 5,
-      "rate": 2.16
+      "rate": 2.14
     },
     {
       "id": "0279-00",
       "name": "패리퍼",
       "count": 5,
-      "rate": 2.16
+      "rate": 2.14
     },
     {
       "id": "0861-00",
       "name": "오롱털",
       "count": 5,
-      "rate": 2.16
+      "rate": 2.14
     },
     {
       "id": "0227-00",
       "name": "무장조",
       "count": 5,
-      "rate": 2.16
+      "rate": 2.14
     },
     {
       "id": "0398-00",
       "name": "찌르호크",
       "count": 5,
-      "rate": 2.16
+      "rate": 2.14
     },
     {
       "id": "0071-00",
       "name": "우츠보트",
       "count": 5,
-      "rate": 2.16
+      "rate": 2.14
     },
     {
       "id": "0199-01",
       "name": "야도킹",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0248-00",
       "name": "마기라스",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0359-00",
       "name": "앱솔",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0937-00",
       "name": "파라블레이즈",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0956-00",
       "name": "클레스퍼트라",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0282-00",
       "name": "가디안",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0887-00",
       "name": "드래펄트",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0132-00",
       "name": "메타몽",
       "count": 4,
-      "rate": 1.72
+      "rate": 1.71
     },
     {
       "id": "0952-00",
       "name": "스코빌런",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0478-00",
       "name": "눈여아",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0733-00",
       "name": "왕큰부리",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0968-00",
       "name": "꿈트렁",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0059-01",
       "name": "윈디",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0855-00",
       "name": "포트데스",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0904-00",
       "name": "장침바루",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0302-00",
       "name": "깜까미",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0186-00",
       "name": "왕구리",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0545-00",
       "name": "펜드라",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0547-00",
       "name": "엘풍",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0121-00",
       "name": "아쿠스타",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0902-01",
       "name": "대쓰여너",
       "count": 3,
-      "rate": 1.29
+      "rate": 1.28
     },
     {
       "id": "0115-00",
       "name": "캥카",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0350-00",
       "name": "밀로틱",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0392-00",
       "name": "초염몽",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0689-00",
       "name": "거북손데스",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0530-00",
       "name": "몰드류",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0254-00",
       "name": "나무킹",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0700-00",
       "name": "님피아",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0849-01",
       "name": "스트린더",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0003-00",
       "name": "이상해꽃",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0849-00",
       "name": "스트린더",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0979-00",
       "name": "저승갓숭",
       "count": 2,
-      "rate": 0.86
+      "rate": 0.85
     },
     {
       "id": "0858-00",
@@ -728,27 +728,27 @@
         {
           "value": "ガブリアスナイトＺ",
           "count": 29,
-          "rate": 28.71
+          "rate": 28.43
         },
         {
           "value": "구애스카프",
           "count": 23,
-          "rate": 22.77
+          "rate": 22.55
         },
         {
           "value": "기합의띠",
-          "count": 19,
-          "rate": 18.81
+          "count": 20,
+          "rate": 19.61
         },
         {
           "value": "자뭉열매",
           "count": 14,
-          "rate": 13.86
+          "rate": 13.73
         },
         {
           "value": "하반열매",
           "count": 8,
-          "rate": 7.92
+          "rate": 7.84
         }
       ],
       "top_terastals": []
@@ -759,28 +759,28 @@
       "top_items": [
         {
           "value": "자뭉열매",
-          "count": 36,
-          "rate": 38.71
+          "count": 37,
+          "rate": 39.36
         },
         {
           "value": "먹다남은음식",
           "count": 18,
-          "rate": 19.35
+          "rate": 19.15
         },
         {
           "value": "유루열매",
           "count": 14,
-          "rate": 15.05
+          "rate": 14.89
         },
         {
           "value": "기합의띠",
           "count": 12,
-          "rate": 12.9
+          "rate": 12.77
         },
         {
           "value": "풍선",
           "count": 9,
-          "rate": 9.68
+          "rate": 9.57
         }
       ],
       "top_terastals": []
@@ -819,27 +819,27 @@
         {
           "value": "자뭉열매",
           "count": 21,
-          "rate": 36.21
+          "rate": 35.59
         },
         {
           "value": "하양허브",
           "count": 9,
-          "rate": 15.52
+          "rate": 15.25
         },
         {
           "value": "먹다남은음식",
-          "count": 6,
-          "rate": 10.34
+          "count": 7,
+          "rate": 11.86
         },
         {
           "value": "구애스카프",
           "count": 5,
-          "rate": 8.62
+          "rate": 8.47
         },
         {
           "value": "레드카드",
           "count": 4,
-          "rate": 6.9
+          "rate": 6.78
         }
       ],
       "top_terastals": []
@@ -850,28 +850,45 @@
       "top_items": [
         {
           "value": "생명의구슬",
-          "count": 39,
-          "rate": 70.91
+          "count": 40,
+          "rate": 71.43
         },
         {
           "value": "울퉁불퉁멧",
           "count": 7,
-          "rate": 12.73
+          "rate": 12.5
         },
         {
           "value": "초점렌즈",
           "count": 3,
-          "rate": 5.45
+          "rate": 5.36
         },
         {
           "value": "저주의부적",
           "count": 2,
-          "rate": 3.64
+          "rate": 3.57
         },
         {
           "value": "광각렌즈",
           "count": 1,
-          "rate": 1.82
+          "rate": 1.79
+        }
+      ],
+      "top_terastals": []
+    },
+    {
+      "id": "0373-00",
+      "name": "보만다",
+      "top_items": [
+        {
+          "value": "보만다나이트",
+          "count": 41,
+          "rate": 97.62
+        },
+        {
+          "value": "구애스카프",
+          "count": 1,
+          "rate": 2.38
         }
       ],
       "top_terastals": []
@@ -902,23 +919,6 @@
         },
         {
           "value": "수불열매",
-          "count": 1,
-          "rate": 2.5
-        }
-      ],
-      "top_terastals": []
-    },
-    {
-      "id": "0373-00",
-      "name": "보만다",
-      "top_items": [
-        {
-          "value": "보만다나이트",
-          "count": 39,
-          "rate": 97.5
-        },
-        {
-          "value": "구애스카프",
           "count": 1,
           "rate": 2.5
         }
@@ -1058,6 +1058,18 @@
       "top_terastals": []
     },
     {
+      "id": "0768-00",
+      "name": "갑주무사",
+      "top_items": [
+        {
+          "value": "갑주무사나이트",
+          "count": 31,
+          "rate": 100.0
+        }
+      ],
+      "top_terastals": []
+    },
+    {
       "id": "0376-00",
       "name": "메타그로스",
       "top_items": [
@@ -1065,18 +1077,6 @@
           "value": "메타그로스나이트",
           "count": 30,
           "rate": 96.77
-        }
-      ],
-      "top_terastals": []
-    },
-    {
-      "id": "0768-00",
-      "name": "갑주무사",
-      "top_items": [
-        {
-          "value": "갑주무사나이트",
-          "count": 30,
-          "rate": 100.0
         }
       ],
       "top_terastals": []
@@ -1364,6 +1364,50 @@
       "top_terastals": []
     },
     {
+      "id": "0212-00",
+      "name": "핫삼",
+      "top_items": [
+        {
+          "value": "울퉁불퉁멧",
+          "count": 11,
+          "rate": 68.75
+        },
+        {
+          "value": "핫삼나이트",
+          "count": 2,
+          "rate": 12.5
+        },
+        {
+          "value": "먹다남은음식",
+          "count": 2,
+          "rate": 12.5
+        },
+        {
+          "value": "자뭉열매",
+          "count": 1,
+          "rate": 6.25
+        }
+      ],
+      "top_terastals": []
+    },
+    {
+      "id": "0260-00",
+      "name": "대짱이",
+      "top_items": [
+        {
+          "value": "자뭉열매",
+          "count": 9,
+          "rate": 56.25
+        },
+        {
+          "value": "대짱이나이트",
+          "count": 7,
+          "rate": 43.75
+        }
+      ],
+      "top_terastals": []
+    },
+    {
       "id": "0026-00",
       "name": "라이츄",
       "top_items": [
@@ -1398,77 +1442,45 @@
       "top_terastals": []
     },
     {
-      "id": "0212-00",
-      "name": "핫삼",
-      "top_items": [
-        {
-          "value": "울퉁불퉁멧",
-          "count": 11,
-          "rate": 73.33
-        },
-        {
-          "value": "핫삼나이트",
-          "count": 2,
-          "rate": 13.33
-        },
-        {
-          "value": "자뭉열매",
-          "count": 1,
-          "rate": 6.67
-        },
-        {
-          "value": "먹다남은음식",
-          "count": 1,
-          "rate": 6.67
-        }
-      ],
-      "top_terastals": []
-    },
-    {
-      "id": "0260-00",
-      "name": "대짱이",
-      "top_items": [
-        {
-          "value": "자뭉열매",
-          "count": 8,
-          "rate": 53.33
-        },
-        {
-          "value": "대짱이나이트",
-          "count": 7,
-          "rate": 46.67
-        }
-      ],
-      "top_terastals": []
-    },
-    {
       "id": "0479-01",
       "name": "로토무",
       "top_items": [
         {
           "value": "자뭉열매",
           "count": 4,
-          "rate": 28.57
+          "rate": 26.67
+        },
+        {
+          "value": "구애스카프",
+          "count": 3,
+          "rate": 20.0
         },
         {
           "value": "먹다남은음식",
           "count": 3,
-          "rate": 21.43
+          "rate": 20.0
         },
         {
           "value": "울퉁불퉁멧",
           "count": 2,
-          "rate": 14.29
+          "rate": 13.33
         },
         {
           "value": "리샘열매",
           "count": 2,
-          "rate": 14.29
-        },
+          "rate": 13.33
+        }
+      ],
+      "top_terastals": []
+    },
+    {
+      "id": "0655-00",
+      "name": "마폭시",
+      "top_items": [
         {
-          "value": "구애스카프",
-          "count": 2,
-          "rate": 14.29
+          "value": "마폭시나이트",
+          "count": 15,
+          "rate": 100.0
         }
       ],
       "top_terastals": []
@@ -1511,18 +1523,6 @@
       "top_items": [
         {
           "value": "먹다남은음식",
-          "count": 14,
-          "rate": 100.0
-        }
-      ],
-      "top_terastals": []
-    },
-    {
-      "id": "0655-00",
-      "name": "마폭시",
-      "top_items": [
-        {
-          "value": "마폭시나이트",
           "count": 14,
           "rate": 100.0
         }
@@ -1649,22 +1649,22 @@
         {
           "value": "먹다남은음식",
           "count": 4,
-          "rate": 40.0
+          "rate": 36.36
         },
         {
           "value": "풍선",
           "count": 3,
-          "rate": 30.0
+          "rate": 27.27
         },
         {
           "value": "슈캐열매",
-          "count": 2,
-          "rate": 20.0
+          "count": 3,
+          "rate": 27.27
         },
         {
           "value": "자뭉열매",
           "count": 1,
-          "rate": 10.0
+          "rate": 9.09
         }
       ],
       "top_terastals": []
@@ -4009,6 +4009,72 @@
       ]
     },
     {
+      "rank": 40,
+      "rating": 2458.949,
+      "team": [
+        {
+          "id": "0730-00",
+          "name": "누리레느",
+          "form": "",
+          "type1": "물",
+          "type2": "페어리",
+          "terastal": "",
+          "item": "자뭉열매",
+          "category": "一般"
+        },
+        {
+          "id": "1018-00",
+          "name": "브리두라스",
+          "form": "",
+          "type1": "강철",
+          "type2": "드래곤",
+          "terastal": "",
+          "item": "먹다남은음식",
+          "category": "一般"
+        },
+        {
+          "id": "0373-00",
+          "name": "보만다",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "비행",
+          "terastal": "",
+          "item": "보만다나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0445-00",
+          "name": "한카리아스",
+          "form": "",
+          "type1": "드래곤",
+          "type2": "땅",
+          "terastal": "",
+          "item": "기합의띠",
+          "category": "一般"
+        },
+        {
+          "id": "0768-00",
+          "name": "갑주무사",
+          "form": "",
+          "type1": "벌레",
+          "type2": "물",
+          "terastal": "",
+          "item": "갑주무사나이트",
+          "category": "一般"
+        },
+        {
+          "id": "0479-01",
+          "name": "로토무",
+          "form": "히트로토무",
+          "type1": "전기",
+          "type2": "불꽃",
+          "terastal": "",
+          "item": "구애스카프",
+          "category": "一般"
+        }
+      ]
+    },
+    {
       "rank": 41,
       "rating": 2458.497,
       "team": [
@@ -6116,72 +6182,6 @@
           "type2": "불꽃",
           "terastal": "",
           "item": "먹다남은음식",
-          "category": "一般"
-        }
-      ]
-    },
-    {
-      "rank": 113,
-      "rating": 2410.35,
-      "team": [
-        {
-          "id": "0998-00",
-          "name": "드닐레이브",
-          "form": "",
-          "type1": "드래곤",
-          "type2": "얼음",
-          "terastal": "",
-          "item": "드닐레이브나이트",
-          "category": "一般"
-        },
-        {
-          "id": "0778-00",
-          "name": "따라큐",
-          "form": "둔갑한 모습",
-          "type1": "고스트",
-          "type2": "페어리",
-          "terastal": "",
-          "item": "생명의구슬",
-          "category": "一般"
-        },
-        {
-          "id": "0902-00",
-          "name": "대쓰여너",
-          "form": "수컷의 모습",
-          "type1": "물",
-          "type2": "고스트",
-          "terastal": "",
-          "item": "저주의부적",
-          "category": "一般"
-        },
-        {
-          "id": "0448-00",
-          "name": "루카리오",
-          "form": "",
-          "type1": "격투",
-          "type2": "강철",
-          "terastal": "",
-          "item": "ルカリオナイトＺ",
-          "category": "一般"
-        },
-        {
-          "id": "0812-00",
-          "name": "고릴타",
-          "form": "",
-          "type1": "풀",
-          "type2": "",
-          "terastal": "",
-          "item": "기합의띠",
-          "category": "一般"
-        },
-        {
-          "id": "1000-00",
-          "name": "타부자고",
-          "form": "",
-          "type1": "강철",
-          "type2": "고스트",
-          "terastal": "",
-          "item": "그래스시드",
           "category": "一般"
         }
       ]
